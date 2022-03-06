@@ -6,10 +6,10 @@ const Inspector = () => {
 	const navigate    = useNavigate();
 	return (
 		<>
-			<p>{inspectionURL}</p>
+			<h1>Results for: {inspectionURL}</h1>
 			<Button variant="contained" value="Return" onClick={() => navigate('/')}>Return</Button>
 		</>
 	);
-  };
-  
+};
+
 export default Inspector;

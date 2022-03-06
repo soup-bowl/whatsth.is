@@ -12,6 +12,6 @@ const Home = () => {
 			<a className="App-link" href="https://github.com/soup-bowl/whatsth.is">Source</a>
 		</>
 	);
-  };
-  
+};
+
 export default Home;
