@@ -10,8 +10,11 @@ const Inspector = () => {
 	useEffect(() => {
 		const sourceIndex = async () => {
 			const response = await fetch(inspectionURL);
-			const data     = await response.text();
-			console.log(data);
+			const data     = await response.text();console.log(data);
+			const dataParse = new DOMParser().parseFromString(data, "text/xml");
+			let hasWPAPI = document.evaluate("/html/head/link[@rel='https://api.w.org/']", dataParse, null, XPathResult.ANY_TYPE, null);
+
+			//console.log(data, hasWPAPI);
 		}
 		sourceIndex();
 		setFoobar("changed");
