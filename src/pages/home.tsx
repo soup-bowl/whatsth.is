@@ -7,8 +7,10 @@ const Home = () => {
 	const navigate = useNavigate();
 	return (
 		<>
-			<TextField fullWidth id="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
-			<Button variant="contained" value="Submit" onClick={() =>  navigate('/url/' + inputURL)}>Submit</Button>
+			<form onSubmit={(e) => {e.preventDefault();return navigate('/url/' + inputURL);}}>
+				<TextField fullWidth id="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
+				<Button type="submit" variant="contained" value="Submit">Submit</Button>
+			</form>
 			<a className="App-link" href="https://github.com/soup-bowl/whatsth.is">Source</a>
 		</>
 	);
