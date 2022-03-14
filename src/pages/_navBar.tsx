@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
+const title = "What's this?";
 const pages = [
-	['Author', 'https://soupbowl.io'],
-	['Source Code', 'https://github.com/soup-bowl/whatsth.is']
+	['By Soupbowl', 'https://soupbowl.io'],
+	['Source', 'https://github.com/soup-bowl/whatsth.is']
 ];
 
 const ResponsiveAppBar = () => {
@@ -28,7 +29,7 @@ const ResponsiveAppBar = () => {
 						component="div"
 						sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
 					>
-						What's This?
+						{title}
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -62,7 +63,7 @@ const ResponsiveAppBar = () => {
 						>
 							{pages.map((page) => (
 								<MenuItem key={page[0]} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page[0]}</Typography>
+									<Link underline="none" textAlign="center" href={page[1]}>{page[0]}</Link>
 								</MenuItem>
 							))}
 						</Menu>
@@ -73,13 +74,13 @@ const ResponsiveAppBar = () => {
 						component="div"
 						sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
 					>
-						What's This?
+						{title}
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						{pages.map((page) => (
 							<Button
 								key={page[0]}
-								onClick={handleCloseNavMenu}
+								href={page[1]}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
 								{page[0]}

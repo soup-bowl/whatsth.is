@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Button, TextField, Grid} from '@mui/material';
+import {Button, TextField, Grid, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 
 const Home = () => {
@@ -13,8 +13,14 @@ const Home = () => {
 
 	return (
 		<>
+			<h1>What's this?</h1>
 			<form onSubmit={submitForm}>
-				<Grid container alignItems="center" direction="column" spacing={2}>
+				<Grid container direction="column" spacing={2}>
+					<Grid item>
+						<Typography>
+							We will try to pick details out of the URL you specify.
+						</Typography>
+					</Grid>
 					<Grid item>
 						<TextField fullWidth id="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
 					</Grid>

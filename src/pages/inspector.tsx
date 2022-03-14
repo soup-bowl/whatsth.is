@@ -20,16 +20,18 @@ const Inspector = () => {
 				<>
 					{siteDetails.message.technology !== "Unknown" ? (
 						<>
-							<h2>{inspectionURL} is built with {siteDetails.message.technology}!</h2>
+							<h1>{inspectionURL} is built with {siteDetails.message.technology}!</h1>
 							<p>Assumption made on <strong>{siteDetails.message.matched_on.length}</strong> matches.</p>
 						</>
 					) : (
-						<><h2>We couldn't detect the CMS used for {inspectionURL}</h2></>
+						<>
+							<h2>We couldn't detect the CMS used for {inspectionURL}</h2>
+						</>
 					)}
 				</>
 			) : (
 				<>
-					<h2>Fail to detect {inspectionURL}...</h2>
+					<h1>Fail to detect {inspectionURL}...</h1>
 					<p>Check to make sure the site exists and is responding to public requests.</p>
 				</>
 			)}
