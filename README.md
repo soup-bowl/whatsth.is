@@ -1,5 +1,7 @@
 # [whatsth.is][site]
 
+[![CodeFactor](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge)](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is)
+
 Simple technology scanner designed to inspect the content of websites and attempt to determine what CMS and other technologies they have used.
 
 This app comprises of two components - A React frontend (this repository), and a [Python inspection API][api].
