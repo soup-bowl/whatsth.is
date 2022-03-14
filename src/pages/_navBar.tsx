@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const title = "What's this?";
 const pages = [
-	['By Soupbowl', 'https://soupbowl.io'],
+	['By Soupbowl', 'https://soupbowl.io/projects/whatsthis'],
 	['Source', 'https://github.com/soup-bowl/whatsth.is']
 ];
 
