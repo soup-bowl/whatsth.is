@@ -22,7 +22,8 @@ const Home = () => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						<TextField fullWidth id="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
+						<TextField fullWidth id="url" type="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
+						<Typography color="lightgrey">Remember to include the protocol. If you're unsure, it's normally https:// !</Typography>
 					</Grid>
 					<Grid item>
 						<Button type="submit" variant="contained" value="Submit">Submit</Button>
