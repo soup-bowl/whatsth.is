@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:43594';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const responseBody = ( response: AxiosResponse ) => response.data;
 
