@@ -22,7 +22,7 @@ const Home = () => {
 						</Typography>
 					</Grid>
 					<Grid item>
-						<TextField fullWidth id="url" type="url" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
+						<TextField fullWidth id="url" type="url" placeholder="https://wordpress.org" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
 						<Typography color="lightgrey">Remember to include the protocol. If you're unsure, it's normally https:// !</Typography>
 					</Grid>
 					<Grid item>
