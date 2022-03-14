@@ -1,9 +1,24 @@
 import { createTheme } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
+
+declare module '@mui/material/styles' {
+	interface Theme {
+		status: {
+			danger: string;
+		};
+	}
+
+	interface ThemeOptions {
+		status?: {
+			danger?: string;
+		};
+	}
+}
 
 const theme = createTheme({
 	palette: {
-		primary: red,
+		primary: green,
+		mode: 'dark'
 	},
 	typography: {
 		button: {

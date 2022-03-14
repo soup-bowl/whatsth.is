@@ -81,7 +81,7 @@ const ResponsiveAppBar = () => {
 							<Button
 								key={page[0]}
 								href={page[1]}
-								sx={{ my: 2, color: 'white', display: 'block' }}
+								sx={{ my: 2, color: 'lightgrey', display: 'block' }}
 							>
 								{page[0]}
 							</Button>
