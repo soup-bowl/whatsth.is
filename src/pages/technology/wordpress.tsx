@@ -10,7 +10,7 @@ interface Props {
 export default function WordPress({url, inspection}: Props) {
 	const navigate = useNavigate();
 
-	if (inspection.message.additional.success) {
+	if (inspection.message.additional !== null && inspection.message.additional.success) {
 		let wp_api  = inspection.message.additional;
 		let counts  = {'pt': 'no', 'pg': 'no', 'ct': 'no'};
 
