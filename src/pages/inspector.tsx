@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
+import Generic from './technology/generic';
+import ErrorMessage from './segments/errorMessage';
 
 const Inspector = () => {
 	let inspectionURL = window.location.pathname.slice(5);
@@ -36,15 +38,12 @@ const Inspector = () => {
 
 	if (requestError) {
 		return (
-			<Grid container spacing={0} my={2} direction="column">
-				<Grid item xs={3}>
-					<Typography variant="h4" component="h1" my={2}>An error has occurred.</Typography>
-					<Typography my={2}>Please check the URL is correct or try again later.</Typography>
-				</Grid>
-				<Grid item xs={3}>
-					<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
-				</Grid>
-			</Grid>
+			<>
+				<ErrorMessage
+					title={"Could not reach " + inspectionURL}
+					message="Please check the URL is correct or try again later."
+				/>
+			</>
 		);
 	}
 
@@ -54,22 +53,22 @@ const Inspector = () => {
 				<>
 					{siteDetails.message.technology !== "Unknown" ? (
 						<>
-							<Typography variant="h4" component="h1" my={2}>{inspectionURL} is built with {siteDetails.message.technology}!</Typography>
-							<Typography my={2}>Assumption made on <Box component="span" fontWeight='700'>{siteDetails.message.matched_on.length}</Box> matches.</Typography>
+							<Generic url={inspectionURL} inspection={siteDetails} />
 						</>
 					) : (
 						<>
-							<Typography variant="h4" component="h1" my={2}>We couldn't detect the CMS used for {inspectionURL}</Typography>
+							<ErrorMessage title={"We couldn't detect the CMS used for " + inspectionURL} />
 						</>
 					)}
 				</>
 			) : (
 				<>
-					<Typography variant="h4" component="h1" my={2}>Failed to detect {inspectionURL}...</Typography>
-					<Typography my={2}>Check to make sure the site exists and is responding to public requests.</Typography>
+					<ErrorMessage
+						title={"Failed to detect " + inspectionURL + "..."}
+						message="Check to make sure the site exists and is responding to public requests."
+					/>
 				</>
 			)}
-			<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
 		</Box>
 	);
 };
