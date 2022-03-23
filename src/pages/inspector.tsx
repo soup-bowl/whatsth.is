@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import Generic from './technology/generic';
 import ErrorMessage from './segments/errorMessage';
+import WordPress from './technology/wordpress';
 
 const Inspector = () => {
 	let inspectionURL = window.location.pathname.slice(5);
@@ -48,6 +49,12 @@ const Inspector = () => {
 
 	if (siteDetails.success) {
 		switch (siteDetails.message.technology) {
+			case 'WordPress':
+				return (
+					<Box>
+						<WordPress url={inspectionURL} inspection={siteDetails} />
+					</Box>
+				);
 			case 'Unknown':
 				return (
 					<Box>
