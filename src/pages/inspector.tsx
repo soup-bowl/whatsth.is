@@ -7,7 +7,6 @@ import ErrorMessage from './segments/errorMessage';
 
 const Inspector = () => {
 	let inspectionURL = window.location.pathname.slice(5);
-	const navigate    = useNavigate();
 
 	const [siteDetails, setSiteDetails] = useState<any>([]);
 	const [loading, setLoading]         = useState<boolean>(true);
@@ -47,30 +46,31 @@ const Inspector = () => {
 		);
 	}
 
-	return (
-		<Box>
-			{siteDetails.success ? (
-				<>
-					{siteDetails.message.technology !== "Unknown" ? (
-						<>
-							<Generic url={inspectionURL} inspection={siteDetails} />
-						</>
-					) : (
-						<>
-							<ErrorMessage title={"We couldn't detect the CMS used for " + inspectionURL} />
-						</>
-					)}
-				</>
-			) : (
-				<>
-					<ErrorMessage
-						title={"Failed to detect " + inspectionURL + "..."}
-						message="Check to make sure the site exists and is responding to public requests."
-					/>
-				</>
-			)}
-		</Box>
-	);
+	if (siteDetails.success) {
+		switch (siteDetails.message.technology) {
+			case 'Unknown':
+				return (
+					<Box>
+						<ErrorMessage title={"We couldn't detect the CMS used for " + inspectionURL} />
+					</Box>
+				);
+			default:
+				return (
+					<Box>
+						<Generic url={inspectionURL} inspection={siteDetails} />
+					</Box>
+				);
+		}
+	} else {
+		return (
+			<Box>
+				<ErrorMessage
+					title={"Failed to detect " + inspectionURL + "..."}
+					message="Check to make sure the site exists and is responding to public requests."
+				/>
+			</Box>
+		);		
+	}
 };
 
 export default Inspector;
