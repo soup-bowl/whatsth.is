@@ -10,9 +10,23 @@ This app comprises of two components - A React frontend (this repository), and a
 
 ## Getting Started
 
+### With Docker
+
+You can quickly jump into project development using **Docker** with the **compose** script:
+
+```bash
+docker-compose up --build
+```
+
+This will start-up a **dynamically recompiling** ReactJS server on localhost:3000, but will also download the [latest edge image of the whatsth.is API server][api], and run that too. This effectively gives you the entire system on your computer to play with.
+
+### Without Docker
+
+**Note you will need to either [run a copy of the API server][api], or hook up to the production one (api.whatsth.is).**
+
 This project requires NodeJS to develop, test and compile the code. The following - run in root - will quickstart you.
 
-```
+```bash
 npm install
 npm start
 ```
