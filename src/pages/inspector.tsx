@@ -1,23 +1,52 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import LoadingComponent from '../theme/loadingComponent';
 
 const Inspector = () => {
 	let inspectionURL = window.location.pathname.slice(5);
 	const navigate    = useNavigate();
+
 	const [siteDetails, setSiteDetails] = useState<any>([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading]         = useState<boolean>(true);
+	const [requestError, setRError]     = useState<boolean>(false);
 
 	useEffect(() => {
 		agent.Details.firstCheck(inspectionURL).then(response => {
 			setSiteDetails(response);
+			setLoading(false);
+		}).catch((err: any) => {
+			setRError(true);
+			setLoading(false);
 		});
-		setLoading(false);
 	}, [inspectionURL]);
 
-	if (loading) return <LoadingComponent content='Loading...' />
+	if (loading) {
+		return (
+			<Grid container spacing={0} my={2} direction="column" alignItems="center">
+				<Grid item xs={3}>
+					<CircularProgress />
+				</Grid>
+				<Grid item xs={3}>
+					<Typography>Inspecting the site...</Typography>
+				</Grid>
+			</Grid>
+		);
+	}
+
+	if (requestError) {
+		return (
+			<Grid container spacing={0} my={2} direction="column">
+				<Grid item xs={3}>
+					<Typography variant="h4" component="h1" my={2}>An error has occurred.</Typography>
+					<Typography my={2}>Please check the URL is correct or try again later.</Typography>
+				</Grid>
+				<Grid item xs={3}>
+					<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
+				</Grid>
+			</Grid>
+		);
+	}
 
 	return (
 		<Box>
