@@ -1,48 +1,83 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import LoadingComponent from '../theme/loadingComponent';
+import Generic from './technology/generic';
+import ErrorMessage from './segments/errorMessage';
+import WordPress from './technology/wordpress';
 
 const Inspector = () => {
 	let inspectionURL = window.location.pathname.slice(5);
-	const navigate    = useNavigate();
+
 	const [siteDetails, setSiteDetails] = useState<any>([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading]         = useState<boolean>(true);
+	const [requestError, setRError]     = useState<boolean>(false);
 
 	useEffect(() => {
 		agent.Details.firstCheck(inspectionURL).then(response => {
 			setSiteDetails(response);
+			setLoading(false);
+		}).catch((err: any) => {
+			setRError(true);
+			setLoading(false);
 		});
-		setLoading(false);
 	}, [inspectionURL]);
 
-	if (loading) return <LoadingComponent content='Loading...' />
+	if (loading) {
+		return (
+			<Grid container spacing={0} my={2} direction="column" alignItems="center">
+				<Grid item xs={3}>
+					<CircularProgress />
+				</Grid>
+				<Grid item xs={3}>
+					<Typography>Inspecting the site...</Typography>
+				</Grid>
+			</Grid>
+		);
+	}
 
-	return (
-		<Box>
-			{siteDetails.success ? (
-				<>
-					{siteDetails.message.technology !== "Unknown" ? (
-						<>
-							<Typography variant="h4" component="h1" my={2}>{inspectionURL} is built with {siteDetails.message.technology}!</Typography>
-							<Typography my={2}>Assumption made on <Box component="span" fontWeight='700'>{siteDetails.message.matched_on.length}</Box> matches.</Typography>
-						</>
-					) : (
-						<>
-							<Typography variant="h4" component="h1" my={2}>We couldn't detect the CMS used for {inspectionURL}</Typography>
-						</>
-					)}
-				</>
-			) : (
-				<>
-					<Typography variant="h4" component="h1" my={2}>Failed to detect {inspectionURL}...</Typography>
-					<Typography my={2}>Check to make sure the site exists and is responding to public requests.</Typography>
-				</>
-			)}
-			<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
-		</Box>
-	);
+	if (requestError) {
+		return (
+			<>
+				<ErrorMessage
+					title={"Could not reach " + inspectionURL}
+					message="Please check the URL is correct or try again later."
+				/>
+			</>
+		);
+	}
+
+	if (siteDetails.success) {
+		switch (siteDetails.message.technology) {
+			case 'WordPress':
+				return (
+					<Box>
+						<WordPress url={inspectionURL} inspection={siteDetails} />
+					</Box>
+				);
+			case 'Unknown':
+				return (
+					<Box>
+						<ErrorMessage title={"We couldn't detect the CMS used for " + inspectionURL} />
+					</Box>
+				);
+			default:
+				return (
+					<Box>
+						<Generic url={inspectionURL} inspection={siteDetails} />
+					</Box>
+				);
+		}
+	} else {
+		return (
+			<Box>
+				<ErrorMessage
+					title={"Failed to detect " + inspectionURL + "..."}
+					message="Check to make sure the site exists and is responding to public requests."
+				/>
+			</Box>
+		);		
+	}
 };
 
 export default Inspector;

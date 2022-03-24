@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const title = "What's this?";
 const pages = [
-	['By Soupbowl', 'https://soupbowl.io'],
+	['By Soupbowl', 'https://soupbowl.io/projects/whatsthis'],
 	['Source', 'https://github.com/soup-bowl/whatsth.is']
 ];
 
@@ -76,6 +76,7 @@ const ResponsiveAppBar = () => {
 					>
 						{title}
 					</Typography>
+					<Typography sx={{ color: 'darkgrey', fontVariant: 'small-caps' }}>BETA</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						{pages.map((page) => (
 							<Button
