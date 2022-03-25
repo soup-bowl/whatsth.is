@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

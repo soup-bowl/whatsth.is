@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import agent from '../api/agent';
 import Generic from './technology/generic';
 import ErrorMessage from './segments/errorMessage';
