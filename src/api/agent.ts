@@ -9,7 +9,7 @@ const requests = {
 };
 
 const Details = {
-	firstCheck: (url: string) => requests.get('/' + url)
+	firstCheck: (url: string) => requests.get('/inspect/' + encodeURIComponent(url))
 };
 
 const agent = {
