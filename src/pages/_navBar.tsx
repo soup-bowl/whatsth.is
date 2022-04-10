@@ -23,7 +23,7 @@ const ResponsiveAppBar = () => {
 		<AppBar position="static">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<Avatar src="logo512.png" sx={{ mr: 1 }} />
+					<Avatar src="logo512.png" sx={{ mr: 1 }} variant="square" />
 					<Typography
 						variant="h6"
 						noWrap
