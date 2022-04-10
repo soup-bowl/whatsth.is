@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import { green } from '@mui/material/colors';
+import { purple } from '@mui/material/colors';
 
 declare module '@mui/material/styles' {
 	interface Theme {
@@ -17,7 +17,7 @@ declare module '@mui/material/styles' {
 
 const theme = createTheme({
 	palette: {
-		primary: green,
+		primary: purple,
 		mode: 'dark'
 	},
 	typography: {
