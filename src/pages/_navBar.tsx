@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem, Link } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem, Link, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const title = "What's this?";
@@ -23,6 +23,7 @@ const ResponsiveAppBar = () => {
 		<AppBar position="static">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
+					<Avatar src="logo512.png" sx={{ mr: 1 }} />
 					<Typography
 						variant="h6"
 						noWrap
