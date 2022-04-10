@@ -26,6 +26,7 @@ export default function WordPress({url, inspection}: Props) {
 					<Box component="span" fontWeight='700'>{counts.pg}</Box> pages.
 				</Typography>
 				<Typography my={2}>Assumption made on <Box component="span" fontWeight='700'>{inspection.message.matched_on.length}</Box> matches.</Typography>
+				<Typography my={2} color="darkgrey">Additional information scraped from their public REST API.</Typography>
 				<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
 			</>
 		);
