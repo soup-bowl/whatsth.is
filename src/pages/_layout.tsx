@@ -5,15 +5,13 @@ import theme from "../theme/theme";
 
 const Layout = () => {
 	return (
-		<>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<ResponsiveAppBar />
-				<Container maxWidth="md">
-					<Outlet />
-				</Container>
-			</ThemeProvider>
-		</>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<ResponsiveAppBar />
+			<Container maxWidth="md">
+				<Outlet />
+			</Container>
+		</ThemeProvider>
 	)
 };
 

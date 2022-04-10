@@ -9,6 +9,7 @@ const requests = {
 };
 
 const Details = {
+	stats: () => requests.get('/info'),
 	firstCheck: (url: string) => requests.get('/inspect/' + encodeURIComponent(url))
 };
 
