@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.1] (pre-release) - 2022-04-10
 ### Added
 - Generalised homepage statistics.
+- Browser detection.
 
 ### Changed
 - Branding changes.
