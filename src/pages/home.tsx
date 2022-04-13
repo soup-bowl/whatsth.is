@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import {Button, TextField, Grid, Typography, CircularProgress, Box} from '@mui/material';
-import agent from '../api/agent';
-import {useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+import { Button, TextField, Grid, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import BrowserDetection from './segments/browserDetection';
+import UsageStats from './segments/usageStats';
 
-const Home = () => {
+export default function Home() {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
 
@@ -12,45 +13,9 @@ const Home = () => {
 		return navigate('/url/' + inputURL);
 	};
 
-	const [siteStats, setSiteStats]       = useState<any>([]);
-	const [loadingStats, setLoadingStats] = useState<boolean>(true);
-
-	useEffect(() => {
-		agent.Details.stats().then(response => {
-			setSiteStats(response);
-			setLoadingStats(false);
-		}).catch((err: any) => {
-			setLoadingStats(false);
-		});
-	}, []);
-
-	let isStuffy = (
-		<Grid container spacing={0} my={2} direction="column" alignItems="center">
-			<Grid item xs={3}>
-				<CircularProgress />
-			</Grid>
-		</Grid>
-	);
-
-	if (!loadingStats) {
-		if (siteStats.success) {
-			isStuffy = (
-				<Grid item>
-					<Typography>
-						There has been <Box component="span" fontWeight='700'>{siteStats.counts.year}</Box> scans this year,
-						with <Box component="span" fontWeight='700'>{siteStats.counts.week}</Box> performed this week.
-					</Typography>
-					<Typography color="darkgrey">No identifyiable information is collected, just anonymous usage stats.</Typography>
-				</Grid>
-			);
-		} else {
-			isStuffy = (
-				<Grid item>
-					<Typography color="darkgrey">Could not load stats.</Typography>
-				</Grid>
-			);
-		}
-	}
+	const changeForm = (e:any) => {
+		setInputURL(e.target.value);
+	  };
 
 	return (
 		<>
@@ -58,22 +23,30 @@ const Home = () => {
 			<form onSubmit={submitForm}>
 				<Grid container direction="column" spacing={2}>
 					<Grid item>
-						<Typography my={2}>
-							We will try to pick details out of the URL you specify.
-						</Typography>
+						<Typography my={2}>We will try to pick details out of the URL you specify.</Typography>
 					</Grid>
 					<Grid item>
-						<TextField fullWidth id="url" type="url" placeholder="https://wordpress.org" label="URL" variant="outlined" onChange={(e) => setInputURL(e.target.value)} />
-						<Typography color="lightgrey">Remember to include the protocol. If you're unsure, it's normally https:// !</Typography>
+						<TextField fullWidth
+							id="url"
+							type="url"
+							placeholder="https://wordpress.org"
+							label="URL"
+							variant="outlined"
+							helperText="Remember to include the protocol. If you're unsure, it's normally https:// !"
+							onChange={changeForm}
+						/>
 					</Grid>
 					<Grid item>
 						<Button type="submit" variant="contained" value="Submit">Submit</Button>
 					</Grid>
-					{isStuffy}
+					<Grid item>
+						<BrowserDetection />
+					</Grid>
+					<Grid item>
+						<UsageStats />
+					</Grid>
 				</Grid>
 			</form>
 		</>
 	);
 };
-
-export default Home;

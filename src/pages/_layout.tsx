@@ -3,7 +3,7 @@ import {Container, CssBaseline, ThemeProvider} from '@mui/material';
 import ResponsiveAppBar from "./_navBar";
 import theme from "../theme/theme";
 
-const Layout = () => {
+export default function Layout() {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -14,5 +14,3 @@ const Layout = () => {
 		</ThemeProvider>
 	)
 };
-
-export default Layout;

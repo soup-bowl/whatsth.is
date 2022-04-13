@@ -8,7 +8,7 @@ const pages = [
 	['Source', 'https://github.com/soup-bowl/whatsth.is']
 ];
 
-const ResponsiveAppBar = () => {
+export default function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -94,5 +94,3 @@ const ResponsiveAppBar = () => {
 		</AppBar>
 	);
 };
-
-export default ResponsiveAppBar;

@@ -5,7 +5,7 @@ import Generic from './technology/generic';
 import ErrorMessage from './segments/errorMessage';
 import WordPress from './technology/wordpress';
 
-const Inspector = () => {
+export default function Inspector() {
 	let inspectionURL = window.location.pathname.slice(5);
 
 	const [siteDetails, setSiteDetails] = useState<any>([]);
@@ -78,5 +78,3 @@ const Inspector = () => {
 		);		
 	}
 };
-
-export default Inspector;
