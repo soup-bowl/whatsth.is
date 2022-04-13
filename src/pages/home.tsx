@@ -32,9 +32,9 @@ export default function Home() {
 							placeholder="https://wordpress.org"
 							label="URL"
 							variant="outlined"
-							helperText="Remember to include the protocol. If you're unsure, it's normally https:// !"
 							onChange={changeForm}
 						/>
+						<Typography color="lightgrey">Remember to include the protocol. If you're unsure, it's normally https:// !</Typography>
 					</Grid>
 					<Grid item>
 						<Button type="submit" variant="contained" value="Submit">Submit</Button>
