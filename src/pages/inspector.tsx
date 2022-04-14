@@ -35,46 +35,34 @@ export default function Inspector() {
 		);
 	}
 
-	if (requestError) {
+	if (requestError || siteDetails.success === false) {
 		return (
 			<>
 				<ErrorMessage
-					title={"Could not reach " + inspectionURL}
-					message="Please check the URL is correct or try again later."
+					title={"Failed to detect " + inspectionURL + "..."}
+					message="Check to make sure the site exists and is responding to public requests."
 				/>
 			</>
 		);
 	}
 
-	if (siteDetails.success) {
-		switch (siteDetails.message.technology) {
-			case 'WordPress':
-				return (
-					<Box>
-						<WordPress url={inspectionURL} inspection={siteDetails} />
-					</Box>
-				);
-			case 'Unknown':
-				return (
-					<Box>
-						<ErrorMessage title={"We couldn't detect the CMS used for " + inspectionURL} />
-					</Box>
-				);
-			default:
-				return (
-					<Box>
-						<Generic url={inspectionURL} inspection={siteDetails} />
-					</Box>
-				);
-		}
-	} else {
-		return (
-			<Box>
-				<ErrorMessage
-					title={"Failed to detect " + inspectionURL + "..."}
-					message="Check to make sure the site exists and is responding to public requests."
-				/>
-			</Box>
-		);		
+	let contentModule:any;
+	switch (siteDetails.message.technology) {
+		case 'WordPress':
+			contentModule = (<WordPress url={inspectionURL} inspection={siteDetails} />);
+			break;
+		case 'Unknown':
+			contentModule = (<ErrorMessage title={"We couldn't detect the CMS used for " + siteDetails.message.name} />);
+			break;
+		default:
+			contentModule = (<Generic url={inspectionURL} inspection={siteDetails} />);
+			break;
 	}
+
+	return (
+		<Box>
+			<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
+			{contentModule}
+		</Box>
+	);
 };
