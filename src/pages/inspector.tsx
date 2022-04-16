@@ -65,8 +65,10 @@ export default function Inspector() {
 		<Box>
 			<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
 			{contentModule}
-			<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
-			<Button variant="outlined" color="error" sx={{marginLeft: 2}} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+			<Box>
+				<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
+				<Button variant="outlined" color="error" sx={{marginLeft: 2}} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+			</Box>
 		</Box>
 	);
 };
