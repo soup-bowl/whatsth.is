@@ -1,11 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
 interface Props {
-	url: string;
 	inspection: any;
 }
 
-export default function WordPress({url, inspection}: Props) {
+export default function WordPress({inspection}: Props) {
 	if (inspection.message.additional !== null && inspection.message.additional.success) {
 		let wp_api  = inspection.message.additional;
 		let counts  = {'pt': 'no', 'pg': 'no', 'ct': 'no'};

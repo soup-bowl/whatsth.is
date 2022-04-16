@@ -1,11 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
 interface Props {
-	url: string;
 	inspection: any;
 }
 
-export default function Generic({url, inspection}: Props) {
+export default function Generic({inspection}: Props) {
 	return(
 		<>
 			<Typography variant="h4" component="h1" my={2}>{inspection.message.name} is built with {inspection.message.technology}!</Typography>

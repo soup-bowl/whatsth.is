@@ -51,13 +51,13 @@ export default function Inspector() {
 	let contentModule:any;
 	switch (siteDetails.message.technology) {
 		case 'WordPress':
-			contentModule = (<WordPress url={inspectionURL} inspection={siteDetails} />);
+			contentModule = (<WordPress inspection={siteDetails} />);
 			break;
 		case 'Unknown':
 			contentModule = (<ErrorMessage title={"We couldn't detect the CMS used for " + siteDetails.message.name} />);
 			break;
 		default:
-			contentModule = (<Generic url={inspectionURL} inspection={siteDetails} />);
+			contentModule = (<Generic inspection={siteDetails} />);
 			break;
 	}
 
