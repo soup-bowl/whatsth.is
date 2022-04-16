@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem, Link, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
 
 const title = "What's this?";
 const pages = [
@@ -10,6 +11,7 @@ const pages = [
 
 export default function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+	const navigate = useNavigate();
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
@@ -23,7 +25,9 @@ export default function ResponsiveAppBar() {
 		<AppBar position="static">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<Avatar src="logo512.png" sx={{ mr: 1 }} variant="square" />
+					<Link sx={{cursor: 'pointer'}} onClick={() => navigate('/')}>
+						<Avatar src="logo512.png" sx={{ mr: 1 }} variant="square" />
+					</Link>
 					<Typography
 						variant="h6"
 						noWrap
