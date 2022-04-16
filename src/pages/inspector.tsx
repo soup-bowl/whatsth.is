@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import agent from '../api/agent';
 import Generic from './technology/generic';
 import ErrorMessage from './segments/errorMessage';
 import WordPress from './technology/wordpress';
+import { useNavigate } from 'react-router-dom';
 
 export default function Inspector() {
 	let inspectionURL = window.location.pathname.slice(5);
+	const navigate = useNavigate();
 
 	const [siteDetails, setSiteDetails] = useState<any>([]);
 	const [loading, setLoading]         = useState<boolean>(true);
@@ -63,6 +65,8 @@ export default function Inspector() {
 		<Box>
 			<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
 			{contentModule}
+			<Button variant="contained" value="Return" onClick={() => navigate('/')}>Check Another Site</Button>
+			<Button variant="outlined" color="error" sx={{marginLeft: 2}} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
 		</Box>
 	);
 };
