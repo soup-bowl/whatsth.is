@@ -11,7 +11,11 @@ export default function BrowserDetection() {
 				We've detected that you're using <Box component="span" fontWeight='700'>{uaParser.getBrowser().name} {uaParser.getBrowser().version}</Box>
 				&nbsp;running on <Box component="span" fontWeight='700'>{uaParser.getOS().name}</Box>.
 			</Typography>
-			<Typography color="darkgrey">Information obtained from <Link href="https://wiki.mozilla.org/UserAgent" title={window.navigator.userAgent} style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>your UserAgent string</Link>.</Typography>
+			<Typography color="darkgrey">
+				Information obtained from&nbsp;
+				<Link href="https://wiki.mozilla.org/UserAgent" title={window.navigator.userAgent} style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>your UserAgent string</Link>
+				.
+			</Typography>
 		</>
 	);
 }
