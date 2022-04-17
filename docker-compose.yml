@@ -4,8 +4,6 @@ services:
     image: ghcr.io/soup-bowl/whatsthis-api:edge
     ports:
     - 43594:43594
-    environment:
-      WT_CORS_POLICY: http://localhost:3000
   frontend:
     build:
       context: .
