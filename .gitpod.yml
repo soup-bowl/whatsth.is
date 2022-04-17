@@ -4,4 +4,5 @@ tasks:
       docker-compose build
       npm install
     command: |
+      "REACT_APP_API_URL=https://43594-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" >> .env.development
       docker-compose up
