@@ -7,3 +7,9 @@ tasks:
       git update-index --skip-worktree .env.development
       echo "REACT_APP_API_URL=https://43594-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" >> .env.development
       docker-compose up
+ports:
+  - port: 3000
+    visibility: public
+    onOpen: open-browser
+  - port: 43594
+    visibility: public
