@@ -20,7 +20,7 @@ export default function Home() {
 	return (
 		<>
 			<Typography variant="h3" component="h1" my={2}>What's this?</Typography>
-			<form onSubmit={submitForm}>
+			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2}>
 					<Grid item>
 						<Typography my={2}>We will try to pick details out of the URL you specify.</Typography>
