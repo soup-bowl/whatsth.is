@@ -34,7 +34,6 @@ export default function Home() {
 							variant="outlined"
 							onChange={changeForm}
 						/>
-						<Typography color="lightgrey">Remember to include the protocol. If you're unsure, it's normally https:// !</Typography>
 					</Grid>
 					<Grid item>
 						<Button type="submit" variant="contained" value="Submit">Submit</Button>
