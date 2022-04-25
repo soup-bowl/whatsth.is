@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
+- Upgraded from **React 17** to **React 18**, and other dependencies.
+  - Axios could not be upgraded to 0.27.0 due to "webpack < 5 used to include polyfills for node.js core modules by default".
 - Website inspector now moved to a unique path to allow for expansion. Redirect for continuity for now.
 
 ## [0.2.2] (pre-release) - 2022-04-19
