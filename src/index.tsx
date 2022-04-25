@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from "./pages/_layout";
 import Home from './pages/home';
-import InspectionHome from "./pages/inspectionHome";
-import InspectonResult from "./pages/inspectionResult";
+import { InspectionHome, InspectonResult } from "./pages/inspection";
 
 export default function App() {
 	return (
