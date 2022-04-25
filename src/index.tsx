@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -21,6 +21,10 @@ export default function App() {
 }
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render( <React.StrictMode><App /></React.StrictMode> );
+const root      = createRoot(container!);
 
+root.render(
+	<StrictMode>
+		<App />
+	</StrictMode>
+);
