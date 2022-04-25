@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "/workspace/whatsth.is",
+			"name": "Frontend"
+		},
+		{
+			"path": "/workspace/api.whatsth.is",
+			"name": "Backend"
+		}
+	],
+	"settings": {}
+}

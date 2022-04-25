@@ -1,12 +1,29 @@
+checkoutLocation: whatsth.is
+additionalRepositories:
+  - url: https://github.com/soup-bowl/api.whatsth.is
+    checkoutLocation: api.whatsth.is
+
 tasks:
-  - init: |
-      docker-compose pull
-      docker-compose build
+  - name: Frontend
+    init: |
       npm install
     command: |
       git update-index --skip-worktree .env.development
-      echo "REACT_APP_API_URL=https://43594-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" >> .env.development
-      docker-compose up
+      echo "REACT_APP_API_URL=$(gp url 43594)" >> .env.development
+      npm start
+  - name: Backend
+    before: cd ../api.whatsth.is
+    init: |
+      python -m venv env
+      source env/bin/activate
+      pip install -r requirements.txt
+      pip install pytest
+    command: |
+      source env/bin/activate
+      uvicorn api.main:app --reload --port 43594
+
+workspaceLocation: whatsth.is/.github/gitpod.code-workspace
+
 ports:
   - port: 3000
     visibility: public
