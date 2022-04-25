@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from "./pages/_layout";
-import Home from "./pages/home";
-import Inspector from "./pages/inspector";
+import Home from './pages/home';
+import InspectionHome from "./pages/inspectionHome";
+import InspectonResult from "./pages/inspectionResult";
 
 export default function App() {
 	return (
@@ -12,7 +13,8 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Layout/>}>
 					<Route index element={<Home/>} />
-					<Route path="url/*" element={<Inspector/>} />
+					<Route path="inspect" element={<InspectionHome/>} />
+					<Route path="inspect/*" element={<InspectonResult/>} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
