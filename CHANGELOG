@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Axios could not be upgraded to 0.27.0 due to "webpack < 5 used to include polyfills for node.js core modules by default".
 - Website inspector now moved to a unique path to allow for expansion. Redirect for continuity for now.
 - Menu now displays a drawer instead of in header to allow for more options.
+- Tool given offline-working capabilities (PWA).
 
 ## [0.2.2] (pre-release) - 2022-04-19
 ### Added
