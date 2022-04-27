@@ -16,19 +16,19 @@ export default function EncoderPage() {
 		<Box sx={{ flexGrow: 1 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item xs={2} sm={4} md={4}>
-					<TextField id="encode" label="Encode" multiline fullWidth rows={10} value={stringMorph.encoded} onChange={(e) => {
+					<TextField id="decode" label="Decode" multiline fullWidth rows={10} value={stringMorph.decoded} onChange={(e) => {
 						let cont: StringMorph = {
-							decoded: atob(e.target.value),
-							encoded: e.target.value
+							decoded: e.target.value,
+							encoded: btoa(e.target.value)
 						}
 						setStringMorph(cont);
 					}} />
 				</Grid>
 				<Grid item xs={2} sm={4} md={4}>
-					<TextField id="decode" label="Decode" multiline fullWidth rows={10} value={stringMorph.decoded} onChange={(e) => {
+					<TextField id="encode" label="Encode" multiline fullWidth rows={10} value={stringMorph.encoded} onChange={(e) => {
 						let cont: StringMorph = {
-							decoded: e.target.value,
-							encoded: btoa(e.target.value)
+							decoded: atob(e.target.value),
+							encoded: e.target.value
 						}
 						setStringMorph(cont);
 					}} />
