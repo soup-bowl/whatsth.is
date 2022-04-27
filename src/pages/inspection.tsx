@@ -23,7 +23,7 @@ export function InspectionHome() {
 
 	return (
 		<>
-			<Typography variant="h3" component="h1" my={2}>What's this?</Typography>
+			<Typography variant="h3" component="h1" my={2}>Site Inspector</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2}>
 					<Grid item>
