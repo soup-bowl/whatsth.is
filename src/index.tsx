@@ -1,20 +1,23 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import Layout from "./pages/_layout";
 import Home from './pages/home';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
+import EncoderPage from './pages/encoder';
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Layout/>}>
-					<Route index element={<Home/>} />
-					<Route path="inspect" element={<InspectionHome/>} />
-					<Route path="inspect/*" element={<InspectonResult/>} />
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
+					<Route path="inspect" element={<InspectionHome />} />
+					<Route path="inspect/*" element={<InspectonResult />} />
+					<Route path="encoder" element={<EncoderPage />} />
+					<Route path="decoder" element={<Navigate replace to="/encoder" />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

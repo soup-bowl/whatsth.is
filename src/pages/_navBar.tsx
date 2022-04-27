@@ -1,8 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import { Link, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CodeIcon from '@mui/icons-material/Code';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useNavigate } from 'react-router-dom';
+import CachedIcon from '@mui/icons-material/Cached';
 
 export default function NavDrawer() {
 	const navigate = useNavigate();
@@ -13,6 +14,10 @@ export default function NavDrawer() {
 			<ListItem button onClick={() => navigate('/inspect')}>
 				<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 				<ListItemText primary="Site Inspector" />
+			</ListItem>
+			<ListItem button onClick={() => navigate('/encoder')}>
+				<ListItemIcon><CachedIcon /></ListItemIcon>
+				<ListItemText primary="Encoder" />
 			</ListItem>
 		</List>
 		<Divider />
