@@ -6,8 +6,8 @@
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-* Website Inspector ([uses the API][api]).
-* Base64 encoder/decoder.
+* [Website Inspector](https://whatsth.is/inspect) ([uses the API][api]).
+* [Base64 encoder/decoder](https://whatsth.is/encoder).
 
 This app comprises of two components - A React frontend (this repository), and a [Python inspection API][api].
 
