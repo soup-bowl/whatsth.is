@@ -1,8 +1,12 @@
-# [whatsth.is][site]
+<p align="center"><img src="https://whatsth.is/logo192.png" /></p>
+<h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge)](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is)
 
-Simple technology scanner designed to inspect the content of websites and attempt to determine what CMS and other technologies they have used.
+React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
+
+* Website Inspector ([uses the API][api]).
+* Base64 encoder/decoder.
 
 This app comprises of two components - A React frontend (this repository), and a [Python inspection API][api].
 
@@ -35,5 +39,10 @@ And you're off! A Docker method is coming soon, I promise.
 
 The API the system will communicate with is defined in the appropriate `.env` file (if using `npm start`, it's `.development`).
 
+### Testing Offline Capabilities
+
+The PWA aspect won't kick into full effect unless it is running 'production' with full HTTPS. With these conditions met, the command `npm run buildstart` has been provided to compile a production build of the tool, and run a local instance server to preview it. 
+
 [site]: https://whatsth.is
+[pwa]:  https://web.dev/learn/pwa/progressive-web-apps/
 [api]:  https://github.com/soup-bowl/api.whatsth.is
