@@ -2,8 +2,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container, styled, Drawer, Divider, Box} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloudOffIcon from '@mui/icons-material/CloudOff';
 import theme from "../theme/theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavDrawer from "./_navBar";
 
 const drawerWidth = 240;
@@ -60,6 +61,21 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Layout() {
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
+	const [connectionState, setConnectionState] = useState(true);
+	const MINUTE_MS = 15000;
+
+	// https://stackoverflow.com/a/65049865
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (navigator.onLine) {
+				setConnectionState(true);
+			} else {
+				setConnectionState(false);
+			}
+		}, MINUTE_MS);
+
+		return () => clearInterval(interval);
+	}, []);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -75,16 +91,19 @@ export default function Layout() {
 			<CssBaseline />
 			<AppBar position="fixed" open={open}>
 				<Toolbar>
-				<IconButton
-					color="inherit"
-					aria-label="open drawer"
-					onClick={handleDrawerOpen}
-					edge="start"
-					sx={{ mr: 2, ...(open && { display: 'none' }) }}
-				>
-					<MenuIcon />
-				</IconButton>
-				<Typography variant="h6" noWrap component="div">What's this?</Typography>
+					<IconButton
+						color="inherit"
+						aria-label="open drawer"
+						onClick={handleDrawerOpen}
+						edge="start"
+						sx={{ mr: 2, ...(open && { display: 'none' }) }}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography variant="h6" noWrap component="div">What's this?</Typography>
+					{ ! connectionState ? 
+					<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
+					: null }
 				</Toolbar>
 			</AppBar>
 			<Drawer
