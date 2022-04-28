@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Link, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CodeIcon from '@mui/icons-material/Code';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -11,6 +12,10 @@ export default function NavDrawer() {
 	return (
 		<>
 		<List>
+			<ListItem button onClick={() => navigate('/')}>
+				<ListItemIcon><HomeIcon /></ListItemIcon>
+				<ListItemText primary="Home" />
+			</ListItem>
 			<ListItem button onClick={() => navigate('/inspect')}>
 				<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 				<ListItemText primary="Site Inspector" />

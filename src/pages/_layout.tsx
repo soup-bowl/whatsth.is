@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container, styled, Drawer, Divider, Box} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -59,7 +59,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function Layout() {
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [connectionState, setConnectionState] = useState(true);
 	const MINUTE_MS = 15000;
