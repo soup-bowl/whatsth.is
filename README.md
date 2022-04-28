@@ -1,7 +1,8 @@
 <p align="center"><img src="https://whatsth.is/logo192.png" /></p>
 <h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
-
-[![CodeFactor](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge)](https://www.codefactor.io/repository/github/soup-bowl/whatsth.is)
+<p align="center">
+  <a href="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is"><img src="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge" alt="CodeFactor" /></a>
+</p>
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
