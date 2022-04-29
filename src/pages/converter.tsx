@@ -1,4 +1,5 @@
-import { Box, FormControl, Grid, InputLabel, TextField, Typography, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Box, FormControl, Grid, InputLabel, TextField, Typography,
+	MenuItem, Select, SelectChangeEvent, ListSubheader } from "@mui/material";
 import { useState } from "react";
 
 interface StringMorph {
@@ -8,6 +9,7 @@ interface StringMorph {
 
 enum ConversionType {
 	Base64,
+	Hex,
 }
 
 export default function StringConversionPage() {
@@ -16,12 +18,16 @@ export default function StringConversionPage() {
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
 		setType(parseInt(event.target.value));
+		setStringMorph({encoded: '', decoded: ''});
 	};
 
 	function ConvertTo(thing:string) {
 		switch (type) {
 			case ConversionType.Base64:
 				return btoa(thing);
+			case ConversionType.Hex:
+				// https://stackoverflow.com/a/60435654
+				return thing.split("").map(c => c.charCodeAt(0).toString(16).padStart(2, "0")).join("");
 			default:
 				return thing;
 		}
@@ -31,6 +37,9 @@ export default function StringConversionPage() {
 		switch (type) {
 			case ConversionType.Base64:
 				return atob(thing);
+			case ConversionType.Hex:
+				// https://stackoverflow.com/a/60435654
+				return thing.split(/(\w\w)/g).filter(p => !!p).map(c => String.fromCharCode(parseInt(c, 16))).join("")
 			default:
 				return thing;
 		}
@@ -50,7 +59,9 @@ export default function StringConversionPage() {
 						value={ConversionType.Base64.toString()}
 						onChange={handleTypeChange}
 						>
+							<ListSubheader>Encode</ListSubheader>
 							<MenuItem value={0}>Base64</MenuItem>
+							<MenuItem value={1}>Hexidecimal</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
