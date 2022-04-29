@@ -20,9 +20,9 @@ export default function NavDrawer() {
 				<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 				<ListItemText primary="Site Inspector" />
 			</ListItem>
-			<ListItem button onClick={() => navigate('/encoder')}>
+			<ListItem button onClick={() => navigate('/convert')}>
 				<ListItemIcon><CachedIcon /></ListItemIcon>
-				<ListItemText primary="Encoder" />
+				<ListItemText primary="String Conversion" />
 			</ListItem>
 		</List>
 		<Divider />

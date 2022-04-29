@@ -16,8 +16,9 @@ export default function App() {
 					<Route index element={<Home />} />
 					<Route path="inspect" element={<InspectionHome />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
-					<Route path="encoder" element={<EncoderPage />} />
-					<Route path="decoder" element={<Navigate replace to="/encoder" />} />
+					<Route path="convert" element={<EncoderPage />} />
+					<Route path="encoder" element={<Navigate replace to="/convert" />} />
+					<Route path="decoder" element={<Navigate replace to="/convert" />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
