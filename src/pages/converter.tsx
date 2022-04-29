@@ -10,6 +10,7 @@ interface StringMorph {
 enum ConversionType {
 	Base64,
 	Hex,
+	URI,
 }
 
 export default function StringConversionPage() {
@@ -28,11 +29,13 @@ export default function StringConversionPage() {
 			case ConversionType.Hex:
 				// https://stackoverflow.com/a/60435654
 				return thing.split("").map(c => c.charCodeAt(0).toString(16).padStart(2, "0")).join("");
+			case ConversionType.URI:
+				return encodeURIComponent(thing);
 			default:
 				return thing;
 		}
 	}
-	
+
 	function ConvertFrom(thing:string) {
 		switch (type) {
 			case ConversionType.Base64:
@@ -40,6 +43,8 @@ export default function StringConversionPage() {
 			case ConversionType.Hex:
 				// https://stackoverflow.com/a/60435654
 				return thing.split(/(\w\w)/g).filter(p => !!p).map(c => String.fromCharCode(parseInt(c, 16))).join("")
+			case ConversionType.URI:
+				return decodeURIComponent(thing);
 			default:
 				return thing;
 		}
@@ -62,6 +67,7 @@ export default function StringConversionPage() {
 							<ListSubheader>Encode</ListSubheader>
 							<MenuItem value={0}>Base64</MenuItem>
 							<MenuItem value={1}>Hexidecimal</MenuItem>
+							<MenuItem value={2}>URI</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
