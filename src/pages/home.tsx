@@ -39,7 +39,7 @@ export default function Home() {
 					<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/decoder')}>
 						<Item>
 							<CachedIcon fontSize="large" />
-							<Typography>Encode / Decode</Typography>
+							<Typography>String Conversions</Typography>
 						</Item>
 					</Link>
 				</Grid>
