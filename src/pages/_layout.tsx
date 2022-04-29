@@ -1,11 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container, styled, Drawer, Divider, Box} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloudOffIcon from '@mui/icons-material/CloudOff';
+import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
+	Container, styled, Drawer, Divider, Box, List, ListItem, ListItemIcon,
+	ListItemText, Link} from '@mui/material';
 import theme from "../theme/theme";
 import { useEffect, useState } from "react";
-import NavDrawer from "./_navBar";
+
+import MenuIcon from '@mui/icons-material/Menu';
+import CloudOffIcon from '@mui/icons-material/CloudOff';
+import HomeIcon from '@mui/icons-material/Home';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import CodeIcon from '@mui/icons-material/Code';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import CachedIcon from '@mui/icons-material/Cached';
 
 const drawerWidth = 240;
 
@@ -59,6 +66,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function Layout() {
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [connectionState, setConnectionState] = useState(true);
 	const MINUTE_MS = 15000;
@@ -128,7 +136,31 @@ export default function Layout() {
 					</IconButton>
 				</DrawerHeader>
 				<Divider />
-				<NavDrawer />
+				<List>
+					<ListItem button onClick={() => {navigate('/');handleDrawerClose();}}>
+						<ListItemIcon><HomeIcon /></ListItemIcon>
+						<ListItemText primary="Home" />
+					</ListItem>
+					<ListItem button onClick={() => {navigate('/inspect');handleDrawerClose();}}>
+						<ListItemIcon><TravelExploreIcon /></ListItemIcon>
+						<ListItemText primary="Site Inspector" />
+					</ListItem>
+					<ListItem button onClick={() => {navigate('/convert');handleDrawerClose();}}>
+						<ListItemIcon><CachedIcon /></ListItemIcon>
+						<ListItemText primary="String Conversion" />
+					</ListItem>
+				</List>
+				<Divider />
+				<List>
+					<ListItem button component={Link} href="https://soupbowl.io/projects/whatsthis">
+						<ListItemIcon><CodeIcon /></ListItemIcon>
+						<ListItemText primary="Made by Soupbowl" />
+					</ListItem>
+					<ListItem button component={Link} href="https://github.com/soup-bowl/whatsth.is">
+						<ListItemIcon><GitHubIcon /></ListItemIcon>
+						<ListItemText primary="Source Code" />
+					</ListItem>
+				</List>
 			</Drawer>
 			<Main open={open}>
         		<DrawerHeader />
