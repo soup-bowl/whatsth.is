@@ -10,9 +10,7 @@ enum ConversionType {
 	Base64,
 }
 
-
-
-export default function EncoderPage() {
+export default function StringConversionPage() {
 	const [stringMorph, setStringMorph] = useState<StringMorph>({encoded: '', decoded: ''});
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
 

@@ -6,7 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import Layout from "./pages/_layout";
 import Home from './pages/home';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
-import EncoderPage from './pages/encoder';
+import StringConversionPage from './pages/converter';
 
 export default function App() {
 	return (
@@ -16,7 +16,7 @@ export default function App() {
 					<Route index element={<Home />} />
 					<Route path="inspect" element={<InspectionHome />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
-					<Route path="convert" element={<EncoderPage />} />
+					<Route path="convert" element={<StringConversionPage />} />
 					<Route path="encoder" element={<Navigate replace to="/convert" />} />
 					<Route path="decoder" element={<Navigate replace to="/convert" />} />
 				</Route>
