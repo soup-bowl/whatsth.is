@@ -56,7 +56,7 @@ export default function StringConversionPage() {
 						<Select
 						labelId="chooseConversionType"
 						id="chooseConversionType"
-						value={ConversionType.Base64.toString()}
+						value={type.toString()}
 						onChange={handleTypeChange}
 						>
 							<ListSubheader>Encode</ListSubheader>
