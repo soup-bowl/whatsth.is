@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cloud indicator to highlight if the tool is connected to the internet or not.
 
 ### Changed
+- Icon changed to support PWA adaptive icons.
 - Clicking on menu items now closes the drawer.
 
 ## [0.2.3] (pre-release) - 2022-04-28
