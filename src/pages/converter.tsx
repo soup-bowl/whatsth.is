@@ -97,7 +97,7 @@ export default function StringConversionPage() {
 						<TextField
 							id="passphrase"
 							label="Passphrase (for encryption)"
-							variant="outlined"
+							variant="filled"
 							onChange={handleChangePassphrase}
 							disabled={(parseInt(type.toString()) >= 10) ? false : true}
 						/>
