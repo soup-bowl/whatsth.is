@@ -1,4 +1,4 @@
-<p align="center"><img src="https://whatsth.is/logo192.png" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/11209477/167717787-7f33f564-e975-4055-bf7b-c2b3c29e4f81.png" /></p>
 <h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
 <p align="center">
   <a href="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is"><img src="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge" alt="CodeFactor" /></a>
