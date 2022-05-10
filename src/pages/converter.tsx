@@ -1,5 +1,6 @@
 import { Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader } from "@mui/material";
+	MenuItem, Select, SelectChangeEvent, ListSubheader, FormHelperText } from "@mui/material";
+import { AES, enc } from 'crypto-js';
 import { useState } from "react";
 
 interface StringMorph {
@@ -8,13 +9,15 @@ interface StringMorph {
 }
 
 enum ConversionType {
-	Base64,
-	Hex,
-	URI,
+	Base64 = 0,
+	Hex = 1,
+	URI = 2,
+	AES = 10,
 }
 
 export default function StringConversionPage() {
 	const [stringMorph, setStringMorph] = useState<StringMorph>({encoded: '', decoded: ''});
+	const [passphrase, setPassphrase] = useState('');
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
@@ -22,7 +25,11 @@ export default function StringConversionPage() {
 		setStringMorph({encoded: '', decoded: ''});
 	};
 
-	function ConvertTo(thing:string) {
+	const handleChangePassphrase = (e:any) => {
+		setPassphrase(e.target.value);
+	};
+
+	function ConvertTo(thing:string, phrase:string = '') {
 		switch (type) {
 			case ConversionType.Base64:
 				return btoa(thing);
@@ -31,12 +38,14 @@ export default function StringConversionPage() {
 				return thing.split("").map(c => c.charCodeAt(0).toString(16).padStart(2, "0")).join("");
 			case ConversionType.URI:
 				return encodeURIComponent(thing);
+			case ConversionType.AES:
+				return AES.encrypt(thing, phrase).toString();
 			default:
 				return thing;
 		}
 	}
 
-	function ConvertFrom(thing:string) {
+	function ConvertFrom(thing:string, phrase:string = '') {
 		switch (type) {
 			case ConversionType.Base64:
 				return atob(thing);
@@ -45,6 +54,8 @@ export default function StringConversionPage() {
 				return thing.split(/(\w\w)/g).filter(p => !!p).map(c => String.fromCharCode(parseInt(c, 16))).join("")
 			case ConversionType.URI:
 				return decodeURIComponent(thing);
+			case ConversionType.AES:
+				return AES.decrypt(thing, phrase).toString(enc.Utf8);
 			default:
 				return thing;
 		}
@@ -68,7 +79,14 @@ export default function StringConversionPage() {
 							<MenuItem value={0}>Base64</MenuItem>
 							<MenuItem value={1}>Hexidecimal</MenuItem>
 							<MenuItem value={2}>URI</MenuItem>
+							<ListSubheader>Encrypt</ListSubheader>
+							<MenuItem value={10}>AES</MenuItem>
 						</Select>
+					</FormControl>
+				</Grid>
+				<Grid item>
+					<FormControl variant="filled" sx={{ m: 1, minWidth: 360 }}>
+						<TextField id="passphrase" label="Passphrase (for encryption)" variant="outlined" onChange={handleChangePassphrase} />
 					</FormControl>
 				</Grid>
 			</Grid>
@@ -79,7 +97,7 @@ export default function StringConversionPage() {
 					<TextField id="encode" label="Encode" multiline fullWidth rows={10} value={stringMorph.decoded} onChange={(e) => {
 						let cont: StringMorph = {
 							decoded: e.target.value,
-							encoded: ConvertTo(e.target.value)
+							encoded: ConvertTo(e.target.value, passphrase)
 						}
 						setStringMorph(cont);
 					}} />
@@ -87,7 +105,7 @@ export default function StringConversionPage() {
 				<Grid item xs={2} sm={4} md={4}>
 					<TextField id="decode" label="Decode" multiline fullWidth rows={10} value={stringMorph.encoded} onChange={(e) => {
 						let cont: StringMorph = {
-							decoded: ConvertFrom(e.target.value),
+							decoded: ConvertFrom(e.target.value, passphrase),
 							encoded: e.target.value
 						}
 						setStringMorph(cont);

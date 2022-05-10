@@ -19,7 +19,7 @@ export function InspectionHome() {
 
 	const changeForm = (e:any) => {
 		setInputURL(e.target.value);
-	  };
+	};
 
 	return (
 		<>

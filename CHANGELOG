@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - New homescreen.
 - More encoding options, renamed Encoder to Converter,
+- Encryption options.
 - Cloud indicator to highlight if the tool is connected to the internet or not.
 
 ### Changed
