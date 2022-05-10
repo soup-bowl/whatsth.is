@@ -94,7 +94,13 @@ export default function StringConversionPage() {
 				</Grid>
 				<Grid item>
 					<FormControl variant="filled" sx={{ m: 1, minWidth: 360 }}>
-						<TextField id="passphrase" label="Passphrase (for encryption)" variant="outlined" onChange={handleChangePassphrase} />
+						<TextField
+							id="passphrase"
+							label="Passphrase (for encryption)"
+							variant="outlined"
+							onChange={handleChangePassphrase}
+							disabled={(parseInt(type.toString()) >= 10) ? false : true}
+						/>
 					</FormControl>
 				</Grid>
 			</Grid>
