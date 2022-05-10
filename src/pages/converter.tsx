@@ -1,6 +1,6 @@
 import { Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader, FormHelperText } from "@mui/material";
-import { AES, enc } from 'crypto-js';
+	MenuItem, Select, SelectChangeEvent, ListSubheader } from "@mui/material";
+import { AES, TripleDES, enc } from 'crypto-js';
 import { useState } from "react";
 
 interface StringMorph {
@@ -13,6 +13,7 @@ enum ConversionType {
 	Hex = 1,
 	URI = 2,
 	AES = 10,
+	TDES = 11,
 }
 
 export default function StringConversionPage() {
@@ -27,6 +28,7 @@ export default function StringConversionPage() {
 
 	const handleChangePassphrase = (e:any) => {
 		setPassphrase(e.target.value);
+		setStringMorph({encoded: '', decoded: ''});
 	};
 
 	function ConvertTo(thing:string, phrase:string = '') {
@@ -40,6 +42,8 @@ export default function StringConversionPage() {
 				return encodeURIComponent(thing);
 			case ConversionType.AES:
 				return AES.encrypt(thing, phrase).toString();
+			case ConversionType.TDES:
+				return TripleDES.encrypt(thing, phrase).toString();
 			default:
 				return thing;
 		}
@@ -56,6 +60,8 @@ export default function StringConversionPage() {
 				return decodeURIComponent(thing);
 			case ConversionType.AES:
 				return AES.decrypt(thing, phrase).toString(enc.Utf8);
+			case ConversionType.TDES:
+				return TripleDES.decrypt(thing, phrase).toString(enc.Utf8);
 			default:
 				return thing;
 		}
@@ -64,6 +70,7 @@ export default function StringConversionPage() {
 	return(
 		<>
 		<Typography variant="h3" component="h1" my={2}>String Conversions</Typography>
+		<Typography my={2}>This segment is powered by the <a href="https://www.npmjs.com/package/crypto-js">CryptoJS library</a>.</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>
@@ -81,6 +88,7 @@ export default function StringConversionPage() {
 							<MenuItem value={2}>URI</MenuItem>
 							<ListSubheader>Encrypt</ListSubheader>
 							<MenuItem value={10}>AES</MenuItem>
+							<MenuItem value={11}>3DES</MenuItem>
 						</Select>
 					</FormControl>
 				</Grid>
