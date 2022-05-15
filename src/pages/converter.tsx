@@ -1,5 +1,5 @@
 import { Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader } from "@mui/material";
+	MenuItem, Select, SelectChangeEvent, ListSubheader, Link } from "@mui/material";
 import { AES, TripleDES, enc } from 'crypto-js';
 import { useState } from "react";
 
@@ -70,7 +70,7 @@ export default function StringConversionPage() {
 	return(
 		<>
 		<Typography variant="h3" component="h1" my={2}>String Conversions</Typography>
-		<Typography my={2}>This segment is powered by the <a href="https://www.npmjs.com/package/crypto-js">CryptoJS library</a>.</Typography>
+		<Typography my={2}>This segment is powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>
