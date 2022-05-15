@@ -99,7 +99,6 @@ export default function StringConversionPage() {
 							label="Passphrase (for encryption)"
 							variant="filled"
 							onChange={handleChangePassphrase}
-							
 						/>
 					</FormControl>
 				</Grid>

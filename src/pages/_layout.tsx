@@ -141,7 +141,7 @@ export default function Layout() {
 						<ListItemIcon><HomeIcon /></ListItemIcon>
 						<ListItemText primary="Home" />
 					</ListItem>
-					<ListItem button onClick={() => {navigate('/inspect');handleDrawerClose();}}>
+					<ListItem button onClick={() => {navigate('/inspect');handleDrawerClose();}} disabled={!connectionState}>
 						<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 						<ListItemText primary="Site Inspector" />
 					</ListItem>

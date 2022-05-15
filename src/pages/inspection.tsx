@@ -11,6 +11,21 @@ import WordPress from './technology/wordpress';
 export function InspectionHome() {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
+	const [connectionState, setConnectionState] = useState(true);
+	const MINUTE_MS = 15000;
+
+	// https://stackoverflow.com/a/65049865
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (navigator.onLine) {
+				setConnectionState(true);
+			} else {
+				setConnectionState(false);
+			}
+		}, MINUTE_MS);
+
+		return () => clearInterval(interval);
+	}, []);
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
@@ -37,16 +52,28 @@ export function InspectionHome() {
 							label="URL"
 							variant="outlined"
 							onChange={changeForm}
+							disabled={!connectionState}
 						/>
 					</Grid>
 					<Grid item>
-						<Button type="submit" variant="contained" value="Submit">Submit</Button>
+						<Button
+							type="submit"
+							variant="contained"
+							value="Submit"
+							disabled={!connectionState}
+						>
+							Submit
+						</Button>
 					</Grid>
 					<Grid item>
 						<BrowserDetection />
 					</Grid>
 					<Grid item>
+						{ connectionState ?
 						<UsageStats />
+						:
+						<Typography color="darkgrey">No stats - you are currently offline.</Typography>
+						}
 					</Grid>
 				</Grid>
 			</form>
