@@ -92,14 +92,14 @@ export default function StringConversionPage() {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item>
+				<Grid item visibility={(parseInt(type.toString()) >= 10) ? 'visible' : 'hidden'}>
 					<FormControl variant="filled" sx={{ m: 1, minWidth: 360 }}>
 						<TextField
 							id="passphrase"
 							label="Passphrase (for encryption)"
 							variant="filled"
 							onChange={handleChangePassphrase}
-							disabled={(parseInt(type.toString()) >= 10) ? false : true}
+							
 						/>
 					</FormControl>
 				</Grid>
