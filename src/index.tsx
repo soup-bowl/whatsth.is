@@ -7,6 +7,7 @@ import Layout from "./pages/_layout";
 import Home from './pages/home';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
 import StringConversionPage from './pages/converter';
+import { Metrology } from './pages/metrology';
 
 export default function App() {
 	return (
@@ -19,6 +20,8 @@ export default function App() {
 					<Route path="convert" element={<StringConversionPage />} />
 					<Route path="encoder" element={<Navigate replace to="/convert" />} />
 					<Route path="decoder" element={<Navigate replace to="/convert" />} />
+					<Route path="metrology" element={<Metrology />} />
+					<Route path="unit" element={<Navigate replace to="/metrology" />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

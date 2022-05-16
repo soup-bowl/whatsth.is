@@ -4,6 +4,7 @@ import { Box, Paper, Link } from '@mui/material';
 
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CachedIcon from '@mui/icons-material/Cached';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import { useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -40,6 +41,14 @@ export default function Home() {
 						<Item>
 							<CachedIcon fontSize="large" />
 							<Typography>String Conversions</Typography>
+						</Item>
+					</Link>
+				</Grid>
+				<Grid item xs={6}>
+					<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/metrology')}>
+						<Item>
+							<AccessTimeFilledIcon fontSize="large" />
+							<Typography>Unit Conversions</Typography>
 						</Item>
 					</Link>
 				</Grid>

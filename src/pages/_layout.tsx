@@ -13,6 +13,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CodeIcon from '@mui/icons-material/Code';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 const drawerWidth = 240;
 
@@ -148,6 +149,10 @@ export default function Layout() {
 					<ListItem button onClick={() => {navigate('/convert');handleDrawerClose();}}>
 						<ListItemIcon><CachedIcon /></ListItemIcon>
 						<ListItemText primary="String Conversion" />
+					</ListItem>
+					<ListItem button onClick={() => {navigate('/metrology');handleDrawerClose();}}>
+						<ListItemIcon><AccessTimeFilledIcon /></ListItemIcon>
+						<ListItemText primary="Unit Conversions" />
 					</ListItem>
 				</List>
 				<Divider />
