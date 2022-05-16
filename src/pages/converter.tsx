@@ -70,7 +70,6 @@ export default function StringConversionPage() {
 	return(
 		<>
 		<Typography variant="h3" component="h1" my={2}>String Conversions</Typography>
-		<Typography my={2}>This segment is powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>
@@ -100,6 +99,7 @@ export default function StringConversionPage() {
 							variant="filled"
 							onChange={handleChangePassphrase}
 						/>
+						<Typography>This segment is powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.</Typography>
 					</FormControl>
 				</Grid>
 			</Grid>
