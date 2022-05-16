@@ -108,7 +108,7 @@ export default function Layout() {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">What's this?</Typography>
-					{ ! connectionState ? 
+					{ ! connectionState ?
 					<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
 					: null }
 				</Toolbar>
@@ -128,7 +128,7 @@ export default function Layout() {
 			>
 				<DrawerHeader>
 					<Typography>{process.env.REACT_APP_VERSION}</Typography>&nbsp;
-					{ process.env.REACT_APP_BETA === "1" ? 
+					{ process.env.REACT_APP_BETA === "1" ?
 					<Typography sx={{ color: 'darkgrey', fontVariant: 'small-caps' }}>BETA</Typography>
 					: null }
 					<IconButton onClick={handleDrawerClose}>
