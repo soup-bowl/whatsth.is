@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
 import theme from "../theme/theme";
 import { useEffect, useState } from "react";
 
+import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import HomeIcon from '@mui/icons-material/Home';
@@ -152,6 +153,10 @@ export default function Layout() {
 				</List>
 				<Divider />
 				<List>
+					<ListItem button onClick={() => {navigate('/help');handleDrawerClose();}}>
+						<ListItemIcon><HelpIcon /></ListItemIcon>
+						<ListItemText primary="Help" />
+					</ListItem>
 					<ListItem button component={Link} href="https://soupbowl.io/projects/whatsthis">
 						<ListItemIcon><CodeIcon /></ListItemIcon>
 						<ListItemText primary="Made by Soupbowl" />

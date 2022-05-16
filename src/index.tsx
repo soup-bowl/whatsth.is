@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import Layout from "./pages/_layout";
 import Home from './pages/home';
+import HelpPage from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
 import StringConversionPage from './pages/converter';
 
@@ -14,6 +15,7 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
+					<Route path="help" element={<HelpPage />} />
 					<Route path="inspect" element={<InspectionHome />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
 					<Route path="convert" element={<StringConversionPage />} />
