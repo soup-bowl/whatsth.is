@@ -8,11 +8,10 @@ tasks:
     init: |
       npm install
     command: |
-      git update-index --skip-worktree .env.development
-      echo "PUBLIC_URL=$(gp url 3000)" > .env.development
-      echo "REACT_APP_API_URL=$(gp url 43594)" >> .env.development
-      echo "REACT_APP_VERSION=\$npm_package_version" >> .env.development
-      echo "REACT_APP_BETA=1" >> .env.development
+      echo "PUBLIC_URL=$(gp url 3000)" > .env.development.local
+      echo "REACT_APP_API_URL=$(gp url 43594)" >> .env.development.local
+      echo "REACT_APP_VERSION=\$npm_package_version" >> .env.development.local
+      echo "REACT_APP_BETA=1" >> .env.development.local
       npm start
   - name: Backend
     before: cd ../api.whatsth.is
