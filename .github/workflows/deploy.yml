@@ -4,9 +4,8 @@ name: Auto-deploy to GitHub Pages (alpha)
 
 # Controls 
 on:
-  push:
-    branches: [ "develop" ]
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build_test:
