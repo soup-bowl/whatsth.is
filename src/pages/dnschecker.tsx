@@ -1,6 +1,9 @@
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
+import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import agent from '../api/agent';
+import { IRecord } from "../interfaces";
 
 export function DnsCheckHome() {
 	const [inputURL, setInputURL] = useState('');
@@ -31,7 +34,7 @@ export function DnsCheckHome() {
 		<>
 			<Typography variant="h3" component="h1" my={2}>DNS Inspector</Typography>
 			<form onSubmit={submitForm} noValidate>
-				<Grid container direction="column" spacing={2}>
+				<Grid container direction="column" spacing={2} my={2}>
 					<Grid container spacing={2}>
 						<Grid item xs={4}>
 							<FormControl fullWidth>
@@ -83,13 +86,62 @@ export function DnsCheckHome() {
 
 export function DnsCheckResult() {
 	const navigate = useNavigate();
-	let inputs = window.location.pathname.slice(5).split('/');
 
+	const [protocol, setProtocol] = useState<string>('');
+	const [dnsUrl, setDnsUrl]     = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(true);
+	const [columns, setColumns] = useState<any>([]);
+	const [rows, setRows] = useState<any>([]);
+	const [errResult, setErrResult] = useState<any>(undefined);
+
+	useEffect(() => {
+		let inputs = window.location.pathname.slice(5).split('/');
+		setProtocol(inputs[0]);
+		setDnsUrl(inputs[1]);
+	}, []);
+	
+	useEffect(() => {
+		if (protocol !== '' && dnsUrl !== '') {
+			agent.DNS.probe(protocol, dnsUrl)
+			.then((response:any) => {
+				let rows:IRecord[]   = [];
+				let cols:GridColumns = [];
+				if (protocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1} ) };
+				if (protocol === 'MX' ) { cols.push( { field: 'priority', headerName: 'Priority', flex: 1, maxWidth: 125} ) };
+				if (protocol === 'TXT') { cols.push( { field: 'text', headerName: 'Text', flex: 1 } ) };
+
+				for (let index = 0; index < response.records.length; index++) {
+					response.records[index].id = index;
+					rows.push( response.records[index] );
+				}
+
+				setColumns(cols);
+				setRows(rows);
+				setLoading(false);
+			})
+			.catch((err:any) => {
+				setErrResult(true);
+				setLoading(false);
+			});
+		}
+	}, [protocol, dnsUrl]);
 
 	return(
 		<Box>
-			<Typography my={2} component="h1" variant="h4">{inputs[0]} records for {inputs[1]}</Typography>
-
+			<Typography my={2} component="h1" variant="h4">{protocol} records for {dnsUrl}</Typography>
+			<Box my={2} height={400}>
+				<DataGrid
+					rows={rows}
+					columns={columns}
+					getRowId={(row) => row.id}
+					loading={loading}
+					error={errResult}
+					disableSelectionOnClick
+					disableColumnMenu
+					disableColumnSelector
+					hideFooter
+				/>
+			</Box>
 			<Box>
 				<Button variant="contained" value="Return" onClick={() => navigate('/dns')}>Check Another Site</Button>	
 			</Box>
