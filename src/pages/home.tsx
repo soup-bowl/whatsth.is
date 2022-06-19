@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import { Box, Paper, Link } from '@mui/material';
 
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import DnsIcon from '@mui/icons-material/Dns';
 import CachedIcon from '@mui/icons-material/Cached';
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +32,14 @@ export default function Home() {
 						<Item>
 							<TravelExploreIcon fontSize="large" />
 							<Typography>Site Inspector</Typography>
+						</Item>
+					</Link>
+				</Grid>
+				<Grid item xs={6}>
+					<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/dns')}>
+						<Item>
+							<DnsIcon fontSize="large" />
+							<Typography>DNS Inspector</Typography>
 						</Item>
 					</Link>
 				</Grid>

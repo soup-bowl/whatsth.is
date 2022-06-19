@@ -7,6 +7,7 @@ import Layout from "./pages/_layout";
 import Home from './pages/home';
 import HelpPage from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
+import { DnsCheckHome, DnsCheckResult } from './pages/dnschecker';
 import StringConversionPage from './pages/converter';
 
 export default function App() {
@@ -15,12 +16,14 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
-					<Route path="help" element={<HelpPage />} />
-					<Route path="inspect" element={<InspectionHome />} />
+					<Route path="help"      element={<HelpPage />} />
+					<Route path="inspect"   element={<InspectionHome />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
-					<Route path="convert" element={<StringConversionPage />} />
-					<Route path="encoder" element={<Navigate replace to="/convert" />} />
-					<Route path="decoder" element={<Navigate replace to="/convert" />} />
+					<Route path="dns"       element={<DnsCheckHome />} />
+					<Route path="dns/*"     element={<DnsCheckResult />} />
+					<Route path="convert"   element={<StringConversionPage />} />
+					<Route path="encoder"   element={<Navigate replace to="/convert" />} />
+					<Route path="decoder"   element={<Navigate replace to="/convert" />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

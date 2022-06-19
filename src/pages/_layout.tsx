@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import DnsIcon from '@mui/icons-material/Dns';
 import CodeIcon from '@mui/icons-material/Code';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
@@ -145,6 +146,10 @@ export default function Layout() {
 					<ListItem button onClick={() => {navigate('/inspect');handleDrawerClose();}} disabled={!connectionState}>
 						<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 						<ListItemText primary="Site Inspector" />
+					</ListItem>
+					<ListItem button onClick={() => {navigate('/dns');handleDrawerClose();}} disabled={!connectionState}>
+						<ListItemIcon><DnsIcon /></ListItemIcon>
+						<ListItemText primary="DNS Inspector" />
 					</ListItem>
 					<ListItem button onClick={() => {navigate('/convert');handleDrawerClose();}}>
 						<ListItemIcon><CachedIcon /></ListItemIcon>
