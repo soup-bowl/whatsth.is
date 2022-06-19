@@ -13,8 +13,14 @@ const Details = {
 	firstCheck: (url: string) => requests.get('/inspect/' + encodeURIComponent(url))
 };
 
+const DNS = {
+	protocols: () => requests.get('/dns/protocols'),
+	probe: (protocol: string, url: string) => requests.get(`/dns/${protocol}/${encodeURIComponent(url)}`),
+};
+
 const agent = {
-	Details
+	Details,
+	DNS
 };
 
 export default agent;

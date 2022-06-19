@@ -1,3 +1,4 @@
 build
 node_modules
-.env.development
+.env.development.local
+.env.production.local
