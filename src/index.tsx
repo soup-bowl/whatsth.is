@@ -24,6 +24,7 @@ export default function App() {
 					<Route path="convert"   element={<StringConversionPage />} />
 					<Route path="encoder"   element={<Navigate replace to="/convert" />} />
 					<Route path="decoder"   element={<Navigate replace to="/convert" />} />
+					<Route path="*"         element={<Navigate replace to="/" />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

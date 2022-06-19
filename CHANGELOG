@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Hyperlink issue on Conversion page.
+- 404 URLs now redirect back to the homepage.
 
 ## [0.2.5] (pre-release) - 2022-05-10
 ### Changed
