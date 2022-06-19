@@ -3,13 +3,14 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import agent from '../api/agent';
-import { IRecord } from "../interfaces";
+import { IDNSProtocol, IRecord } from "../interfaces";
 
 export function DnsCheckHome() {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
 	const [connectionState, setConnectionState] = useState(true);
 	const [recordType, setRecordType] = useState('');
+	const [protocols, setProtocols] = useState<IDNSProtocol[]>([]);
 	const MINUTE_MS = 15000;
 
 	// https://stackoverflow.com/a/65049865
@@ -25,6 +26,13 @@ export function DnsCheckHome() {
 		return () => clearInterval(interval);
 	}, []);
 
+	useEffect(() => {
+		agent.DNS.protocols()
+		.then((response:any) => {
+			setProtocols(response.records);
+		});
+	}, []);
+
 	const submitForm = (e:any) => {
 		e.preventDefault();
 		return navigate(`/dns/${recordType}/${inputURL}`);
@@ -33,6 +41,7 @@ export function DnsCheckHome() {
 	return(
 		<>
 			<Typography variant="h3" component="h1" my={2}>DNS Inspector</Typography>
+			<Typography>Allows you to check the public DNS records associated with a domain or subdomain.</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2} my={2}>
 					<Grid container spacing={2}>
@@ -42,16 +51,13 @@ export function DnsCheckHome() {
 								<Select
 									id="type"
 									label="Record Type"
+									disabled={!connectionState}
 									value={recordType}
 									onChange={(e:SelectChangeEvent) => (setRecordType(e.target.value))}
 								>
-									<MenuItem value={""}>Select...</MenuItem>
-									<MenuItem value={"A"}>A</MenuItem>
-									<MenuItem value={"AAAA"}>AAAA</MenuItem>
-									<MenuItem value={"CNAME"}>CNAME</MenuItem>
-									<MenuItem value={"MX"}>MX</MenuItem>
-									<MenuItem value={"NS"}>NS</MenuItem>
-									<MenuItem value={"TXT"}>TXT</MenuItem>
+								{protocols.map((protocol:IDNSProtocol) => (
+									<MenuItem key={protocol.type} value={protocol.type}>{protocol.type}</MenuItem>
+								))}
 								</Select>
 							</FormControl>
 						</Grid>
@@ -65,6 +71,7 @@ export function DnsCheckHome() {
 								value={inputURL}
 								onChange={(e:any) => (setInputURL(e.target.value))}
 								disabled={!connectionState}
+								helperText="Do not specify a protocol for now - just 'example.com'."
 							/>
 						</Grid>
 					</Grid>
@@ -99,7 +106,7 @@ export function DnsCheckResult() {
 		setProtocol(inputs[0]);
 		setDnsUrl(inputs[1]);
 	}, []);
-	
+
 	useEffect(() => {
 		if (protocol !== '' && dnsUrl !== '') {
 			agent.DNS.probe(protocol, dnsUrl)
@@ -143,7 +150,7 @@ export function DnsCheckResult() {
 				/>
 			</Box>
 			<Box>
-				<Button variant="contained" value="Return" onClick={() => navigate('/dns')}>Check Another Site</Button>	
+				<Button variant="contained" value="Return" onClick={() => navigate('/dns')}>Check Another Site</Button>
 			</Box>
 		</Box>
 	);

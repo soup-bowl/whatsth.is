@@ -11,3 +11,8 @@ export interface IDNSResult {
 	type: string;
 	records: IRecord[];
 }
+
+export interface IDNSProtocol {
+	type: string;
+	name: string;
+}
