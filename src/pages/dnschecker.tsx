@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -78,9 +78,21 @@ export function DnsCheckHome() {
 				</Grid>
 			</form>
 		</>
-	)
-}
+	);
+};
 
 export function DnsCheckResult() {
-	return(<p>BBBBBBBBBBBBB</p>)
-}
+	const navigate = useNavigate();
+	let inputs = window.location.pathname.slice(5).split('/');
+
+
+	return(
+		<Box>
+			<Typography my={2} component="h1" variant="h4">{inputs[0]} records for {inputs[1]}</Typography>
+
+			<Box>
+				<Button variant="contained" value="Return" onClick={() => navigate('/dns')}>Check Another Site</Button>	
+			</Box>
+		</Box>
+	);
+};
