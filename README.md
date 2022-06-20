@@ -2,6 +2,7 @@
 <h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
 <p align="center">
   <a href="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is"><img src="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge" alt="CodeFactor" /></a>
+  <a href="https://gitpod.io/#https://github.com/soup-bowl/whatsth.is"><img src="https://img.shields.io/badge/open%20in-GitPod-orange?logo=gitpod&logoColor=white" /></a>
 </p>
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
@@ -17,7 +18,7 @@ This app comprises of two components - A React frontend (this repository), and a
 
 ### With GitPod
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/soup-bowl/whatsth.is)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)]()
 
 (Will clone and setup a workspace of both front and back-end code!).
 
