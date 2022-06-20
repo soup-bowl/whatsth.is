@@ -15,6 +15,12 @@ This app comprises of two components - A React frontend (this repository), and a
 
 ## Getting Started
 
+### With GitPod
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/soup-bowl/whatsth.is)
+
+(Will clone and setup a workspace of both front and back-end code!).
+
 ### With Docker
 
 You can quickly jump into project development using **Docker** with the **compose** script:
