@@ -2,7 +2,7 @@
 
 name: Auto-deploy to GitHub Pages (alpha)
 
-# Controls 
+# Controls
 on:
   release:
     types: [published]
