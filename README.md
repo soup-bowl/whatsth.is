@@ -36,8 +36,6 @@ npm install
 npm start
 ```
 
-And you're off! A Docker method is coming soon, I promise.
-
 The API the system will communicate with is defined in the appropriate `.env` file (if using `npm start`, it's `.development`).
 
 ### Testing Offline Capabilities
