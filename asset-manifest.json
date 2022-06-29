@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "https://whatsth.is/static/js/main.1431784f.js",
+    "main.js": "https://whatsth.is/static/js/main.b42c2da8.js",
     "service-worker.js": "https://whatsth.is/service-worker.js",
     "index.html": "https://whatsth.is/index.html",
-    "main.1431784f.js.map": "https://whatsth.is/static/js/main.1431784f.js.map"
+    "main.b42c2da8.js.map": "https://whatsth.is/static/js/main.b42c2da8.js.map"
   },
   "entrypoints": [
-    "static/js/main.1431784f.js"
+    "static/js/main.b42c2da8.js"
   ]
 }
