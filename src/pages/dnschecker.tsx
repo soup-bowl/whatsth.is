@@ -102,7 +102,7 @@ export function DnsCheckResult() {
 	const [errResult, setErrResult] = useState<any>(undefined);
 
 	useEffect(() => {
-		let inputs = window.location.pathname.slice(5).split('/');
+		let inputs = window.location.hash.slice(6).split('/');
 		setProtocol(inputs[0]);
 		setDnsUrl(inputs[1]);
 	}, []);

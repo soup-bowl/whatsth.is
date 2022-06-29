@@ -82,7 +82,7 @@ export function InspectionHome() {
 };
 
 export function InspectonResult() {
-	let inspectionURL = window.location.pathname.slice(9);
+	let inspectionURL = window.location.hash.slice(10);
 	const navigate = useNavigate();
 
 	const [siteDetails, setSiteDetails] = useState<any>([]);

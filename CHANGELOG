@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Moved CNAME to public folder, to stop the GitHub Pages deployment breaking the URL.
 - GitHub 404 added to pick-up users who haven't cached the system first.
+- Switched to hashed routing since GitHub web rules are not available, to help reduce 404s.
 
 ## [0.2.7] (pre-release) - 2022-06-20
 ### Added
