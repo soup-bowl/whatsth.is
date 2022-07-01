@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import agent from '../api/agent';
 import { IDNSProtocol, IRecord } from "../interfaces";
+import { LocationDetection } from "./segments/browserDetection";
 
 export function DnsCheckHome() {
 	const [inputURL, setInputURL] = useState('');
@@ -84,6 +85,9 @@ export function DnsCheckHome() {
 						>
 							Submit
 						</Button>
+					</Grid>
+					<Grid item>
+						<LocationDetection />
 					</Grid>
 				</Grid>
 			</form>
