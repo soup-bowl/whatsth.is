@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - IP information of the user shown on the DNS page.
 - Current page highlighted in drawer.
+- Reload PWA when a new version has been deployed (untested).
 
 ### Changed
 - Spurious information in the drawer now in an 'About' page.
