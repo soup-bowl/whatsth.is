@@ -91,7 +91,7 @@ export default function StringConversionPage() {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item visibility={(parseInt(type.toString()) >= 10) ? 'visible' : 'hidden'}>
+				<Grid item display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
 					<FormControl variant="filled" sx={{ m: 1, minWidth: 360 }}>
 						<TextField
 							id="passphrase"
