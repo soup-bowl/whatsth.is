@@ -69,9 +69,11 @@ export function AboutPage() {
 			setApiVersion('Comm error');
 		});
 
-		navigator.storage.estimate().then(({usage, quota}) => {
-			setStorageInfo({ usage: usage ?? 0, quota: quota ?? 0 });
-		});
+		if ('storage' in navigator && 'estimate' in navigator.storage) {
+			navigator.storage.estimate().then(({usage, quota}) => {
+				setStorageInfo({ usage: usage ?? 0, quota: quota ?? 0 });
+			});
+		}
 	}, []);
 
 	return(
@@ -85,9 +87,14 @@ export function AboutPage() {
 			<Stack my={2}>
 				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
 				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+				{ storageInfo.quota !== 0 ?
 				<Typography>
 					Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
-					<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.</Typography>
+					<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.
+				</Typography>
+				:
+				<Typography color="darkgrey">Storage API is not supported.</Typography>
+				}
 			</Stack>
 			<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
 		</Box>
