@@ -48,10 +48,10 @@ export function DnsCheckHome() {
 					<Grid container spacing={2}>
 						<Grid item xs={4}>
 							<FormControl fullWidth>
-								<InputLabel id="type">Record Type</InputLabel>
+								<InputLabel id="type">Type</InputLabel>
 								<Select
 									id="type"
-									label="Record Type"
+									label="Type"
 									disabled={!connectionState}
 									value={recordType}
 									onChange={(e:SelectChangeEvent) => (setRecordType(e.target.value))}
@@ -72,7 +72,6 @@ export function DnsCheckHome() {
 								value={inputURL}
 								onChange={(e:any) => (setInputURL(e.target.value))}
 								disabled={!connectionState}
-								helperText="Do not specify a protocol for now - just 'example.com'."
 							/>
 						</Grid>
 					</Grid>
@@ -106,9 +105,14 @@ export function DnsCheckResult() {
 	const [errResult, setErrResult] = useState<any>(undefined);
 
 	useEffect(() => {
-		let inputs = window.location.hash.slice(6).split('/');
-		setProtocol(inputs[0]);
-		setDnsUrl(inputs[1]);
+		// Split the protocol from the URL. In case someone has copied and pasted a URL, we check to see if there's
+		// a protocol splitter (://) then strip it out too. Either way, it'll be last in the split return array.
+		// Finally, check if there's subfolder, and remove it. Congrats, clean domain strip!
+		const [method, ...urlSegments] = window.location.hash.slice(6).split('/');
+		const urlParts = urlSegments.join('/').split('://');
+		const url = urlParts[urlParts.length - 1].split('/')[0];
+		setProtocol(method);
+		setDnsUrl(url);
 	}, []);
 
 	useEffect(() => {
