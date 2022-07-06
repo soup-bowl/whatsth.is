@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Strip URL smells from an input to the DNS inspector.
+- Show used local storage in about page.
 
 ### Fixed
 - Crypto password box causing mobile display issues.

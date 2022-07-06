@@ -38,8 +38,27 @@ export function HelpPage() {
 	);
 }
 
+interface storage {
+	quota: number;
+	usage: number;
+}
+
+// https://stackoverflow.com/a/35696506
+function formatBytes(bytes: number, decimals: number = 2) {
+	if (bytes === 0) return '0 Bytes';
+
+	const k = 1024;
+	const dm = decimals < 0 ? 0 : decimals;
+	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+	const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 export function AboutPage() {
 	const [apiVersion, setApiVersion] = useState('');
+	const [storageInfo, setStorageInfo] = useState<storage>({quota: 0, usage: 0});
 
 	useEffect(() => {
 		agent.Details.stats().then(response => {
@@ -48,6 +67,10 @@ export function AboutPage() {
 		})
 		.catch((err: any) => {
 			setApiVersion('Comm error');
+		});
+
+		navigator.storage.estimate().then(({usage, quota}) => {
+			setStorageInfo({ usage: usage ?? 0, quota: quota ?? 0 });
 		});
 	}, []);
 
@@ -62,6 +85,9 @@ export function AboutPage() {
 			<Stack my={2}>
 				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
 				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+				<Typography>
+					Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
+					<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.</Typography>
 			</Stack>
 			<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
 		</Box>
