@@ -128,10 +128,6 @@ export default function Layout() {
 				open={open}
 			>
 				<DrawerHeader>
-					<Typography>{process.env.REACT_APP_VERSION}</Typography>&nbsp;
-					{ process.env.REACT_APP_BETA === "1" ?
-					<Typography sx={{ color: 'darkgrey', fontVariant: 'small-caps' }}>BETA</Typography>
-					: null }
 					<IconButton onClick={handleDrawerClose}>
 						<MenuIcon />
 					</IconButton>
@@ -157,7 +153,8 @@ export default function Layout() {
 				</List>
 				<Divider />
 				<List>
-					<ListItem button onClick={() => {navigate('/help');handleDrawerClose();}}>
+					<ListItem button onClick={() => {navigate('/help');handleDrawerClose();}}
+						title={process.env.REACT_APP_VERSION}>
 						<ListItemIcon><HelpIcon /></ListItemIcon>
 						<ListItemText primary="Help" />
 					</ListItem>
