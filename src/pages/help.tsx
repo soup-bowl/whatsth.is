@@ -52,17 +52,18 @@ export function AboutPage() {
 	}, []);
 
 	return(
-		<>
-			<Typography variant="h3" component="h1" my={2}>About</Typography>
-			<Stack my={2}>
-				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
-				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
-			</Stack>
+		<Box textAlign="center">
+			<img src="logo-mask-192.png" alt="What's This logo" style={{borderRadius: 200, maxWidth: "100%"}} />
+			<Typography variant="h3" component="h1" my={2}>What's This?</Typography>
 			<Typography my={2}>
 				Developed and hosted by <Link href="https://github.com/soup-bowl">soup-bowl</Link> as
 				part of <Link href="https://labs.soupbowl.io">soup-bowl labs</Link>.&nbsp;
 			</Typography>
+			<Stack my={2}>
+				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
+				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+			</Stack>
 			<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
-		</>
+		</Box>
 	);
 }
