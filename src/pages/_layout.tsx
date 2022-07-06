@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
 	Container, styled, Drawer, Divider, Box, List, ListItem, ListItemIcon,
-	ListItemText, Link} from '@mui/material';
+	ListItemText, Link, useMediaQuery} from '@mui/material';
 import theme from "../theme/theme";
 import { useEffect, useState } from "react";
 
@@ -31,13 +31,11 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
-	marginLeft: `-${drawerWidth}px`,
 	...(open && {
 		transition: theme.transitions.create('margin', {
 			easing: theme.transitions.easing.easeOut,
 			duration: theme.transitions.duration.enteringScreen,
 		}),
-		marginLeft: 0,
 	}),
 }));
 
@@ -49,8 +47,6 @@ const AppBar = styled(MuiAppBar, {
 		duration: theme.transitions.duration.leavingScreen,
 	}),
 	...(open && {
-		width: `calc(100% - ${drawerWidth}px)`,
-		marginLeft: `${drawerWidth}px`,
 		transition: theme.transitions.create(['margin', 'width'], {
 			easing: theme.transitions.easing.easeOut,
 			duration: theme.transitions.duration.enteringScreen,
@@ -71,6 +67,7 @@ export default function Layout() {
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [connectionState, setConnectionState] = useState(true);
+	const desktop = useMediaQuery("(min-width: 961px)");
 	const MINUTE_MS = 15000;
 
 	// https://stackoverflow.com/a/65049865
@@ -98,8 +95,9 @@ export default function Layout() {
 		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open}>
+			<AppBar position="fixed" open={open} sx={{ zIndex: (theme) => ( desktop ? theme.zIndex.drawer + 1 : 0) }}>
 				<Toolbar>
+					{ ! desktop ?
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -109,6 +107,7 @@ export default function Layout() {
 					>
 						<MenuIcon />
 					</IconButton>
+					: null }
 					<Typography variant="h6" noWrap component="div">What's this?</Typography>
 					{ ! connectionState ?
 					<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
@@ -124,7 +123,7 @@ export default function Layout() {
 					boxSizing: 'border-box',
 				},
 				}}
-				variant="persistent"
+				variant={(desktop) ? "permanent" : "temporary"}
 				anchor="left"
 				open={open}
 			>
