@@ -5,7 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import Layout from "./pages/_layout";
 import Home from './pages/home';
-import HelpPage from './pages/help';
+import { HelpPage, AboutPage } from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
 import { DnsCheckHome, DnsCheckResult } from './pages/dnschecker';
 import StringConversionPage from './pages/converter';
@@ -17,6 +17,7 @@ export default function App() {
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path="help"      element={<HelpPage />} />
+					<Route path="about"     element={<AboutPage />} />
 					<Route path="inspect"   element={<InspectionHome />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
 					<Route path="dns"       element={<DnsCheckHome />} />

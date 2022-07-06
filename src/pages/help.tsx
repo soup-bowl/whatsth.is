@@ -1,6 +1,7 @@
-import { Typography, Link, Box } from "@mui/material";
+import { Typography, Link, Box, Button } from "@mui/material";
+import GitHubIcon from '@mui/icons-material/GitHub';
 
-export default function HelpPage() {
+export function HelpPage() {
 	return(
 	<>
 		<Typography variant="h3" component="h1" my={2}>What's "What's This?"?</Typography>
@@ -32,5 +33,21 @@ export default function HelpPage() {
 			Most Android variants will highlight PWAs with the icon of the browser technology they run in. 
 		</Typography>
 	</>
+	);
+}
+
+export function AboutPage() {
+	return(
+		<>
+			<Typography variant="h3" component="h1" my={2}>About</Typography>
+			<Typography my={2}>
+				App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box>
+			</Typography>
+			<Typography my={2}>
+				Developed and hosted by <Link href="https://github.com/soup-bowl">soup-bowl</Link> as
+				part of <Link href="https://labs.soupbowl.io">soup-bowl labs</Link>.&nbsp;
+			</Typography>
+			<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
+		</>
 	);
 }

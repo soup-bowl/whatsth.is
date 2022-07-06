@@ -1,8 +1,8 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
-	Container, styled, Drawer, Divider, Box, List, ListItem, ListItemIcon,
-	ListItemText, Link, useMediaQuery} from '@mui/material';
+	Container, styled, Drawer, Divider, Box, List, ListItemIcon,
+	ListItemText, useMediaQuery, ListItemButton} from '@mui/material';
 import theme from "../theme/theme";
 import { useEffect, useState } from "react";
 
@@ -12,9 +12,8 @@ import CloudOffIcon from '@mui/icons-material/CloudOff';
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import DnsIcon from '@mui/icons-material/Dns';
-import CodeIcon from '@mui/icons-material/Code';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
+import CoPresentIcon from '@mui/icons-material/CoPresent';
 
 const drawerWidth = 240;
 
@@ -134,38 +133,53 @@ export default function Layout() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<ListItem button onClick={() => {navigate('/');handleDrawerClose();}}>
+					<ListItemButton
+						onClick={() => {navigate('/');handleDrawerClose();}}
+						selected={(window.location.hash.replace('/', '') === "#")}
+					>
 						<ListItemIcon><HomeIcon /></ListItemIcon>
 						<ListItemText primary="Home" />
-					</ListItem>
-					<ListItem button onClick={() => {navigate('/inspect');handleDrawerClose();}} disabled={!connectionState}>
+					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/inspect');handleDrawerClose();}}
+						disabled={!connectionState}
+						selected={window.location.hash.includes("/inspect")}
+					>
 						<ListItemIcon><TravelExploreIcon /></ListItemIcon>
 						<ListItemText primary="Site Inspector" />
-					</ListItem>
-					<ListItem button onClick={() => {navigate('/dns');handleDrawerClose();}} disabled={!connectionState}>
+					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/dns');handleDrawerClose();}}
+						disabled={!connectionState}
+						selected={window.location.hash.includes("/dns")}
+					>
 						<ListItemIcon><DnsIcon /></ListItemIcon>
 						<ListItemText primary="DNS Inspector" />
-					</ListItem>
-					<ListItem button onClick={() => {navigate('/convert');handleDrawerClose();}}>
+					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/convert');handleDrawerClose();}}
+						selected={window.location.hash.includes("/convert")}
+					>
 						<ListItemIcon><CachedIcon /></ListItemIcon>
 						<ListItemText primary="String Conversion" />
-					</ListItem>
+					</ListItemButton>
 				</List>
 				<Divider />
 				<List>
-					<ListItem button onClick={() => {navigate('/help');handleDrawerClose();}}
-						title={process.env.REACT_APP_VERSION}>
+					<ListItemButton
+						onClick={() => {navigate('/help');handleDrawerClose();}}
+						selected={window.location.hash.includes("/help")}
+					>
 						<ListItemIcon><HelpIcon /></ListItemIcon>
 						<ListItemText primary="Help" />
-					</ListItem>
-					<ListItem button component={Link} href="https://soupbowl.io/projects/whatsthis">
-						<ListItemIcon><CodeIcon /></ListItemIcon>
-						<ListItemText primary="Made by Soupbowl" />
-					</ListItem>
-					<ListItem button component={Link} href="https://github.com/soup-bowl/whatsth.is">
-						<ListItemIcon><GitHubIcon /></ListItemIcon>
-						<ListItemText primary="Source Code" />
-					</ListItem>
+					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/about');handleDrawerClose();}}
+						selected={window.location.hash.includes("/about")}
+					>
+						<ListItemIcon><CoPresentIcon /></ListItemIcon>
+						<ListItemText primary="About" />
+					</ListItemButton>
 				</List>
 			</Drawer>
 			<Main open={open}>
