@@ -1,5 +1,7 @@
-import { Typography, Link, Box, Button } from "@mui/material";
+import { Typography, Link, Box, Button, Stack } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useState, useEffect } from "react";
+import agent from "../api/agent";
 
 export function HelpPage() {
 	return(
@@ -37,12 +39,25 @@ export function HelpPage() {
 }
 
 export function AboutPage() {
+	const [apiVersion, setApiVersion] = useState('');
+
+	useEffect(() => {
+		agent.Details.stats().then(response => {
+			// @ts-ignore
+			setApiVersion(response.api_version);
+		})
+		.catch((err: any) => {
+			setApiVersion('Comm error');
+		});
+	}, []);
+
 	return(
 		<>
 			<Typography variant="h3" component="h1" my={2}>About</Typography>
-			<Typography my={2}>
-				App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box>
-			</Typography>
+			<Stack my={2}>
+				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
+				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+			</Stack>
 			<Typography my={2}>
 				Developed and hosted by <Link href="https://github.com/soup-bowl">soup-bowl</Link> as
 				part of <Link href="https://labs.soupbowl.io">soup-bowl labs</Link>.&nbsp;
