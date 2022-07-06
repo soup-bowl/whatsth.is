@@ -92,8 +92,8 @@ export default function StringConversionPage() {
 					</FormControl>
 				</Grid>
 				<Grid item display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
-					<FormControl variant="filled" sx={{ m: 1, minWidth: 360 }}>
-						<TextField
+					<FormControl variant="filled">
+						<TextField fullWidth
 							id="passphrase"
 							label="Passphrase (for encryption)"
 							variant="filled"
