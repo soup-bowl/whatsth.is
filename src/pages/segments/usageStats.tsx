@@ -20,8 +20,8 @@ export default function UsageStats() {
 			return (
 				<>
 				<Typography>
-					There has been <Box component="span" fontWeight='700'>{siteStats.counts.year}</Box> scans this year,
-					with <Box component="span" fontWeight='700'>{siteStats.counts.week}</Box> performed this week.
+					There has been <Box component="span" fontWeight='700'>{siteStats.inspection_usage.year}</Box> scans this year,
+					with <Box component="span" fontWeight='700'>{siteStats.inspection_usage.week}</Box> performed this week.
 				</Typography>
 				<Typography color="darkgrey">No identifyiable information is collected, just anonymous usage stats.</Typography>
 				</>
