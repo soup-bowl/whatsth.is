@@ -14,6 +14,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import DnsIcon from '@mui/icons-material/Dns';
 import CachedIcon from '@mui/icons-material/Cached';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const drawerWidth = 240;
 
@@ -163,6 +164,13 @@ export default function Layout() {
 					>
 						<ListItemIcon><CachedIcon /></ListItemIcon>
 						<ListItemText primary="String Conversion" />
+					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/cron');handleDrawerClose();}}
+						selected={window.location.hash.includes("/cron")}
+					>
+						<ListItemIcon><AccessTimeIcon /></ListItemIcon>
+						<ListItemText primary="Cron Calculator" />
 					</ListItemButton>
 				</List>
 				<Divider />

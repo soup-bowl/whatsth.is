@@ -9,6 +9,7 @@ import { HelpPage, AboutPage } from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
 import { DnsCheckHome, DnsCheckResult } from './pages/dnschecker';
 import StringConversionPage from './pages/converter';
+import { CronConversionPage } from './pages/cron';
 
 export default function App() {
 	return (
@@ -22,6 +23,7 @@ export default function App() {
 					<Route path="inspect/*" element={<InspectonResult />} />
 					<Route path="dns"       element={<DnsCheckHome />} />
 					<Route path="dns/*"     element={<DnsCheckResult />} />
+					<Route path="cron"      element={<CronConversionPage />} />
 					<Route path="convert"   element={<StringConversionPage />} />
 					<Route path="encoder"   element={<Navigate replace to="/convert" />} />
 					<Route path="decoder"   element={<Navigate replace to="/convert" />} />
