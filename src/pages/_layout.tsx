@@ -125,6 +125,7 @@ export default function Layout() {
 				variant={(desktop) ? "permanent" : "temporary"}
 				anchor="left"
 				open={open}
+				onClose={handleDrawerClose}
 			>
 				<DrawerHeader>
 					<IconButton onClick={handleDrawerClose}>

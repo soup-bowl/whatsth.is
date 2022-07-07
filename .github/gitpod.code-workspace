@@ -9,5 +9,9 @@
 			"name": "Backend"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"githubPullRequests.ignoredPullRequestBranches": [
+			"develop"
+		]
+	}
 }
