@@ -24,6 +24,7 @@ export default function App() {
 					<Route path="dns"       element={<DnsCheckHome />} />
 					<Route path="dns/*"     element={<DnsCheckResult />} />
 					<Route path="cron"      element={<CronConversionPage />} />
+					<Route path="cron/*"    element={<CronConversionPage />} />
 					<Route path="convert"   element={<StringConversionPage />} />
 					<Route path="encoder"   element={<Navigate replace to="/convert" />} />
 					<Route path="decoder"   element={<Navigate replace to="/convert" />} />
