@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function checkValidGetCode(input: string) {
 	input = input.replaceAll('_', ' ');
-	if (input.split(' ').length === 5) {
+	if (~ [5,6].indexOf(input.split(' ').length)) {
 		return true;
 	}
 	return false;
