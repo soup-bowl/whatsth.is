@@ -1,6 +1,7 @@
 import { Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
+import { IMenu } from "../../interfaces";
 
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -12,13 +13,6 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 interface props {
 	onlineState: boolean;
 	drawerClose: any;
-}
-
-interface IMenu {
-	name: string;
-	icon: JSX.Element;
-	url: string;
-	needsInternet: boolean;
 }
 
 const getMenu:IMenu[] = [
@@ -74,7 +68,7 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 					<ListItemButton
 						key={(i + 1)}
 						onClick={() => {navigate(item.url);drawerClose();}}
-						disabled={!onlineState}
+						disabled={(item.needsInternet) ? !onlineState : false}
 						selected={window.location.hash.includes(`${item.url}`)}
 					>
 						<ListItemIcon>{item.icon}</ListItemIcon>

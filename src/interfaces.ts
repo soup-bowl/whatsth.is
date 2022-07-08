@@ -16,3 +16,10 @@ export interface IDNSProtocol {
 	type: string;
 	name: string;
 }
+
+export interface IMenu {
+	name: string;
+	icon: JSX.Element;
+	url: string;
+	needsInternet: boolean;
+}
