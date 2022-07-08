@@ -1,24 +1,23 @@
-import { ContactPageSharp } from "@mui/icons-material";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import WarningIcon from '@mui/icons-material/Warning';
 
 interface ITime {
 	string: Date;
 	unix: number;
-}
-
-function milliepochToSecond(unix:number) {
-	return Math.floor(unix / 1000);
+	overflow: boolean;
 }
 
 export default function UnixEpochPage() {
-	const [timeStore, setTimeStore] = useState<ITime>({string: new Date(), unix: Math.floor(Date.now() / 1000)});
+	const [timeStore, setTimeStore] = useState<ITime>({string: new Date(), unix: Math.floor(Date.now() / 1000), overflow: false});
 
 	const changeDateTime = (e:any) => {
 		let conversionDate = new Date(e.target.value);
+		let unix = Math.floor(conversionDate.getTime() / 1000);
 		setTimeStore({
 			string: conversionDate,
-			unix: Math.floor(conversionDate.getTime() / 1000)
+			unix: unix,
+			overflow: (unix > 2147483647) ? true : false
 		});
 	};
 
@@ -26,7 +25,8 @@ export default function UnixEpochPage() {
 		let conversionDate = new Date(parseInt(e.target.value) * 1000);
 		setTimeStore({
 			string: conversionDate,
-			unix: e.target.value
+			unix: e.target.value,
+			overflow: (e.target.value > 2147483647) ? true : false
 		});
 	};
 
@@ -56,6 +56,13 @@ export default function UnixEpochPage() {
 					onChange={changeUnix}
 				/>
 			</Box>
+			{timeStore.overflow ?
+				<Typography my={2}>
+					<WarningIcon fontSize="inherit" /> Be warned - this date goes over the <Box component="span" fontWeight='700'>signed 32-bit buffer</Box>.
+					On legacy systems, a Unix timestamp of this value will be subjected to
+					the <Link href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem</Link>.
+				</Typography>
+			: null}
 		</>
 	);
 }
