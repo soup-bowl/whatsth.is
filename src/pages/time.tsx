@@ -11,9 +11,21 @@ interface ITime {
 const siteTitle = "Unix Timestamp Conversion";
 
 export default function UnixEpochPage() {
-	const [timeStore, setTimeStore] = useState<ITime>({string: new Date(), unix: Math.floor(Date.now() / 1000), overflow: false});
+	const inputGet:string = window.location.hash.slice(7);
+	const inputIsNumber:boolean = /^\d+$/.test(inputGet);
+
+	let startingUnix = (inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1000);
+	const [timeStore, setTimeStore] = useState<ITime>({
+		string: new Date(startingUnix * 1000),
+		unix: startingUnix,
+		overflow: false
+	});
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+
+	useEffect(() => {
+		window.location.href = `/#/time/${timeStore.unix}`
+	}, [timeStore]);
 
 	const changeDateTime = (e:any) => {
 		let conversionDate = new Date(e.target.value);
