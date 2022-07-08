@@ -2,6 +2,8 @@ import { Link, TextField, Typography } from "@mui/material";
 import cronstrue from 'cronstrue';
 import { useEffect, useState } from "react";
 
+const siteTitle = "Cron Calculator";
+
 function checkValidGetCode(input: string) {
 	input = input.replaceAll('_', ' ');
 	if (~ [5,6].indexOf(input.split(' ').length)) {
@@ -32,6 +34,8 @@ export function CronConversionPage() {
 		setTimeString(e.target.value);
 	};
 
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+
 	useEffect(() => {
 		setTimeResult(calculate(timeString));
 		window.location.href = `/#/cron/${timeString.replaceAll(' ', '_')}`
@@ -39,7 +43,7 @@ export function CronConversionPage() {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>Cron Calculator</Typography>
+			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>Convert crontab time strings into human-readable format. Uses the <Link href="https://www.npmjs.com/package/cronstrue">cRonstrue library</Link>.</Typography>
 			<TextField fullWidth
 				id="timestring"

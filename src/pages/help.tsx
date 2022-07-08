@@ -6,6 +6,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 
 export function HelpPage() {
+	const siteTitle = "Help";
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+
 	return(
 	<>
 		<Typography variant="h3" component="h1" my={2}>What's "What's This?"?</Typography>
@@ -59,8 +63,12 @@ function formatBytes(bytes: number, decimals: number = 2) {
 }
 
 export function AboutPage() {
+	const siteTitle = "About";
+
 	const [apiVersion, setApiVersion] = useState('');
 	const [storageInfo, setStorageInfo] = useState<storage>({quota: 0, usage: 0});
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
 		agent.Details.stats().then(response => {

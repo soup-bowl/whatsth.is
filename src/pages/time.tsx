@@ -1,5 +1,5 @@
 import { Box, Link, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WarningIcon from '@mui/icons-material/Warning';
 
 interface ITime {
@@ -8,8 +8,12 @@ interface ITime {
 	overflow: boolean;
 }
 
+const siteTitle = "Unix Timestamp Conversion";
+
 export default function UnixEpochPage() {
 	const [timeStore, setTimeStore] = useState<ITime>({string: new Date(), unix: Math.floor(Date.now() / 1000), overflow: false});
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	const changeDateTime = (e:any) => {
 		let conversionDate = new Date(e.target.value);
@@ -32,7 +36,7 @@ export default function UnixEpochPage() {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>Unix Timestamp Conversion</Typography>
+			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>
 				Unix timestamp represents the <Box component="span" fontWeight='700'>seconds past since 1st January 1970</Box>.
 				This therefore gives you a way to represent time using a linear scaling integer, as opposed to a complicated

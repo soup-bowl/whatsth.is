@@ -6,11 +6,15 @@ import agent from '../api/agent';
 import { IDNSProtocol, IRecord, PageProps } from "../interfaces";
 import { LocationDetection } from "./segments/browserDetection";
 
+const siteTitle = "DNS Inspector";
+
 export function DnsCheckHome({online}:PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
 	const [recordType, setRecordType] = useState('');
 	const [protocols, setProtocols] = useState<IDNSProtocol[]>([]);
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
 		agent.DNS.protocols()
@@ -26,7 +30,7 @@ export function DnsCheckHome({online}:PageProps) {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>DNS Inspector</Typography>
+			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
 			<Typography>Allows you to check the public DNS records associated with a domain or subdomain.</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2} my={2}>
@@ -88,6 +92,8 @@ export function DnsCheckResult() {
 	const [columns, setColumns] = useState<any>([]);
 	const [rows, setRows] = useState<any>([]);
 	const [errResult, setErrResult] = useState<any>(undefined);
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
 		// Split the protocol from the URL. In case someone has copied and pasted a URL, we check to see if there's

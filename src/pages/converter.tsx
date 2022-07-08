@@ -1,7 +1,7 @@
 import { Box, FormControl, Grid, InputLabel, TextField, Typography,
 	MenuItem, Select, SelectChangeEvent, ListSubheader, Link } from "@mui/material";
 import { AES, TripleDES, enc } from 'crypto-js';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface StringMorph {
 	decoded: string;
@@ -16,10 +16,14 @@ enum ConversionType {
 	TDES = 11,
 }
 
+const siteTitle = "String Conversions";
+
 export default function StringConversionPage() {
 	const [stringMorph, setStringMorph] = useState<StringMorph>({encoded: '', decoded: ''});
 	const [passphrase, setPassphrase] = useState('');
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
 		setType(parseInt(event.target.value));
@@ -69,7 +73,7 @@ export default function StringConversionPage() {
 
 	return(
 		<>
-		<Typography variant="h3" component="h1" my={2}>String Conversions</Typography>
+		<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>

@@ -9,9 +9,13 @@ import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
 import { PageProps } from '../interfaces';
 
+const siteTitle = "Site Inspector";
+
 export function InspectionHome({online}:PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
@@ -24,7 +28,7 @@ export function InspectionHome({online}:PageProps) {
 
 	return (
 		<>
-			<Typography variant="h3" component="h1" my={2}>Site Inspector</Typography>
+			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2}>
 					<Grid item>
@@ -68,8 +72,10 @@ export function InspectionHome({online}:PageProps) {
 };
 
 export function InspectonResult() {
-	let inspectionURL = window.location.hash.slice(10);
+	const inspectionURL = window.location.hash.slice(10);
 	const navigate = useNavigate();
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	const [siteDetails, setSiteDetails] = useState<any>([]);
 	const [loading, setLoading]         = useState<boolean>(true);
