@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Cron calculator segment.
 - Unix epoch segment.
+- SEO tags for shared links.
 
 ### Changed
 - Menu and homepage grid instructions consolidated.
