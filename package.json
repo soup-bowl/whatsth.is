@@ -1,6 +1,6 @@
 {
   "name": "whatsth.is",
-  "version": "develop",
+  "version": "0.2.12",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
