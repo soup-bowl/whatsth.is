@@ -102,7 +102,7 @@ export function HomeMenu() {
 		<>
 			{getMenu.map((item:IMenu, i:number) => {
 				return(
-					<Grid item xs={6}>
+					<Grid key={i} item xs={6}>
 						<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate(item.url)}>
 							<Item>
 								{item.icon}
