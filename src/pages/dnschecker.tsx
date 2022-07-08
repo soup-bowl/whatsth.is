@@ -86,7 +86,7 @@ export function DnsCheckHome() {
 						</Button>
 					</Grid>
 					<Grid item>
-						<LocationDetection />
+						<LocationDetection ConnectionState={connectionState} />
 					</Grid>
 				</Grid>
 			</form>

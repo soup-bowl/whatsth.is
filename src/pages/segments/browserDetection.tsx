@@ -22,7 +22,11 @@ export function BrowserDetection() {
 	);
 }
 
-export function LocationDetection() {
+interface LocationProps {
+	ConnectionState: boolean;
+}
+
+export function LocationDetection({ConnectionState = true}:LocationProps) {
 	const [success, setSuccess] = useState<boolean>(false); 
 	const [ipaddr, setIPaddr] = useState<string>('');
 
@@ -36,6 +40,10 @@ export function LocationDetection() {
 			setSuccess(false);
 		})
 	}, []);
+
+	if (!ConnectionState) {
+		return(<Typography color="darkgrey">No stats - you are currently offline.</Typography>);
+	}
 
 	if (success) {
 		return (
