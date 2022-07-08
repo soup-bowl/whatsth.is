@@ -7,6 +7,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import DnsIcon from '@mui/icons-material/Dns';
 import CachedIcon from '@mui/icons-material/Cached';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import TimelapseIcon from '@mui/icons-material/Timelapse';
 
 interface props {
 	onlineState: boolean;
@@ -47,7 +48,7 @@ const getMenu:IMenu[] = [
 	},
 	{
 		name: 'Unix Timestamp',
-		icon: <AccessTimeIcon />,
+		icon: <TimelapseIcon />,
 		url: '/time',
 		needsInternet: false,
 	}
