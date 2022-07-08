@@ -1,7 +1,9 @@
 import { Typography, Link, Box, Button, Stack } from "@mui/material";
-import GitHubIcon from '@mui/icons-material/GitHub';
 import { useState, useEffect } from "react";
 import agent from "../api/agent";
+
+import GitHubIcon from '@mui/icons-material/GitHub';
+import CachedIcon from '@mui/icons-material/Cached';
 
 export function HelpPage() {
 	return(
@@ -97,7 +99,7 @@ export function AboutPage() {
 				}
 			</Stack>
 			<Stack my={2} spacing={2} direction="row" justifyContent="center">
-				<Button onClick={() => (window.location.reload())} variant="outlined" color="error">Reload</Button>
+				<Button onClick={() => (window.location.reload())} variant="outlined" color="error"><CachedIcon />&nbsp;Reload</Button>
 				<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
 			</Stack>
 		</Box>
