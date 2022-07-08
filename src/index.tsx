@@ -13,10 +13,8 @@ import { CronConversionPage } from './pages/cron';
 import UnixEpochPage from './pages/time';
 
 export default function App() {
-	const [connectionState, setConnectionState] = useState(true);
-	const MINUTE_MS = 15000;
-
 	// https://stackoverflow.com/a/65049865
+	const [connectionState, setConnectionState] = useState(true);
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (navigator.onLine) {
@@ -24,7 +22,7 @@ export default function App() {
 			} else {
 				setConnectionState(false);
 			}
-		}, MINUTE_MS);
+		}, 15000);
 
 		return () => clearInterval(interval);
 	}, []);
