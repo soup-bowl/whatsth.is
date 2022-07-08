@@ -96,7 +96,10 @@ export function AboutPage() {
 				<Typography color="darkgrey">Storage API is not supported.</Typography>
 				}
 			</Stack>
-			<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
+			<Stack my={2} spacing={2} direction="row" justifyContent="center">
+				<Button onClick={() => (window.location.reload())} variant="outlined" color="error">Reload</Button>
+				<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
+			</Stack>
 		</Box>
 	);
 }
