@@ -9,12 +9,8 @@ import { useEffect, useState } from "react";
 import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import HomeIcon from '@mui/icons-material/Home';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import DnsIcon from '@mui/icons-material/Dns';
-import CachedIcon from '@mui/icons-material/Cached';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { DrawMenu } from "./segments/menu";
 
 const drawerWidth = 240;
 
@@ -134,52 +130,7 @@ export default function Layout() {
 					</IconButton>
 				</DrawerHeader>
 				<Divider />
-				<List>
-					<ListItemButton
-						onClick={() => {navigate('/');handleDrawerClose();}}
-						selected={(window.location.hash.replace('/', '') === "#")}
-					>
-						<ListItemIcon><HomeIcon /></ListItemIcon>
-						<ListItemText primary="Home" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/inspect');handleDrawerClose();}}
-						disabled={!connectionState}
-						selected={window.location.hash.includes("/inspect")}
-					>
-						<ListItemIcon><TravelExploreIcon /></ListItemIcon>
-						<ListItemText primary="Site Inspector" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/dns');handleDrawerClose();}}
-						disabled={!connectionState}
-						selected={window.location.hash.includes("/dns")}
-					>
-						<ListItemIcon><DnsIcon /></ListItemIcon>
-						<ListItemText primary="DNS Inspector" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/convert');handleDrawerClose();}}
-						selected={window.location.hash.includes("/convert")}
-					>
-						<ListItemIcon><CachedIcon /></ListItemIcon>
-						<ListItemText primary="String Conversion" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/cron');handleDrawerClose();}}
-						selected={window.location.hash.includes("/cron")}
-					>
-						<ListItemIcon><AccessTimeIcon /></ListItemIcon>
-						<ListItemText primary="Cron Calculator" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/time');handleDrawerClose();}}
-						selected={window.location.hash.includes("/time")}
-					>
-						<ListItemIcon><AccessTimeIcon /></ListItemIcon>
-						<ListItemText primary="Unix Timestamp" />
-					</ListItemButton>
-				</List>
+				<DrawMenu onlineState={connectionState} drawerClose={handleDrawerClose} />
 				<Divider />
 				<List>
 					<ListItemButton

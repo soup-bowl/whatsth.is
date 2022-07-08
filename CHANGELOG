@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cron calculator segment.
 - Unix epoch segment.
 
+### Changed
+- Menu and homepage grid instructions consolidated.
+
 ## [0.2.10.1] - 2022-07-06
 ### Fixed
 - White screen on Help & About on iOS Safari/Mobile Webkit browsers.
