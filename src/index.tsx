@@ -53,7 +53,10 @@ root.render(
 // Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.register({
 	onUpdate: (registration: ServiceWorkerRegistration) => {
-		if (registration && registration.waiting) { registration.waiting.postMessage({ type: 'SKIP_WAITING' }); }
+		if (registration && registration.waiting) {
+			registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+		}
+
 		window.location.reload();
 	}
 });
