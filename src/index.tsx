@@ -10,6 +10,7 @@ import { InspectionHome, InspectonResult } from "./pages/inspection";
 import { DnsCheckHome, DnsCheckResult } from './pages/dnschecker';
 import StringConversionPage from './pages/converter';
 import { CronConversionPage } from './pages/cron';
+import UnixEpochPage from './pages/time';
 
 export default function App() {
 	return (
@@ -25,9 +26,12 @@ export default function App() {
 					<Route path="dns/*"     element={<DnsCheckResult />} />
 					<Route path="cron"      element={<CronConversionPage />} />
 					<Route path="cron/*"    element={<CronConversionPage />} />
+					<Route path="time"      element={<UnixEpochPage />} />
+					<Route path="time/*"    element={<UnixEpochPage />} />
 					<Route path="convert"   element={<StringConversionPage />} />
 					<Route path="encoder"   element={<Navigate replace to="/convert" />} />
 					<Route path="decoder"   element={<Navigate replace to="/convert" />} />
+					<Route path="unix"      element={<Navigate replace to="/time" />} />
 					<Route path="*"         element={<Navigate replace to="/" />} />
 				</Route>
 			</Routes>

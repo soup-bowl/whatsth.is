@@ -172,6 +172,13 @@ export default function Layout() {
 						<ListItemIcon><AccessTimeIcon /></ListItemIcon>
 						<ListItemText primary="Cron Calculator" />
 					</ListItemButton>
+					<ListItemButton
+						onClick={() => {navigate('/time');handleDrawerClose();}}
+						selected={window.location.hash.includes("/time")}
+					>
+						<ListItemIcon><AccessTimeIcon /></ListItemIcon>
+						<ListItemText primary="Unix Timestamp" />
+					</ListItemButton>
 				</List>
 				<Divider />
 				<List>
