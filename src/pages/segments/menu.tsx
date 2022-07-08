@@ -12,7 +12,7 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 
 interface props {
 	onlineState: boolean;
-	drawerClose: any;
+	drawerClose?: any;
 }
 
 const getMenuCategories:IMenuCategory[] = [
@@ -98,7 +98,7 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 	);
 }
 
-export function HomeMenu() {
+export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 	const navigate = useNavigate();
 
 	const Item = styled(Paper)(({ theme }) => ({
@@ -123,7 +123,13 @@ export function HomeMenu() {
 							if (subitem.category === item.id) {
 								return(
 									<Grid key={i} item xs={6}>
-										<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate(subitem.url)}>
+										<Link
+											sx={{
+												cursor: (subitem.needsInternet && !onlineState) ? 'default' : 'pointer',
+												textDecoration: 'none'
+											}}
+											onClick={() => navigate(subitem.url)}
+										>
 											<Item>
 												{subitem.icon}
 												<Typography>{subitem.name}</Typography>
