@@ -3,29 +3,14 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import agent from '../api/agent';
-import { IDNSProtocol, IRecord } from "../interfaces";
+import { IDNSProtocol, IRecord, PageProps } from "../interfaces";
 import { LocationDetection } from "./segments/browserDetection";
 
-export function DnsCheckHome() {
+export function DnsCheckHome({online}:PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
-	const [connectionState, setConnectionState] = useState(true);
 	const [recordType, setRecordType] = useState('');
 	const [protocols, setProtocols] = useState<IDNSProtocol[]>([]);
-	const MINUTE_MS = 15000;
-
-	// https://stackoverflow.com/a/65049865
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (navigator.onLine) {
-				setConnectionState(true);
-			} else {
-				setConnectionState(false);
-			}
-		}, MINUTE_MS);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	useEffect(() => {
 		agent.DNS.protocols()
@@ -52,7 +37,7 @@ export function DnsCheckHome() {
 								<Select
 									id="type"
 									label="Type"
-									disabled={!connectionState}
+									disabled={!online}
 									value={recordType}
 									onChange={(e:SelectChangeEvent) => (setRecordType(e.target.value))}
 								>
@@ -71,7 +56,7 @@ export function DnsCheckHome() {
 								variant="outlined"
 								value={inputURL}
 								onChange={(e:any) => (setInputURL(e.target.value))}
-								disabled={!connectionState}
+								disabled={!online}
 							/>
 						</Grid>
 					</Grid>
@@ -80,13 +65,13 @@ export function DnsCheckHome() {
 							type="submit"
 							variant="contained"
 							value="Submit"
-							disabled={!connectionState}
+							disabled={!online}
 						>
 							Submit
 						</Button>
 					</Grid>
 					<Grid item>
-						<LocationDetection ConnectionState={connectionState} />
+						<LocationDetection ConnectionState={online} />
 					</Grid>
 				</Grid>
 			</form>

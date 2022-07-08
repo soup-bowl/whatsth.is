@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -13,16 +13,32 @@ import { CronConversionPage } from './pages/cron';
 import UnixEpochPage from './pages/time';
 
 export default function App() {
+	const [connectionState, setConnectionState] = useState(true);
+	const MINUTE_MS = 15000;
+
+	// https://stackoverflow.com/a/65049865
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (navigator.onLine) {
+				setConnectionState(true);
+			} else {
+				setConnectionState(false);
+			}
+		}, MINUTE_MS);
+
+		return () => clearInterval(interval);
+	}, []);
+
 	return (
 		<HashRouter>
 			<Routes>
-				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
+				<Route path="/" element={<Layout online={connectionState} />}>
+					<Route index element={<Home online={connectionState} />} />
 					<Route path="help"      element={<HelpPage />} />
 					<Route path="about"     element={<AboutPage />} />
-					<Route path="inspect"   element={<InspectionHome />} />
+					<Route path="inspect"   element={<InspectionHome online={connectionState} />} />
 					<Route path="inspect/*" element={<InspectonResult />} />
-					<Route path="dns"       element={<DnsCheckHome />} />
+					<Route path="dns"       element={<DnsCheckHome online={connectionState} />} />
 					<Route path="dns/*"     element={<DnsCheckResult />} />
 					<Route path="cron"      element={<CronConversionPage />} />
 					<Route path="cron/*"    element={<CronConversionPage />} />

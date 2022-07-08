@@ -4,13 +4,14 @@ import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
 	Container, styled, Drawer, Divider, Box, List, ListItemIcon,
 	ListItemText, useMediaQuery, ListItemButton} from '@mui/material';
 import theme from "../theme/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import { DrawMenu } from "./segments/menu";
+import { PageProps } from "../interfaces";
 
 const drawerWidth = 240;
 
@@ -59,25 +60,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-export default function Layout() {
+export default function Layout({online}:PageProps) {
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
-	const [connectionState, setConnectionState] = useState(true);
 	const desktop = useMediaQuery("(min-width: 961px)");
-	const MINUTE_MS = 15000;
-
-	// https://stackoverflow.com/a/65049865
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (navigator.onLine) {
-				setConnectionState(true);
-			} else {
-				setConnectionState(false);
-			}
-		}, MINUTE_MS);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -105,7 +91,7 @@ export default function Layout() {
 					</IconButton>
 					: null }
 					<Typography variant="h6" noWrap component="div">What's this?</Typography>
-					{ ! connectionState ?
+					{ ! online ?
 					<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
 					: null }
 				</Toolbar>
@@ -129,7 +115,7 @@ export default function Layout() {
 						<MenuIcon />
 					</IconButton>
 				</DrawerHeader>
-				<DrawMenu onlineState={connectionState} drawerClose={handleDrawerClose} />
+				<DrawMenu onlineState={online} drawerClose={handleDrawerClose} />
 				<Divider />
 				<List>
 					<ListItemButton

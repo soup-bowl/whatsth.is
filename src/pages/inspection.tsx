@@ -7,25 +7,11 @@ import UsageStats from './segments/usageStats';
 import ErrorMessage from './segments/errorMessage';
 import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
+import { PageProps } from '../interfaces';
 
-export function InspectionHome() {
+export function InspectionHome({online}:PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
-	const [connectionState, setConnectionState] = useState(true);
-	const MINUTE_MS = 15000;
-
-	// https://stackoverflow.com/a/65049865
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (navigator.onLine) {
-				setConnectionState(true);
-			} else {
-				setConnectionState(false);
-			}
-		}, MINUTE_MS);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
@@ -52,7 +38,7 @@ export function InspectionHome() {
 							label="URL"
 							variant="outlined"
 							onChange={changeForm}
-							disabled={!connectionState}
+							disabled={!online}
 						/>
 					</Grid>
 					<Grid item>
@@ -60,7 +46,7 @@ export function InspectionHome() {
 							type="submit"
 							variant="contained"
 							value="Submit"
-							disabled={!connectionState}
+							disabled={!online}
 						>
 							Submit
 						</Button>
@@ -69,7 +55,7 @@ export function InspectionHome() {
 						<BrowserDetection />
 					</Grid>
 					<Grid item>
-						{ connectionState ?
+						{ online ?
 						<UsageStats />
 						:
 						<Typography color="darkgrey">No stats - you are currently offline.</Typography>

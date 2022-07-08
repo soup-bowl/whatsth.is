@@ -1,3 +1,7 @@
+export interface PageProps {
+	online: boolean;
+}
+
 export interface IRecord {
 	id?: number;
 	address: string;
