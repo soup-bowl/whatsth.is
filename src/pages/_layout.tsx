@@ -129,7 +129,6 @@ export default function Layout() {
 						<MenuIcon />
 					</IconButton>
 				</DrawerHeader>
-				<Divider />
 				<DrawMenu onlineState={connectionState} drawerClose={handleDrawerClose} />
 				<Divider />
 				<List>

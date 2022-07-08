@@ -1,4 +1,4 @@
-import { Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
+import { Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 
@@ -66,6 +66,7 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 				<ListItemIcon><HomeIcon /></ListItemIcon>
 				<ListItemText primary="Home" />
 			</ListItemButton>
+			<Divider />
 			<>
 			{getMenu.map((item:IMenu, i:number) => {
 				return(
