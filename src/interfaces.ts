@@ -23,3 +23,17 @@ export interface IMenu {
 	url: string;
 	needsInternet: boolean;
 }
+
+export interface IMenu {
+	name: string;
+	category: number;
+	icon: JSX.Element;
+	url: string;
+	needsInternet: boolean;
+}
+
+export interface IMenuCategory {
+	id: number;
+	name: string;
+	description?: string;
+}

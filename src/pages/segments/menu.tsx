@@ -1,7 +1,7 @@
 import { Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
-import { IMenu } from "../../interfaces";
+import { IMenu, IMenuCategory } from "../../interfaces";
 
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -15,34 +15,51 @@ interface props {
 	drawerClose: any;
 }
 
+const getMenuCategories:IMenuCategory[] = [
+	{
+		id: 1,
+		name: 'Inspection Tools',
+		description: 'These tools require an internet connection.',
+	},
+	{
+		id: 2,
+		name: 'Conversion',
+	}
+];
+
 const getMenu:IMenu[] = [
 	{
 		name: 'Site Inspector',
 		icon: <TravelExploreIcon />,
+		category: 1,
 		url: '/inspect',
 		needsInternet: true,
 	},
 	{
 		name: 'DNS Inspector',
 		icon: <DnsIcon />,
+		category: 1,
 		url: '/dns',
 		needsInternet: true,
 	},
 	{
 		name: 'String Conversion',
 		icon: <CachedIcon />,
+		category: 2,
 		url: '/convert',
 		needsInternet: false,
 	},
 	{
 		name: 'Cron Calculator',
 		icon: <AccessTimeIcon />,
+		category: 2,
 		url: '/cron',
 		needsInternet: false,
 	},
 	{
 		name: 'Unix Timestamp',
 		icon: <TimelapseIcon />,
+		category: 2,
 		url: '/time',
 		needsInternet: false,
 	}
@@ -94,16 +111,32 @@ export function HomeMenu() {
 
 	return(
 		<>
-			{getMenu.map((item:IMenu, i:number) => {
+			{getMenuCategories.map((item:IMenuCategory, i:number) => {
 				return(
-					<Grid key={i} item xs={6}>
-						<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate(item.url)}>
-							<Item>
-								{item.icon}
-								<Typography>{item.name}</Typography>
-							</Item>
-						</Link>
+					<>
+					<Typography variant="h4" component="h2" my={2}>{item.name}</Typography>
+					{ item.description !== undefined ?
+					<Typography my={2}>{item.description}</Typography>
+					: null }
+					<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+						{getMenu.map((subitem:IMenu, i:number) => {
+							if (subitem.category === item.id) {
+								return(
+									<Grid key={i} item xs={6}>
+										<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate(subitem.url)}>
+											<Item>
+												{subitem.icon}
+												<Typography>{subitem.name}</Typography>
+											</Item>
+										</Link>
+									</Grid>
+								);
+							} else {
+								return undefined;
+							}
+						})}
 					</Grid>
+					</>
 				);
 			})}
 		</>

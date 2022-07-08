@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, Link } from '@mui/material';
+import { Typography, Box, Link } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { HomeMenu } from "./segments/menu";
 
@@ -13,11 +13,7 @@ export default function Home() {
 				<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/help')}>see the help page</Link>.
 			</Typography>
 
-			<Typography variant="h4" component="h2" my={2}>Inspection Tools</Typography>
-			<Typography my={2}>These tools require an internet connection.</Typography>
-			<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-				<HomeMenu />
-			</Grid>
+			<HomeMenu />
 		</Box>
 	)
 }
