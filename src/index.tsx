@@ -52,5 +52,8 @@ root.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.register({
-	onUpdate: () => {window.location.reload()}
+	onUpdate: (registration: ServiceWorkerRegistration) => {
+		if (registration && registration.waiting) { registration.waiting.postMessage({ type: 'SKIP_WAITING' }); }
+		window.location.reload();
+	}
 });
