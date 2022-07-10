@@ -77,7 +77,7 @@ export default function StringConversionPage() {
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>
-					<FormControl variant="filled" sx={{ m: 1, minWidth: 240 }}>
+					<FormControl variant="standard" sx={{ m: 1, minWidth: 240 }}>
 						<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
 						<Select
 						labelId="chooseConversionType"
@@ -96,11 +96,10 @@ export default function StringConversionPage() {
 					</FormControl>
 				</Grid>
 				<Grid item display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
-					<FormControl variant="filled">
+					<FormControl variant="standard">
 						<TextField fullWidth
 							id="passphrase"
 							label="Passphrase (for encryption)"
-							variant="filled"
 							onChange={handleChangePassphrase}
 						/>
 						<Typography>This segment is powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.</Typography>
