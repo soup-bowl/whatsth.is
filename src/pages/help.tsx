@@ -4,6 +4,7 @@ import agent from "../api/agent";
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
+import WhatsThisLogo from "./segments/logo";
 
 export function HelpPage() {
 	const siteTitle = "Help";
@@ -88,7 +89,7 @@ export function AboutPage() {
 
 	return(
 		<Box textAlign="center">
-			<img src="logo-mask-192.png" alt="What's This logo" style={{borderRadius: 200, maxWidth: "100%"}} />
+			<WhatsThisLogo />
 			<Typography variant="h3" component="h1" my={2}>What's This?</Typography>
 			<Typography my={2}>
 				Developed and hosted by <Link href="https://github.com/soup-bowl">soup-bowl</Link> as
