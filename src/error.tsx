@@ -6,6 +6,9 @@ interface ErrorProp {
 
 interface StateProp {
 	hasError: boolean;
+	errorName?: string;
+	errorMessage?: string;
+	errorStack?: string;
 }
 
 const mainStyle:CSSProperties = {
@@ -17,7 +20,7 @@ const mainStyle:CSSProperties = {
 	width: '100%',
 	height: '100%',
 	backgroundColor: '#121212',
-	color: '#fff'
+	color: '#fff',
 }
 
 const buttonStyle:CSSProperties = {
@@ -25,7 +28,16 @@ const buttonStyle:CSSProperties = {
 	border: 'none',
 	borderRadius: '1em',
 	padding: '1em',
-	color: '#fff'
+	color: '#fff',
+}
+
+const errorBox:CSSProperties = {
+	backgroundColor: '#404040',
+	borderRadius: '1em',
+    maxWidth: '75%',
+	padding: '1em',
+    margin: '0 auto',
+	textAlign: 'left',
 }
 
 export class ErrorBoundary extends Component<ErrorProp, StateProp> {
@@ -34,8 +46,17 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 		this.state = { hasError: false };
 	}
 
-	static getDerivedStateFromError(error:any) {
+	static getDerivedStateFromError() {
 		return { hasError: true };
+	}
+
+	componentDidCatch(error:any, errorInfo:any) {
+		console.log(errorInfo.componentStack);
+		this.setState({
+			errorName: error.name,
+			errorMessage: error.message,
+			errorStack: errorInfo.componentStack
+		});
 	}
 
 	render() {
@@ -46,6 +67,11 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 					<h1>A crash has occurred</h1>
 					<p>We apologise for the inconvinience. Click the button below to return.</p>
 					<button style={buttonStyle} onClick={() => (window.location.reload())}>Reload</button>
+					<h2>Technical Details</h2>
+					<div style={errorBox}>
+						<p><strong>[{this.state.errorName}] {this.state.errorMessage}</strong></p>
+						<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
+					</div>
 				</div>
 			);
 		}
