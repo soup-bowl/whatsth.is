@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - React WSOD Error handler to create a recoverable state for PWA users.
 
+### Fixed
+- Added limits to the UNIX Epoch calculator.
+
 ## [0.2.12] - 2022-07-08
 ### Added
 - Page titles.

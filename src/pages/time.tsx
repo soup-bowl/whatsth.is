@@ -59,6 +59,7 @@ export default function UnixEpochPage() {
 					id="humanDTString"
 					label="Human Date & Time"
 					type="datetime-local"
+					InputProps={{ inputProps: { min: '1970-01-01T00:00:00', max: '9999-12-31T23:59:59' } }}
 					value={timeStore.string.toISOString().slice(0, -5)}
 					onChange={changeDateTime}
 				/>
@@ -68,6 +69,7 @@ export default function UnixEpochPage() {
 					id="computerDTString"
 					label="Unix Epoch String"
 					type="number"
+					InputProps={{ inputProps: { min: 0, max: 253402300799 } }}
 					value={timeStore.unix}
 					onChange={changeUnix}
 				/>
