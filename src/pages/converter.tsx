@@ -74,10 +74,14 @@ export default function StringConversionPage() {
 	return(
 		<>
 		<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+		<Typography>
+			Converts text from and into various forms of encoding and encryption methods. The encryption segment is
+			powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.
+		</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
-			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
+			<Grid container spacing={2} marginTop={2} columns={{ xs: 2, sm: 8}}>
 				<Grid item>
-					<FormControl variant="standard" sx={{ m: 1, minWidth: 240 }}>
+					<FormControl sx={{ minWidth: 240 }}>
 						<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
 						<Select
 						labelId="chooseConversionType"
@@ -96,13 +100,12 @@ export default function StringConversionPage() {
 					</FormControl>
 				</Grid>
 				<Grid item display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
-					<FormControl variant="standard">
+					<FormControl>
 						<TextField fullWidth
 							id="passphrase"
 							label="Passphrase (for encryption)"
 							onChange={handleChangePassphrase}
 						/>
-						<Typography>This segment is powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.</Typography>
 					</FormControl>
 				</Grid>
 			</Grid>
