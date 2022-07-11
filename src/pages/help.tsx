@@ -92,8 +92,8 @@ export function AboutPage() {
 			<WhatsThisLogo />
 			<Typography variant="h3" component="h1" my={2}>What's This?</Typography>
 			<Typography my={2}>
-				Developed and hosted by <Link href="https://github.com/soup-bowl">soup-bowl</Link> as
-				part of <Link href="https://labs.soupbowl.io">soup-bowl labs</Link>.&nbsp;
+				Developed by <Link style={{fontWeight: 'bold'}} href="https://soupbowl.io">soup-bowl</Link> and hosted
+				on <Link style={{fontWeight: 'bold'}} href="https://pages.github.com/">GitHub Pages</Link>.
 			</Typography>
 			<Stack my={2}>
 				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
