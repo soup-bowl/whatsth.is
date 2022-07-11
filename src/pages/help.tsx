@@ -13,7 +13,7 @@ export function HelpPage() {
 
 	return(
 	<>
-		<Typography variant="h3" component="h1" my={2}>What's "What's This?"?</Typography>
+		<Typography variant="h1" my={2}>What's "What's This?"?</Typography>
 		<Typography my={2}>
 			What's This is a <Link href="https://labs.soupbowl.io">Soupbowl Labs</Link> experiment to create
 			a <Link href="https://web.dev/progressive-web-apps/">Progressive Web App</Link> programmer/tinkerer's toolbox.
@@ -90,7 +90,7 @@ export function AboutPage() {
 	return(
 		<Box textAlign="center">
 			<WhatsThisLogo />
-			<Typography variant="h3" component="h1" my={2}>What's This?</Typography>
+			<Typography variant="h1" my={2}>What's This?</Typography>
 			<Typography my={2}>
 				Developed by <Link style={{fontWeight: 'bold'}} href="https://soupbowl.io">soup-bowl</Link> and hosted
 				on <Link style={{fontWeight: 'bold'}} href="https://pages.github.com/">GitHub Pages</Link>.

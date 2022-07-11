@@ -48,7 +48,7 @@ export default function UnixEpochPage() {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>
 				Unix timestamp represents the <Box component="span" fontWeight='700'>seconds past since 1st January 1970</Box>.
 				This therefore gives you a way to represent time using a linear scaling integer, as opposed to a complicated

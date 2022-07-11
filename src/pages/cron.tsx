@@ -43,7 +43,7 @@ export function CronConversionPage() {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>Convert crontab time strings into human-readable format. Uses the <Link href="https://www.npmjs.com/package/cronstrue">cRonstrue library</Link>.</Typography>
 			<TextField fullWidth
 				id="timestring"

@@ -30,7 +30,7 @@ export function DnsCheckHome({online}:PageProps) {
 
 	return(
 		<>
-			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography>Allows you to check the public DNS records associated with a domain or subdomain.</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2} my={2}>

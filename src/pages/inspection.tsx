@@ -28,7 +28,7 @@ export function InspectionHome({online}:PageProps) {
 
 	return (
 		<>
-			<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2}>
 					<Grid item>

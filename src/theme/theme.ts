@@ -23,6 +23,15 @@ const theme = createTheme({
 	typography: {
 		button: {
 			textTransform: 'none'
+		},
+		h1: {
+			fontSize: '3.25rem'
+		},
+		h2: {
+			fontSize: '2.75rem'
+		},
+		h3: {
+			fontSize: '2rem'
 		}
 	}
 });

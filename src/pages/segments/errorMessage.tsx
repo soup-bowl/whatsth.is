@@ -8,7 +8,7 @@ interface Props {
 export default function ErrorMessage({title, message = ''}: Props) {
 	return(
 		<>
-			<Typography variant="h4" component="h1" my={2}>{title}</Typography>
+			<Typography variant="h1" my={2}>{title}</Typography>
 			<Typography my={2}>{message}</Typography>
 		</>
 	);

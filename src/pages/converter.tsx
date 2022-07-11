@@ -73,7 +73,7 @@ export default function StringConversionPage() {
 
 	return(
 		<>
-		<Typography variant="h3" component="h1" my={2}>{siteTitle}</Typography>
+		<Typography variant="h1" my={2}>{siteTitle}</Typography>
 		<Typography>
 			Converts text from and into various forms of encoding and encryption methods. The encryption segment is
 			powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.

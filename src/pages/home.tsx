@@ -11,7 +11,7 @@ export default function Home({online}:PageProps) {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<Typography variant="h3" component="h1" my={2}>What's This? Toolbox</Typography>
+			<Typography variant="h1" my={2}>What's This? Toolbox</Typography>
 			<Typography my={2}>
 				Simple technology toolbox. For more information,&nbsp;
 				<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/help')}>see the help page</Link>.
