@@ -1,5 +1,6 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Paper, Stack, ThemeProvider, Typography } from "@mui/material";
 import { CSSProperties, Component } from "react";
+import theme from "./theme/theme";
 
 interface ErrorProp {
 	children: any;
@@ -12,21 +13,10 @@ interface StateProp {
 	errorStack?: string;
 }
 
-const mainStyle:CSSProperties = {
-	fontFamily: 'sans-serif',
-	textAlign: 'center',
-	position: 'absolute',
-	top: 0,
-	left: 0,
-	width: '100%',
-	height: '100%',
-	backgroundColor: '#121212',
-	color: '#fff',
-}
-
 const errorBox:CSSProperties = {
 	fontFamily: 'monospace',
 	backgroundColor: '#404040',
+	color: '#fff',
 	borderRadius: '1em',
     maxWidth: '75%',
 	padding: '1em',
@@ -59,20 +49,25 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&template=crash_report.md&title=${title}`;
 
 			return (
-				<Box style={mainStyle}>
-					<Typography sx={{fontSize: '8em', margin: 0, transform: 'rotate(90deg)'}}>:(</Typography>
-					<Typography variant="h3" component="h1" my={2}>A Crash has Occurred</Typography>
-					<Typography my={2}>We apologise for the inconvinience. Click the button below to return.</Typography>
-					<Stack my={2} spacing={2} direction="row" justifyContent="center">
-						<Button variant="contained" onClick={() => (window.location.reload())}>Reload</Button>
-						<Button variant="outlined" color="error" onClick={() => (window.open(url, '_blank'))}>Report</Button>
-					</Stack>
-					<Typography variant="h4" component="h2" my={2}>Technical Details</Typography>
-					<Box style={errorBox}>
-						<Typography>[{this.state.errorName}] {this.state.errorMessage}</Typography>
-						<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
+				<ThemeProvider theme={theme}>
+					<Box sx={{ display: 'flex', paddingBottom: 4 }} textAlign="center">
+						<CssBaseline />
+						<Container maxWidth="lg">
+							<Typography sx={{fontSize: '8em'}}>:(</Typography>
+							<Typography variant="h3" component="h1" my={2}>A Crash has Occurred</Typography>
+							<Typography my={2}>We apologise for the inconvinience. Click the button below to return.</Typography>
+							<Stack my={2} spacing={2} direction="row" justifyContent="center">
+								<Button variant="contained" onClick={() => (window.location.reload())}>Reload</Button>
+								<Button variant="outlined" color="error" onClick={() => (window.open(url, '_blank'))}>Report</Button>
+							</Stack>
+							<Typography variant="h4" component="h2" my={2}>Technical Details</Typography>
+							<Paper elevation={3} sx={errorBox}>
+								<Typography>[{this.state.errorName}] {this.state.errorMessage}</Typography>
+								<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
+							</Paper>
+						</Container>
 					</Box>
-				</Box>
+				</ThemeProvider>
 			);
 		}
 
