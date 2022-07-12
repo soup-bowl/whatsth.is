@@ -1,3 +1,4 @@
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { CSSProperties, Component } from "react";
 
 interface ErrorProp {
@@ -23,15 +24,8 @@ const mainStyle:CSSProperties = {
 	color: '#fff',
 }
 
-const buttonStyle:CSSProperties = {
-	backgroundColor: '#9c27b0',
-	border: 'none',
-	borderRadius: '1em',
-	padding: '1em',
-	color: '#fff',
-}
-
 const errorBox:CSSProperties = {
+	fontFamily: 'monospace',
 	backgroundColor: '#404040',
 	borderRadius: '1em',
     maxWidth: '75%',
@@ -61,18 +55,24 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 
 	render() {
 		if (this.state.hasError) {
+			let title = `[${this.state.errorName}] ${this.state.errorMessage}`.replaceAll(' ', '+');
+			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&template=crash_report.md&title=${title}`;
+
 			return (
-				<div style={mainStyle}>
-					<p style={{fontSize: '8em', margin: 0}}>:(</p>
-					<h1>A crash has occurred</h1>
-					<p>We apologise for the inconvinience. Click the button below to return.</p>
-					<button style={buttonStyle} onClick={() => (window.location.reload())}>Reload</button>
-					<h2>Technical Details</h2>
-					<div style={errorBox}>
-						<p><strong>[{this.state.errorName}] {this.state.errorMessage}</strong></p>
+				<Box style={mainStyle}>
+					<Typography sx={{fontSize: '8em', margin: 0, transform: 'rotate(90deg)'}}>:(</Typography>
+					<Typography variant="h3" component="h1" my={2}>A Crash has Occurred</Typography>
+					<Typography my={2}>We apologise for the inconvinience. Click the button below to return.</Typography>
+					<Stack my={2} spacing={2} direction="row" justifyContent="center">
+						<Button variant="contained" onClick={() => (window.location.reload())}>Reload</Button>
+						<Button variant="outlined" color="error" onClick={() => (window.open(url, '_blank'))}>Report</Button>
+					</Stack>
+					<Typography variant="h4" component="h2" my={2}>Technical Details</Typography>
+					<Box style={errorBox}>
+						<Typography>[{this.state.errorName}] {this.state.errorMessage}</Typography>
 						<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
-					</div>
-				</div>
+					</Box>
+				</Box>
 			);
 		}
 
