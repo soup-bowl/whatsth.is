@@ -15,7 +15,7 @@ import { ErrorBoundary } from "./error";
 
 export default function App() {
 	// https://stackoverflow.com/a/65049865
-	const [connectionState, setConnectionState] = useState(true);
+	const [connectionState, setConnectionState] = useState((navigator.onLine) ? true : false);
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (navigator.onLine) {
