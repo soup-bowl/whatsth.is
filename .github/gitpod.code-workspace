@@ -12,6 +12,9 @@
 	"settings": {
 		"githubPullRequests.ignoredPullRequestBranches": [
 			"develop"
-		]
+		],
+		"yaml.schemas": {
+			"https://json.schemastore.org/github-workflow.json": "file:///workspace/whatsth.is/.github/workflows/deploy.yml"
+		}
 	}
 }
