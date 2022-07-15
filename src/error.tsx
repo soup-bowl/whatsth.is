@@ -62,7 +62,8 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 							</Stack>
 							<Typography variant="h4" component="h2" my={2}>Technical Details</Typography>
 							<Paper elevation={3} sx={errorBox}>
-								<Typography>[{this.state.errorName}] {this.state.errorMessage}</Typography>
+								<Typography fontWeight='700'>[{this.state.errorName}] {this.state.errorMessage}</Typography>
+								<Typography>URL: {window.location.href}</Typography>
 								<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
 							</Paper>
 						</Container>
