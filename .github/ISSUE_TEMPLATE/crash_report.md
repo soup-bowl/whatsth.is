@@ -18,9 +18,6 @@ The following are relevant to my situation:
 **What browser are you using?**
 (If installed, it'll still link to the browser you installed with).
 
-**What was the URL you were on during the crash?**
-(Just copy it from your browser. If you're in app mode, tell us your steps to the screen).
-
 **If you got an output, Paste the Stack Trace inbetween the marks below**
 ```
 
