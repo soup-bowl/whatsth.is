@@ -45,7 +45,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 
 	render() {
 		if (this.state.hasError) {
-			let title = `[${this.state.errorName}] ${this.state.errorMessage}`.replaceAll(' ', '+');
+			let title = `[${this.state.errorName}] ${this.state.errorMessage}`.split(' ').join('+');
 			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&template=crash_report.md&title=${title}`;
 
 			return (
