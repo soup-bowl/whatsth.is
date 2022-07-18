@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Latest
 ### Changed
 - Grid instructions changed for conversion and DNS page.
+- Highlighted that site inspection is beta.
 
 ## [0.2.14.1] - 2022-07-16
 ### Fixed

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, TextField, Grid, Typography, CircularProgress, Box } from '@mui/material';
+import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import { BrowserDetection } from './segments/browserDetection';
@@ -29,44 +29,44 @@ export function InspectionHome({online}:PageProps) {
 	return (
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
+			<Typography my={2}>We will try to pick details out of the URL you specify.</Typography>
+			<Box my={2}>
+				<Alert severity="info">
+					<AlertTitle>Beta</AlertTitle>
+					This is a <strong>beta</strong> service. Please use the feedback forms to let us know what is missing!
+				</Alert>
+			</Box>
 			<form onSubmit={submitForm} noValidate>
-				<Grid container direction="column" spacing={2}>
-					<Grid item>
-						<Typography my={2}>We will try to pick details out of the URL you specify.</Typography>
-					</Grid>
-					<Grid item>
-						<TextField fullWidth
-							id="url"
-							type="url"
-							placeholder="https://wordpress.org"
-							label="URL"
-							variant="outlined"
-							onChange={changeForm}
-							disabled={!online}
-						/>
-					</Grid>
-					<Grid item>
-						<Button
-							type="submit"
-							variant="contained"
-							value="Submit"
-							disabled={!online}
-						>
-							Submit
-						</Button>
-					</Grid>
-					<Grid item>
-						<BrowserDetection />
-					</Grid>
-					<Grid item>
-						{ online ?
-						<UsageStats />
-						:
-						<Typography color="darkgrey">No stats - you are currently offline.</Typography>
-						}
-					</Grid>
-				</Grid>
+				<TextField fullWidth
+					id="url"
+					type="url"
+					placeholder="https://wordpress.org"
+					label="URL"
+					variant="outlined"
+					onChange={changeForm}
+					disabled={!online}
+				/>
+				<Box my={2}>
+					<Button
+						type="submit"
+						variant="contained"
+						value="Submit"
+						disabled={!online}
+					>
+						Submit
+					</Button>
+				</Box>
 			</form>
+			<Box my={2}>
+				<BrowserDetection />
+			</Box>
+			<Box my={2}>
+				{ online ?
+				<UsageStats />
+				:
+				<Typography color="darkgrey">No stats - you are currently offline.</Typography>
+				}
+			</Box>
 		</>
 	);
 };
