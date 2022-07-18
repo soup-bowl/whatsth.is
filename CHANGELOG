@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Latest
+### Fixed
+- Cron page breaking on Morph/UBPorts browser ([#6](https://github.com/soup-bowl/whatsth.is/issues/6)).
+
 ### Added
 - Can mark pages in the list as 'beta'.
 

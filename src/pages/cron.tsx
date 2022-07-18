@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const siteTitle = "Cron Calculator";
 
 function checkValidGetCode(input: string) {
-	input = input.replaceAll('_', ' ');
+	input = input.split('_').join(' ');
 	if (~ [5,6].indexOf(input.split(' ').length)) {
 		return true;
 	}
@@ -13,7 +13,7 @@ function checkValidGetCode(input: string) {
 }
 
 function calculate(input: string) {
-	input = input.replaceAll('_', ' ');
+	input = input.split('_').join(' ');
 	let output:string = '';
 	try {
 		output = cronstrue.toString(input);
@@ -27,7 +27,7 @@ function calculate(input: string) {
 export function CronConversionPage() {
 	const inputGet = window.location.hash.slice(7);
 
-	const [timeString, setTimeString] = useState<string>((checkValidGetCode(inputGet)) ? inputGet.replaceAll('_', ' ') : '* * * * *');
+	const [timeString, setTimeString] = useState<string>((checkValidGetCode(inputGet)) ? inputGet.split('_').join(' ') : '* * * * *');
 	const [timeResult, setTimeResult] = useState<string>(calculate(timeString));
 
 	const timeChange = (e:any) => {
@@ -38,7 +38,7 @@ export function CronConversionPage() {
 
 	useEffect(() => {
 		setTimeResult(calculate(timeString));
-		window.location.href = `/#/cron/${timeString.replaceAll(' ', '_')}`
+		window.location.href = `/#/cron/${timeString.split(' ').join('_')}`
 	}, [timeString]);
 
 	return(
