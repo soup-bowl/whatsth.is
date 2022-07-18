@@ -35,7 +35,7 @@ export function DnsCheckHome({online}:PageProps) {
 			<form onSubmit={submitForm} noValidate>
 				<Grid container direction="column" spacing={2} my={2}>
 					<Grid container spacing={2}>
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={4}>
 							<FormControl fullWidth>
 								<InputLabel id="type">Type</InputLabel>
 								<Select
@@ -51,7 +51,7 @@ export function DnsCheckHome({online}:PageProps) {
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item xs={12} sm={8}>
 							<TextField fullWidth
 								id="url"
 								type="url"
