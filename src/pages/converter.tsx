@@ -79,11 +79,11 @@ export default function StringConversionPage() {
 			powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.
 		</Typography>
 		<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
-			<Grid container spacing={2} marginTop={2} columns={{ xs: 2, sm: 8}}>
-				<Grid item>
-					<FormControl sx={{ minWidth: 240 }}>
+			<Grid container spacing={2} marginTop={2}>
+				<Grid item xs={12} sm={4}>
+					<FormControl fullWidth>
 						<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
-						<Select
+						<Select fullWidth
 						labelId="chooseConversionType"
 						id="chooseConversionType"
 						value={type.toString()}
@@ -99,11 +99,11 @@ export default function StringConversionPage() {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
-					<FormControl>
+				<Grid item xs={12} sm={8} display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
+					<FormControl fullWidth>
 						<TextField fullWidth
 							id="passphrase"
-							label="Passphrase (for encryption)"
+							label="Encryption Password (optional)"
 							onChange={handleChangePassphrase}
 						/>
 					</FormControl>
@@ -111,23 +111,21 @@ export default function StringConversionPage() {
 			</Grid>
 		</Box>
 		<Box sx={{ flexGrow: 1 }}>
-			<Grid container spacing={2} columns={{ xs: 2, sm: 8}}>
-				<Grid item xs={2} sm={4} md={4}>
-					<TextField id="encode" label="Encode" multiline fullWidth rows={10} value={stringMorph.decoded} onChange={(e) => {
-						let cont: StringMorph = {
+			<Grid container spacing={2}>
+				<Grid item xs={12} sm={6}>
+					<TextField id="encode" label="Encode" multiline fullWidth rows={15} value={stringMorph.decoded} onChange={(e) => {
+						setStringMorph({
 							decoded: e.target.value,
 							encoded: ConvertTo(e.target.value, passphrase)
-						}
-						setStringMorph(cont);
+						});
 					}} />
 				</Grid>
-				<Grid item xs={2} sm={4} md={4}>
-					<TextField id="decode" label="Decode" multiline fullWidth rows={10} value={stringMorph.encoded} onChange={(e) => {
-						let cont: StringMorph = {
+				<Grid item xs={12} sm={6}>
+					<TextField id="decode" label="Decode" multiline fullWidth rows={15} value={stringMorph.encoded} onChange={(e) => {
+						setStringMorph({
 							decoded: ConvertFrom(e.target.value, passphrase),
 							encoded: e.target.value
-						}
-						setStringMorph(cont);
+						});
 					}} />
 				</Grid>
 			</Grid>
