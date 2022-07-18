@@ -1,4 +1,4 @@
-import { Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
+import { Chip, Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { IMenu, IMenuCategory } from "../../interfaces";
@@ -34,6 +34,7 @@ const getMenu:IMenu[] = [
 		category: 1,
 		url: '/inspect',
 		needsInternet: true,
+		beta: true,
 	},
 	{
 		name: 'DNS Inspector',
@@ -90,6 +91,9 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 					>
 						<ListItemIcon>{item.icon}</ListItemIcon>
 						<ListItemText primary={item.name} />
+						{item.beta ?
+						<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
+						: null}
 					</ListItemButton>
 				);
 			})}
@@ -132,7 +136,12 @@ export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 										>
 											<Item>
 												{subitem.icon}
-												<Typography>{subitem.name}</Typography>
+												<Typography>
+													{subitem.name}
+													{subitem.beta ?
+													<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
+													: null}
+												</Typography>
 											</Item>
 										</Link>
 									</Grid>

@@ -23,17 +23,11 @@ export interface IDNSProtocol {
 
 export interface IMenu {
 	name: string;
-	icon: JSX.Element;
-	url: string;
-	needsInternet: boolean;
-}
-
-export interface IMenu {
-	name: string;
 	category: number;
 	icon: JSX.Element;
 	url: string;
 	needsInternet: boolean;
+	beta?: boolean;
 }
 
 export interface IMenuCategory {
