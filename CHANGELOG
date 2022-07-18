@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Grid instructions changed for conversion and DNS page.
 - Highlighted that site inspection is beta.
 
+### Removed
+- Removed usage stats.
+
 ## [0.2.14.1] - 2022-07-16
 ### Fixed
 - Removed Prototype reference in error page, causing it on some browsers to also crash.

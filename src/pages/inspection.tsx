@@ -60,13 +60,6 @@ export function InspectionHome({online}:PageProps) {
 			<Box my={2}>
 				<BrowserDetection />
 			</Box>
-			<Box my={2}>
-				{ online ?
-				<UsageStats />
-				:
-				<Typography color="darkgrey">No stats - you are currently offline.</Typography>
-				}
-			</Box>
 		</>
 	);
 };
