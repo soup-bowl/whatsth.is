@@ -3,7 +3,6 @@ import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, Aler
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import { BrowserDetection } from './segments/browserDetection';
-import UsageStats from './segments/usageStats';
 import ErrorMessage from './segments/errorMessage';
 import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
