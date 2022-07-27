@@ -13,7 +13,7 @@ tasks:
       pip install -r requirements.txt
       pip install pytest
     command: |
-      export REDIS_HOST="localhost"
+      export REDIS_URL="redis://localhost"
       docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
       source env/bin/activate
       uvicorn api.main:app --reload --port 43594
