@@ -7,11 +7,14 @@ tasks:
   - name: Backend
     before: cd ../api.whatsth.is
     init: |
+      docker pull redis/redis-stack:latest
       python -m venv env
       source env/bin/activate
       pip install -r requirements.txt
       pip install pytest
     command: |
+      export REDIS_HOST="localhost"
+      docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
       source env/bin/activate
       uvicorn api.main:app --reload --port 43594
   - name: Frontend
