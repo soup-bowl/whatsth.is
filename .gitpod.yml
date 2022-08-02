@@ -11,7 +11,7 @@ tasks:
       python -m venv env
       source env/bin/activate
       pip install -r requirements.txt
-      pip install pytest
+      pip install pytest pylint
     command: |
       export REDIS_URL="redis://localhost"
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
