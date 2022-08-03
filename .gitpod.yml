@@ -6,25 +6,25 @@ additionalRepositories:
 tasks:
   - name: Backend
     before: cd ../api.whatsth.is
+    env:
+      REDIS_URL: redis://localhost
     init: |
       docker pull redis/redis-stack:latest
       python -m venv env
       source env/bin/activate
-      pip install -r requirements.txt
-      pip install pytest pylint
+      poetry install
     command: |
-      export REDIS_URL="redis://localhost"
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
       source env/bin/activate
       uvicorn api.main:app --reload --port 43594
   - name: Frontend
     init: |
-      npm install
-    command: |
       echo "PUBLIC_URL=$(gp url 3000)" > .env.development.local
       echo "REACT_APP_API_URL=$(gp url 43594)" >> .env.development.local
       echo "REACT_APP_VERSION=\$npm_package_version" >> .env.development.local
       cp .env.development.local .env.production.local
+      npm install
+    command: |
       npm start
 
 workspaceLocation: whatsth.is/.github/gitpod.code-workspace
