@@ -13,7 +13,7 @@ tasks:
       poetry install
     command: |
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
-      python run uvicorn api.main:app --reload --port 43594
+      poetry run uvicorn api.main:app --reload --port 43594
   - name: Frontend
     init: |
       echo "PUBLIC_URL=$(gp url 3000)" > .env.development.local
