@@ -7,8 +7,11 @@
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-* [Website Inspector](https://whatsth.is/inspect) ([uses the API][api]).
-* [String Conversion (encode & encrypt)](https://whatsth.is/convert).
+* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]).
+* [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
+* [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
+* [Cron Conversion](https://whatsth.is/#/cron).
+* [UNIX Timestamp Converter](https://whatsth.is/#/time).
 
 This app comprises of two components - A React frontend (this repository), and a [Python inspection API][api].
 
