@@ -43,7 +43,7 @@ export function LocationDetection({ConnectionState = true}:LocationProps) {
 	}, []);
 
 	if (!ConnectionState) {
-		return(<Typography color="darkgrey">No stats - you are currently offline.</Typography>);
+		return(<Typography color="darkgrey">Cannot retrieve information - you are currently offline.</Typography>);
 	}
 
 	if (success) {
