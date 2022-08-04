@@ -2,6 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UAParser } from 'ua-parser-js';
+import { MyIpAddressModal } from "./detailModals";
 
 export function BrowserDetection() {
 	const uaParser = new UAParser();
@@ -55,7 +56,7 @@ export function LocationDetection({ConnectionState = true}:LocationProps) {
 					Information obtained from&nbsp;
 					<Link href="https://api.ident.me/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ident.me</Link>
 					.
-				</Typography>
+				</Typography><MyIpAddressModal />
 			</>
 		);
 	} else {
