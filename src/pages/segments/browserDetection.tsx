@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UAParser } from 'ua-parser-js';
-import { MyIpAddressModal } from "./detailModals";
+import { MyIpAddressModal, UserAgentModel } from "./detailModals";
 
 export function BrowserDetection() {
 	const uaParser = new UAParser();
@@ -11,7 +11,7 @@ export function BrowserDetection() {
 	return (
 		<>
 			<Typography>
-				We've detected that you're using <Box component="span" fontWeight='700'>{uaParser.getBrowser().name} {uaParser.getBrowser().version}</Box>
+				We've detected that you're using <Box component="span" fontWeight='700'>{uaParser.getBrowser().name} {uaParser.getBrowser().version?.split('.')[0]}</Box>
 				&nbsp;running on <Box component="span" fontWeight='700'>{uaParser.getOS().name}</Box>.
 			</Typography>
 			<Typography color="darkgrey">
@@ -19,6 +19,7 @@ export function BrowserDetection() {
 				<Link href="https://wiki.mozilla.org/UserAgent" title={window.navigator.userAgent} style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>your UserAgent string</Link>
 				.
 			</Typography>
+			<UserAgentModel />
 		</>
 	);
 }
@@ -56,7 +57,8 @@ export function LocationDetection({ConnectionState = true}:LocationProps) {
 					Information obtained from&nbsp;
 					<Link href="https://api.ident.me/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ident.me</Link>
 					.
-				</Typography><MyIpAddressModal />
+				</Typography>
+				<MyIpAddressModal />
 			</>
 		);
 	} else {
