@@ -28,7 +28,11 @@ workspaceLocation: whatsth.is/.github/gitpod.code-workspace
 
 ports:
   - port: 3000
+    name: Frontend
+    description: Access the React PWA app.
     visibility: public
     onOpen: open-browser
   - port: 43594
+    name: Backend
+    description: Backend Python FastAPI.
     visibility: public
