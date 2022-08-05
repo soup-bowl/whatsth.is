@@ -36,3 +36,7 @@ ports:
     name: Backend
     description: Backend Python FastAPI.
     visibility: public
+  - port: 8001
+    name: Redis GUI
+    description: RedisInsight client for the backend API.
+    visibility: private
