@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Latest
+
+## [0.2.16] - 2022-08-10
 ### Added
 - Modal window on DNS inspector to show IPv4 and IPv6 addresses, if relevant.
 - Modal window that unpacks UserAgent information more thoroughly.
@@ -14,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - DNS checker page is now one page - table shows on same page as input.
 - IP address modal uses a Promise collection to collect both IPs simultaneously.
 
-## [0.2.5] - 2022-07-18
+## [0.2.15] - 2022-07-18
 ### Fixed
 - Cron page breaking on Morph/UBPorts browser ([#6](https://github.com/soup-bowl/whatsth.is/issues/6)).
 
