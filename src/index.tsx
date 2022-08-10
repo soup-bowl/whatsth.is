@@ -23,7 +23,7 @@ export default function App() {
 			} else {
 				setConnectionState(false);
 			}
-		}, 15000);
+		}, 5000);
 
 		return () => clearInterval(interval);
 	}, []);
