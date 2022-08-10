@@ -3,7 +3,7 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import agent from '../api/agent';
 import { IDNSProtocol, IRecord, PageProps } from "../interfaces";
-import { MyIpAddressModal } from "./segments/detailModals";
+import { MyIpAddressModal } from "./segments/modals";
 
 const siteTitle = "DNS Inspector";
 

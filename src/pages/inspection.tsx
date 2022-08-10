@@ -6,7 +6,7 @@ import ErrorMessage from './segments/errorMessage';
 import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
 import { PageProps } from '../interfaces';
-import { UserAgentModel } from './segments/detailModals';
+import { UserAgentModel } from './segments/modals';
 
 const siteTitle = "Site Inspector";
 
