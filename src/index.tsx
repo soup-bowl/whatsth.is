@@ -38,7 +38,6 @@ export default function App() {
 						<Route path="about"     element={<AboutPage />} />
 						<Route path="inspect"   element={<InspectionHome online={connectionState} />} />
 						<Route path="inspect/*" element={<InspectonResult />} />
-						<Route path="dns"       element={<DnsCheckHome online={connectionState} />} />
 						<Route path="dns/*"     element={<DnsCheckHome online={connectionState} />} />
 						<Route path="cron"      element={<CronConversionPage />} />
 						<Route path="cron/*"    element={<CronConversionPage />} />

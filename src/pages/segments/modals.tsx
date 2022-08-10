@@ -112,7 +112,6 @@ export function MyIpAddressModal({online}:PageProps) {
 			axios.get('https://4.ident.me/'),
 			axios.get('https://6.ident.me/'),
 		]).then(values => {
-			console.log(values);
 			setIPs({
 				ipv4: values[0].data,
 				ipv6: values[1].data,
