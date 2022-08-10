@@ -19,12 +19,13 @@ tasks:
       poetry run uvicorn api.main:app --reload --port 43594
   - name: Frontend
     init: |
+      npm install
+    command: |
+      alias gp="gp"
       echo "PUBLIC_URL=$(gp url 3000)" > .env.development.local
       echo "REACT_APP_API_URL=$(gp url 43594)" >> .env.development.local
       echo "REACT_APP_VERSION=\$npm_package_version" >> .env.development.local
       cp .env.development.local .env.production.local
-      npm install
-    command: |
       npm start
 
 workspaceLocation: whatsth.is/.github/gitpod.code-workspace
