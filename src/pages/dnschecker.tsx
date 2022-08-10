@@ -154,7 +154,7 @@ export default function DnsCheckHome({online}:PageProps) {
 							>
 								Clear Selection
 							</Button>
-							<MyIpAddressModal />
+							<MyIpAddressModal online={online} />
 						</Stack>
 					</Grid>
 					<Grid item>

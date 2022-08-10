@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle } from '@mui/material';
+import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import { BrowserDetection } from './segments/browserDetection';
 import ErrorMessage from './segments/errorMessage';
 import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
 import { PageProps } from '../interfaces';
+import { UserAgentModel } from './segments/detailModals';
 
 const siteTitle = "Site Inspector";
 
@@ -46,19 +46,19 @@ export function InspectionHome({online}:PageProps) {
 					disabled={!online}
 				/>
 				<Box my={2}>
-					<Button
-						type="submit"
-						variant="contained"
-						value="Submit"
-						disabled={!online}
-					>
-						Submit
-					</Button>
+					<Stack spacing={2} direction="row">
+						<Button
+							type="submit"
+							variant="contained"
+							value="Submit"
+							disabled={!online}
+						>
+							Submit
+						</Button>
+						<UserAgentModel />
+					</Stack>
 				</Box>
 			</form>
-			<Box my={2}>
-				<BrowserDetection />
-			</Box>
 		</>
 	);
 };

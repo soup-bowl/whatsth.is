@@ -2,6 +2,7 @@ import { Modal, Box, Typography, Button, Grid, Link } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
+import { PageProps } from "../../interfaces";
 
 const style = {
 	position: 'absolute' as 'absolute',
@@ -27,7 +28,7 @@ export function UserAgentModel() {
 
 	return(
 		<div>
-			<Button onClick={handleOpen} variant="outlined">More Information</Button>
+			<Button onClick={handleOpen} variant="outlined">Connection Info</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -38,8 +39,8 @@ export function UserAgentModel() {
 					<Typography id="modal-modal-title" variant="h4" component="h2">
 						UserAgent Information
 					</Typography>
-					<Typography>
-						With thanks to <Link href="https://github.com/faisalman/ua-parser-js">ua-parser-js</Link> to be
+					<Typography  color="darkgrey">
+						With thanks to <Link href="https://github.com/faisalman/ua-parser-js" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ua-parser-js</Link> to be
 						able to unpack this string of text.
 					</Typography>
 					<Grid container id="modal-modal-description" spacing={2} my={2}>
@@ -100,7 +101,7 @@ export function UserAgentModel() {
 	);
 }
 
-export function MyIpAddressModal() {
+export function MyIpAddressModal({online}:PageProps) {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -121,7 +122,7 @@ export function MyIpAddressModal() {
 
 	return(
 		<div>
-			<Button onClick={handleOpen} variant="outlined">My IP</Button>
+			<Button onClick={handleOpen} variant="outlined" disabled={!online}>My IP</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
