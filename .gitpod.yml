@@ -10,8 +10,11 @@ tasks:
       REDIS_URL: redis://localhost
     init: |
       docker pull redis/redis-stack:latest
+      python -m venv env
+      source env/bin/activate
       poetry install
     command: |
+      source env/bin/activate
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
       poetry run uvicorn api.main:app --reload --port 43594
   - name: Frontend
