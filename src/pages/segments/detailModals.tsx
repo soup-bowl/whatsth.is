@@ -121,7 +121,7 @@ export function MyIpAddressModal() {
 
 	return(
 		<div>
-			<Button onClick={handleOpen} variant="outlined">More Information</Button>
+			<Button onClick={handleOpen} variant="outlined">My IP</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -131,6 +131,11 @@ export function MyIpAddressModal() {
 				<Box sx={style}>
 					<Typography id="modal-modal-title" variant="h4" component="h2">
 						My IP Addresses
+					</Typography>
+					<Typography color="darkgrey" my={2}>
+						Information obtained from&nbsp;
+						<Link href="https://api.ident.me/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ident.me</Link>
+						.
 					</Typography>
 					<Grid container id="modal-modal-description" spacing={2} my={2}>
 						<Grid item xs={12} sm={2}>

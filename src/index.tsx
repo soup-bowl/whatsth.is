@@ -7,7 +7,7 @@ import Layout from "./pages/_layout";
 import Home from './pages/home';
 import { HelpPage, AboutPage } from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
-import { DnsCheckHome, DnsCheckResult } from './pages/dnschecker';
+import DnsCheckHome from './pages/dnschecker';
 import StringConversionPage from './pages/converter';
 import { CronConversionPage } from './pages/cron';
 import UnixEpochPage from './pages/time';
@@ -39,7 +39,7 @@ export default function App() {
 						<Route path="inspect"   element={<InspectionHome online={connectionState} />} />
 						<Route path="inspect/*" element={<InspectonResult />} />
 						<Route path="dns"       element={<DnsCheckHome online={connectionState} />} />
-						<Route path="dns/*"     element={<DnsCheckResult />} />
+						<Route path="dns/*"     element={<DnsCheckHome online={connectionState} />} />
 						<Route path="cron"      element={<CronConversionPage />} />
 						<Route path="cron/*"    element={<CronConversionPage />} />
 						<Route path="time"      element={<UnixEpochPage />} />

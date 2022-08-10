@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modal window on DNS inspector to show IPv4 and IPv6 addresses, if relevant.
 - Modal window that unpacks UserAgent information more thoroughly.
 
+### Changed
+- Highlighted that DNS inspection is beta - unfinished and CNAME & A records show the same.
+- DNS checker page is now one page - table shows on same page as input.
+
 ## [0.2.5] - 2022-07-18
 ### Fixed
 - Cron page breaking on Morph/UBPorts browser ([#6](https://github.com/soup-bowl/whatsth.is/issues/6)).

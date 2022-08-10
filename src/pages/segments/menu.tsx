@@ -42,6 +42,7 @@ const getMenu:IMenu[] = [
 		category: 1,
 		url: '/dns',
 		needsInternet: true,
+		beta: true,
 	},
 	{
 		name: 'String Conversion',
