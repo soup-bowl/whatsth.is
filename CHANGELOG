@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Highlighted that DNS inspection is beta - unfinished and CNAME & A records show the same.
 - DNS checker page is now one page - table shows on same page as input.
+- IP address modal uses a Promise collection to collect both IPs simultaneously.
 
 ## [0.2.5] - 2022-07-18
 ### Fixed

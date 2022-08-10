@@ -2,7 +2,7 @@ import { Modal, Box, Typography, Button, Grid, Link } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
-import { PageProps } from "../../interfaces";
+import { IIPCollection, PageProps } from "../../interfaces";
 
 const style = {
 	position: 'absolute' as 'absolute',
@@ -102,22 +102,22 @@ export function UserAgentModel() {
 }
 
 export function MyIpAddressModal({online}:PageProps) {
+	const [ips, setIPs] = useState<IIPCollection>({ipv4: 'N/A', ipv6: 'N/A'});
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const [ip4, setIP4] = useState('N/A');
-	const [ip6, setIP6] = useState('N/A');
-
 	useEffect(() => {
-		axios.get("https://4.ident.me/")
-		.then(response => {
-			setIP4(response.data);
-		})
-		axios.get("https://6.ident.me/")
-		.then(response => {
-			setIP6(response.data);
-		})
+		Promise.all([
+			axios.get('https://4.ident.me/'),
+			axios.get('https://6.ident.me/'),
+		]).then(values => {
+			console.log(values);
+			setIPs({
+				ipv4: values[0].data,
+				ipv6: values[1].data,
+			});
+		});
 	}, []);
 
 	return(
@@ -143,7 +143,7 @@ export function MyIpAddressModal({online}:PageProps) {
 							<Typography fontWeight={700}>IP v4</Typography>
 						</Grid>
 						<Grid item xs={12} sm={10}>
-							<Typography>{ip4}</Typography>
+							<Typography>{ips.ipv4}</Typography>
 						</Grid>
 					</Grid>
 					<Grid container spacing={2} my={2}>
@@ -151,7 +151,7 @@ export function MyIpAddressModal({online}:PageProps) {
 							<Typography fontWeight={700}>IP v6</Typography>
 						</Grid>
 						<Grid item xs={12} sm={10}>
-							<Typography>{ip6}</Typography>
+							<Typography>{ips.ipv6}</Typography>
 						</Grid>
 					</Grid>
 					<Button variant="contained" onClick={handleClose}>Close</Button>

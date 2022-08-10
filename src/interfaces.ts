@@ -35,3 +35,8 @@ export interface IMenuCategory {
 	name: string;
 	description?: string;
 }
+
+export interface IIPCollection {
+	ipv4: string;
+	ipv6: string;
+}
