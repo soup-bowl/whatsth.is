@@ -19,13 +19,13 @@ const siteTitle = "Unix Timestamp Conversion";
 
 export default function UnixEpochPage() {
 	function timeOutput(time:number):ITime {
-		let conversionDate:Date = new Date(time * 1000);
+		let conversionDate:Date = (time >= 100000000000) ? new Date(time) : new Date(time * 1000);
 
 		return {
 			string: conversionDate,
 			unix: time,
 			overflow: (time > 2147483647) ? true : false,
-			type: SecondType.s,
+			type: (time >= 100000000000) ? SecondType.ms : SecondType.s,
 		}
 	}
 
@@ -46,11 +46,14 @@ export default function UnixEpochPage() {
 
 	const changeDateTime = (e:any) => {
 		let conversionDate:Date = new Date(e.target.value);
-		setTimeStore(timeOutput(Math.floor(conversionDate.getTime() / 1000)));
+		let ts:number = ((conversionDate.getTime() / 1000) >= 100000000000) ?
+			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1000));
+
+		setTimeStore(timeOutput(ts));
 	};
 
 	const changeUnix = (e:any) => {
-		setTimeStore(timeOutput(e.target.value));
+		setTimeStore(timeOutput(parseInt(e.target.value)));
 	};
 
 	return(
@@ -77,7 +80,7 @@ export default function UnixEpochPage() {
 					label="Unix Epoch String"
 					type="number"
 					InputProps={{
-						inputProps: { min: 0, max: 253402300799 },
+						inputProps: { min: 0, max: 253402300799999 },
 						endAdornment: <InputAdornment position="end">
 							{timeStore.type === SecondType.s ?
 							<>s</>
