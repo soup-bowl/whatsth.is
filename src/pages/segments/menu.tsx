@@ -1,6 +1,5 @@
 import { Chip, Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { styled } from '@mui/material/styles';
 import { IMenu, IMenuCategory } from "../../interfaces";
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -106,14 +105,6 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 	const navigate = useNavigate();
 
-	const Item = styled(Paper)(({ theme }) => ({
-		backgroundColor: '#121212',
-		...theme.typography.body2,
-		padding: theme.spacing(1),
-		textAlign: 'center',
-		color: theme.palette.text.secondary
-	}));
-
 	return(
 		<>
 			{getMenuCategories.map((item:IMenuCategory, i:number) => {
@@ -127,7 +118,7 @@ export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 						{getMenu.map((subitem:IMenu, i:number) => {
 							if (subitem.category === item.id) {
 								return(
-									<Grid key={i} item xs={6}>
+									<Grid key={i} item xs={6} md={3}>
 										<Link
 											sx={{
 												cursor: (subitem.needsInternet && !onlineState) ? 'default' : 'pointer',
@@ -135,15 +126,25 @@ export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 											}}
 											onClick={() => navigate(subitem.url)}
 										>
-											<Item>
+											<Paper elevation={3} sx={{
+												padding: 1,
+												margin: 1,
+												display: 'flex',
+												flexDirection: 'column',
+												textAlign: 'center',
+												justifyContent: 'center',
+												alignItems: 'center',
+												maxWidth: "200px",
+												minHeight: "125px"
+											}}>
 												{subitem.icon}
 												<Typography>
 													{subitem.name}
-													{subitem.beta ?
-													<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
-													: null}
 												</Typography>
-											</Item>
+												{subitem.beta ?
+													<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
+												: null}
+											</Paper>
 										</Link>
 									</Grid>
 								);
