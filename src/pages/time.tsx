@@ -63,6 +63,9 @@ export default function UnixEpochPage() {
 				This therefore gives you a way to represent time using a linear scaling integer, as opposed to a complicated
 				string/text based comparison.
 			</Typography>
+			<Typography my={2}>
+				This tool automatically supports epoch represented as seconds and milliseconds (1/1,000 seconds).
+			</Typography>
 			<Box my={2}>
 				<TextField fullWidth
 					id="humanDTString"
