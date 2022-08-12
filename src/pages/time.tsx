@@ -19,13 +19,13 @@ const siteTitle = "Unix Timestamp Conversion";
 
 export default function UnixEpochPage() {
 	function timeOutput(time:number):ITime {
-		let conversionDate:Date = (time >= 100000000000) ? new Date(time) : new Date(time * 1000);
+		let conversionDate:Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
 
 		return {
 			string: conversionDate,
 			unix: time,
 			overflow: (time > 2147483647) ? true : false,
-			type: (time >= 100000000000) ? SecondType.ms : SecondType.s,
+			type: (time >= 1e11) ? SecondType.ms : SecondType.s,
 		}
 	}
 
@@ -34,7 +34,7 @@ export default function UnixEpochPage() {
 		const inputIsNumber:boolean = /^\d+$/.test(inputGet);
 
 		return timeOutput(
-			(inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1000)
+			(inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1e3)
 		);
 	});
 
@@ -46,8 +46,8 @@ export default function UnixEpochPage() {
 
 	const changeDateTime = (e:any) => {
 		let conversionDate:Date = new Date(e.target.value);
-		let ts:number = ((conversionDate.getTime() / 1000) >= 100000000000) ?
-			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1000));
+		let ts:number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
+			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1e3));
 
 		setTimeStore(timeOutput(ts));
 	};
