@@ -16,6 +16,8 @@ enum SecondType {
 }
 
 const siteTitle = "Unix Timestamp Conversion";
+const maxInt32 = 2147483647;
+const MaxAcceptUnix = 253402300799999;
 
 export default function UnixEpochPage() {
 	function timeOutput(time:number):ITime {
@@ -24,7 +26,7 @@ export default function UnixEpochPage() {
 		return {
 			string: conversionDate,
 			unix: time,
-			overflow: (time > 2147483647) ? true : false,
+			overflow: (time > maxInt32) ? true : false,
 			type: (time >= 1e11) ? SecondType.ms : SecondType.s,
 		}
 	}
@@ -80,7 +82,7 @@ export default function UnixEpochPage() {
 					label="Unix Epoch String"
 					type="number"
 					InputProps={{
-						inputProps: { min: 0, max: 253402300799999 },
+						inputProps: { min: 0, max: MaxAcceptUnix },
 						endAdornment: <InputAdornment position="end">
 							{timeStore.type === SecondType.s ?
 							<>s</>
