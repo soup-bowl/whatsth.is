@@ -2,15 +2,10 @@ import { Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, MenuItem
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import agent from '../api/agent';
-import { IDNSProtocol, IRecord, PageProps } from "../interfaces";
+import { IDNSProtocol, IDNSTableData, IRecord, PageProps } from "../interfaces";
 import { MyIpAddressModal } from "./segments/modals";
 
 const siteTitle = "DNS Inspector";
-
-interface dnsTableData {
-	rows: IRecord[];
-	columns: GridColumns;
-}
 
 export default function DnsCheckHome({online}:PageProps) {
 	const [selectionProtocol, setSelectionProtocol] = useState('');
@@ -21,7 +16,7 @@ export default function DnsCheckHome({online}:PageProps) {
 	const [protocols, setProtocols] = useState<IDNSProtocol[]>([]);
 
 	const [loading, setLoading] = useState<boolean>(true);
-	const [dnsData, setDnsData] = useState<dnsTableData>({rows: [], columns: []});
+	const [dnsData, setDnsData] = useState<IDNSTableData>({rows: [], columns: []});
 	const [errResult, setErrResult] = useState<any>(undefined);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });

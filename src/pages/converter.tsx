@@ -2,24 +2,13 @@ import { Box, FormControl, Grid, InputLabel, TextField, Typography,
 	MenuItem, Select, SelectChangeEvent, ListSubheader, Link } from "@mui/material";
 import { AES, TripleDES, enc } from 'crypto-js';
 import { useEffect, useState } from "react";
-
-interface StringMorph {
-	decoded: string;
-	encoded: string;
-}
-
-enum ConversionType {
-	Base64 = 0,
-	Hex = 1,
-	URI = 2,
-	AES = 10,
-	TDES = 11,
-}
+import { ConversionType } from "../enums";
+import { IStringMorph } from "../interfaces";
 
 const siteTitle = "String Conversions";
 
 export default function StringConversionPage() {
-	const [stringMorph, setStringMorph] = useState<StringMorph>({encoded: '', decoded: ''});
+	const [stringMorph, setStringMorph] = useState<IStringMorph>({encoded: '', decoded: ''});
 	const [passphrase, setPassphrase] = useState('');
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
 

@@ -1,3 +1,6 @@
+import { GridColumns } from "@mui/x-data-grid";
+import { SecondType } from "./enums";
+
 export interface PageProps {
 	online: boolean;
 }
@@ -21,6 +24,16 @@ export interface IDNSProtocol {
 	name: string;
 }
 
+export interface IDNSTableData {
+	rows: IRecord[];
+	columns: GridColumns;
+}
+
+export interface IStringMorph {
+	decoded: string;
+	encoded: string;
+}
+
 export interface IMenu {
 	name: string;
 	category: number;
@@ -39,4 +52,11 @@ export interface IMenuCategory {
 export interface IIPCollection {
 	ipv4: string;
 	ipv6: string;
+}
+
+export interface ITime {
+	string: Date;
+	unix: number;
+	overflow: boolean;
+	type: SecondType;
 }

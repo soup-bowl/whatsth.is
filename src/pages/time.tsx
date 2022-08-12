@@ -1,19 +1,8 @@
 import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import WarningIcon from '@mui/icons-material/Warning';
-
-interface ITime {
-	string: Date;
-	unix: number;
-	overflow: boolean;
-	type: SecondType;
-}
-
-enum SecondType {
-	s = 1,
-	ms = 2,
-	us = 3,
-}
+import { ITime } from "../interfaces";
+import { SecondType } from "../enums";
 
 const siteTitle = "Unix Timestamp Conversion";
 const maxInt32 = 2147483647;
