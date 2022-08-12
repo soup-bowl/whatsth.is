@@ -6,6 +6,7 @@ interface ITime {
 	string: Date;
 	unix: number;
 	overflow: boolean;
+	type: SecondType;
 }
 
 enum SecondType {
@@ -17,22 +18,6 @@ enum SecondType {
 const siteTitle = "Unix Timestamp Conversion";
 
 export default function UnixEpochPage() {
-	const inputGet:string = window.location.hash.slice(7);
-	const inputIsNumber:boolean = /^\d+$/.test(inputGet);
-
-	let startingUnix = (inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1000);
-	const [timeStore, setTimeStore] = useState<ITime>({
-		string: new Date(startingUnix * 1000),
-		unix: startingUnix,
-		overflow: false
-	});
-
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
-
-	useEffect(() => {
-		window.location.href = `/#/time/${timeStore.unix}`
-	}, [timeStore]);
-
 	function timeOutput(time:number):ITime {
 		let conversionDate:Date = new Date(time * 1000);
 
@@ -40,8 +25,24 @@ export default function UnixEpochPage() {
 			string: conversionDate,
 			unix: time,
 			overflow: (time > 2147483647) ? true : false,
+			type: SecondType.s,
 		}
 	}
+
+	const [timeStore, setTimeStore] = useState<ITime>(():ITime => {
+		const inputGet:string = window.location.hash.slice(7);
+		const inputIsNumber:boolean = /^\d+$/.test(inputGet);
+
+		return timeOutput(
+			(inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1000)
+		);
+	});
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` }, []);
+
+	useEffect(() => {
+		window.location.href = `/#/time/${timeStore.unix}`
+	}, [timeStore]);
 
 	const changeDateTime = (e:any) => {
 		let conversionDate:Date = new Date(e.target.value);
