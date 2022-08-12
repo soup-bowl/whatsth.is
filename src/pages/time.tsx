@@ -21,6 +21,10 @@ const MaxAcceptUnix = 253402300799999;
 
 export default function UnixEpochPage() {
 	function timeOutput(time:number):ITime {
+		if (time > MaxAcceptUnix) {
+			return timeStore;
+		}
+
 		let conversionDate:Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
 
 		return {

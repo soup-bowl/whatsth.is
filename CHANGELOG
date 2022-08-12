@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Millisecond support for the epoch calculator (#10).
 
+### Fixed
+- Can't input a Unix time beyond the accepted bounds.
+
 ## [0.2.16] - 2022-08-10
 ### Added
 - Modal window on DNS inspector to show IPv4 and IPv6 addresses, if relevant.
