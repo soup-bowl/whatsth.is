@@ -1,4 +1,4 @@
-import { Box, Link, TextField, Typography } from "@mui/material";
+import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import WarningIcon from '@mui/icons-material/Warning';
 
@@ -76,7 +76,16 @@ export default function UnixEpochPage() {
 					id="computerDTString"
 					label="Unix Epoch String"
 					type="number"
-					InputProps={{ inputProps: { min: 0, max: 253402300799 } }}
+					InputProps={{
+						inputProps: { min: 0, max: 253402300799 },
+						endAdornment: <InputAdornment position="end">
+							{timeStore.type === SecondType.s ?
+							<>s</>
+							:
+							<>ms (1/1,000s)</>
+							}
+						</InputAdornment>,
+					}}
 					value={timeStore.unix}
 					onChange={changeUnix}
 				/>
