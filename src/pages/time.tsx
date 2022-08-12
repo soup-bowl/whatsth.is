@@ -8,6 +8,12 @@ interface ITime {
 	overflow: boolean;
 }
 
+enum SecondType {
+	s = 1,
+	ms = 2,
+	us = 3,
+}
+
 const siteTitle = "Unix Timestamp Conversion";
 
 export default function UnixEpochPage() {
@@ -27,23 +33,23 @@ export default function UnixEpochPage() {
 		window.location.href = `/#/time/${timeStore.unix}`
 	}, [timeStore]);
 
-	const changeDateTime = (e:any) => {
-		let conversionDate = new Date(e.target.value);
-		let unix = Math.floor(conversionDate.getTime() / 1000);
-		setTimeStore({
+	function timeOutput(time:number):ITime {
+		let conversionDate:Date = new Date(time * 1000);
+
+		return {
 			string: conversionDate,
-			unix: unix,
-			overflow: (unix > 2147483647) ? true : false
-		});
+			unix: time,
+			overflow: (time > 2147483647) ? true : false,
+		}
+	}
+
+	const changeDateTime = (e:any) => {
+		let conversionDate:Date = new Date(e.target.value);
+		setTimeStore(timeOutput(Math.floor(conversionDate.getTime() / 1000)));
 	};
 
 	const changeUnix = (e:any) => {
-		let conversionDate = new Date(parseInt(e.target.value) * 1000);
-		setTimeStore({
-			string: conversionDate,
-			unix: e.target.value,
-			overflow: (e.target.value > 2147483647) ? true : false
-		});
+		setTimeStore(timeOutput(e.target.value));
 	};
 
 	return(
