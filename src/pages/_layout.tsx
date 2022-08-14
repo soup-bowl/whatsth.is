@@ -77,7 +77,13 @@ export default function Layout({online}:PageProps) {
 		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open} sx={{ zIndex: (theme) => ( desktop ? theme.zIndex.drawer + 1 : 0) }}>
+			<AppBar
+				position="fixed"
+				open={open}
+				sx={{
+					backgroundColor: theme.palette.primary.main,
+					zIndex: (theme) => ( desktop ? theme.zIndex.drawer + 1 : 0)
+				}}>
 				<Toolbar>
 					{ ! desktop ?
 					<IconButton
