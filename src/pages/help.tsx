@@ -124,7 +124,7 @@ export function AboutPage({online}:PageProps) {
 				
 				<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
 
-				{ storageInfo.quota !== 0 ?
+				{ storageInfo.quota !== undefined && storageInfo.quota !== 0 ?
 					<Typography>
 						Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
 						<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.
