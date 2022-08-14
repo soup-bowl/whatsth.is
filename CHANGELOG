@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Home screen tiles changed for better clickability.
+- Show API offline in about when the browser is disconnected.
 
 ## [0.2.16] - 2022-08-10
 ### Added

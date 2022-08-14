@@ -60,3 +60,8 @@ export interface ITime {
 	overflow: boolean;
 	type: SecondType;
 }
+
+export interface IStorage {
+	quota: number;
+	usage: number;
+}

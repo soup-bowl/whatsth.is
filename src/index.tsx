@@ -35,7 +35,7 @@ export default function App() {
 					<Route path="/" element={<Layout online={connectionState} />}>
 						<Route index element={<Home online={connectionState} />} />
 						<Route path="help"      element={<HelpPage />} />
-						<Route path="about"     element={<AboutPage />} />
+						<Route path="about"     element={<AboutPage online={connectionState} />} />
 						<Route path="inspect"   element={<InspectionHome online={connectionState} />} />
 						<Route path="inspect/*" element={<InspectonResult />} />
 						<Route path="dns/*"     element={<DnsCheckHome online={connectionState} />} />

@@ -1,10 +1,12 @@
-import { Typography, Link, Box, Button, Stack, Chip } from "@mui/material";
+import { Typography, Link, Box, Button, Stack, Chip, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 import agent from "../api/agent";
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
+import CloudOffIcon from '@mui/icons-material/CloudOff';
 import WhatsThisLogo from "./segments/logo";
+import { IStorage, PageProps } from "../interfaces";
 
 export function HelpPage() {
 	const siteTitle = "Help";
@@ -64,11 +66,6 @@ export function HelpPage() {
 	);
 }
 
-interface storage {
-	quota: number;
-	usage: number;
-}
-
 // https://stackoverflow.com/a/35696506
 function formatBytes(bytes: number, decimals: number = 2) {
 	if (bytes === 0) return '0 Bytes';
@@ -82,23 +79,31 @@ function formatBytes(bytes: number, decimals: number = 2) {
 	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-export function AboutPage() {
+export function AboutPage({online}:PageProps) {
 	const siteTitle = "About";
 
-	const [apiVersion, setApiVersion] = useState('');
-	const [storageInfo, setStorageInfo] = useState<storage>({quota: 0, usage: 0});
+	const [apiVersion, setApiVersion] = useState<string|JSX.Element>('');
+	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
-		agent.Details.stats().then(response => {
-			// @ts-ignore
-			setApiVersion(response.api_version);
-		})
-		.catch((err: any) => {
-			setApiVersion('Comm error');
-		});
+		if (online) {
+			agent.Details.stats().then(response => {
+				// @ts-ignore
+				setApiVersion(response.api_version);
+			})
+			.catch((err: any) => {
+				setApiVersion(
+					<Tooltip title={`(${err.code ?? 'N/A'}) ${err.message ?? 'N/A'}`}><span>Comms Error</span></Tooltip>
+				);
+			});
+		} else {
+			setApiVersion(<><CloudOffIcon fontSize="inherit" /> Offline</>);
+		}
+	}, [online]);
 
+	useEffect(() => {
 		if ('storage' in navigator && 'estimate' in navigator.storage) {
 			navigator.storage.estimate().then(({usage, quota}) => {
 				setStorageInfo({ usage: usage ?? 0, quota: quota ?? 0 });
@@ -115,15 +120,17 @@ export function AboutPage() {
 				on <Link style={{fontWeight: 'bold'}} href="https://pages.github.com/">GitHub Pages</Link>.
 			</Typography>
 			<Stack my={2}>
-				<Typography>App version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
-				<Typography>API version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
+				
+				<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
+
 				{ storageInfo.quota !== 0 ?
-				<Typography>
-					Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
-					<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.
-				</Typography>
+					<Typography>
+						Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
+						<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.
+					</Typography>
 				:
-				<Typography color="darkgrey">Storage API is not supported.</Typography>
+					<Typography color="darkgrey">Storage API is not supported.</Typography>
 				}
 			</Stack>
 			<Stack my={2} spacing={2} direction="row" justifyContent="center">
