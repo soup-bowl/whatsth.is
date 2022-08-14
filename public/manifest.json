@@ -1,6 +1,8 @@
 {
   "short_name": "whatsth.is",
-  "name": "WhatsThis?",
+  "name": "What's This?",
+  "description": "The Swiss Army knife for developers, full of handy toolsets and features.",
+  "categories": ["productivity", "security", "utilities"],
   "icons": [
     {
       "src": "logo-mask-192.png",
