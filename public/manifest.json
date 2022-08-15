@@ -5,6 +5,12 @@
   "categories": ["productivity", "security", "utilities"],
   "icons": [
     {
+      "src": "logo-mask-144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
       "src": "logo-mask-192.png",
       "type": "image/png",
       "sizes": "192x192",
