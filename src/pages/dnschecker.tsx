@@ -170,7 +170,14 @@ export default function DnsCheckHome({online}:PageProps) {
 								/>
 							</Box>
 						</Box>
-						: null}
+						:
+						<Box>
+							{currentURL !== '' ?
+							<Typography my={2}>
+								There are no <strong>{currentProtocol}</strong> records to display for <strong>{currentURL}</strong>.
+							</Typography>
+							: null}
+						</Box>}
 					</Grid>
 				</Grid>
 			</form>
