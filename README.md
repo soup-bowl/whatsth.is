@@ -19,7 +19,7 @@ This app comprises of two components - A React frontend (this repository), and a
 
 ## Getting Started
 
-### With GitPod
+### With Gitpod
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)]()
 
