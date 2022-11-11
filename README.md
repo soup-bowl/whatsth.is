@@ -5,7 +5,7 @@
   <a href="https://gitpod.io/#https://github.com/soup-bowl/whatsth.is"><img src="https://img.shields.io/badge/open%20in-Gitpod-orange?logo=gitpod&logoColor=white" /></a>
 </p>
 
-![Apple iMac Pro](https://user-images.githubusercontent.com/11209477/201294392-d728449b-5f9a-4f54-bfba-aa3779db8084.png)
+![A computer display shows the Whats This website, with a mobile phone showing the same content in front](https://user-images.githubusercontent.com/11209477/201387735-6b56eb2b-7354-4a98-9aa4-e77d8a8ebaf4.png)
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
