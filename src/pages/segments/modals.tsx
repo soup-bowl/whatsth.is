@@ -108,16 +108,17 @@ export function MyIpAddressModal({online}:PageProps) {
 	const handleClose = () => setOpen(false);
 
 	useEffect(() => {
-		Promise.all([
-			axios.get('https://4.ident.me/'),
-			axios.get('https://6.ident.me/'),
-		]).then(values => {
-			setIPs({
-				ipv4: values[0].data,
-				ipv6: values[1].data,
-			});
+		axios.get('https://4.ident.me/').then(value => {
+			let ipVals = ips;
+			ipVals.ipv4 = value.data;
+			setIPs(ipVals);
 		});
-	}, []);
+		axios.get('https://6.ident.me/').then(value => {
+			let ipVals = ips;
+			ipVals.ipv6 = value.data;
+			setIPs(ipVals);
+		});
+	}, [ips]);
 
 	return(
 		<div>
