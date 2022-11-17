@@ -5,7 +5,7 @@ import agent from '../api/agent';
 import ErrorMessage from './segments/errorMessage';
 import Generic from './technology/generic';
 import WordPress from './technology/wordpress';
-import { PageProps } from '../interfaces';
+import { IInspectionResult, PageProps } from '../interfaces';
 import { UserAgentModel } from './segments/modals';
 
 const siteTitle = "Site Inspector";
@@ -69,12 +69,12 @@ export function InspectonResult() {
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
-	const [siteDetails, setSiteDetails] = useState<any>([]);
+	const [siteDetails, setSiteDetails] = useState<IInspectionResult>({} as IInspectionResult);
 	const [loading, setLoading]         = useState<boolean>(true);
 	const [requestError, setRError]     = useState<boolean>(false);
 
 	useEffect(() => {
-		agent.Details.firstCheck(inspectionURL).then(response => {
+		agent.Inspection.inspect(inspectionURL).then(response => {
 			setSiteDetails(response);
 			setLoading(false);
 		}).catch((err: any) => {
@@ -108,16 +108,18 @@ export function InspectonResult() {
 	}
 
 	let contentModule:any;
-	switch (siteDetails.message.technology) {
-		case 'WordPress':
-			contentModule = (<WordPress inspection={siteDetails} />);
-			break;
-		case 'Unknown':
-			contentModule = (<ErrorMessage title={"We couldn't detect the CMS used for " + siteDetails.message.name} />);
-			break;
-		default:
-			contentModule = (<Generic inspection={siteDetails} />);
-			break;
+	if (typeof siteDetails.message !== 'string') {
+		switch (siteDetails.message.technology) {
+			case 'WordPress':
+				contentModule = (<WordPress inspection={siteDetails} />);
+				break;
+			case 'Unknown':
+				contentModule = (<ErrorMessage title={"We couldn't detect the CMS used for " + siteDetails.message.name} />);
+				break;
+			default:
+				contentModule = (<Generic inspection={siteDetails} />);
+				break;
+		}
 	}
 
 	return (

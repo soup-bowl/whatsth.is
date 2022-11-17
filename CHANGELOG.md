@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Latest
 ### Changed
 - Upgraded dependencies.
+- API version obtained from OpenAPI spec, not a bespoke endpoint.
 
 ### Fixed
 - An empty DNS response now shows a notice message.
+- API agent misconfigured for TypeScript checks on responses.
 
 ## [0.2.18] - 2022-08-15
 ### Changed

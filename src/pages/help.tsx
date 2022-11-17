@@ -89,9 +89,8 @@ export function AboutPage({online}:PageProps) {
 
 	useEffect(() => {
 		if (online) {
-			agent.Details.stats().then(response => {
-				// @ts-ignore
-				setApiVersion(response.api_version);
+			agent.Details.openapi().then(response => {
+				setApiVersion(response.info.version);
 			})
 			.catch((err: any) => {
 				setApiVersion(

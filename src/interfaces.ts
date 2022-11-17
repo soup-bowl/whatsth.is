@@ -1,6 +1,16 @@
 import { GridColumns } from "@mui/x-data-grid";
 import { SecondType } from "./enums";
 
+export interface IOpenAPI {
+	info: IOpenAPIInfo;
+}
+
+export interface IOpenAPIInfo {
+	title: string;
+	description: string;
+	version: string;
+}
+
 export interface PageProps {
 	online: boolean;
 }
@@ -12,6 +22,37 @@ export interface IRecord {
 	text: string[];
 }
 
+export interface IInspectionResult {
+	success: boolean;
+	message: IInspectionSiteDetails | string;
+	url: string;
+}
+
+export interface IInspectionSiteDetails {
+	name: string;
+	technology: string;
+	matched_on: string[];
+	additional?: IInspectionWordPress;
+}
+
+export interface IInspectionWordPress {
+	success: boolean;
+	name: string;
+	tagline: string;
+	timezone: string;
+	post_count: number;
+	page_count: number;
+	cat_count: number;
+	latest_post?: IInspectionWordPressPost;
+	latest_page?: IInspectionWordPressPost;
+}
+
+export interface IInspectionWordPressPost {
+	title: string;
+	date: string;
+	url: string;
+}
+
 export interface IDNSResult {
 	success: boolean;
 	url: string;
@@ -20,6 +61,11 @@ export interface IDNSResult {
 }
 
 export interface IDNSProtocol {
+	success: boolean;
+	records: IDNSProtocols[];
+}
+
+export interface IDNSProtocols {
 	type: string;
 	name: string;
 }

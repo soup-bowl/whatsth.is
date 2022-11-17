@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { IDNSProtocol, IDNSResult, IInspectionResult, IOpenAPI } from '../interfaces';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -9,17 +10,21 @@ const requests = {
 };
 
 const Details = {
-	stats: () => requests.get('/info'),
-	firstCheck: (url: string) => requests.get('/inspect/' + encodeURIComponent(url))
+	openapi: () => requests.get<IOpenAPI>('/openapi.json'),
+}
+
+const Inspection = {
+	inspect: (url: string) => requests.get<IInspectionResult>('/inspect/' + encodeURIComponent(url))
 };
 
 const DNS = {
-	protocols: () => requests.get('/dns/protocols'),
-	probe: (protocol: string, url: string) => requests.get(`/dns/${protocol}/${encodeURIComponent(url)}`),
+	protocols: () => requests.get<IDNSProtocol>('/dns/protocols'),
+	probe: (protocol: string, url: string) => requests.get<IDNSResult>(`/dns/${protocol}/${encodeURIComponent(url)}`),
 };
 
 const agent = {
 	Details,
+	Inspection,
 	DNS
 };
 

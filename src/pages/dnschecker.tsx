@@ -1,8 +1,11 @@
-import { Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from "@mui/material"
+import {
+	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, MenuItem,
+	Select, SelectChangeEvent, Stack, TextField, Typography
+} from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import agent from '../api/agent';
-import { IDNSProtocol, IDNSTableData, IRecord, PageProps } from "../interfaces";
+import { IDNSProtocols, IDNSTableData, IRecord, PageProps } from "../interfaces";
 import { MyIpAddressModal } from "./segments/modals";
 
 const siteTitle = "DNS Inspector";
@@ -13,7 +16,7 @@ export default function DnsCheckHome({online}:PageProps) {
 	const [currentProtocol, setCurrentProtocol] = useState('');
 	const [currentURL, setCurrentURL] = useState('');
 
-	const [protocols, setProtocols] = useState<IDNSProtocol[]>([]);
+	const [protocols, setProtocols] = useState<IDNSProtocols[]>([]);
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [dnsData, setDnsData] = useState<IDNSTableData>({rows: [], columns: []});
@@ -23,7 +26,7 @@ export default function DnsCheckHome({online}:PageProps) {
 
 	useEffect(() => {
 		agent.DNS.protocols()
-		.then((response:any) => {
+		.then((response) => {
 			setProtocols(response.records);
 		});
 	}, []);
@@ -47,7 +50,7 @@ export default function DnsCheckHome({online}:PageProps) {
 		if (currentProtocol !== '' && currentURL !== '') {
 			setLoading(true);
 			agent.DNS.probe(currentProtocol, currentURL)
-			.then((response:any) => {
+			.then((response) => {
 				let rows:IRecord[]   = [];
 				let cols:GridColumns = [];
 				if (currentProtocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1} ) };
@@ -112,7 +115,7 @@ export default function DnsCheckHome({online}:PageProps) {
 									value={selectionProtocol}
 									onChange={(e:SelectChangeEvent) => (setSelectionProtocol(e.target.value))}
 								>
-								{protocols.map((protocol:IDNSProtocol) => (
+								{protocols.map((protocol) => (
 									<MenuItem key={protocol.type} value={protocol.type}>{protocol.type}</MenuItem>
 								))}
 								</Select>
