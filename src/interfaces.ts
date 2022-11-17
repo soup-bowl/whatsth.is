@@ -75,6 +75,17 @@ export interface IDNSTableData {
 	columns: GridColumns;
 }
 
+export interface IWHOISResult {
+	success: boolean;
+	domain: string;
+	registrar: string;
+	whois_operator: string;
+	nameservers: string[];
+	date_created: string;
+	date_updated: string;
+	date_expires: string;
+}
+
 export interface IStringMorph {
 	decoded: string;
 	encoded: string;

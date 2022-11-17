@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
-import { IDNSProtocol, IDNSResult, IInspectionResult, IOpenAPI } from '../interfaces';
+import { IDNSProtocol, IDNSResult, IInspectionResult, IOpenAPI, IWHOISResult } from '../interfaces';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const responseBody = <T> ( response: AxiosResponse<T> ) => response.data;
 
 const requests = {
-	get: <T>(url: string) => axios.get<T>(url).then(responseBody)
+	get: <T>(url: string) => axios.get<T>(url).then(responseBody),
 };
 
 const Details = {
@@ -14,12 +14,13 @@ const Details = {
 }
 
 const Inspection = {
-	inspect: (url: string) => requests.get<IInspectionResult>('/inspect/' + encodeURIComponent(url))
+	inspect: (url: string) => requests.get<IInspectionResult>('/inspect/' + encodeURIComponent(url)),
 };
 
 const DNS = {
 	protocols: () => requests.get<IDNSProtocol>('/dns/protocols'),
 	probe: (protocol: string, url: string) => requests.get<IDNSResult>(`/dns/${protocol}/${encodeURIComponent(url)}`),
+	whois: (url: string) => requests.get<IWHOISResult>(`/whois/${encodeURIComponent(url)}`),
 };
 
 const agent = {

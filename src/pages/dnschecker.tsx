@@ -27,7 +27,9 @@ export default function DnsCheckHome({online}:PageProps) {
 	useEffect(() => {
 		agent.DNS.protocols()
 		.then((response) => {
-			setProtocols(response.records);
+			let records:IDNSProtocols[] = response.records;
+			records.push({ name: "WHOIS", type: "WHOIS"	});
+			setProtocols(records);
 		});
 	}, []);
 
@@ -49,29 +51,58 @@ export default function DnsCheckHome({online}:PageProps) {
 	useEffect(() => {
 		if (currentProtocol !== '' && currentURL !== '') {
 			setLoading(true);
-			agent.DNS.probe(currentProtocol, currentURL)
-			.then((response) => {
-				let rows:IRecord[]   = [];
-				let cols:GridColumns = [];
-				if (currentProtocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1} ) };
-				if (currentProtocol === 'MX' ) { cols.push( { field: 'priority', headerName: 'Priority', flex: 1, maxWidth: 125} ) };
-				if (currentProtocol === 'TXT') { cols.push( { field: 'text', headerName: 'Text', flex: 1 } ) };
+			if (currentProtocol !== "WHOIS") {
+				agent.DNS.probe(currentProtocol, currentURL)
+				.then((response) => {
+					let rows:IRecord[]   = [];
+					let cols:GridColumns = [];
+					if (currentProtocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1} ) };
+					if (currentProtocol === 'MX' ) { cols.push( { field: 'priority', headerName: 'Priority', flex: 1, maxWidth: 125} ) };
+					if (currentProtocol === 'TXT') { cols.push( { field: 'text', headerName: 'Text', flex: 1 } ) };
 
-				for (let index = 0; index < response.records.length; index++) {
-					response.records[index].id = index;
-					rows.push( response.records[index] );
-				}
+					for (let index = 0; index < response.records.length; index++) {
+						response.records[index].id = index;
+						rows.push( response.records[index] );
+					}
 
-				setDnsData({
-					rows: rows,
-					columns: cols,
+					setDnsData({
+						rows: rows,
+						columns: cols,
+					});
+					setLoading(false);
+				})
+				.catch((err:any) => {
+					setErrResult(true);
+					setLoading(false);
 				});
-				setLoading(false);
-			})
-			.catch((err:any) => {
-				setErrResult(true);
-				setLoading(false);
-			});
+			} else {
+				agent.DNS.whois(currentURL)
+				.then(response => {
+					let cols:GridColumns = [
+						{ field: 'key', headerName: 'Key', flex: 1 },
+						{ field: 'value', headerName: 'Value', flex: 2 },
+					];
+					let records:any = [];
+					records.push(
+						{ id: 0, key: 'Domain', value: response.domain },
+						{ id: 1, key: 'Registrar', value: response.registrar },
+						{ id: 2, key: 'WHOIS', value: response.whois_operator },
+						{ id: 3, key: 'First Registered', value: new Date(response.date_created) },
+						{ id: 4, key: 'Renewal Date', value: new Date(response.date_updated) },
+						{ id: 5, key: 'Expiry Date', value: new Date(response.date_expires) },
+					);
+
+					setDnsData({
+						rows: records,
+						columns: cols,
+					});
+					setLoading(false);
+				})
+				.catch((err:any) => {
+					setErrResult(true);
+					setLoading(false);
+				});
+			}
 		}
 	}, [currentProtocol, currentURL]);
 
