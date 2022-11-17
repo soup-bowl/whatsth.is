@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgraded dependencies.
 - API version obtained from OpenAPI spec, not a bespoke endpoint.
+- Loading skeleton shown when DNS check is loading, but no grid present.
 
 ### Fixed
 - An empty DNS response now shows a notice message.

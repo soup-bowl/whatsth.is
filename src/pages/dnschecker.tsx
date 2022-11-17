@@ -1,6 +1,6 @@
 import {
 	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, MenuItem,
-	Select, SelectChangeEvent, Stack, TextField, Typography
+	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
@@ -214,9 +214,17 @@ export default function DnsCheckHome({online}:PageProps) {
 						:
 						<Box>
 							{currentURL !== '' ?
-							<Typography my={2}>
-								There are no <strong>{currentProtocol}</strong> records to display for <strong>{currentURL}</strong>.
-							</Typography>
+							<>
+								{loading ?
+								<>
+									<Typography my={2} component="h2" variant="h5"><Skeleton /></Typography>
+									<Skeleton variant="rectangular" width="100%" height={400} />
+								</>
+								: 
+								<Typography my={2}>
+									There are no <strong>{currentProtocol}</strong> records to display for <strong>{currentURL}</strong>.
+								</Typography>}
+							</>
 							: null}
 						</Box>}
 					</Grid>
