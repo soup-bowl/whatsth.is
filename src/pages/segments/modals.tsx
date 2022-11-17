@@ -1,8 +1,9 @@
-import { Modal, Box, Typography, Button, Grid, Link } from "@mui/material";
+import { Modal, Box, Typography, Button, Grid, Link, IconButton, Stack } from "@mui/material";
 import axios from "axios";
+import countryCodeEmoji from "country-code-emoji";
 import { useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
-import { IIPCollection, PageProps } from "../../interfaces";
+import { IIPCollection, IIPGeolocation, PageProps } from "../../interfaces";
 
 const style = {
 	position: 'absolute' as 'absolute',
@@ -50,43 +51,35 @@ export function UserAgentModel() {
 						<Grid item xs={12} sm={8}>
 							<Typography>{window.navigator.userAgent}</Typography>
 						</Grid>
-					</Grid>
-					<Typography>
-						From this, it can be determined:
-					</Typography>
-					<Grid container spacing={2} my={2}>
+						<Grid item xs={12} sm={12}>
+							<Typography>
+								From this, it can be determined:
+							</Typography>
+						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Browser</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
 							<Typography>{uaParser.getBrowser().name} {uaParser.getBrowser().version}</Typography>
 						</Grid>
-					</Grid>
-					<Grid container spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Engine</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
 							<Typography>{uaParser.getEngine().name} {uaParser.getEngine().version}</Typography>
 						</Grid>
-					</Grid>
-					<Grid container spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Operating System</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
 							<Typography>{uaParser.getOS().name} {uaParser.getOS().version}</Typography>
 						</Grid>
-					</Grid>
-					<Grid container spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Device</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
 							<Typography>{uaParser.getDevice().model ?? <em>Unspecified</em>}</Typography>
 						</Grid>
-					</Grid>
-					<Grid container spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>CPU</Typography>
 						</Grid>
@@ -143,18 +136,114 @@ export function MyIpAddressModal({online}:PageProps) {
 							<Typography fontWeight={700}>IP v4</Typography>
 						</Grid>
 						<Grid item xs={12} sm={10}>
-							<Typography>{ips.ipv4}</Typography>
+							<Stack direction="row" alignItems="center">
+								<Typography>{ips.ipv4}</Typography>
+								<IPAddressGeo ip={ips.ipv4} />
+							</Stack>
 						</Grid>
-					</Grid>
-					<Grid container spacing={2} my={2}>
 						<Grid item xs={12} sm={2}>
 							<Typography fontWeight={700}>IP v6</Typography>
 						</Grid>
 						<Grid item xs={12} sm={10}>
-							<Typography>{ips.ipv6}</Typography>
+							<Stack direction="row" alignItems="center">
+								<Typography>{ips.ipv6}</Typography>
+								<IPAddressGeo ip={ips.ipv6} />
+							</Stack>
 						</Grid>
 					</Grid>
 					<Button variant="contained" onClick={handleClose}>Close</Button>
+				</Box>
+			</Modal>
+		</div>
+	);
+}
+
+interface GeoProps {
+	ip: string;
+}
+
+export function IPAddressGeo({ip}:GeoProps) {
+	const [geo, setGeo] = useState<any>();
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	useEffect(() => {
+		axios.get(`https://ipinfo.io/${ip}/json`)
+		.then(value => {
+			let reply:IIPGeolocation = value.data;
+			reply.icon = countryCodeEmoji(reply.country) ?? undefined;
+			setGeo(reply);
+		})
+		.catch (err => {
+			setGeo(undefined);
+		});
+	}, [ip, open]);
+
+	if (geo === undefined) {
+		<IconButton size="small">🌐</IconButton>
+	}
+
+	return(
+		<div>
+			<IconButton onClick={handleOpen} size="small">{geo?.icon ?? <>🌐</>}</IconButton>
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="geo-modal-modal-title"
+				aria-describedby="geo-modal-modal-description"
+			>
+				<Box sx={style}>
+					{geo !== undefined ?
+					<>
+					<Typography id="geo-modal-modal-title" variant="h4" component="h2">
+						About IP...
+					</Typography>
+					<Typography color="darkgrey" my={2}>
+						Information obtained from&nbsp;
+						<Link href="https://ipinfo.io/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ipinfo.io</Link>
+						.
+					</Typography>
+					<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
+						<Grid item xs={12} sm={3}>
+							<Typography fontWeight={700}>IP</Typography>
+						</Grid>
+						<Grid item xs={12} sm={9}>
+							<Typography>{geo.ip}</Typography>
+						</Grid>
+						<Grid item xs={12} sm={3}>
+							<Typography fontWeight={700}>Hostname</Typography>
+						</Grid>
+						<Grid item xs={12} sm={9}>
+							<Typography>{geo.hostname}</Typography>
+						</Grid>
+						<Grid item xs={12} sm={3}>
+							<Typography fontWeight={700}>Organisation</Typography>
+						</Grid>
+						<Grid item xs={12} sm={9}>
+							<Typography>{geo.org}</Typography>
+						</Grid>
+						<Grid item xs={12} sm={3}>
+							<Typography fontWeight={700}>Location</Typography>
+						</Grid>
+						<Grid item xs={12} sm={9}>
+							<Typography>{geo.city}, {geo.region}</Typography>
+						</Grid>
+					</Grid>
+					<Button variant="contained" onClick={handleClose}>Close</Button>
+					</>
+					: 
+					<>
+					<Typography id="geo-modal-modal-title" variant="h4" component="h2">
+						Where's the Info?
+					</Typography>
+					<Typography id="geo-modal-modal-description" my={2}>
+						Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the
+						API we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result,
+						we can't show you the information.
+					</Typography>
+					<Button variant="contained" onClick={handleClose}>Close</Button>
+					</>}
 				</Box>
 			</Modal>
 		</div>

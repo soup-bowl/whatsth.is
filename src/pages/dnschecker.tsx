@@ -6,7 +6,7 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import agent from '../api/agent';
 import { IDNSProtocols, IDNSTableData, IRecord, PageProps } from "../interfaces";
-import { MyIpAddressModal } from "./segments/modals";
+import { IPAddressGeo, MyIpAddressModal } from "./segments/modals";
 
 const siteTitle = "DNS Inspector";
 
@@ -56,7 +56,16 @@ export default function DnsCheckHome({online}:PageProps) {
 				.then((response) => {
 					let rows:IRecord[]   = [];
 					let cols:GridColumns = [];
-					if (currentProtocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1} ) };
+					if (currentProtocol !== 'TXT') { cols.push( { field: 'address', headerName: 'Address', flex: 1, renderCell: (params) => {
+						return(
+							<>
+								{params.value}
+								{((params.value.match(/\./g)||[]).length === 3) || ((params.value.match(/:/g)||[]).length > 3) ?
+									<><IPAddressGeo ip={params.value} /></>
+								: null}
+							</>
+						);
+					}} ) };
 					if (currentProtocol === 'MX' ) { cols.push( { field: 'priority', headerName: 'Priority', flex: 1, maxWidth: 125} ) };
 					if (currentProtocol === 'TXT') { cols.push( { field: 'text', headerName: 'Text', flex: 1 } ) };
 

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Latest
 ### Added
 - WHOIS lookup added to DNS toolset.
+- Geolocation details for IP addresses.
 
 ### Changed
 - Upgraded dependencies.
