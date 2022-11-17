@@ -1,5 +1,5 @@
 import {
-	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, MenuItem,
+	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, MenuItem,
 	Select, SelectChangeEvent, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
@@ -191,6 +191,13 @@ export default function DnsCheckHome({online}:PageProps) {
 						<Box>
 							<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
 							<Box my={2} height={400}>
+								{currentProtocol === "WHOIS" ?
+								<Typography  my={2}>
+									Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
+									this tool does not show ownership contact information. Powered by
+									the <Link href="https://pypi.org/project/python-whois/">Python WHOIS library</Link>.
+								</Typography>
+								: null}
 								<DataGrid
 									rows={dnsData.rows}
 									columns={dnsData.columns}
