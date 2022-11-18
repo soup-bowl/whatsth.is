@@ -1,23 +1,52 @@
-import { Modal, Box, Typography, Button, Grid, Link, IconButton, Stack } from "@mui/material";
+import {
+	Typography, Button, Grid, Link, IconButton, Stack, styled,
+	Dialog, DialogTitle, DialogContent
+} from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import countryCodeEmoji from "country-code-emoji";
 import { useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 import { IIPCollection, IIPGeolocation, PageProps } from "../../interfaces";
 
-const style = {
-	position: 'absolute' as 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	maxHeight: '90%',
-	overflowY: 'auto',
-	maxWidth: 500,
-	width: '90%',
-	bgcolor: 'background.paper',
-	boxShadow: 24,
-	p: 4,
-};
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+	'& .MuiDialogContent-root': {
+		padding: theme.spacing(2),
+	},
+	'& .MuiDialogActions-root': {
+		padding: theme.spacing(1),
+	},
+}));
+  
+export interface DialogTitleProps {
+	id: string;
+	children?: React.ReactNode;
+	onClose: () => void;
+}
+
+function BootstrapDialogTitle(props: DialogTitleProps) {
+	const { children, onClose, ...other } = props;
+  
+	return (
+		<DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+			{children}
+			{onClose ? (
+				<IconButton
+				aria-label="close"
+				onClick={onClose}
+				sx={{
+					position: 'absolute',
+					right: 8,
+					top: 8,
+					color: (theme) => theme.palette.grey[500],
+				}}
+				>
+				<CloseIcon />
+				</IconButton>
+			) : null}
+		</DialogTitle>
+	);
+}
 
 export function UserAgentModel() {
 	const [open, setOpen] = useState(false);
@@ -30,21 +59,21 @@ export function UserAgentModel() {
 	return(
 		<div>
 			<Button onClick={handleOpen} variant="outlined">Connection Info</Button>
-			<Modal
+			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
+				aria-labelledby="conn-modal-modal-title"
+				aria-describedby="conn-modal-modal-description"
 			>
-				<Box sx={style}>
-					<Typography id="modal-modal-title" variant="h4" component="h2">
-						UserAgent Information
-					</Typography>
+				<BootstrapDialogTitle id="conn-modal-modal-title" onClose={handleClose}>
+					UserAgent Information
+				</BootstrapDialogTitle>
+				<DialogContent>
 					<Typography  color="darkgrey">
 						With thanks to <Link href="https://github.com/faisalman/ua-parser-js" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ua-parser-js</Link> to be
 						able to unpack this string of text.
 					</Typography>
-					<Grid container id="modal-modal-description" spacing={2} my={2}>
+					<Grid container id="conn-modal-modal-description" spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Your UserAgent</Typography>
 						</Grid>
@@ -87,9 +116,8 @@ export function UserAgentModel() {
 							<Typography>{uaParser.getCPU().architecture ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 					</Grid>
-					<Button variant="contained" onClick={handleClose}>Close</Button>
-				</Box>
-			</Modal>
+				</DialogContent>
+			</BootstrapDialog>
 		</div>
 	);
 }
@@ -116,22 +144,22 @@ export function MyIpAddressModal({online}:PageProps) {
 	return(
 		<div>
 			<Button onClick={handleOpen} variant="outlined" disabled={!online}>My IP</Button>
-			<Modal
+			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
+				aria-labelledby="ipi-modal-modal-title"
+				aria-describedby="ipi-modal-modal-description"
 			>
-				<Box sx={style}>
-					<Typography id="modal-modal-title" variant="h4" component="h2">
-						My IP Addresses
-					</Typography>
-					<Typography color="darkgrey" my={2}>
+				<BootstrapDialogTitle id="ipi-modal-modal-title" onClose={handleClose}>
+					My IP Addresses
+				</BootstrapDialogTitle>
+				<DialogContent>
+					<Typography color="darkgrey">
 						Information obtained from&nbsp;
 						<Link href="https://api.ident.me/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ident.me</Link>
 						.
 					</Typography>
-					<Grid container id="modal-modal-description" spacing={2} my={2}>
+					<Grid container id="ipi-modal-modal-description" spacing={2} my={2}>
 						<Grid item xs={12} sm={2}>
 							<Typography fontWeight={700}>IP v4</Typography>
 						</Grid>
@@ -151,9 +179,8 @@ export function MyIpAddressModal({online}:PageProps) {
 							</Stack>
 						</Grid>
 					</Grid>
-					<Button variant="contained" onClick={handleClose}>Close</Button>
-				</Box>
-			</Modal>
+				</DialogContent>
+			</BootstrapDialog>
 		</div>
 	);
 }
@@ -187,19 +214,19 @@ export function IPAddressGeo({ip}:GeoProps) {
 	return(
 		<div>
 			<IconButton onClick={handleOpen} size="small">{geo?.icon ?? <>🌐</>}</IconButton>
-			<Modal
+			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
 				aria-labelledby="geo-modal-modal-title"
 				aria-describedby="geo-modal-modal-description"
 			>
-				<Box sx={style}>
+				<BootstrapDialogTitle id="geo-modal-modal-title" onClose={handleClose}>
+					About IP...
+				</BootstrapDialogTitle>
+				<DialogContent>
 					{geo !== undefined ?
 					<>
-					<Typography id="geo-modal-modal-title" variant="h4" component="h2">
-						About IP...
-					</Typography>
-					<Typography color="darkgrey" my={2}>
+					<Typography color="darkgrey">
 						Information obtained from&nbsp;
 						<Link href="https://ipinfo.io/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ipinfo.io</Link>
 						.
@@ -230,22 +257,17 @@ export function IPAddressGeo({ip}:GeoProps) {
 							<Typography>{geo.city}, {geo.region}</Typography>
 						</Grid>
 					</Grid>
-					<Button variant="contained" onClick={handleClose}>Close</Button>
 					</>
 					: 
 					<>
-					<Typography id="geo-modal-modal-title" variant="h4" component="h2">
-						Where's the Info?
-					</Typography>
 					<Typography id="geo-modal-modal-description" my={2}>
 						Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the
 						API we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result,
 						we can't show you the information.
 					</Typography>
-					<Button variant="contained" onClick={handleClose}>Close</Button>
 					</>}
-				</Box>
-			</Modal>
+				</DialogContent>
+			</BootstrapDialog>
 		</div>
 	);
 }
