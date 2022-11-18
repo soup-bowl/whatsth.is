@@ -1,5 +1,5 @@
 import {
-	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, MenuItem,
+	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, ListSubheader, MenuItem,
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
@@ -27,9 +27,7 @@ export default function DnsCheckHome({online}:PageProps) {
 	useEffect(() => {
 		agent.DNS.protocols()
 		.then((response) => {
-			let records:IDNSProtocols[] = response.records;
-			records.push({ name: "WHOIS", type: "WHOIS"	});
-			setProtocols(records);
+			setProtocols(response.records);
 		});
 	}, []);
 
@@ -155,9 +153,12 @@ export default function DnsCheckHome({online}:PageProps) {
 									value={selectionProtocol}
 									onChange={(e:SelectChangeEvent) => (setSelectionProtocol(e.target.value))}
 								>
-								{protocols.map((protocol) => (
-									<MenuItem key={protocol.type} value={protocol.type}>{protocol.type}</MenuItem>
-								))}
+									<ListSubheader>Records</ListSubheader>
+									{protocols.map((protocol) => (
+										<MenuItem key={protocol.type} value={protocol.type}>{protocol.type}</MenuItem>
+									))}
+									<ListSubheader>Tools</ListSubheader>
+									<MenuItem key="WHOIS" value="WHOIS">WHOIS</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
