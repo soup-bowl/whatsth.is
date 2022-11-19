@@ -218,6 +218,7 @@ export default function DnsCheckHome({online}:PageProps) {
 									disableColumnMenu
 									disableColumnSelector
 									hideFooter
+									sx={{ marginBottom: 2 }}
 								/>
 							</Box>
 						</Box>
