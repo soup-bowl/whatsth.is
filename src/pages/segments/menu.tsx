@@ -1,4 +1,7 @@
-import { Chip, Divider, Grid, Link, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
+import {
+	Chip, Divider, Grid, IconButton, Link, List, ListItemButton, ListItemIcon,
+	ListItemText, Paper, Typography
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IMenu, IMenuCategory } from "../../interfaces";
 
@@ -13,6 +16,20 @@ interface props {
 	onlineState: boolean;
 	drawerClose?: any;
 }
+
+const ResizableIconButton = ({...props}:any) => {
+    return (
+		<IconButton
+			sx={{
+				'& svg': {
+					fontSize: 38
+				}
+			}}
+			disableRipple
+			{...props}
+		/>
+	);
+};
 
 const getMenuCategories:IMenuCategory[] = [
 	{
@@ -137,7 +154,9 @@ export function HomeMenu({onlineState, drawerClose = undefined}:props) {
 												maxWidth: "200px",
 												minHeight: "125px"
 											}}>
-												{subitem.icon}
+												<ResizableIconButton>
+													{subitem.icon}
+												</ResizableIconButton>
 												<Typography>
 													{subitem.name}
 												</Typography>
