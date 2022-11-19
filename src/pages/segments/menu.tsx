@@ -11,10 +11,17 @@ import DnsIcon from '@mui/icons-material/Dns';
 import CachedIcon from '@mui/icons-material/Cached';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
+import HelpIcon from '@mui/icons-material/Help';
+import CoPresentIcon from '@mui/icons-material/CoPresent';
 
 interface props {
 	onlineState: boolean;
 	drawerClose?: any;
+}
+
+enum Category {
+	Inspection,
+	Conversion,
 }
 
 const ResizableIconButton = ({...props}:any) => {
@@ -33,12 +40,12 @@ const ResizableIconButton = ({...props}:any) => {
 
 const getMenuCategories:IMenuCategory[] = [
 	{
-		id: 1,
+		id: Category.Inspection,
 		name: 'Inspection Tools',
 		description: 'These tools require an internet connection.',
 	},
 	{
-		id: 2,
+		id: Category.Conversion,
 		name: 'Conversion',
 	}
 ];
@@ -47,7 +54,7 @@ const getMenu:IMenu[] = [
 	{
 		name: 'Site Inspector',
 		icon: <TravelExploreIcon />,
-		category: 1,
+		category: Category.Inspection,
 		url: '/inspect',
 		needsInternet: true,
 		beta: true,
@@ -55,7 +62,7 @@ const getMenu:IMenu[] = [
 	{
 		name: 'DNS Inspector',
 		icon: <DnsIcon />,
-		category: 1,
+		category: Category.Inspection,
 		url: '/dns',
 		needsInternet: true,
 		beta: true,
@@ -63,21 +70,21 @@ const getMenu:IMenu[] = [
 	{
 		name: 'String Conversion',
 		icon: <CachedIcon />,
-		category: 2,
+		category: Category.Conversion,
 		url: '/convert',
 		needsInternet: false,
 	},
 	{
 		name: 'Cron Calculator',
 		icon: <AccessTimeIcon />,
-		category: 2,
+		category: Category.Conversion,
 		url: '/cron',
 		needsInternet: false,
 	},
 	{
 		name: 'Unix Timestamp',
 		icon: <TimelapseIcon />,
-		category: 2,
+		category: Category.Conversion,
 		url: '/time',
 		needsInternet: false,
 	}
@@ -86,11 +93,16 @@ const getMenu:IMenu[] = [
 export function DrawMenu({onlineState, drawerClose}:props) {
 	const navigate = useNavigate();
 
+	const MenuNav = (url:string) => {
+		navigate(url);
+		drawerClose();
+	}
+
 	return(
 		<List>
 			<ListItemButton
 				key={0}
-				onClick={() => {navigate('/');drawerClose();}}
+				onClick={() => MenuNav('/')}
 				selected={(window.location.hash.replace('/', '') === "#")}
 			>
 				<ListItemIcon><HomeIcon /></ListItemIcon>
@@ -102,7 +114,7 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 				return(
 					<ListItemButton
 						key={(i + 1)}
-						onClick={() => {navigate(item.url);drawerClose();}}
+						onClick={() => MenuNav(item.url)}
 						disabled={(item.needsInternet) ? !onlineState : false}
 						selected={window.location.hash.includes(`${item.url}`)}
 					>
@@ -114,6 +126,23 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 					</ListItemButton>
 				);
 			})}
+			<Divider />
+			<List>
+				<ListItemButton
+					onClick={() => MenuNav('/help')}
+					selected={window.location.hash.includes("/help")}
+				>
+					<ListItemIcon><HelpIcon /></ListItemIcon>
+					<ListItemText primary="Help" />
+				</ListItemButton>
+				<ListItemButton
+					onClick={() => MenuNav('/about')}
+					selected={window.location.hash.includes("/about")}
+				>
+					<ListItemIcon><CoPresentIcon /></ListItemIcon>
+					<ListItemText primary="About" />
+				</ListItemButton>
+			</List>
 			</>
 		</List>
 	);

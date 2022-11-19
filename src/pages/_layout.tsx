@@ -1,15 +1,14 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { CssBaseline, ThemeProvider, Toolbar, IconButton, Typography,
-	Container, styled, Drawer, Divider, Box, List, ListItemIcon,
-	ListItemText, useMediaQuery, ListItemButton} from '@mui/material';
+import {
+	CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container,
+	styled, Drawer, Box, useMediaQuery
+} from '@mui/material';
 import theme from "../theme/theme";
 import { useState } from "react";
 
-import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import CoPresentIcon from '@mui/icons-material/CoPresent';
 import { DrawMenu } from "./segments/menu";
 import { PageProps } from "../interfaces";
 
@@ -61,7 +60,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function Layout({online}:PageProps) {
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const desktop = useMediaQuery("(min-width: 961px)");
 
@@ -122,23 +120,6 @@ export default function Layout({online}:PageProps) {
 					</IconButton>
 				</DrawerHeader>
 				<DrawMenu onlineState={online} drawerClose={handleDrawerClose} />
-				<Divider />
-				<List>
-					<ListItemButton
-						onClick={() => {navigate('/help');handleDrawerClose();}}
-						selected={window.location.hash.includes("/help")}
-					>
-						<ListItemIcon><HelpIcon /></ListItemIcon>
-						<ListItemText primary="Help" />
-					</ListItemButton>
-					<ListItemButton
-						onClick={() => {navigate('/about');handleDrawerClose();}}
-						selected={window.location.hash.includes("/about")}
-					>
-						<ListItemIcon><CoPresentIcon /></ListItemIcon>
-						<ListItemText primary="About" />
-					</ListItemButton>
-				</List>
 			</Drawer>
 			<Main open={open}>
         		<DrawerHeader />
