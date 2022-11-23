@@ -38,7 +38,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: whatsthis
+          projectName: whatsthis-prtest
           directory: ./build
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: main
