@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
+name: Auto-deploy to Cloudflare Pages
 
-name: Auto-deploy to GitHub Pages (alpha)
-
-# Controls
 on:
   release:
     types: [published]
@@ -13,26 +10,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 16
+
+      - name: 🏗 Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 18.x
 
-      - name: Identify Commit Hash
+      - name: 🔎 Identify Commit Hash
         id: commit
         uses: pr-mpt/actions-commit-hash@v1
 
-      - name: Identify version
+      - name: 🔎 Identify version
         id: get_version
         uses: battila7/get-version-action@v2
 
-      - name: change version in NPM
+      - name: 🦸 change version in NPM
         uses: reedyuk/npm-version@1.1.1
         with:
           version: ${{ steps.get_version.outputs.version-without-v  }}-${{ steps.commit.outputs.short }}
           git-tag-version: 'false'
 
-      - name: 🏗 Build Site
+      - name: 📦 Build Site
         run: npm i && npm run build
 
       - name: 🚀 Deploy Site

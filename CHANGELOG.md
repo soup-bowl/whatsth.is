@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Latest
 ### Changed
+- Switched main site (whatsth.is) from GitHub Pages to Cloudflare Pages.
 - Distinguished between DNS options and other tools in DNS page.
 
 ## [0.2.19] - 2022-08-18
