@@ -28,6 +28,7 @@ tasks:
       cp .env.development.local .env.production.local
       nvm use 18
       npm start
+    openMode: split-right
 
 workspaceLocation: whatsth.is/.github/gitpod.code-workspace
 
