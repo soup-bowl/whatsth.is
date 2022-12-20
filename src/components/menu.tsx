@@ -3,7 +3,7 @@ import {
 	ListItemText, Paper, Typography
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { IMenu, IMenuCategory } from "../../interfaces";
+import { IMenu, IMenuCategory } from "../interfaces";
 
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';

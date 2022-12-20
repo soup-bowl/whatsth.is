@@ -7,7 +7,7 @@ import axios from "axios";
 import countryCodeEmoji from "country-code-emoji";
 import { useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
-import { IIPCollection, IIPGeolocation, PageProps } from "../../interfaces";
+import { IIPCollection, IIPGeolocation, PageProps } from "../interfaces";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {

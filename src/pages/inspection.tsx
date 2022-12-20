@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import ErrorMessage from './components/errorMessage';
-import Generic from './components/technology/generic';
-import WordPress from './components/technology/wordpress';
+import ErrorMessage from '../components/errorMessage';
+import Generic from '../components/technology/generic';
+import WordPress from '../components/technology/wordpress';
 import { IInspectionResult, PageProps } from '../interfaces';
-import { UserAgentModel } from './components/modals';
+import { UserAgentModel } from '../components/modals';
 
 const siteTitle = "Site Inspector";
 
