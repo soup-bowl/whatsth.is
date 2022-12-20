@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Latest
 ### Changed
+- Upgraded dependencies.
 - Internal structure re-organisation and linting.
 
 ## [0.2.21] - 2022-12-15
