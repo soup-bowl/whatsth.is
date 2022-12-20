@@ -2,7 +2,7 @@ import { Typography, Box, Link } from '@mui/material';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { PageProps } from '../interfaces';
-import { HomeMenu } from "./segments/menu";
+import { HomeMenu } from "./components/menu";
 
 export default function Home({online}:PageProps) {
 	const navigate = useNavigate();

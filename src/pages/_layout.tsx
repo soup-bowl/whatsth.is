@@ -9,7 +9,7 @@ import { useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import { DrawMenu } from "./segments/menu";
+import { DrawMenu } from "./components/menu";
 import { PageProps } from "../interfaces";
 
 const drawerWidth = 240;
