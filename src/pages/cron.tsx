@@ -6,7 +6,7 @@ const siteTitle = "Cron Calculator";
 
 function checkValidGetCode(input: string) {
 	input = input.split('_').join(' ');
-	if (~ [5,6].indexOf(input.split(' ').length)) {
+	if (~[5, 6].indexOf(input.split(' ').length)) {
 		return true;
 	}
 	return false;
@@ -14,7 +14,7 @@ function checkValidGetCode(input: string) {
 
 function calculate(input: string) {
 	input = input.split('_').join(' ');
-	let output:string = '';
+	let output: string = '';
 	try {
 		output = cronstrue.toString(input);
 	} catch {
@@ -30,7 +30,7 @@ export function CronConversionPage() {
 	const [timeString, setTimeString] = useState<string>((checkValidGetCode(inputGet)) ? inputGet.split('_').join(' ') : '* * * * *');
 	const [timeResult, setTimeResult] = useState<string>(calculate(timeString));
 
-	const timeChange = (e:any) => {
+	const timeChange = (e: any) => {
 		setTimeString(e.target.value);
 	};
 
@@ -41,7 +41,7 @@ export function CronConversionPage() {
 		window.location.href = `/#/cron/${timeString.split(' ').join('_')}`
 	}, [timeString]);
 
-	return(
+	return (
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>Convert crontab time strings into human-readable format. Uses the <Link href="https://www.npmjs.com/package/cronstrue">cRonstrue library</Link>.</Typography>

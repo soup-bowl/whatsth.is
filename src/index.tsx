@@ -34,20 +34,20 @@ export default function App() {
 				<Routes>
 					<Route path="/" element={<Layout online={connectionState} />}>
 						<Route index element={<Home online={connectionState} />} />
-						<Route path="help"      element={<HelpPage />} />
-						<Route path="about"     element={<AboutPage online={connectionState} />} />
-						<Route path="inspect"   element={<InspectionHome online={connectionState} />} />
+						<Route path="help" element={<HelpPage />} />
+						<Route path="about" element={<AboutPage online={connectionState} />} />
+						<Route path="inspect" element={<InspectionHome online={connectionState} />} />
 						<Route path="inspect/*" element={<InspectonResult />} />
-						<Route path="dns/*"     element={<DnsCheckHome online={connectionState} />} />
-						<Route path="cron"      element={<CronConversionPage />} />
-						<Route path="cron/*"    element={<CronConversionPage />} />
-						<Route path="time"      element={<UnixEpochPage />} />
-						<Route path="time/*"    element={<UnixEpochPage />} />
-						<Route path="convert"   element={<StringConversionPage />} />
-						<Route path="encoder"   element={<Navigate replace to="/convert" />} />
-						<Route path="decoder"   element={<Navigate replace to="/convert" />} />
-						<Route path="unix"      element={<Navigate replace to="/time" />} />
-						<Route path="*"         element={<Navigate replace to="/" />} />
+						<Route path="dns/*" element={<DnsCheckHome online={connectionState} />} />
+						<Route path="cron" element={<CronConversionPage />} />
+						<Route path="cron/*" element={<CronConversionPage />} />
+						<Route path="time" element={<UnixEpochPage />} />
+						<Route path="time/*" element={<UnixEpochPage />} />
+						<Route path="convert" element={<StringConversionPage />} />
+						<Route path="encoder" element={<Navigate replace to="/convert" />} />
+						<Route path="decoder" element={<Navigate replace to="/convert" />} />
+						<Route path="unix" element={<Navigate replace to="/time" />} />
+						<Route path="*" element={<Navigate replace to="/" />} />
 					</Route>
 				</Routes>
 			</HashRouter>
@@ -56,7 +56,7 @@ export default function App() {
 }
 
 const container = document.getElementById('root');
-const root      = createRoot(container!);
+const root = createRoot(container!);
 
 root.render(
 	<StrictMode>

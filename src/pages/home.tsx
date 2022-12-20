@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { PageProps } from '../interfaces';
 import { HomeMenu } from "../components/menu";
 
-export default function Home({online}:PageProps) {
+export default function Home({ online }: PageProps) {
 	const navigate = useNavigate();
 
 	useEffect(() => { document.title = "What's This?" });

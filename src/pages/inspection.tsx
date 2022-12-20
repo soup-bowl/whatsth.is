@@ -10,18 +10,18 @@ import { UserAgentModel } from '../components/modals';
 
 const siteTitle = "Site Inspector";
 
-export function InspectionHome({online}:PageProps) {
+export function InspectionHome({ online }: PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
-	const submitForm = (e:any) => {
+	const submitForm = (e: any) => {
 		e.preventDefault();
 		return navigate('/inspect/' + inputURL);
 	};
 
-	const changeForm = (e:any) => {
+	const changeForm = (e: any) => {
 		setInputURL(e.target.value);
 	};
 
@@ -70,8 +70,8 @@ export function InspectonResult() {
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	const [siteDetails, setSiteDetails] = useState<IInspectionResult>({} as IInspectionResult);
-	const [loading, setLoading]         = useState<boolean>(true);
-	const [requestError, setRError]     = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [requestError, setRError] = useState<boolean>(false);
 
 	useEffect(() => {
 		agent.Inspection.inspect(inspectionURL).then(response => {
@@ -107,7 +107,7 @@ export function InspectonResult() {
 		);
 	}
 
-	let contentModule:any;
+	let contentModule: any;
 	if (typeof siteDetails.message !== 'string') {
 		switch (siteDetails.message.technology) {
 			case 'WordPress':
@@ -128,7 +128,7 @@ export function InspectonResult() {
 			{contentModule}
 			<Box>
 				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-				<Button variant="outlined" color="error" sx={{marginLeft: 2}} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+				<Button variant="outlined" color="error" sx={{ marginLeft: 2 }} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
 			</Box>
 		</Box>
 	);

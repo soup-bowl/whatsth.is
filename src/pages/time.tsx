@@ -9,7 +9,7 @@ const maxInt32 = 2147483647;
 const MaxAcceptUnix = 253402300799999;
 
 export default function UnixEpochPage() {
-	function timeOutput(time:number):ITime {
+	function timeOutput(time: number): ITime {
 		if (time > MaxAcceptUnix) {
 			try {
 				return timeStore;
@@ -18,7 +18,7 @@ export default function UnixEpochPage() {
 			}
 		}
 
-		let conversionDate:Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
+		let conversionDate: Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
 
 		return {
 			string: conversionDate,
@@ -28,9 +28,9 @@ export default function UnixEpochPage() {
 		}
 	}
 
-	const [timeStore, setTimeStore] = useState<ITime>(():ITime => {
-		const inputGet:string = window.location.hash.slice(7);
-		const inputIsNumber:boolean = /^\d+$/.test(inputGet);
+	const [timeStore, setTimeStore] = useState<ITime>((): ITime => {
+		const inputGet: string = window.location.hash.slice(7);
+		const inputIsNumber: boolean = /^\d+$/.test(inputGet);
 
 		return timeOutput(
 			(inputIsNumber) ? parseInt(inputGet) : Math.floor(Date.now() / 1e3)
@@ -43,19 +43,19 @@ export default function UnixEpochPage() {
 		window.location.href = `/#/time/${timeStore.unix}`
 	}, [timeStore]);
 
-	const changeDateTime = (e:any) => {
-		let conversionDate:Date = new Date(e.target.value);
-		let ts:number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
+	const changeDateTime = (e: any) => {
+		let conversionDate: Date = new Date(e.target.value);
+		let ts: number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
 			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1e3));
 
 		setTimeStore(timeOutput(ts));
 	};
 
-	const changeUnix = (e:any) => {
+	const changeUnix = (e: any) => {
 		setTimeStore(timeOutput(parseInt(e.target.value)));
 	};
 
-	return(
+	return (
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>
@@ -85,9 +85,9 @@ export default function UnixEpochPage() {
 						inputProps: { min: 0, max: MaxAcceptUnix },
 						endAdornment: <InputAdornment position="end">
 							{timeStore.type === SecondType.s ?
-							<>s</>
-							:
-							<>ms (1/1,000s)</>
+								<>s</>
+								:
+								<>ms (1/1,000s)</>
 							}
 						</InputAdornment>,
 					}}
@@ -101,7 +101,7 @@ export default function UnixEpochPage() {
 					On legacy systems, a Unix timestamp of this value will be subjected to
 					the <Link href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem</Link>.
 				</Typography>
-			: null}
+				: null}
 		</>
 	);
 }

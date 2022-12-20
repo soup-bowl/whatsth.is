@@ -24,8 +24,8 @@ enum Category {
 	Conversion,
 }
 
-const ResizableIconButton = ({...props}:any) => {
-    return (
+const ResizableIconButton = ({ ...props }: any) => {
+	return (
 		<IconButton
 			sx={{
 				'& svg': {
@@ -38,7 +38,7 @@ const ResizableIconButton = ({...props}:any) => {
 	);
 };
 
-const getMenuCategories:IMenuCategory[] = [
+const getMenuCategories: IMenuCategory[] = [
 	{
 		id: Category.Inspection,
 		name: 'Inspection Tools',
@@ -50,7 +50,7 @@ const getMenuCategories:IMenuCategory[] = [
 	}
 ];
 
-const getMenu:IMenu[] = [
+const getMenu: IMenu[] = [
 	{
 		name: 'Site Inspector',
 		icon: <TravelExploreIcon />,
@@ -90,15 +90,15 @@ const getMenu:IMenu[] = [
 	}
 ];
 
-export function DrawMenu({onlineState, drawerClose}:props) {
+export function DrawMenu({ onlineState, drawerClose }: props) {
 	const navigate = useNavigate();
 
-	const MenuNav = (url:string) => {
+	const MenuNav = (url: string) => {
 		navigate(url);
 		drawerClose();
 	}
 
-	return(
+	return (
 		<List>
 			<ListItemButton
 				key={0}
@@ -110,97 +110,97 @@ export function DrawMenu({onlineState, drawerClose}:props) {
 			</ListItemButton>
 			<Divider />
 			<>
-			{getMenu.map((item:IMenu, i:number) => {
-				return(
+				{getMenu.map((item: IMenu, i: number) => {
+					return (
+						<ListItemButton
+							key={(i + 1)}
+							onClick={() => MenuNav(item.url)}
+							disabled={(item.needsInternet) ? !onlineState : false}
+							selected={window.location.hash.includes(`${item.url}`)}
+						>
+							<ListItemIcon>{item.icon}</ListItemIcon>
+							<ListItemText primary={item.name} />
+							{item.beta ?
+								<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
+								: null}
+						</ListItemButton>
+					);
+				})}
+				<Divider />
+				<List>
 					<ListItemButton
-						key={(i + 1)}
-						onClick={() => MenuNav(item.url)}
-						disabled={(item.needsInternet) ? !onlineState : false}
-						selected={window.location.hash.includes(`${item.url}`)}
+						onClick={() => MenuNav('/help')}
+						selected={window.location.hash.includes("/help")}
 					>
-						<ListItemIcon>{item.icon}</ListItemIcon>
-						<ListItemText primary={item.name} />
-						{item.beta ?
-						<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
-						: null}
+						<ListItemIcon><HelpIcon /></ListItemIcon>
+						<ListItemText primary="Help" />
 					</ListItemButton>
-				);
-			})}
-			<Divider />
-			<List>
-				<ListItemButton
-					onClick={() => MenuNav('/help')}
-					selected={window.location.hash.includes("/help")}
-				>
-					<ListItemIcon><HelpIcon /></ListItemIcon>
-					<ListItemText primary="Help" />
-				</ListItemButton>
-				<ListItemButton
-					onClick={() => MenuNav('/about')}
-					selected={window.location.hash.includes("/about")}
-				>
-					<ListItemIcon><CoPresentIcon /></ListItemIcon>
-					<ListItemText primary="About" />
-				</ListItemButton>
-			</List>
+					<ListItemButton
+						onClick={() => MenuNav('/about')}
+						selected={window.location.hash.includes("/about")}
+					>
+						<ListItemIcon><CoPresentIcon /></ListItemIcon>
+						<ListItemText primary="About" />
+					</ListItemButton>
+				</List>
 			</>
 		</List>
 	);
 }
 
-export function HomeMenu({onlineState, drawerClose = undefined}:props) {
+export function HomeMenu({ onlineState, drawerClose = undefined }: props) {
 	const navigate = useNavigate();
 
-	return(
+	return (
 		<>
-			{getMenuCategories.map((item:IMenuCategory, i:number) => {
-				return(
+			{getMenuCategories.map((item: IMenuCategory, i: number) => {
+				return (
 					<>
-					<Typography variant="h4" component="h2" my={2}>{item.name}</Typography>
-					{ item.description !== undefined ?
-					<Typography my={2}>{item.description}</Typography>
-					: null }
-					<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-						{getMenu.map((subitem:IMenu, i:number) => {
-							if (subitem.category === item.id) {
-								return(
-									<Grid key={i} item xs={6} md={3}>
-										<Link
-											sx={{
-												cursor: (subitem.needsInternet && !onlineState) ? 'default' : 'pointer',
-												textDecoration: 'none'
-											}}
-											onClick={() => navigate(subitem.url)}
-										>
-											<Paper elevation={3} sx={{
-												padding: 1,
-												margin: 1,
-												display: 'flex',
-												flexDirection: 'column',
-												textAlign: 'center',
-												justifyContent: 'center',
-												alignItems: 'center',
-												maxWidth: "200px",
-												minHeight: "125px"
-											}}>
-												<ResizableIconButton>
-													{subitem.icon}
-												</ResizableIconButton>
-												<Typography>
-													{subitem.name}
-												</Typography>
-												{subitem.beta ?
-													<Chip label="Beta" size="small" color="info" sx={{marginLeft: '2px'}} />
-												: null}
-											</Paper>
-										</Link>
-									</Grid>
-								);
-							} else {
-								return undefined;
-							}
-						})}
-					</Grid>
+						<Typography variant="h4" component="h2" my={2}>{item.name}</Typography>
+						{item.description !== undefined ?
+							<Typography my={2}>{item.description}</Typography>
+							: null}
+						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+							{getMenu.map((subitem: IMenu, i: number) => {
+								if (subitem.category === item.id) {
+									return (
+										<Grid key={i} item xs={6} md={3}>
+											<Link
+												sx={{
+													cursor: (subitem.needsInternet && !onlineState) ? 'default' : 'pointer',
+													textDecoration: 'none'
+												}}
+												onClick={() => navigate(subitem.url)}
+											>
+												<Paper elevation={3} sx={{
+													padding: 1,
+													margin: 1,
+													display: 'flex',
+													flexDirection: 'column',
+													textAlign: 'center',
+													justifyContent: 'center',
+													alignItems: 'center',
+													maxWidth: "200px",
+													minHeight: "125px"
+												}}>
+													<ResizableIconButton>
+														{subitem.icon}
+													</ResizableIconButton>
+													<Typography>
+														{subitem.name}
+													</Typography>
+													{subitem.beta ?
+														<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
+														: null}
+												</Paper>
+											</Link>
+										</Grid>
+									);
+								} else {
+									return undefined;
+								}
+							})}
+						</Grid>
 					</>
 				);
 			})}

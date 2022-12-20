@@ -4,16 +4,16 @@ interface Props {
 	inspection: any;
 }
 
-export default function WordPress({inspection}: Props) {
+export default function WordPress({ inspection }: Props) {
 	if (inspection.message.additional !== null && inspection.message.additional.success) {
-		let wp_api  = inspection.message.additional;
-		let counts  = {'pt': 'no', 'pg': 'no', 'ct': 'no'};
+		let wp_api = inspection.message.additional;
+		let counts = { 'pt': 'no', 'pg': 'no', 'ct': 'no' };
 
 		if (wp_api.post_count > -1) { counts.pt = String(wp_api.post_count) }
 		if (wp_api.page_count > -1) { counts.pg = String(wp_api.page_count) }
-		if (wp_api.cat_count  > -1) { counts.ct = String(wp_api.cat_count) }
+		if (wp_api.cat_count > -1) { counts.ct = String(wp_api.cat_count) }
 
-		return(
+		return (
 			<>
 				<Typography variant="h1" my={2}>{wp_api.name} is built with {inspection.message.technology}!</Typography>
 				<Typography>
@@ -26,7 +26,7 @@ export default function WordPress({inspection}: Props) {
 			</>
 		);
 	} else {
-		return(
+		return (
 			<>
 				<Typography variant="h1" my={2}>{inspection.message.name} is built with {inspection.message.technology}!</Typography>
 				<Typography my={2}>Assumption made on <Box component="span" fontWeight='700'>{inspection.message.matched_on.length}</Box> matches.</Typography>

@@ -17,7 +17,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 		padding: theme.spacing(1),
 	},
 }));
-  
+
 export interface DialogTitleProps {
 	id: string;
 	children?: React.ReactNode;
@@ -26,22 +26,22 @@ export interface DialogTitleProps {
 
 function BootstrapDialogTitle(props: DialogTitleProps) {
 	const { children, onClose, ...other } = props;
-  
+
 	return (
 		<DialogTitle sx={{ m: 0, p: 2 }} {...other}>
 			{children}
 			{onClose ? (
 				<IconButton
-				aria-label="close"
-				onClick={onClose}
-				sx={{
-					position: 'absolute',
-					right: 8,
-					top: 8,
-					color: (theme) => theme.palette.grey[500],
-				}}
+					aria-label="close"
+					onClick={onClose}
+					sx={{
+						position: 'absolute',
+						right: 8,
+						top: 8,
+						color: (theme) => theme.palette.grey[500],
+					}}
 				>
-				<CloseIcon />
+					<CloseIcon />
 				</IconButton>
 			) : null}
 		</DialogTitle>
@@ -56,7 +56,7 @@ export function UserAgentModel() {
 	const uaParser = new UAParser();
 	uaParser.setUA(window.navigator.userAgent);
 
-	return(
+	return (
 		<div>
 			<Button onClick={handleOpen} variant="outlined">Connection Info</Button>
 			<BootstrapDialog
@@ -69,8 +69,8 @@ export function UserAgentModel() {
 					UserAgent Information
 				</BootstrapDialogTitle>
 				<DialogContent>
-					<Typography  color="darkgrey">
-						With thanks to <Link href="https://github.com/faisalman/ua-parser-js" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ua-parser-js</Link> to be
+					<Typography color="darkgrey">
+						With thanks to <Link href="https://github.com/faisalman/ua-parser-js" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ua-parser-js</Link> to be
 						able to unpack this string of text.
 					</Typography>
 					<Grid container id="conn-modal-modal-description" spacing={2} my={2}>
@@ -122,8 +122,8 @@ export function UserAgentModel() {
 	);
 }
 
-export function MyIpAddressModal({online}:PageProps) {
-	const [ips, setIPs] = useState<IIPCollection>({ipv4: 'N/A', ipv6: 'N/A'});
+export function MyIpAddressModal({ online }: PageProps) {
+	const [ips, setIPs] = useState<IIPCollection>({ ipv4: 'N/A', ipv6: 'N/A' });
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -141,7 +141,7 @@ export function MyIpAddressModal({online}:PageProps) {
 		});
 	}, [ips]);
 
-	return(
+	return (
 		<div>
 			<Button onClick={handleOpen} variant="outlined" disabled={!online}>My IP</Button>
 			<BootstrapDialog
@@ -156,7 +156,7 @@ export function MyIpAddressModal({online}:PageProps) {
 				<DialogContent>
 					<Typography color="darkgrey">
 						Information obtained from&nbsp;
-						<Link href="https://api.ident.me/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ident.me</Link>
+						<Link href="https://api.ident.me/" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ident.me</Link>
 						.
 					</Typography>
 					<Grid container id="ipi-modal-modal-description" spacing={2} my={2}>
@@ -189,7 +189,7 @@ interface GeoProps {
 	ip: string;
 }
 
-export function IPAddressGeo({ip}:GeoProps) {
+export function IPAddressGeo({ ip }: GeoProps) {
 	const [geo, setGeo] = useState<any>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -197,21 +197,21 @@ export function IPAddressGeo({ip}:GeoProps) {
 
 	useEffect(() => {
 		axios.get(`https://ipinfo.io/${ip}/json`)
-		.then(value => {
-			let reply:IIPGeolocation = value.data;
-			reply.icon = countryCodeEmoji(reply.country) ?? undefined;
-			setGeo(reply);
-		})
-		.catch (err => {
-			setGeo(undefined);
-		});
+			.then(value => {
+				let reply: IIPGeolocation = value.data;
+				reply.icon = countryCodeEmoji(reply.country) ?? undefined;
+				setGeo(reply);
+			})
+			.catch(err => {
+				setGeo(undefined);
+			});
 	}, [ip, open]);
 
 	if (geo === undefined) {
 		<IconButton size="small">🌐</IconButton>
 	}
 
-	return(
+	return (
 		<div>
 			<IconButton onClick={handleOpen} size="small">{geo?.icon ?? <>🌐</>}</IconButton>
 			<BootstrapDialog
@@ -225,47 +225,47 @@ export function IPAddressGeo({ip}:GeoProps) {
 				</BootstrapDialogTitle>
 				<DialogContent>
 					{geo !== undefined ?
-					<>
-					<Typography color="darkgrey">
-						Information obtained from&nbsp;
-						<Link href="https://ipinfo.io/" style={{color: 'darkgrey', textDecorationColor: 'darkgrey'}}>ipinfo.io</Link>
-						.
-					</Typography>
-					<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
-						<Grid item xs={12} sm={3}>
-							<Typography fontWeight={700}>IP</Typography>
-						</Grid>
-						<Grid item xs={12} sm={9}>
-							<Typography>{geo.ip}</Typography>
-						</Grid>
-						<Grid item xs={12} sm={3}>
-							<Typography fontWeight={700}>Hostname</Typography>
-						</Grid>
-						<Grid item xs={12} sm={9}>
-							<Typography>{geo.hostname}</Typography>
-						</Grid>
-						<Grid item xs={12} sm={3}>
-							<Typography fontWeight={700}>Organisation</Typography>
-						</Grid>
-						<Grid item xs={12} sm={9}>
-							<Typography>{geo.org}</Typography>
-						</Grid>
-						<Grid item xs={12} sm={3}>
-							<Typography fontWeight={700}>Location</Typography>
-						</Grid>
-						<Grid item xs={12} sm={9}>
-							<Typography>{geo.city}, {geo.region}</Typography>
-						</Grid>
-					</Grid>
-					</>
-					: 
-					<>
-					<Typography id="geo-modal-modal-description" my={2}>
-						Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the
-						API we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result,
-						we can't show you the information.
-					</Typography>
-					</>}
+						<>
+							<Typography color="darkgrey">
+								Information obtained from&nbsp;
+								<Link href="https://ipinfo.io/" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ipinfo.io</Link>
+								.
+							</Typography>
+							<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
+								<Grid item xs={12} sm={3}>
+									<Typography fontWeight={700}>IP</Typography>
+								</Grid>
+								<Grid item xs={12} sm={9}>
+									<Typography>{geo.ip}</Typography>
+								</Grid>
+								<Grid item xs={12} sm={3}>
+									<Typography fontWeight={700}>Hostname</Typography>
+								</Grid>
+								<Grid item xs={12} sm={9}>
+									<Typography>{geo.hostname}</Typography>
+								</Grid>
+								<Grid item xs={12} sm={3}>
+									<Typography fontWeight={700}>Organisation</Typography>
+								</Grid>
+								<Grid item xs={12} sm={9}>
+									<Typography>{geo.org}</Typography>
+								</Grid>
+								<Grid item xs={12} sm={3}>
+									<Typography fontWeight={700}>Location</Typography>
+								</Grid>
+								<Grid item xs={12} sm={9}>
+									<Typography>{geo.city}, {geo.region}</Typography>
+								</Grid>
+							</Grid>
+						</>
+						:
+						<>
+							<Typography id="geo-modal-modal-description" my={2}>
+								Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the
+								API we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result,
+								we can't show you the information.
+							</Typography>
+						</>}
 				</DialogContent>
 			</BootstrapDialog>
 		</div>

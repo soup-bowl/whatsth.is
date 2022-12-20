@@ -3,11 +3,11 @@ services:
   backend:
     image: ghcr.io/soup-bowl/whatsthis-api:edge
     ports:
-    - 43594:43594
+      - 43594:43594
   frontend:
     build:
       context: .
     ports:
-    - 3000:3000
+      - 3000:3000
     volumes:
-    - ".:/usr/src/app"
+      - ".:/usr/src/app"

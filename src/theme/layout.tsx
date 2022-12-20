@@ -59,7 +59,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-export default function Layout({online}:PageProps) {
+export default function Layout({ online }: PageProps) {
 	const [open, setOpen] = useState(false);
 	const desktop = useMediaQuery("(min-width: 961px)");
 
@@ -74,59 +74,59 @@ export default function Layout({online}:PageProps) {
 	return (
 		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
-			<CssBaseline />
-			<AppBar
-				position="fixed"
-				open={open}
-				sx={{
-					backgroundColor: theme.palette.primary.main,
-					zIndex: (theme) => ( desktop ? theme.zIndex.drawer + 1 : 0)
-				}}>
-				<Toolbar>
-					{ ! desktop ?
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						sx={{ mr: 2, ...(open && { display: 'none' }) }}
-					>
-						<MenuIcon />
-					</IconButton>
-					: null }
-					<Typography variant="h6" noWrap component="div">What's this?</Typography>
-					{ ! online ?
-					<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
-					: null }
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				sx={{
-				width: drawerWidth,
-				flexShrink: 0,
-				'& .MuiDrawer-paper': {
-					width: drawerWidth,
-					boxSizing: 'border-box',
-				},
-				}}
-				variant={(desktop) ? "permanent" : "temporary"}
-				anchor="left"
-				open={open}
-				onClose={handleDrawerClose}
-			>
-				<DrawerHeader>
-					<IconButton onClick={handleDrawerClose}>
-						<MenuIcon />
-					</IconButton>
-				</DrawerHeader>
-				<DrawMenu onlineState={online} drawerClose={handleDrawerClose} />
-			</Drawer>
-			<Main open={open}>
-        		<DrawerHeader />
-				<Container maxWidth="md">
-					<Outlet />
-				</Container>
-			</Main>
+				<CssBaseline />
+				<AppBar
+					position="fixed"
+					open={open}
+					sx={{
+						backgroundColor: theme.palette.primary.main,
+						zIndex: (theme) => (desktop ? theme.zIndex.drawer + 1 : 0)
+					}}>
+					<Toolbar>
+						{!desktop ?
+							<IconButton
+								color="inherit"
+								aria-label="open drawer"
+								onClick={handleDrawerOpen}
+								edge="start"
+								sx={{ mr: 2, ...(open && { display: 'none' }) }}
+							>
+								<MenuIcon />
+							</IconButton>
+							: null}
+						<Typography variant="h6" noWrap component="div">What's this?</Typography>
+						{!online ?
+							<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
+							: null}
+					</Toolbar>
+				</AppBar>
+				<Drawer
+					sx={{
+						width: drawerWidth,
+						flexShrink: 0,
+						'& .MuiDrawer-paper': {
+							width: drawerWidth,
+							boxSizing: 'border-box',
+						},
+					}}
+					variant={(desktop) ? "permanent" : "temporary"}
+					anchor="left"
+					open={open}
+					onClose={handleDrawerClose}
+				>
+					<DrawerHeader>
+						<IconButton onClick={handleDrawerClose}>
+							<MenuIcon />
+						</IconButton>
+					</DrawerHeader>
+					<DrawMenu onlineState={online} drawerClose={handleDrawerClose} />
+				</Drawer>
+				<Main open={open}>
+					<DrawerHeader />
+					<Container maxWidth="md">
+						<Outlet />
+					</Container>
+				</Main>
 			</Box>
 		</ThemeProvider>
 	)

@@ -13,19 +13,19 @@ interface StateProp {
 	errorStack?: string;
 }
 
-const errorBox:CSSProperties = {
+const errorBox: CSSProperties = {
 	fontFamily: 'monospace',
 	backgroundColor: '#404040',
 	color: '#fff',
 	borderRadius: '1em',
-    maxWidth: '75%',
+	maxWidth: '75%',
 	padding: '1em',
-    margin: '0 auto',
+	margin: '0 auto',
 	textAlign: 'left',
 }
 
 export class ErrorBoundary extends Component<ErrorProp, StateProp> {
-	constructor(props:any) {
+	constructor(props: any) {
 		super(props);
 		this.state = { hasError: false };
 	}
@@ -34,7 +34,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 		return { hasError: true };
 	}
 
-	componentDidCatch(error:any, errorInfo:any) {
+	componentDidCatch(error: any, errorInfo: any) {
 		console.log(errorInfo.componentStack);
 		this.setState({
 			errorName: error.name,
@@ -53,7 +53,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 					<Box sx={{ display: 'flex', paddingBottom: 4 }} textAlign="center">
 						<CssBaseline />
 						<Container maxWidth="lg">
-							<Typography sx={{fontSize: '8em'}}>:(</Typography>
+							<Typography sx={{ fontSize: '8em' }}>:(</Typography>
 							<Typography variant="h3" component="h1" my={2}>A Crash has Occurred</Typography>
 							<Typography my={2}>We apologise for the inconvinience. Click the button below to return.</Typography>
 							<Stack my={2} spacing={2} direction="row" justifyContent="center">
@@ -64,7 +64,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 							<Paper elevation={3} sx={errorBox}>
 								<Typography fontWeight='700'>[{this.state.errorName}] {this.state.errorMessage}</Typography>
 								<Typography>URL: {window.location.href}; Verison: {process.env.REACT_APP_VERSION}; Agent: {window.navigator.userAgent}</Typography>
-								<pre style={{overflowX: 'auto'}}>{this.state.errorStack}</pre>
+								<pre style={{ overflowX: 'auto' }}>{this.state.errorStack}</pre>
 							</Paper>
 						</Container>
 					</Box>
