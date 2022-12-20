@@ -4,7 +4,7 @@ import {
 	CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container,
 	styled, Drawer, Box, useMediaQuery
 } from '@mui/material';
-import theme from "../theme/theme";
+import theme from "./theme";
 import { useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';

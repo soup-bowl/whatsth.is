@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-import Layout from "./pages/_layout";
+import Layout from "./theme/layout";
 import Home from './pages/home';
 import { HelpPage, AboutPage } from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
