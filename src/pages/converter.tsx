@@ -120,7 +120,7 @@ export default function StringConversionPage() {
 									decodeError: false
 								});
 							}}
-							InputLabelProps={{ shrink: true }} 
+							InputLabelProps={{ shrink: true }}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -147,7 +147,7 @@ export default function StringConversionPage() {
 									decodeError: decodeError
 								});
 							}}
-							InputLabelProps={{ shrink: true }} 
+							InputLabelProps={{ shrink: true }}
 						/>
 					</Grid>
 				</Grid>
