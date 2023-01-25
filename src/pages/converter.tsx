@@ -108,7 +108,7 @@ export default function StringConversionPage() {
 							multiline
 							fullWidth
 							id="encode"
-							label="Encode"
+							label="Convert to"
 							rows={15}
 							value={stringMorph.decoded}
 							error={stringMorph.decodeError}
@@ -128,7 +128,7 @@ export default function StringConversionPage() {
 							multiline
 							fullWidth
 							id="decode"
-							label="Decode"
+							label="Convert from"
 							rows={15}
 							value={stringMorph.encoded}
 							onChange={(e) => {
