@@ -132,20 +132,19 @@ export default function StringConversionPage() {
 							rows={15}
 							value={stringMorph.encoded}
 							onChange={(e) => {
-								let convertedValue: string;
-								let decodeError: boolean = false;
+								let convs = {
+									encoded: e.target.value,
+									decodeError: false
+								} as IStringMorph;
+
 								try {
-									convertedValue = ConvertFrom(e.target.value, passphrase);
+									convs.decoded = ConvertFrom(e.target.value, passphrase);
 								} catch {
-									convertedValue = stringMorph.decoded;
-									decodeError = true;
+									convs.decoded = stringMorph.decoded;
+									convs.decodeError = true;
 								}
 
-								setStringMorph({
-									decoded: convertedValue,
-									encoded: e.target.value,
-									decodeError: decodeError
-								});
+								setStringMorph(convs);
 							}}
 							InputLabelProps={{ shrink: true }}
 						/>
