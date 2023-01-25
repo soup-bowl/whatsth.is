@@ -113,8 +113,15 @@ export default function StringConversionPage() {
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField id="decode" label="Decode" multiline fullWidth rows={15} value={stringMorph.encoded} onChange={(e) => {
+							let convertedValue: string;
+							try {
+								convertedValue = ConvertFrom(e.target.value, passphrase);
+							} catch {
+								convertedValue = stringMorph.decoded;
+							}
+
 							setStringMorph({
-								decoded: ConvertFrom(e.target.value, passphrase),
+								decoded: convertedValue,
 								encoded: e.target.value
 							});
 						}} />

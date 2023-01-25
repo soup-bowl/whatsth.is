@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgraded dependencies.
 - Internal structure re-organisation and linting.
+- String conversion will handle an unusual decode input instead of blocking input.
 
 ## [0.2.21] - 2022-12-15
 ### Changed
