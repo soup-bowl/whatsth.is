@@ -111,8 +111,6 @@ export default function StringConversionPage() {
 							label="Convert to"
 							rows={15}
 							value={stringMorph.decoded}
-							error={stringMorph.decodeError}
-							helperText={(stringMorph.decodeError) ? 'The contents of decode cannot be converted.' : ''}
 							onChange={(e) => {
 								setStringMorph({
 									decoded: e.target.value,
@@ -131,6 +129,8 @@ export default function StringConversionPage() {
 							label="Convert from"
 							rows={15}
 							value={stringMorph.encoded}
+							error={stringMorph.decodeError}
+							helperText={(stringMorph.decodeError) ? 'This value cannot be converted.' : ''}
 							onChange={(e) => {
 								let convs = {
 									encoded: e.target.value,
