@@ -10,7 +10,7 @@ import { IStringMorph } from "../interfaces";
 const siteTitle = "String Conversions";
 
 export default function StringConversionPage() {
-	const [stringMorph, setStringMorph] = useState<IStringMorph>({ encoded: '', decoded: '' });
+	const [stringMorph, setStringMorph] = useState<IStringMorph>({ decodeError: false } as IStringMorph);
 	const [passphrase, setPassphrase] = useState('');
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
 
@@ -18,12 +18,12 @@ export default function StringConversionPage() {
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
 		setType(parseInt(event.target.value));
-		setStringMorph({ encoded: '', decoded: '' });
+		setStringMorph({ decodeError: false } as IStringMorph);
 	};
 
 	const handleChangePassphrase = (e: any) => {
 		setPassphrase(e.target.value);
-		setStringMorph({ encoded: '', decoded: '' });
+		setStringMorph({ decodeError: false } as IStringMorph);
 	};
 
 	function ConvertTo(thing: string, phrase: string = '') {
@@ -104,27 +104,51 @@ export default function StringConversionPage() {
 			<Box sx={{ flexGrow: 1 }}>
 				<Grid container spacing={2}>
 					<Grid item xs={12} sm={6}>
-						<TextField id="encode" label="Encode" multiline fullWidth rows={15} value={stringMorph.decoded} onChange={(e) => {
-							setStringMorph({
-								decoded: e.target.value,
-								encoded: ConvertTo(e.target.value, passphrase)
-							});
-						}} />
+						<TextField
+							multiline
+							fullWidth
+							id="encode"
+							label="Encode"
+							rows={15}
+							value={stringMorph.decoded}
+							error={stringMorph.decodeError}
+							helperText={(stringMorph.decodeError) ? 'The contents of decode cannot be converted.' : ''}
+							onChange={(e) => {
+								setStringMorph({
+									decoded: e.target.value,
+									encoded: ConvertTo(e.target.value, passphrase),
+									decodeError: false
+								});
+							}}
+							InputLabelProps={{ shrink: true }} 
+						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<TextField id="decode" label="Decode" multiline fullWidth rows={15} value={stringMorph.encoded} onChange={(e) => {
-							let convertedValue: string;
-							try {
-								convertedValue = ConvertFrom(e.target.value, passphrase);
-							} catch {
-								convertedValue = stringMorph.decoded;
-							}
+						<TextField
+							multiline
+							fullWidth
+							id="decode"
+							label="Decode"
+							rows={15}
+							value={stringMorph.encoded}
+							onChange={(e) => {
+								let convertedValue: string;
+								let decodeError: boolean = false;
+								try {
+									convertedValue = ConvertFrom(e.target.value, passphrase);
+								} catch {
+									convertedValue = stringMorph.decoded;
+									decodeError = true;
+								}
 
-							setStringMorph({
-								decoded: convertedValue,
-								encoded: e.target.value
-							});
-						}} />
+								setStringMorph({
+									decoded: convertedValue,
+									encoded: e.target.value,
+									decodeError: decodeError
+								});
+							}}
+							InputLabelProps={{ shrink: true }} 
+						/>
 					</Grid>
 				</Grid>
 			</Box>

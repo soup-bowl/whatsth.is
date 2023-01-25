@@ -89,6 +89,7 @@ export interface IWHOISResult {
 export interface IStringMorph {
 	decoded: string;
 	encoded: string;
+	decodeError: boolean;
 }
 
 export interface IMenu {
