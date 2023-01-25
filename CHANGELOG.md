@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Internal structure re-organisation and linting.
 - String conversion will handle an unusual decode input instead of blocking input.
 
+### Fixed
+- Label on Conversion page no longer clips the box.
+
 ## [0.2.21] - 2022-12-15
 ### Changed
 - Returned back to GitHub Pages.

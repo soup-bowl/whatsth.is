@@ -75,6 +75,7 @@ export default function StringConversionPage() {
 						<FormControl fullWidth>
 							<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
 							<Select fullWidth
+								label="Conversion Type"
 								labelId="chooseConversionType"
 								id="chooseConversionType"
 								value={type.toString()}
