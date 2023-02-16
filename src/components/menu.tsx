@@ -1,10 +1,12 @@
 import {
 	Chip, Divider, Grid, IconButton, Link, List, ListItemButton, ListItemIcon,
-	ListItemText, Paper, styled, Typography
+	ListItemText, Paper, styled, Theme, Typography
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IMenu, IMenuCategory } from "../interfaces";
 
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import HomeIcon from '@mui/icons-material/Home';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import DnsIcon from '@mui/icons-material/Dns';
@@ -14,9 +16,11 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 import HelpIcon from '@mui/icons-material/Help';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 
-interface props {
+interface MenuProps {
 	onlineState: boolean;
-	drawerClose?: any;
+	theme: Theme;
+	drawerClose: () => void;
+	colorMode: { toggleColorMode: () => void; };
 }
 
 enum Category {
@@ -90,7 +94,7 @@ const getMenu: IMenu[] = [
 	}
 ];
 
-export function DrawMenu({ onlineState, drawerClose }: props) {
+export function DrawMenu({ onlineState, drawerClose, theme, colorMode }: MenuProps) {
 	const navigate = useNavigate();
 
 	const MenuNav = (url: string) => {
@@ -126,6 +130,12 @@ export function DrawMenu({ onlineState, drawerClose }: props) {
 				);
 			})}
 			<Divider />
+			<ListItemButton onClick={colorMode.toggleColorMode}>
+				<ListItemIcon>
+					{theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+				</ListItemIcon>
+				<ListItemText primary={theme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode'} />
+			</ListItemButton>
 			<ListItemButton
 				onClick={() => MenuNav('/help')}
 				selected={window.location.hash.includes("/help")}
@@ -156,7 +166,11 @@ const OptionSquare = styled(Paper)(({ theme }) => ({
 	minHeight: "125px"
 }));
 
-export function HomeMenu({ onlineState, drawerClose = undefined }: props) {
+interface GridProps {
+	onlineState: boolean;
+}
+
+export function HomeMenu({ onlineState }: GridProps) {
 	const navigate = useNavigate();
 
 	return (

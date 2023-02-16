@@ -2,15 +2,15 @@ import { Outlet } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import {
 	CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container,
-	styled, Drawer, Box, useMediaQuery
+	styled, Drawer, Box, useMediaQuery, PaletteMode, createTheme
 } from '@mui/material';
-import theme from "./theme";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import { DrawMenu } from "../components/menu";
 import { PageProps } from "../interfaces";
+import { purple } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -71,6 +71,38 @@ export default function Layout({ online }: PageProps) {
 		setOpen(false);
 	};
 
+	const [mode, setMode] = useState<string>(localStorage.getItem('ColourPref') ?? 'dark');
+	const colorMode = useMemo(() => ({
+		toggleColorMode: () => {
+			setMode((prevMode:string) => {
+				let cmode = (prevMode === 'light') ? 'dark' : 'light';
+				localStorage.setItem('ColourPref', cmode);
+				return cmode;
+			});
+		},
+	}), []);
+
+	const theme = useMemo(() => createTheme({
+		palette: {
+			primary: purple,
+			mode: mode as PaletteMode
+		},
+		typography: {
+			button: {
+				textTransform: 'none'
+			},
+			h1: {
+				fontSize: '3.25rem'
+			},
+			h2: {
+				fontSize: '2.75rem'
+			},
+			h3: {
+				fontSize: '2rem'
+			}
+		}
+	}), [mode]);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
@@ -119,7 +151,7 @@ export default function Layout({ online }: PageProps) {
 							<MenuIcon />
 						</IconButton>
 					</DrawerHeader>
-					<DrawMenu onlineState={online} drawerClose={handleDrawerClose} />
+					<DrawMenu onlineState={online} drawerClose={handleDrawerClose} colorMode={colorMode} theme={theme} />
 				</Drawer>
 				<Main open={open}>
 					<DrawerHeader />
