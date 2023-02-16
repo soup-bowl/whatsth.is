@@ -1,6 +1,6 @@
 import {
 	Chip, Divider, Grid, IconButton, Link, List, ListItemButton, ListItemIcon,
-	ListItemText, Paper, Typography
+	ListItemText, Paper, styled, Typography
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IMenu, IMenuCategory } from "../interfaces";
@@ -144,6 +144,18 @@ export function DrawMenu({ onlineState, drawerClose }: props) {
 	);
 }
 
+const OptionSquare = styled(Paper)(({ theme }) => ({
+	padding: 1,
+	margin: 1,
+	display: 'flex',
+	flexDirection: 'column',
+	textAlign: 'center',
+	justifyContent: 'center',
+	alignItems: 'center',
+	maxWidth: "200px",
+	minHeight: "125px"
+}));
+
 export function HomeMenu({ onlineState, drawerClose = undefined }: props) {
 	const navigate = useNavigate();
 
@@ -168,17 +180,7 @@ export function HomeMenu({ onlineState, drawerClose = undefined }: props) {
 												}}
 												onClick={() => navigate(subitem.url)}
 											>
-												<Paper elevation={3} sx={{
-													padding: 1,
-													margin: 1,
-													display: 'flex',
-													flexDirection: 'column',
-													textAlign: 'center',
-													justifyContent: 'center',
-													alignItems: 'center',
-													maxWidth: "200px",
-													minHeight: "125px"
-												}}>
+												<OptionSquare elevation={3}>
 													<ResizableIconButton>
 														{subitem.icon}
 													</ResizableIconButton>
@@ -188,7 +190,7 @@ export function HomeMenu({ onlineState, drawerClose = undefined }: props) {
 													{subitem.beta ?
 														<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
 														: null}
-												</Paper>
+												</OptionSquare>
 											</Link>
 										</Grid>
 									);
