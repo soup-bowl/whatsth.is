@@ -109,41 +109,37 @@ export function DrawMenu({ onlineState, drawerClose }: props) {
 				<ListItemText primary="Home" />
 			</ListItemButton>
 			<Divider />
-			<>
-				{getMenu.map((item: IMenu, i: number) => {
-					return (
-						<ListItemButton
-							key={(i + 1)}
-							onClick={() => MenuNav(item.url)}
-							disabled={(item.needsInternet) ? !onlineState : false}
-							selected={window.location.hash.includes(`${item.url}`)}
-						>
-							<ListItemIcon>{item.icon}</ListItemIcon>
-							<ListItemText primary={item.name} />
-							{item.beta ?
-								<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
-								: null}
-						</ListItemButton>
-					);
-				})}
-				<Divider />
-				<List>
+			{getMenu.map((item: IMenu, i: number) => {
+				return (
 					<ListItemButton
-						onClick={() => MenuNav('/help')}
-						selected={window.location.hash.includes("/help")}
+						key={(i + 1)}
+						onClick={() => MenuNav(item.url)}
+						disabled={(item.needsInternet) ? !onlineState : false}
+						selected={window.location.hash.includes(`${item.url}`)}
 					>
-						<ListItemIcon><HelpIcon /></ListItemIcon>
-						<ListItemText primary="Help" />
+						<ListItemIcon>{item.icon}</ListItemIcon>
+						<ListItemText primary={item.name} />
+						{item.beta ?
+							<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
+							: null}
 					</ListItemButton>
-					<ListItemButton
-						onClick={() => MenuNav('/about')}
-						selected={window.location.hash.includes("/about")}
-					>
-						<ListItemIcon><CoPresentIcon /></ListItemIcon>
-						<ListItemText primary="About" />
-					</ListItemButton>
-				</List>
-			</>
+				);
+			})}
+			<Divider />
+			<ListItemButton
+				onClick={() => MenuNav('/help')}
+				selected={window.location.hash.includes("/help")}
+			>
+				<ListItemIcon><HelpIcon /></ListItemIcon>
+				<ListItemText primary="Help" />
+			</ListItemButton>
+			<ListItemButton
+				onClick={() => MenuNav('/about')}
+				selected={window.location.hash.includes("/about")}
+			>
+				<ListItemIcon><CoPresentIcon /></ListItemIcon>
+				<ListItemText primary="About" />
+			</ListItemButton>
 		</List>
 	);
 }
