@@ -27,7 +27,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 		// Split the protocol from the URL. In case someone has copied and pasted a URL, we check to see if there's
 		// a protocol splitter (://) then strip it out too. Either way, it'll be last in the split return array.
 		// Finally, check if there's subfolder, and remove it. Congrats, clean domain strip!
-		const [method, ...urlSegments] = window.location.hash.slice(9).split('/');
+		const [method, ...urlSegments] = window.location.hash.slice('/#/domain'.length).split('/');
 		if (method !== '') {
 			const urlParts = urlSegments.join('/').split('://');
 			const url = urlParts[urlParts.length - 1].split('/')[0];
