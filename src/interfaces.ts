@@ -15,13 +15,6 @@ export interface PageProps {
 	online: boolean;
 }
 
-export interface IRecord {
-	id?: number;
-	address: string;
-	priority: number;
-	text: string[];
-}
-
 export interface IInspectionResult {
 	success: boolean;
 	message: IInspectionSiteDetails | string;
@@ -53,26 +46,35 @@ export interface IInspectionWordPressPost {
 	url: string;
 }
 
+export interface ILookupTable {
+	columns: GridColumns;
+	rows: ILookupTableLayout[];
+}
+
+export interface ILookupTableLayout {
+	id: number;
+	key: string;
+	value: string;
+}
+
 export interface IDNSResult {
 	success: boolean;
-	url: string;
-	type: string;
-	records: IRecord[];
+	message: string;
+	records: IDNSRecord;
 }
 
-export interface IDNSProtocol {
-	success: boolean;
-	records: IDNSProtocols[];
+export interface IDNSRecord {
+	A: string[];
+	AAAA: string[];
+	CNAME: string[];
+	MX: IDNSRecordDetails[];
+	TXT: string[];
+	NS: string[];
 }
 
-export interface IDNSProtocols {
-	type: string;
-	name: string;
-}
-
-export interface IDNSTableData {
-	rows: IRecord[];
-	columns: GridColumns;
+export interface IDNSRecordDetails {
+	address: string;
+	priority: number;
 }
 
 export interface IWHOISResult {

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IDNSProtocol, IDNSResult, IInspectionResult, IOpenAPI, IWHOISResult } from '../interfaces';
+import { IDNSResult, IInspectionResult, IOpenAPI, IWHOISResult } from '../interfaces';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -18,8 +18,7 @@ const Inspection = {
 };
 
 const DNS = {
-	protocols: () => requests.get<IDNSProtocol>('/dns/protocols'),
-	probe: (protocol: string, url: string) => requests.get<IDNSResult>(`/dns/${protocol}/${encodeURIComponent(url)}`),
+	dns: (url: string) => requests.get<IDNSResult>(`/dns/${encodeURIComponent(url)}`),
 	whois: (url: string) => requests.get<IWHOISResult>(`/whois/${encodeURIComponent(url)}`),
 };
 

@@ -1,12 +1,12 @@
 import {
-	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, ListSubheader, MenuItem,
+	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, MenuItem,
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import agent from '../api/agent';
-import { IDNSProtocols, IDNSTableData, IRecord, PageProps } from "../interfaces";
-import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
+import { ILookupTable, ILookupTableLayout, PageProps } from "../interfaces";
+import { MyIpAddressModal } from "../components/modals";
 
 const siteTitle = "DNS Inspector";
 
@@ -16,20 +16,11 @@ export default function DnsCheckHome({ online }: PageProps) {
 	const [currentProtocol, setCurrentProtocol] = useState('');
 	const [currentURL, setCurrentURL] = useState('');
 
-	const [protocols, setProtocols] = useState<IDNSProtocols[]>([]);
-
 	const [loading, setLoading] = useState<boolean>(true);
-	const [dnsData, setDnsData] = useState<IDNSTableData>({ rows: [], columns: [] });
+	const [tableData, setTableData] = useState<ILookupTable>({ columns: [], rows: [] } as ILookupTable);
 	const [errResult, setErrResult] = useState<any>(undefined);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
-
-	useEffect(() => {
-		agent.DNS.protocols()
-			.then((response) => {
-				setProtocols(response.records);
-			});
-	}, []);
 
 	useEffect(() => {
 		// Split the protocol from the URL. In case someone has copied and pasted a URL, we check to see if there's
@@ -49,36 +40,52 @@ export default function DnsCheckHome({ online }: PageProps) {
 	useEffect(() => {
 		if (currentProtocol !== '' && currentURL !== '') {
 			setLoading(true);
-			if (currentProtocol !== "WHOIS") {
-				agent.DNS.probe(currentProtocol, currentURL)
-					.then((response) => {
-						let rows: IRecord[] = [];
-						let cols: GridColumns = [];
-						if (currentProtocol !== 'TXT') {
-							cols.push({
-								field: 'address', headerName: 'Address', flex: 1, renderCell: (params) => {
-									return (
-										<>
-											{params.value}
-											{((params.value.match(/\./g) || []).length === 3) || ((params.value.match(/:/g) || []).length > 3) ?
-												<><IPAddressGeo ip={params.value} /></>
-												: null}
-										</>
-									);
-								}
-							})
-						};
-						if (currentProtocol === 'MX') { cols.push({ field: 'priority', headerName: 'Priority', flex: 1, maxWidth: 125 }) };
-						if (currentProtocol === 'TXT') { cols.push({ field: 'text', headerName: 'Text', flex: 1 }) };
 
-						for (let index = 0; index < response.records.length; index++) {
-							response.records[index].id = index;
-							rows.push(response.records[index]);
+			let cols: GridColumns = [
+				{
+					field: 'key', headerName: 'Key', flex: 1, renderCell(params) {
+						return (<strong>{params.row.key}</strong>);
+					}
+				},
+				{
+					field: 'value', headerName: 'Value', flex: 2, renderCell(params) {
+						if (params.row.value !== null && params.row.value.includes('<!=BREAK=!>')) {
+							let values: string[] = params.row.value.split('<!=BREAK=!>');
+							return (
+								<div>
+									{values.map((value, i) => {
+										return (<Typography key={i}>{value}</Typography>);
+									})}
+								</div>
+							);
+						} else {
+							return (<div><Typography>{params.row.value}</Typography></div>);
 						}
+					},
+				},
+			];
 
-						setDnsData({
-							rows: rows,
+			if (currentProtocol !== "WHOIS") {
+				agent.DNS.dns(currentURL)
+					.then((response) => {
+						let records: ILookupTableLayout[] = [];
+						let types: string[] = ['A', 'AAAA', 'CNAME', 'TXT', 'NS'];
+
+						types.forEach((type: string, i: number) => {
+							// @ts-ignore
+							let key: keyof typeof response.records = type;
+							if (response.records[key].length > 0) {
+								records.push({
+									id: i,
+									key: type,
+									value: response.records[key].join('<!=BREAK=!>')
+								});
+							}
+						});
+
+						setTableData({
 							columns: cols,
+							rows: records,
 						});
 						setLoading(false);
 					})
@@ -89,23 +96,20 @@ export default function DnsCheckHome({ online }: PageProps) {
 			} else {
 				agent.DNS.whois(currentURL)
 					.then(response => {
-						let cols: GridColumns = [
-							{ field: 'key', headerName: 'Key', flex: 1 },
-							{ field: 'value', headerName: 'Value', flex: 2 },
-						];
-						let records: any = [];
+						let records: ILookupTableLayout[] = [];
+
 						records.push(
 							{ id: 0, key: 'Domain', value: response.domain },
 							{ id: 1, key: 'Registrar', value: response.registrar },
 							{ id: 2, key: 'WHOIS', value: response.whois_operator },
-							{ id: 3, key: 'First Registered', value: new Date(response.date_created) },
-							{ id: 4, key: 'Renewal Date', value: new Date(response.date_updated) },
-							{ id: 5, key: 'Expiry Date', value: new Date(response.date_expires) },
+							{ id: 3, key: 'First Registered', value: new Date(response.date_created).toLocaleDateString() },
+							{ id: 4, key: 'Renewal Date', value: new Date(response.date_updated).toLocaleDateString() },
+							{ id: 5, key: 'Expiry Date', value: new Date(response.date_expires).toLocaleDateString() },
 						);
 
-						setDnsData({
-							rows: records,
+						setTableData({
 							columns: cols,
+							rows: records,
 						});
 						setLoading(false);
 					})
@@ -131,7 +135,7 @@ export default function DnsCheckHome({ online }: PageProps) {
 		setCurrentProtocol('');
 		setSelectionURL('');
 		setCurrentURL('');
-		setDnsData({ rows: [], columns: [] });
+		setTableData({ columns: [], rows: [] } as ILookupTable);
 	};
 
 	return (
@@ -157,12 +161,8 @@ export default function DnsCheckHome({ online }: PageProps) {
 									value={selectionProtocol}
 									onChange={(e: SelectChangeEvent) => (setSelectionProtocol(e.target.value))}
 								>
-									<ListSubheader>Records</ListSubheader>
-									{protocols.map((protocol) => (
-										<MenuItem key={protocol.type} value={protocol.type}>{protocol.type}</MenuItem>
-									))}
-									<ListSubheader>Tools</ListSubheader>
-									<MenuItem key="WHOIS" value="WHOIS">WHOIS</MenuItem>
+									<MenuItem key="DNS" value="DNS">DNS Records</MenuItem>
+									<MenuItem key="WHOIS" value="WHOIS">WHOIS Query</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
@@ -201,7 +201,7 @@ export default function DnsCheckHome({ online }: PageProps) {
 						</Stack>
 					</Grid>
 					<Grid item>
-						{dnsData.rows.length > 0 ?
+						{tableData.rows.length > 0 ?
 							<Box>
 								<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
 								<Box my={2} height={400}>
@@ -213,15 +213,21 @@ export default function DnsCheckHome({ online }: PageProps) {
 										</Typography>
 										: null}
 									<DataGrid
-										rows={dnsData.rows}
-										columns={dnsData.columns}
+										rows={tableData.rows}
+										columns={tableData.columns}
 										getRowId={(row) => row.id}
 										loading={loading}
 										error={errResult}
+										getRowHeight={() => 'auto'}
+										getRowSpacing={(params) => ({
+											top: 5,
+											bottom: 5
+										})}
 										disableSelectionOnClick
 										disableColumnMenu
 										disableColumnSelector
 										hideFooter
+										headerHeight={0}
 										sx={{ marginBottom: 2 }}
 									/>
 								</Box>
