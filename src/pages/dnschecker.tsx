@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, PageProps } from "../interfaces";
 import { MyIpAddressModal } from "../components/modals";
+import '../theme/grid.css';
 
 const siteTitle = "DNS Inspector";
 
@@ -52,14 +53,14 @@ export default function DnsCheckHome({ online }: PageProps) {
 						if (params.row.value !== null && params.row.value.includes('<!=BREAK=!>')) {
 							let values: string[] = params.row.value.split('<!=BREAK=!>');
 							return (
-								<div>
+								<div style={{ width: '100%' }}>
 									{values.map((value, i) => {
-										return (<Typography key={i}>{value}</Typography>);
+										return (<Typography key={i} my={2}>{value}</Typography>);
 									})}
 								</div>
 							);
 						} else {
-							return (<div><Typography>{params.row.value}</Typography></div>);
+							return (<Typography my={2}>{params.row.value}</Typography>);
 						}
 					},
 				},
@@ -204,7 +205,7 @@ export default function DnsCheckHome({ online }: PageProps) {
 						{tableData.rows.length > 0 ?
 							<Box>
 								<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
-								<Box my={2} height={400}>
+								<Box>
 									{currentProtocol === "WHOIS" ?
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
@@ -219,16 +220,11 @@ export default function DnsCheckHome({ online }: PageProps) {
 										loading={loading}
 										error={errResult}
 										getRowHeight={() => 'auto'}
-										getRowSpacing={(params) => ({
-											top: 5,
-											bottom: 5
-										})}
 										disableSelectionOnClick
 										disableColumnMenu
 										disableColumnSelector
 										hideFooter
-										headerHeight={0}
-										sx={{ marginBottom: 2 }}
+										autoHeight
 									/>
 								</Box>
 							</Box>
