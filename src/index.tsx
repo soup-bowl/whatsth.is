@@ -7,7 +7,7 @@ import Layout from "./theme/layout";
 import Home from './pages/home';
 import { HelpPage, AboutPage } from './pages/help';
 import { InspectionHome, InspectonResult } from "./pages/inspection";
-import DnsCheckHome from './pages/dnschecker';
+import DomainToolsHome from './pages/domain';
 import StringConversionPage from './pages/converter';
 import { CronConversionPage } from './pages/cron';
 import UnixEpochPage from './pages/time';
@@ -38,7 +38,7 @@ export default function App() {
 						<Route path="about" element={<AboutPage online={connectionState} />} />
 						<Route path="inspect" element={<InspectionHome online={connectionState} />} />
 						<Route path="inspect/*" element={<InspectonResult />} />
-						<Route path="dns/*" element={<DnsCheckHome online={connectionState} />} />
+						<Route path="domain/*" element={<DomainToolsHome online={connectionState} />} />
 						<Route path="cron" element={<CronConversionPage />} />
 						<Route path="cron/*" element={<CronConversionPage />} />
 						<Route path="time" element={<UnixEpochPage />} />
@@ -47,6 +47,7 @@ export default function App() {
 						<Route path="encoder" element={<Navigate replace to="/convert" />} />
 						<Route path="decoder" element={<Navigate replace to="/convert" />} />
 						<Route path="unix" element={<Navigate replace to="/time" />} />
+						<Route path="dns/*" element={<Navigate replace to="/domain" />} />
 						<Route path="*" element={<Navigate replace to="/" />} />
 					</Route>
 				</Routes>

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Light/dark mode toggle.
 
 ### Changed
+- DNS Inspector is now Domain Tools.
 - API for DNS changed to a show-all approach - table adjusted to suit.
 
 ## [0.2.22] - 2023-01-25

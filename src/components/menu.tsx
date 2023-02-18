@@ -64,10 +64,10 @@ const getMenu: IMenu[] = [
 		beta: true,
 	},
 	{
-		name: 'DNS Inspector',
+		name: 'Domain Tools',
 		icon: <DnsIcon />,
 		category: Category.Inspection,
-		url: '/dns',
+		url: '/domain',
 		needsInternet: true,
 		beta: true,
 	},

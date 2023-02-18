@@ -9,9 +9,9 @@ import { ILookupTable, ILookupTableLayout, PageProps } from "../interfaces";
 import { MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 
-const siteTitle = "DNS Inspector";
+const siteTitle = "Domain Tools";
 
-export default function DnsCheckHome({ online }: PageProps) {
+export default function DomainToolsHome({ online }: PageProps) {
 	const [selectionProtocol, setSelectionProtocol] = useState('');
 	const [selectionURL, setSelectionURL] = useState('');
 	const [currentProtocol, setCurrentProtocol] = useState('');
@@ -124,14 +124,14 @@ export default function DnsCheckHome({ online }: PageProps) {
 
 	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		window.location.href = `/#/dns/${selectionProtocol}/${selectionURL}`;
+		window.location.href = `/#/domain/${selectionProtocol}/${selectionURL}`;
 		setCurrentProtocol(selectionProtocol);
 		setCurrentURL(selectionURL);
 	};
 
 	const clearForm = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		window.location.href = `/#/dns`;
+		window.location.href = `/#/domain`;
 		setSelectionProtocol('');
 		setCurrentProtocol('');
 		setSelectionURL('');
@@ -142,7 +142,7 @@ export default function DnsCheckHome({ online }: PageProps) {
 	return (
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
-			<Typography>Allows you to check the public DNS records associated with a domain or subdomain.</Typography>
+			<Typography>Allows you to check the records associated with a domain or subdomain.</Typography>
 			<Box my={2}>
 				<Alert severity="info">
 					<AlertTitle>Beta</AlertTitle>
