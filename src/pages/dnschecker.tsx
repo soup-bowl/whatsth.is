@@ -3,7 +3,7 @@ import {
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
+import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, PageProps } from "../interfaces";
 import { MyIpAddressModal } from "../components/modals";
@@ -19,7 +19,7 @@ export default function DnsCheckHome({ online }: PageProps) {
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [tableData, setTableData] = useState<ILookupTable>({ columns: [], rows: [] } as ILookupTable);
-	const [errResult, setErrResult] = useState<any>(undefined);
+	const [errResult, setErrResult] = useState<boolean>(false);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
@@ -122,14 +122,14 @@ export default function DnsCheckHome({ online }: PageProps) {
 		}
 	}, [currentProtocol, currentURL]);
 
-	const submitForm = (e: any) => {
+	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		window.location.href = `/#/dns/${selectionProtocol}/${selectionURL}`;
 		setCurrentProtocol(selectionProtocol);
 		setCurrentURL(selectionURL);
 	};
 
-	const clearForm = (e: any) => {
+	const clearForm = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		window.location.href = `/#/dns`;
 		setSelectionProtocol('');
@@ -206,6 +206,11 @@ export default function DnsCheckHome({ online }: PageProps) {
 							<Box>
 								<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
 								<Box>
+									{currentProtocol === "DNS" ?
+										<Typography my={2}>
+											Powered by <Link href="https://www.dnspython.org/">dnspython</Link>.
+										</Typography>
+										: null}
 									{currentProtocol === "WHOIS" ?
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
