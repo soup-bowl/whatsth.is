@@ -112,7 +112,7 @@ export default function Layout({ online }: PageProps) {
 					open={open}
 					sx={{
 						backgroundColor: theme.palette.primary.main,
-						zIndex: (theme) => (desktop ? theme.zIndex.drawer + 1 : 0)
+						zIndex: (theme) => (desktop ? theme.zIndex.drawer + 10 : 10)
 					}}>
 					<Toolbar>
 						{!desktop ?
