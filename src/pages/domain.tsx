@@ -5,7 +5,7 @@ import {
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, PageProps } from "../interfaces";
+import { ILookupTable, ILookupTableLayout, PageProps, IDNSRecordDetails } from "../interfaces";
 import { MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 
@@ -70,16 +70,23 @@ export default function DomainToolsHome({ online }: PageProps) {
 				agent.DNS.dns(currentURL)
 					.then((response) => {
 						let records: ILookupTableLayout[] = [];
-						let types: string[] = ['A', 'AAAA', 'CNAME', 'TXT', 'NS'];
+						let types: string[] = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS'];
 
 						types.forEach((type: string, i: number) => {
 							// @ts-ignore
 							let key: keyof typeof response.records = type;
 							if (response.records[key].length > 0) {
+								let collection: string[] = [];
+								if (type === 'MX') {
+									// @ts-ignore
+									response.records[key].forEach((entry: IDNSRecordDetails) => {
+										collection.push(`${entry.address} (Priority ${entry.priority})`);
+									});
+								}
 								records.push({
 									id: i,
 									key: type,
-									value: response.records[key].join('<!=BREAK=!>')
+									value: (collection.length > 0) ? collection.join('<!=BREAK=!>') : response.records[key].join('<!=BREAK=!>')
 								});
 							}
 						});
