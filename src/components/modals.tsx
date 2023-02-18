@@ -187,10 +187,9 @@ export function MyIpAddressModal({ online }: PageProps) {
 
 interface GeoProps {
 	ip: string;
-	inline?: boolean;
 }
 
-export function IPAddressGeo({ ip, inline = false }: GeoProps) {
+export function IPAddressGeo({ ip}: GeoProps) {
 	const [geo, setGeo] = useState<any>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -213,7 +212,7 @@ export function IPAddressGeo({ ip, inline = false }: GeoProps) {
 	}
 
 	return (
-		<div style={{ display: (inline) ? 'inline' : 'block' }}>
+		<div>
 			<IconButton onClick={handleOpen} size="small">{geo?.icon ?? <>🌐</>}</IconButton>
 			<BootstrapDialog
 				open={open}

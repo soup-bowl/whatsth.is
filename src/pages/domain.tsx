@@ -55,18 +55,25 @@ export default function DomainToolsHome({ online }: PageProps) {
 							return (
 								<div style={{ width: '100%' }}>
 									{values.map((value, i) => {
-										return (<Typography key={i} my={2}>{value}</Typography>);
+										return (
+											<Stack key={i} my={2} direction="row" alignItems="center">
+												<Typography>{value}</Typography>
+												{isValidIP(value) ?
+													<IPAddressGeo ip={value} />
+													: null}
+											</Stack>
+										);
 									})}
 								</div>
 							);
 						} else {
 							return (
-								<Typography my={2}>
-									{params.row.value}
+								<Stack direction="row" alignItems="center">
+									<Typography my={2}>{params.row.value}</Typography>
 									{isValidIP(params.row.value) ?
-										<IPAddressGeo inline ip={params.row.value} />
+										<IPAddressGeo ip={params.row.value} />
 										: null}
-								</Typography>
+								</Stack>
 							);
 						}
 					},
