@@ -106,7 +106,7 @@ export default function Layout({ online }: PageProps) {
 	return (
 		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
-				<CssBaseline />
+				<CssBaseline enableColorScheme />
 				<AppBar
 					position="fixed"
 					open={open}

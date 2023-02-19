@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Latest
 ### Fixed
 - Fixed the IP inspector not appearing when A records are numerous.
+- Scrollbars match dark/light mode.
 
 ## [0.2.23] - 2023-02-18
 ### Added
