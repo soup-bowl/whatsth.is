@@ -123,9 +123,9 @@ export function DrawMenu({ onlineState, drawerClose, theme, colorMode }: MenuPro
 					>
 						<ListItemIcon>{item.icon}</ListItemIcon>
 						<ListItemText primary={item.name} />
-						{item.beta ?
+						{item.beta &&
 							<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
-							: null}
+						}
 					</ListItemButton>
 				);
 			})}
@@ -179,9 +179,9 @@ export function HomeMenu({ onlineState }: GridProps) {
 				return (
 					<>
 						<Typography variant="h4" component="h2" my={2}>{item.name}</Typography>
-						{item.description !== undefined ?
+						{item.description !== undefined &&
 							<Typography my={2}>{item.description}</Typography>
-							: null}
+						}
 						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 							{getMenu.map((subitem: IMenu, i: number) => {
 								if (subitem.category === item.id) {
@@ -201,9 +201,9 @@ export function HomeMenu({ onlineState }: GridProps) {
 													<Typography>
 														{subitem.name}
 													</Typography>
-													{subitem.beta ?
+													{subitem.beta &&
 														<Chip label="Beta" size="small" color="info" sx={{ marginLeft: '2px' }} />
-														: null}
+													}
 												</OptionSquare>
 											</Link>
 										</Grid>

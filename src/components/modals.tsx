@@ -30,7 +30,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	return (
 		<DialogTitle sx={{ m: 0, p: 2 }} {...other}>
 			{children}
-			{onClose ? (
+			{onClose && (
 				<IconButton
 					aria-label="close"
 					onClick={onClose}
@@ -43,7 +43,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 				>
 					<CloseIcon />
 				</IconButton>
-			) : null}
+			)}
 		</DialogTitle>
 	);
 }

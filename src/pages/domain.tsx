@@ -58,9 +58,9 @@ export default function DomainToolsHome({ online }: PageProps) {
 										return (
 											<Stack key={i} my={2} direction="row" alignItems="center">
 												<Typography>{value}</Typography>
-												{isValidIP(value) ?
+												{isValidIP(value) &&
 													<IPAddressGeo ip={value} />
-													: null}
+												}
 											</Stack>
 										);
 									})}
@@ -70,9 +70,9 @@ export default function DomainToolsHome({ online }: PageProps) {
 							return (
 								<Stack direction="row" alignItems="center">
 									<Typography my={2}>{params.row.value}</Typography>
-									{isValidIP(params.row.value) ?
+									{isValidIP(params.row.value) &&
 										<IPAddressGeo ip={params.row.value} />
-										: null}
+									}
 								</Stack>
 							);
 						}
@@ -237,18 +237,18 @@ export default function DomainToolsHome({ online }: PageProps) {
 							<Box>
 								<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
 								<Box>
-									{currentProtocol === "DNS" ?
+									{currentProtocol === "DNS" &&
 										<Typography my={2}>
 											Powered by <Link href="https://www.dnspython.org/">dnspython</Link>.
 										</Typography>
-										: null}
-									{currentProtocol === "WHOIS" ?
+									}
+									{currentProtocol === "WHOIS" &&
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
 											this tool does not show ownership contact information. Powered by
 											the <Link href="https://pypi.org/project/python-whois/">Python WHOIS library</Link>.
 										</Typography>
-										: null}
+									}
 									<DataGrid
 										rows={tableData.rows}
 										columns={tableData.columns}
@@ -266,7 +266,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 							</Box>
 							:
 							<Box>
-								{currentURL !== '' ?
+								{currentURL !== '' &&
 									<>
 										{loading ?
 											<>
@@ -278,7 +278,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 												There are no <strong>{currentProtocol}</strong> records to display for <strong>{currentURL}</strong>.
 											</Typography>}
 									</>
-									: null}
+								}
 							</Box>}
 					</Grid>
 				</Grid>

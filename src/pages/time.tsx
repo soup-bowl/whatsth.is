@@ -95,13 +95,13 @@ export default function UnixEpochPage() {
 					onChange={changeUnix}
 				/>
 			</Box>
-			{timeStore.overflow ?
+			{timeStore.overflow &&
 				<Typography my={2}>
 					<WarningIcon fontSize="inherit" /> Be warned - this date goes over the <Box component="span" fontWeight='700'>signed 32-bit buffer</Box>.
 					On legacy systems, a Unix timestamp of this value will be subjected to
 					the <Link href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem</Link>.
 				</Typography>
-				: null}
+			}
 		</>
 	);
 }

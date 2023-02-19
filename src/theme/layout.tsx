@@ -115,7 +115,7 @@ export default function Layout({ online }: PageProps) {
 						zIndex: (theme) => (desktop ? theme.zIndex.drawer + 10 : 10)
 					}}>
 					<Toolbar>
-						{!desktop ?
+						{!desktop &&
 							<IconButton
 								color="inherit"
 								aria-label="open drawer"
@@ -125,11 +125,11 @@ export default function Layout({ online }: PageProps) {
 							>
 								<MenuIcon />
 							</IconButton>
-							: null}
+						}
 						<Typography variant="h6" noWrap component="div">What's this?</Typography>
-						{!online ?
+						{!online &&
 							<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
-							: null}
+						}
 					</Toolbar>
 				</AppBar>
 				<Drawer
