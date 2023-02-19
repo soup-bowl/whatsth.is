@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Latest
+### Added
+- Provider icons for inspection results.
+
+## [0.2.24] - 2023-02-19
 ### Changed
 - Inspection page design changed to utilise the new Inspection API changes.
 

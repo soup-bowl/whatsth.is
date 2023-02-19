@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack } from '@mui/material';
+import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import ErrorMessage from '../components/errorMessage';
@@ -119,8 +119,8 @@ export function InspectonResult() {
 						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 							{siteDetails.message.technology.javascript.map((jslib, i) => {
 								return (
-									<Grid item xs={12} md={6}>
-										<DisplaySecondary key={i} details={jslib} />
+									<Grid key={i} item xs={12} md={6}>
+										<DisplaySecondary details={jslib} />
 									</Grid>
 								);
 							})}
@@ -132,8 +132,8 @@ export function InspectonResult() {
 						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 							{siteDetails.message.technology.cdn.map((jslib, i) => {
 								return (
-									<Grid item xs={12} md={6}>
-										<DisplaySecondary key={i} details={jslib} />
+									<Grid key={i} item xs={12} md={6}>
+										<DisplaySecondary details={jslib} />
 									</Grid>
 								);
 							})}
@@ -143,6 +143,9 @@ export function InspectonResult() {
 					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
 					<Button variant="outlined" color="error" sx={{ marginLeft: 2 }} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
 				</Box>
+				<Typography my={1} color="darkgrey">
+					All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.
+				</Typography>
 			</Box>
 		);
 	} else {
