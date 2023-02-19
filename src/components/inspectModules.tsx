@@ -22,8 +22,6 @@ export function DisplayCMS({ details }: Props) {
 		);
 	}
 
-	console.log(details);
-
 	return (
 		<Card>
 			<CardContent>
