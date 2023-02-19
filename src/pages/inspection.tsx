@@ -3,8 +3,7 @@ import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, Aler
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import ErrorMessage from '../components/errorMessage';
-import Generic from '../components/technology/generic';
-import WordPress from '../components/technology/wordpress';
+import { DisplayCMS, DisplaySecondary } from '../components/inspectModules';
 import { IInspectionResult, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
 
@@ -107,29 +106,48 @@ export function InspectonResult() {
 		);
 	}
 
-	let contentModule: any;
 	if (typeof siteDetails.message !== 'string') {
-		switch (siteDetails.message.technology) {
-			case 'WordPress':
-				contentModule = (<WordPress inspection={siteDetails} />);
-				break;
-			case 'Unknown':
-				contentModule = (<ErrorMessage title={"We couldn't detect the CMS used for " + siteDetails.message.name} />);
-				break;
-			default:
-				contentModule = (<Generic inspection={siteDetails} />);
-				break;
-		}
-	}
-
-	return (
-		<Box>
-			<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
-			{contentModule}
+		return (
 			<Box>
-				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-				<Button variant="outlined" color="error" sx={{ marginLeft: 2 }} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+				<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
+				<Box my={2}>
+					<DisplayCMS details={siteDetails.message.technology.cms} />
+				</Box>
+				{siteDetails.message.technology.javascript.length > 0 &&
+					<Box my={2}>
+						<Typography variant="h2" my={2}>JavaScript</Typography>
+						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+							{siteDetails.message.technology.javascript.map((jslib, i) => {
+								return (
+									<Grid item xs={12} md={6}>
+										<DisplaySecondary key={i} details={jslib} />
+									</Grid>
+								);
+							})}
+						</Grid>
+					</Box>}
+				{siteDetails.message.technology.cdn.length > 0 &&
+					<Box my={2}>
+						<Typography variant="h2" my={2}>CDN</Typography>
+						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+							{siteDetails.message.technology.cdn.map((jslib, i) => {
+								return (
+									<Grid item xs={12} md={6}>
+										<DisplaySecondary key={i} details={jslib} />
+									</Grid>
+								);
+							})}
+						</Grid>
+					</Box>}
+				<Box>
+					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
+					<Button variant="outlined" color="error" sx={{ marginLeft: 2 }} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+				</Box>
 			</Box>
-		</Box>
-	);
+		);
+	} else {
+		return (<Box>
+			<Typography>an unknown error occurred.</Typography>
+		</Box>);
+	}
 };

@@ -22,10 +22,24 @@ export interface IInspectionResult {
 }
 
 export interface IInspectionSiteDetails {
-	name: string;
-	technology: string;
-	matched_on: string[];
+	title: string;
+	technology: IInspectionTechnology;
 	additional?: IInspectionWordPress;
+}
+
+export interface IInspectionTechnology {
+	cms?: IInspectionDetails;
+	frontend?: IInspectionDetails;
+	javascript: IInspectionDetails[];
+	cdn: IInspectionDetails[];
+}
+
+export interface IInspectionDetails {
+	name: string;
+	description: string;
+	url: string;
+	match_available: number;
+	match_on: string[];
 }
 
 export interface IInspectionWordPress {
