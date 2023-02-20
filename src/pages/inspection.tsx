@@ -6,6 +6,7 @@ import ErrorMessage from '../components/errorMessage';
 import { DisplayCMS, DisplaySecondary } from '../components/inspectModules';
 import { IInspectionResult, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
+import ReportError from '../components/reportButton';
 
 const siteTitle = "Site Inspector";
 
@@ -141,7 +142,7 @@ export function InspectonResult() {
 					</Box>}
 				<Box>
 					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-					<Button variant="outlined" color="error" sx={{ marginLeft: 2 }} href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?template=report_detection.md&title=Failed+Detection+URL:+${inspectionURL}`} target="_blank">Report</Button>
+					<ReportError title={`Failed Detection URL: ${inspectionURL}`} template="report_detection" />
 				</Box>
 				<Typography my={1} color="darkgrey">
 					All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.

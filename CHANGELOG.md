@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Latest
 ### Added
 - Provider icons for inspection results.
+- Added a report button to domain tools.
 
 ## [0.2.24] - 2023-02-19
 ### Changed
