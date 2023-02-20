@@ -1,6 +1,6 @@
 import {
-	Chip, Divider, Grid, IconButton, Link, List, ListItemButton, ListItemIcon,
-	ListItemText, Paper, styled, Theme, Typography
+	Box, Chip, Divider, Grid, IconButton, Link, List, ListItemButton, 
+	ListItemIcon, ListItemText, Paper, styled, Theme, Typography
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IMenu, IMenuCategory } from "../interfaces";
@@ -177,7 +177,7 @@ export function HomeMenu({ onlineState }: GridProps) {
 		<>
 			{getMenuCategories.map((item: IMenuCategory, i: number) => {
 				return (
-					<>
+					<Box key={i}>
 						<Typography variant="h4" component="h2" my={2}>{item.name}</Typography>
 						{item.description !== undefined &&
 							<Typography my={2}>{item.description}</Typography>
@@ -213,7 +213,7 @@ export function HomeMenu({ onlineState }: GridProps) {
 								}
 							})}
 						</Grid>
-					</>
+					</Box>
 				);
 			})}
 		</>
