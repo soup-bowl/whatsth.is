@@ -29,7 +29,7 @@
     "react-scripts": "^5.0.1",
     "serve-build": "^0.1.0",
     "typescript": "^4.6.3",
-    "ua-parser-js": "^1.0.2",
+    "ua-parser-js": "^1.0.33",
     "web-vitals": "^3.0.3"
   },
   "scripts": {
