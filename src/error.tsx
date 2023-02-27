@@ -45,8 +45,32 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 
 	render() {
 		if (this.state.hasError) {
+			let message = encodeURIComponent(`
+			I have:
+
+			- [ ]  Cleared my cache.
+
+			The following are relevant to my situation:
+
+			- [ ] I was on Desktop.
+			- [ ] I was on Mobile.
+			- [ ] I have installed the app in my browser (mention below).
+
+			**What browser are you using?**
+			(If installed, it'll still link to the browser you installed with).
+
+			**If you got an output, Paste the Stack Trace inbetween the marks below**
+			\`\`\`
+			[${this.state.errorName}] ${this.state.errorMessage}
+			URL: ${window.location.href}
+			Verison: ${process.env.REACT_APP_VERSION}
+			Agent: ${window.navigator.userAgent}
+
+			${this.state.errorStack}
+			\`\`\`
+			`.replace(/\t/g, ''));
 			let title = `[${this.state.errorName}] ${this.state.errorMessage}`.split(' ').join('+');
-			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&template=crash_report.md&title=${title}`;
+			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&body=${message}&title=${title}`;
 
 			return (
 				<ThemeProvider theme={theme}>
