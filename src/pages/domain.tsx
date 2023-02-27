@@ -8,7 +8,7 @@ import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, PageProps, IDNSRecordDetails } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
-import ReportError from "../components/reportButton";
+import { ReportDNSError } from "../components/reportButton";
 
 const siteTitle = "Domain Tools";
 
@@ -265,7 +265,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 									/>
 								</Box>
 								<Box my={2}>
-									<ReportError title={`Failed ${currentProtocol} on URL: ${currentURL}`} template="report_dns" />
+									<ReportDNSError url={currentURL} protocol={currentProtocol} object={tableData.rows}  />
 								</Box>
 							</Box>
 							:

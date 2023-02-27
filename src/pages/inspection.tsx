@@ -6,7 +6,7 @@ import ErrorMessage from '../components/errorMessage';
 import { DisplayCMS, DisplaySecondary } from '../components/inspectModules';
 import { IInspectionResult, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
-import ReportError from '../components/reportButton';
+import { ReportInspectionError } from '../components/reportButton';
 
 const siteTitle = "Site Inspector";
 
@@ -142,7 +142,7 @@ export function InspectonResult() {
 					</Box>}
 				<Box>
 					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-					<ReportError title={`Failed Detection URL: ${inspectionURL}`} template="report_detection" />
+					<ReportInspectionError url={inspectionURL} object={siteDetails} />
 				</Box>
 				<Typography my={1} color="darkgrey">
 					All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.

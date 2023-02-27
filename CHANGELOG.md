@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Latest
+### Changed
+- Report buttons now pre-fill forms out with developer-assistance data.
+
+## [0.2.25] - 2023-02-27
 ### Added
 - Provider icons for inspection results.
 - Added a report button to domain tools.
