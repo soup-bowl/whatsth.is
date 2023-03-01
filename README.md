@@ -9,7 +9,7 @@
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]).
+* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]). Also comes in [extension format][ext]!
 * [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
 * [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
 * [Cron Conversion](https://whatsth.is/#/cron).
@@ -57,3 +57,4 @@ The PWA aspect won't kick into full effect unless it is running 'production' wit
 [site]: https://whatsth.is
 [pwa]:  https://web.dev/learn/pwa/progressive-web-apps/
 [api]:  https://github.com/soup-bowl/api.whatsth.is
+[ext]:  https://github.com/soup-bowl/whatsth.is-browser
