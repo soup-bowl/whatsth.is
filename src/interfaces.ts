@@ -32,6 +32,7 @@ export interface IInspectionTechnology {
 	frontend?: IInspectionDetails;
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
+	seo: IInspectionDetails[];
 }
 
 export interface IInspectionDetails {

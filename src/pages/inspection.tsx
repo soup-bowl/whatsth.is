@@ -127,6 +127,19 @@ export function InspectonResult() {
 							})}
 						</Grid>
 					</Box>}
+				{siteDetails.message.technology.seo.length > 0 &&
+					<Box my={2}>
+						<Typography variant="h2" my={2}>SEO</Typography>
+						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+							{siteDetails.message.technology.seo.map((jslib, i) => {
+								return (
+									<Grid key={i} item xs={12} md={6}>
+										<DisplaySecondary details={jslib} />
+									</Grid>
+								);
+							})}
+						</Grid>
+					</Box>}
 				{siteDetails.message.technology.cdn.length > 0 &&
 					<Box my={2}>
 						<Typography variant="h2" my={2}>CDN</Typography>
