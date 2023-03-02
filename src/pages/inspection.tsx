@@ -10,6 +10,12 @@ import { ReportInspectionError } from '../components/reportButton';
 
 const siteTitle = "Site Inspector";
 
+const segments = [
+	{ name: 'JavaScript', funct: 'javascript' },
+	{ name: 'SEO', funct: 'seo' },
+	{ name: 'CDN', funct: 'cdn' },
+];
+
 export function InspectionHome({ online }: PageProps) {
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
@@ -114,45 +120,31 @@ export function InspectonResult() {
 				<Box my={2}>
 					<DisplayCMS details={siteDetails.message.technology.cms} />
 				</Box>
-				{siteDetails.message.technology.javascript.length > 0 &&
-					<Box my={2}>
-						<Typography variant="h2" my={2}>JavaScript</Typography>
-						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-							{siteDetails.message.technology.javascript.map((jslib, i) => {
-								return (
-									<Grid key={i} item xs={12} md={6}>
-										<DisplaySecondary details={jslib} />
-									</Grid>
-								);
-							})}
-						</Grid>
-					</Box>}
-				{siteDetails.message.technology.seo.length > 0 &&
-					<Box my={2}>
-						<Typography variant="h2" my={2}>SEO</Typography>
-						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-							{siteDetails.message.technology.seo.map((jslib, i) => {
-								return (
-									<Grid key={i} item xs={12} md={6}>
-										<DisplaySecondary details={jslib} />
-									</Grid>
-								);
-							})}
-						</Grid>
-					</Box>}
-				{siteDetails.message.technology.cdn.length > 0 &&
-					<Box my={2}>
-						<Typography variant="h2" my={2}>CDN</Typography>
-						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-							{siteDetails.message.technology.cdn.map((jslib, i) => {
-								return (
-									<Grid key={i} item xs={12} md={6}>
-										<DisplaySecondary details={jslib} />
-									</Grid>
-								);
-							})}
-						</Grid>
-					</Box>}
+				{segments.map(e => {
+					if (typeof siteDetails.message !== 'string') {
+						return (
+							<>
+								{/* @ts-ignore */}
+								{siteDetails.message.technology[e.funct].length > 0 &&
+									<Box my={2}>
+										<Typography variant="h2" my={2}>{e.name}</Typography>
+										<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+											{/* @ts-ignore */}
+											{siteDetails.message.technology[e.funct].map((jslib, i) => {
+												return (
+													<Grid key={i} item xs={12} md={6}>
+														<DisplaySecondary details={jslib} />
+													</Grid>
+												);
+											})}
+										</Grid>
+									</Box>}
+							</>
+						);
+					} else {
+						return <></>;
+					}
+				})}
 				<Box>
 					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
 					<ReportInspectionError url={inspectionURL} object={siteDetails} />

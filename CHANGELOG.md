@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Latest
 ### Changed
+- Aspects of inspection display are now auto-generated.
 - Report buttons now pre-fill forms out with developer-assistance data.
 
 ## [0.2.25] - 2023-02-27
