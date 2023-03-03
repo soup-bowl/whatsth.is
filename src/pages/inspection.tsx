@@ -67,7 +67,7 @@ interface Props {
 	url: string;
 }
 
-export function InspectonResult({url}:Props) {
+export function InspectonResult({ url }: Props) {
 	const navigate = useNavigate();
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -87,7 +87,7 @@ export function InspectonResult({url}:Props) {
 				setSiteDetails(coll);
 				console.log(coll, response.message);
 			})
-			.catch((err: any) => setRError(true))
+			.catch(() => setRError(true))
 			.finally(() => setLoading(false));
 	}, [url]);
 
@@ -104,41 +104,42 @@ export function InspectonResult({url}:Props) {
 		);
 	}
 
-	if (requestError) {
-		return (
-			<>
-				<ErrorMessage
-					title={`Failed to detect ${url}...`}
-					message="Check to make sure the site exists and is responding to public requests."
-				/>
-			</>
-		);
-	}
-
 	return (
 		<Box>
 			<Typography my={1} color="darkgrey">For the URL {url} ...</Typography>
 			<Box my={2}>
-				{siteDetails.length > 0 ?
-					<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-						{siteDetails.map((jslib, i) => {
-							return (
-								<Grid key={i} item xs={12} md={6}>
-									<DisplaySecondary details={jslib} />
-								</Grid>
-							);
-						})}
-					</Grid>
+				{!requestError ?
+					<>
+						{siteDetails.length > 0 ?
+							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+								{siteDetails.map((jslib, i) => {
+									return (
+										<Grid key={i} item xs={12} md={6}>
+											<DisplaySecondary details={jslib} />
+										</Grid>
+									);
+								})}
+							</Grid>
+							:
+							<Box>
+								<Typography variant="h1" my={2}>Nothing detected!</Typography>
+								<Typography my={1} color="darkgrey">We can see the site, but nothing was detected against our algorithms</Typography>
+								<Typography>
+									This can happen when the site uses technology not known by the system, or when the website is using
+									methods to customise libraries and functions, which may not be understood by the algorithm.
+								</Typography>
+							</Box>
+						}
+					</>
 					:
 					<Box>
-						<Typography variant="h1" my={2}>Nothing detected!</Typography>
-						<Typography my={1} color="darkgrey">We can see the site, but nothing was detected against our algorithms</Typography>
+						<Typography variant="h1" my={2}>Access failed</Typography>
+						<Typography my={1} color="darkgrey">For some reason, our API cannot access the specified URL</Typography>
 						<Typography>
-							This can happen when the site uses technology not known by the system, or when the website is using
-							methods to customise libraries and functions, which may not be understood by the algorithm.
+							Check to make sure the website you specified is a correct, valid address. This can also happen if the
+							website has blocked us from scanning it.
 						</Typography>
-					</Box>
-				}
+					</Box>}
 			</Box>
 			<Box>
 				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
@@ -154,7 +155,7 @@ export function InspectonResult({url}:Props) {
 export function InspectonResultDisplay() {
 	const inspectionURL = window.location.hash.slice(10);
 
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+	useEffect(() => { document.title = `${inspectionURL} - What's This?` });
 
-	return(<InspectonResult url={inspectionURL} />);
+	return (<InspectonResult url={inspectionURL} />);
 }
