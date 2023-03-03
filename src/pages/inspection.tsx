@@ -63,18 +63,18 @@ export function InspectionHome({ online }: PageProps) {
 	);
 };
 
-export function InspectonResult() {
-	const inspectionURL = window.location.hash.slice(10);
+interface Props {
+	url: string;
+}
+
+export function InspectonResult({url}:Props) {
 	const navigate = useNavigate();
-
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
-
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [requestError, setRError] = useState<boolean>(false);
 
 	useEffect(() => {
-		agent.Inspection.inspect(inspectionURL)
+		agent.Inspection.inspect(url)
 			.then(response => {
 				let coll: IInspectionDetails[] = [];
 				if (typeof response.message !== 'string') {
@@ -89,7 +89,7 @@ export function InspectonResult() {
 			})
 			.catch((err: any) => setRError(true))
 			.finally(() => setLoading(false));
-	}, [inspectionURL]);
+	}, [url]);
 
 	if (loading) {
 		return (
@@ -108,7 +108,7 @@ export function InspectonResult() {
 		return (
 			<>
 				<ErrorMessage
-					title={"Failed to detect " + inspectionURL + "..."}
+					title={`Failed to detect ${url}...`}
 					message="Check to make sure the site exists and is responding to public requests."
 				/>
 			</>
@@ -117,7 +117,7 @@ export function InspectonResult() {
 
 	return (
 		<Box>
-			<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
+			<Typography my={1} color="darkgrey">For the URL {url} ...</Typography>
 			<Box my={2}>
 				{siteDetails.length > 0 ?
 					<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -142,7 +142,7 @@ export function InspectonResult() {
 			</Box>
 			<Box>
 				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-				<ReportInspectionError url={inspectionURL} object={siteDetails} />
+				<ReportInspectionError url={url} object={siteDetails} />
 			</Box>
 			<Typography my={1} color="darkgrey">
 				All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.
@@ -150,3 +150,11 @@ export function InspectonResult() {
 		</Box>
 	);
 };
+
+export function InspectonResultDisplay() {
+	const inspectionURL = window.location.hash.slice(10);
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+
+	return(<InspectonResult url={inspectionURL} />);
+}
