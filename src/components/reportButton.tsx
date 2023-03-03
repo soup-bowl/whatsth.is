@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { IInspectionResult, ILookupTableLayout } from "../interfaces";
+import { IInspectionDetails, ILookupTableLayout } from "../interfaces";
 
 const BrowserDetails = () => {
 	return (window.navigator.userAgent);
@@ -52,7 +52,7 @@ function ErrorButton({ title, body, label }: Props) {
 
 interface InspProps {
 	url: string;
-	object: IInspectionResult;
+	object: IInspectionDetails[];
 }
 
 export function ReportInspectionError({ url, object }: InspProps) {

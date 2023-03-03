@@ -28,8 +28,8 @@ export interface IInspectionSiteDetails {
 }
 
 export interface IInspectionTechnology {
-	cms?: IInspectionDetails;
-	frontend?: IInspectionDetails;
+	cms: IInspectionDetails | null;
+	frontend: IInspectionDetails | null;
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
 	seo: IInspectionDetails[];
