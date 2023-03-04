@@ -2,19 +2,12 @@ import { useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import ErrorMessage from '../components/errorMessage';
-import { DisplayCMS, DisplaySecondary } from '../components/inspectModules';
-import { IInspectionResult, PageProps } from '../interfaces';
+import { DisplaySecondary } from '../components/inspectModules';
+import { IInspectionDetails, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
 import { ReportInspectionError } from '../components/reportButton';
 
 const siteTitle = "Site Inspector";
-
-const segments = [
-	{ name: 'JavaScript', funct: 'javascript' },
-	{ name: 'SEO', funct: 'seo' },
-	{ name: 'CDN', funct: 'cdn' },
-];
 
 export function InspectionHome({ online }: PageProps) {
 	const [inputURL, setInputURL] = useState('');
@@ -69,25 +62,40 @@ export function InspectionHome({ online }: PageProps) {
 	);
 };
 
-export function InspectonResult() {
-	const inspectionURL = window.location.hash.slice(10);
+interface Props {
+	url: string;
+}
+
+export function InspectonResult({ url }: Props) {
 	const navigate = useNavigate();
-
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
-
-	const [siteDetails, setSiteDetails] = useState<IInspectionResult>({} as IInspectionResult);
+	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [requestError, setRError] = useState<boolean>(false);
 
 	useEffect(() => {
-		agent.Inspection.inspect(inspectionURL).then(response => {
-			setSiteDetails(response);
-			setLoading(false);
-		}).catch((err: any) => {
-			setRError(true);
-			setLoading(false);
-		});
-	}, [inspectionURL]);
+		const addSoftwareToList = (inspection: IInspectionDetails, type: string) => {
+			let list = siteDetails;
+			let newItem = inspection;
+			newItem.type = type;
+			list.push(newItem);
+			setSiteDetails(list);
+		}
+
+		agent.Inspection.inspect(url)
+			.then(response => {
+				if (typeof response.message !== 'string') {
+					if (response.message.technology.cms !== null) { addSoftwareToList(response.message.technology.cms, 'CMS') };
+					if (response.message.technology.frontend !== null) { addSoftwareToList(response.message.technology.frontend, 'Frontend') };
+					response.message.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
+					response.message.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
+					response.message.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
+					response.message.technology.language.forEach((res) => addSoftwareToList(res, 'Language'));
+					response.message.technology.server.forEach((res) => addSoftwareToList(res, 'Server'));
+				}
+			})
+			.catch(() => setRError(true))
+			.finally(() => setLoading(false));
+	}, [url, siteDetails]);
 
 	if (loading) {
 		return (
@@ -102,61 +110,60 @@ export function InspectonResult() {
 		);
 	}
 
-	if (requestError || siteDetails.success === false) {
-		return (
-			<>
-				<ErrorMessage
-					title={"Failed to detect " + inspectionURL + "..."}
-					message="Check to make sure the site exists and is responding to public requests."
-				/>
-			</>
-		);
-	}
-
-	if (typeof siteDetails.message !== 'string') {
-		return (
-			<Box>
-				<Typography my={1} color="darkgrey">For the URL {inspectionURL} ...</Typography>
-				<Box my={2}>
-					<DisplayCMS details={siteDetails.message.technology.cms} />
-				</Box>
-				{segments.map(e => {
-					if (typeof siteDetails.message !== 'string') {
-						return (
-							<>
-								{/* @ts-ignore */}
-								{siteDetails.message.technology[e.funct].length > 0 &&
-									<Box my={2}>
-										<Typography variant="h2" my={2}>{e.name}</Typography>
-										<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-											{/* @ts-ignore */}
-											{siteDetails.message.technology[e.funct].map((jslib, i) => {
-												return (
-													<Grid key={i} item xs={12} md={6}>
-														<DisplaySecondary details={jslib} />
-													</Grid>
-												);
-											})}
+	return (
+		<Box>
+			<Typography my={1} color="darkgrey">For the URL {url} ...</Typography>
+			<Box my={2}>
+				{!requestError ?
+					<>
+						{siteDetails.length > 0 ?
+							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+								{siteDetails.map((jslib, i) => {
+									return (
+										<Grid key={i} item xs={12} md={6}>
+											<DisplaySecondary details={jslib} />
 										</Grid>
-									</Box>}
-							</>
-						);
-					} else {
-						return <></>;
-					}
-				})}
-				<Box>
-					<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
-					<ReportInspectionError url={inspectionURL} object={siteDetails} />
-				</Box>
-				<Typography my={1} color="darkgrey">
-					All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.
-				</Typography>
+									);
+								})}
+							</Grid>
+							:
+							<Box>
+								<Typography variant="h1" my={2}>Nothing detected!</Typography>
+								<Typography my={1} color="darkgrey">
+									We can see the site, but nothing was detected against our algorithms
+								</Typography>
+								<Typography>
+									This can happen when the site uses technology not known by the system, or when the website is using
+									methods to customise libraries and functions, which may not be understood by the algorithm.
+								</Typography>
+							</Box>
+						}
+					</>
+					:
+					<Box>
+						<Typography variant="h1" my={2}>Access failed</Typography>
+						<Typography my={1} color="darkgrey">For some reason, our API cannot access the specified URL</Typography>
+						<Typography>
+							Check to make sure the website you specified is a correct, valid address. This can also happen if the
+							website has blocked us from scanning it.
+						</Typography>
+					</Box>}
 			</Box>
-		);
-	} else {
-		return (<Box>
-			<Typography>an unknown error occurred.</Typography>
-		</Box>);
-	}
+			<Box>
+				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
+				<ReportInspectionError url={url} object={siteDetails} />
+			</Box>
+			<Typography my={1} color="darkgrey">
+				All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.
+			</Typography>
+		</Box>
+	);
 };
+
+export function InspectonResultDisplay() {
+	const inspectionURL = window.location.hash.slice(10);
+
+	useEffect(() => { document.title = `${inspectionURL} - What's This?` });
+
+	return (<InspectonResult url={inspectionURL} />);
+}

@@ -6,7 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import Layout from "./theme/layout";
 import Home from './pages/home';
 import { HelpPage, AboutPage } from './pages/help';
-import { InspectionHome, InspectonResult } from "./pages/inspection";
+import { InspectionHome, InspectonResultDisplay } from "./pages/inspection";
 import DomainToolsHome from './pages/domain';
 import StringConversionPage from './pages/converter';
 import { CronConversionPage } from './pages/cron';
@@ -37,7 +37,7 @@ export default function App() {
 						<Route path="help" element={<HelpPage />} />
 						<Route path="about" element={<AboutPage online={connectionState} />} />
 						<Route path="inspect" element={<InspectionHome online={connectionState} />} />
-						<Route path="inspect/*" element={<InspectonResult />} />
+						<Route path="inspect/*" element={<InspectonResultDisplay />} />
 						<Route path="domain/*" element={<DomainToolsHome online={connectionState} />} />
 						<Route path="cron" element={<CronConversionPage />} />
 						<Route path="cron/*" element={<CronConversionPage />} />

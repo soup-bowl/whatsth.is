@@ -28,16 +28,19 @@ export interface IInspectionSiteDetails {
 }
 
 export interface IInspectionTechnology {
-	cms?: IInspectionDetails;
-	frontend?: IInspectionDetails;
+	cms: IInspectionDetails | null;
+	frontend: IInspectionDetails | null;
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
 	seo: IInspectionDetails[];
+	language: IInspectionDetails[];
+	server: IInspectionDetails[];
 }
 
 export interface IInspectionDetails {
 	name: string;
 	description: string;
+	type?: string;
 	url: string;
 	match_available: number;
 	match_on: string[];
