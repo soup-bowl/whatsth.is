@@ -61,7 +61,14 @@ export function DisplaySecondary({ details }: Props) {
 					<ServiceIcon name={details.name} /> {details.name}
 				</Typography>
 				<Typography sx={{ fontSize: 14, mb: 1.5 }} color="text.secondary">
-					{details.type !== undefined && <Chip label={details.type} size="small" sx={{ marginRight: 1 }} />}
+					{details.type !== undefined &&
+						<Chip
+							label={details.type}
+							size="small"
+							color="secondary"
+							sx={{ marginRight: 1 }}
+						/>
+					}
 					{details.match_on.length} out of {details.match_available} matches
 				</Typography>
 				<Typography variant="body2">
