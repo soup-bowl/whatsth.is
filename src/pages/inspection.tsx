@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import ErrorMessage from '../components/errorMessage';
 import { DisplaySecondary } from '../components/inspectModules';
 import { IInspectionDetails, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
@@ -74,22 +73,27 @@ export function InspectonResult({ url }: Props) {
 	const [requestError, setRError] = useState<boolean>(false);
 
 	useEffect(() => {
+		const addSoftwareToList = (inspection: IInspectionDetails, type: string) => {
+			let list = siteDetails;
+			let newItem = inspection;
+			newItem.type = type;
+			list.push(newItem);
+			setSiteDetails(list);
+		}
+
 		agent.Inspection.inspect(url)
 			.then(response => {
-				let coll: IInspectionDetails[] = [];
 				if (typeof response.message !== 'string') {
-					if (response.message.technology.cms !== null) { coll.push(response.message.technology.cms) };
-					if (response.message.technology.frontend !== null) { coll.push(response.message.technology.frontend) };
-					response.message.technology.javascript.forEach((res) => coll.push(res));
-					response.message.technology.cdn.forEach((res) => coll.push(res));
-					response.message.technology.seo.forEach((res) => coll.push(res));
+					if (response.message.technology.cms !== null) { addSoftwareToList(response.message.technology.cms, 'CMS') };
+					if (response.message.technology.frontend !== null) { addSoftwareToList(response.message.technology.frontend, 'Frontend') };
+					response.message.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
+					response.message.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
+					response.message.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
 				}
-				setSiteDetails(coll);
-				console.log(coll, response.message);
 			})
 			.catch(() => setRError(true))
 			.finally(() => setLoading(false));
-	}, [url]);
+	}, [url, siteDetails]);
 
 	if (loading) {
 		return (
@@ -123,7 +127,9 @@ export function InspectonResult({ url }: Props) {
 							:
 							<Box>
 								<Typography variant="h1" my={2}>Nothing detected!</Typography>
-								<Typography my={1} color="darkgrey">We can see the site, but nothing was detected against our algorithms</Typography>
+								<Typography my={1} color="darkgrey">
+									We can see the site, but nothing was detected against our algorithms
+								</Typography>
 								<Typography>
 									This can happen when the site uses technology not known by the system, or when the website is using
 									methods to customise libraries and functions, which may not be understood by the algorithm.

@@ -38,6 +38,7 @@ export interface IInspectionTechnology {
 export interface IInspectionDetails {
 	name: string;
 	description: string;
+	type?: string;
 	url: string;
 	match_available: number;
 	match_on: string[];
