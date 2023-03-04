@@ -1,6 +1,6 @@
 import {
-	faAws, faBootstrap, faCloudflare, faDiscourse, faDrupal, faGoogle, faJoomla, faMagento, faPhp,
-	faReact, faShopify, faSquarespace, faVimeo, faVuejs, faWikipediaW, faWordpress
+	faAws, faBootstrap, faCloudflare, faDiscourse, faDrupal, faGithub, faGoogle, faJava, faJoomla, faMagento, faMicrosoft, faPhp,
+	faReact, faShopify, faSquarespace, faUbuntu, faVimeo, faVuejs, faWikipediaW, faWordpress
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material";
@@ -123,6 +123,17 @@ export function ServiceIcon({ name }: ServiceProps) {
 			return (<FontAwesomeIcon icon={faCloudflare} />);
 		case 'aws-cloudfront':
 			return (<FontAwesomeIcon icon={faAws} />);
+		case 'aspnet':
+		case 'kestrel':
+			return (<FontAwesomeIcon icon={faMicrosoft} />);
+		case 'ubuntu':
+			return (<FontAwesomeIcon icon={faUbuntu} />);
+		case 'java':
+			return (<FontAwesomeIcon icon={faJava} />);
+		case 'php':
+			return (<FontAwesomeIcon icon={faPhp} />);
+		case 'github':
+			return (<FontAwesomeIcon icon={faGithub} />);
 		default:
 			return (<></>);
 	}

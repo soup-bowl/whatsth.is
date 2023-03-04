@@ -33,6 +33,8 @@ export interface IInspectionTechnology {
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
 	seo: IInspectionDetails[];
+	language: IInspectionDetails[];
+	server: IInspectionDetails[];
 }
 
 export interface IInspectionDetails {

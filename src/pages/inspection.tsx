@@ -89,6 +89,8 @@ export function InspectonResult({ url }: Props) {
 					response.message.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
 					response.message.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
 					response.message.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
+					response.message.technology.language.forEach((res) => addSoftwareToList(res, 'Language'));
+					response.message.technology.server.forEach((res) => addSoftwareToList(res, 'Server'));
 				}
 			})
 			.catch(() => setRError(true))
