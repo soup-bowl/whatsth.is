@@ -262,6 +262,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 										disableColumnSelector
 										hideFooter
 										autoHeight
+										sx={{ minHeight: 400 }}
 									/>
 								</Box>
 								<Box my={2}>
