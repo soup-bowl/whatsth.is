@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import { DisplaySecondary } from '../components/inspectModules';
 import { IInspectionDetails, PageProps } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
 import { ReportInspectionError } from '../components/reportButton';
+import DetailCard from '../components/inspectModules';
 
 const siteTitle = "Site Inspector";
 
@@ -121,7 +121,7 @@ export function InspectonResult({ url }: Props) {
 								{siteDetails.map((jslib, i) => {
 									return (
 										<Grid key={i} item xs={12} md={6}>
-											<DisplaySecondary details={jslib} />
+											<DetailCard details={jslib} />
 										</Grid>
 									);
 								})}

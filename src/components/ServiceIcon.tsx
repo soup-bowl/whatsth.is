@@ -71,6 +71,7 @@ export function ServiceIcon({ name }: ServiceProps) {
 		case 'php':
 			return (<FontAwesomeIcon icon={faPhp} />);
 		case 'github':
+		case 'github pages':
 			return (<FontAwesomeIcon icon={faGithub} />);
 		default:
 			return (<></>);
