@@ -6,7 +6,7 @@ import { IInspectionDetails } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
 import { ReportInspectionError } from '../components/reportButton';
 import DetailCard from '../components/inspectModules';
-import { ConnectionContext } from '..';
+import { ConnectionContext } from "../context";
 
 const siteTitle = "Site Inspector";
 

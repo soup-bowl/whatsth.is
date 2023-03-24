@@ -16,7 +16,7 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 import HelpIcon from '@mui/icons-material/Help';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import { useContext } from "react";
-import { ConnectionContext } from "..";
+import { ConnectionContext } from "../context";
 
 interface MenuProps {
 	theme: Theme;

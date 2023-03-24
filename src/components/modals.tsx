@@ -8,7 +8,7 @@ import countryCodeEmoji from "country-code-emoji";
 import { useContext, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 import { IIPCollection, IIPGeolocation } from "../interfaces";
-import { ConnectionContext } from "..";
+import { ConnectionContext } from "../context";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {

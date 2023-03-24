@@ -7,7 +7,7 @@ import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import WhatsThisLogo from "../components/logo";
 import { IStorage } from "../interfaces";
-import { ConnectionContext } from "..";
+import { ConnectionContext } from "../context";
 
 export function HelpPage() {
 	const siteTitle = "Help";

@@ -9,7 +9,7 @@ import { ILookupTable, ILookupTableLayout, IDNSRecordDetails } from "../interfac
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 import { ReportDNSError } from "../components/reportButton";
-import { ConnectionContext } from "..";
+import { ConnectionContext } from "../context";
 
 const siteTitle = "Domain Tools";
 

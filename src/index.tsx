@@ -1,4 +1,4 @@
-import { createContext, StrictMode, useEffect, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -9,16 +9,9 @@ import {
 	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
 	InspectonResultDisplay, StringConversionPage, UnixEpochPage
 } from './pages';
+import { ConnectionContext } from './context';
 
-type ConnectionContextType = {
-	connectionState: boolean;
-};
-
-export const ConnectionContext = createContext<ConnectionContextType>({
-	connectionState: false,
-});
-
-export function App() {
+function App() {
 	const [connectionState, setConnectionState] = useState(navigator.onLine);
 
 	useEffect(() => {

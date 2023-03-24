@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import { DrawMenu } from "../components/menu";
 import { purple } from "@mui/material/colors";
-import { ConnectionContext } from "..";
+import { ConnectionContext } from "../context";
 
 const drawerWidth = 240;
 
