@@ -1,12 +1,13 @@
 import { Typography, Link, Box, Button, Stack, Chip, Tooltip } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import agent from "../api/agent";
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import WhatsThisLogo from "../components/logo";
-import { IStorage, PageProps } from "../interfaces";
+import { IStorage } from "../interfaces";
+import { ConnectionContext } from "..";
 
 export function HelpPage() {
 	const siteTitle = "Help";
@@ -79,8 +80,9 @@ function formatBytes(bytes: number, decimals: number = 2) {
 	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-export function AboutPage({ online }: PageProps) {
+export function AboutPage() {
 	const siteTitle = "About";
+	const { connectionState } = useContext(ConnectionContext);
 
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
@@ -88,7 +90,7 @@ export function AboutPage({ online }: PageProps) {
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
-		if (online) {
+		if (connectionState) {
 			agent.Details.openapi().then(response => {
 				setApiVersion(response.info.version);
 			})
@@ -100,7 +102,7 @@ export function AboutPage({ online }: PageProps) {
 		} else {
 			setApiVersion(<><CloudOffIcon fontSize="inherit" /> Offline</>);
 		}
-	}, [online]);
+	}, [connectionState]);
 
 	useEffect(() => {
 		if ('storage' in navigator && 'estimate' in navigator.storage) {

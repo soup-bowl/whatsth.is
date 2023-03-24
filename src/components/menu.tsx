@@ -15,9 +15,10 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
 import HelpIcon from '@mui/icons-material/Help';
 import CoPresentIcon from '@mui/icons-material/CoPresent';
+import { useContext } from "react";
+import { ConnectionContext } from "..";
 
 interface MenuProps {
-	onlineState: boolean;
 	theme: Theme;
 	drawerClose: () => void;
 	colorMode: { toggleColorMode: () => void; };
@@ -94,7 +95,8 @@ const getMenu: IMenu[] = [
 	}
 ];
 
-export function DrawMenu({ onlineState, drawerClose, theme, colorMode }: MenuProps) {
+export function DrawMenu({ drawerClose, theme, colorMode }: MenuProps) {
+	const { connectionState } = useContext(ConnectionContext);
 	const navigate = useNavigate();
 
 	const MenuNav = (url: string) => {
@@ -118,7 +120,7 @@ export function DrawMenu({ onlineState, drawerClose, theme, colorMode }: MenuPro
 					<ListItemButton
 						key={(i + 1)}
 						onClick={() => MenuNav(item.url)}
-						disabled={(item.needsInternet) ? !onlineState : false}
+						disabled={(item.needsInternet) ? !connectionState : false}
 						selected={window.location.hash.includes(`${item.url}`)}
 					>
 						<ListItemIcon>{item.icon}</ListItemIcon>
@@ -166,11 +168,8 @@ const OptionSquare = styled(Paper)(({ theme }) => ({
 	minHeight: "125px"
 }));
 
-interface GridProps {
-	onlineState: boolean;
-}
-
-export function HomeMenu({ onlineState }: GridProps) {
+export function HomeMenu() {
+	const { connectionState } = useContext(ConnectionContext);
 	const navigate = useNavigate();
 
 	return (
@@ -189,7 +188,7 @@ export function HomeMenu({ onlineState }: GridProps) {
 										<Grid key={i} item xs={6} md={3}>
 											<Link
 												sx={{
-													cursor: (subitem.needsInternet && !onlineState) ? 'default' : 'pointer',
+													cursor: (subitem.needsInternet && !connectionState) ? 'default' : 'pointer',
 													textDecoration: 'none'
 												}}
 												onClick={() => navigate(subitem.url)}

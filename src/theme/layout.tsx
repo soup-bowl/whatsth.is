@@ -4,13 +4,13 @@ import {
 	CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container,
 	styled, Drawer, Box, useMediaQuery, PaletteMode, createTheme
 } from '@mui/material';
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
 import { DrawMenu } from "../components/menu";
-import { PageProps } from "../interfaces";
 import { purple } from "@mui/material/colors";
+import { ConnectionContext } from "..";
 
 const drawerWidth = 240;
 
@@ -59,7 +59,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-export default function Layout({ online }: PageProps) {
+export default function Layout() {
+	const { connectionState } = useContext(ConnectionContext);
 	const [open, setOpen] = useState(false);
 	const desktop = useMediaQuery("(min-width: 961px)");
 
@@ -127,7 +128,7 @@ export default function Layout({ online }: PageProps) {
 							</IconButton>
 						}
 						<Typography variant="h6" noWrap component="div">What's this?</Typography>
-						{!online &&
+						{!connectionState &&
 							<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
 						}
 					</Toolbar>
@@ -151,7 +152,7 @@ export default function Layout({ online }: PageProps) {
 							<MenuIcon />
 						</IconButton>
 					</DrawerHeader>
-					<DrawMenu onlineState={online} drawerClose={handleDrawerClose} colorMode={colorMode} theme={theme} />
+					<DrawMenu drawerClose={handleDrawerClose} colorMode={colorMode} theme={theme} />
 				</Drawer>
 				<Main open={open}>
 					<DrawerHeader />

@@ -3,16 +3,18 @@ import {
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
-import { FormEvent, MouseEvent, useEffect, useState } from "react";
+import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, PageProps, IDNSRecordDetails } from "../interfaces";
+import { ILookupTable, ILookupTableLayout, IDNSRecordDetails } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 import { ReportDNSError } from "../components/reportButton";
+import { ConnectionContext } from "..";
 
 const siteTitle = "Domain Tools";
 
-export default function DomainToolsHome({ online }: PageProps) {
+export default function DomainToolsHome() {
+	const { connectionState } = useContext(ConnectionContext);
 	const [selectionProtocol, setSelectionProtocol] = useState('');
 	const [selectionURL, setSelectionURL] = useState('');
 	const [currentProtocol, setCurrentProtocol] = useState('');
@@ -190,7 +192,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 								<Select
 									id="type"
 									label="Type"
-									disabled={!online}
+									disabled={!connectionState}
 									value={selectionProtocol}
 									onChange={(e: SelectChangeEvent) => (setSelectionProtocol(e.target.value))}
 								>
@@ -208,7 +210,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 								variant="outlined"
 								value={selectionURL}
 								onChange={(e: any) => (setSelectionURL(e.target.value))}
-								disabled={!online}
+								disabled={!connectionState}
 							/>
 						</Grid>
 					</Grid>
@@ -218,7 +220,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 								type="submit"
 								variant="contained"
 								value="Submit"
-								disabled={!online}
+								disabled={!connectionState}
 							>
 								Submit
 							</Button>
@@ -230,7 +232,7 @@ export default function DomainToolsHome({ online }: PageProps) {
 							>
 								Clear Selection
 							</Button>
-							<MyIpAddressModal online={online} />
+							<MyIpAddressModal />
 						</Stack>
 					</Grid>
 					<Grid item>

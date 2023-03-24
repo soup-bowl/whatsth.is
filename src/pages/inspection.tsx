@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
-import { IInspectionDetails, PageProps } from '../interfaces';
+import { IInspectionDetails } from '../interfaces';
 import { UserAgentModel } from '../components/modals';
 import { ReportInspectionError } from '../components/reportButton';
 import DetailCard from '../components/inspectModules';
+import { ConnectionContext } from '..';
 
 const siteTitle = "Site Inspector";
 
-export function InspectionHome({ online }: PageProps) {
+export function InspectionHome() {
+	const { connectionState } = useContext(ConnectionContext);
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ export function InspectionHome({ online }: PageProps) {
 					label="URL"
 					variant="outlined"
 					onChange={changeForm}
-					disabled={!online}
+					disabled={!connectionState}
 				/>
 				<Box my={2}>
 					<Stack spacing={2} direction="row">
@@ -50,7 +52,7 @@ export function InspectionHome({ online }: PageProps) {
 							type="submit"
 							variant="contained"
 							value="Submit"
-							disabled={!online}
+							disabled={!connectionState}
 						>
 							Submit
 						</Button>

@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from 'react';
+import { createContext, StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -13,45 +13,56 @@ import { CronConversionPage } from './pages/cron';
 import UnixEpochPage from './pages/time';
 import { ErrorBoundary } from "./error";
 
-export default function App() {
-	// https://stackoverflow.com/a/65049865
-	const [connectionState, setConnectionState] = useState((navigator.onLine) ? true : false);
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (navigator.onLine) {
-				setConnectionState(true);
-			} else {
-				setConnectionState(false);
-			}
-		}, 5000);
+type ConnectionContextType = {
+	connectionState: boolean;
+};
 
-		return () => clearInterval(interval);
+export const ConnectionContext = createContext<ConnectionContextType>({
+	connectionState: false,
+});
+
+export function App() {
+	const [connectionState, setConnectionState] = useState(navigator.onLine);
+
+	useEffect(() => {
+		const handleOnline = () => setConnectionState(true);
+		const handleOffline = () => setConnectionState(false);
+
+		window.addEventListener("online", handleOnline);
+		window.addEventListener("offline", handleOffline);
+
+		return () => {
+			window.removeEventListener("online", handleOnline);
+			window.removeEventListener("offline", handleOffline);
+		};
 	}, []);
 
 	return (
 		<ErrorBoundary>
-			<HashRouter>
-				<Routes>
-					<Route path="/" element={<Layout online={connectionState} />}>
-						<Route index element={<Home online={connectionState} />} />
-						<Route path="help" element={<HelpPage />} />
-						<Route path="about" element={<AboutPage online={connectionState} />} />
-						<Route path="inspect" element={<InspectionHome online={connectionState} />} />
-						<Route path="inspect/*" element={<InspectonResultDisplay />} />
-						<Route path="domain/*" element={<DomainToolsHome online={connectionState} />} />
-						<Route path="cron" element={<CronConversionPage />} />
-						<Route path="cron/*" element={<CronConversionPage />} />
-						<Route path="time" element={<UnixEpochPage />} />
-						<Route path="time/*" element={<UnixEpochPage />} />
-						<Route path="convert" element={<StringConversionPage />} />
-						<Route path="encoder" element={<Navigate replace to="/convert" />} />
-						<Route path="decoder" element={<Navigate replace to="/convert" />} />
-						<Route path="unix" element={<Navigate replace to="/time" />} />
-						<Route path="dns/*" element={<Navigate replace to="/domain" />} />
-						<Route path="*" element={<Navigate replace to="/" />} />
-					</Route>
-				</Routes>
-			</HashRouter>
+			<ConnectionContext.Provider value={{ connectionState }}>
+				<HashRouter>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<Home />} />
+							<Route path="help" element={<HelpPage />} />
+							<Route path="about" element={<AboutPage />} />
+							<Route path="inspect" element={<InspectionHome />} />
+							<Route path="inspect/*" element={<InspectonResultDisplay />} />
+							<Route path="domain/*" element={<DomainToolsHome />} />
+							<Route path="cron" element={<CronConversionPage />} />
+							<Route path="cron/*" element={<CronConversionPage />} />
+							<Route path="time" element={<UnixEpochPage />} />
+							<Route path="time/*" element={<UnixEpochPage />} />
+							<Route path="convert" element={<StringConversionPage />} />
+							<Route path="encoder" element={<Navigate replace to="/convert" />} />
+							<Route path="decoder" element={<Navigate replace to="/convert" />} />
+							<Route path="unix" element={<Navigate replace to="/time" />} />
+							<Route path="dns/*" element={<Navigate replace to="/domain" />} />
+							<Route path="*" element={<Navigate replace to="/" />} />
+						</Route>
+					</Routes>
+				</HashRouter>
+			</ConnectionContext.Provider>
 		</ErrorBoundary>
 	);
 }

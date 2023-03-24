@@ -11,10 +11,6 @@ export interface IOpenAPIInfo {
 	version: string;
 }
 
-export interface PageProps {
-	online: boolean;
-}
-
 export interface IInspectionResult {
 	success: boolean;
 	message: IInspectionSiteDetails | string;

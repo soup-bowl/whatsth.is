@@ -5,9 +5,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import countryCodeEmoji from "country-code-emoji";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
-import { IIPCollection, IIPGeolocation, PageProps } from "../interfaces";
+import { IIPCollection, IIPGeolocation } from "../interfaces";
+import { ConnectionContext } from "..";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -122,7 +123,8 @@ export function UserAgentModel() {
 	);
 }
 
-export function MyIpAddressModal({ online }: PageProps) {
+export function MyIpAddressModal() {
+	const { connectionState } = useContext(ConnectionContext);
 	const [ips, setIPs] = useState<IIPCollection>({ ipv4: 'N/A', ipv6: 'N/A' });
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -143,7 +145,7 @@ export function MyIpAddressModal({ online }: PageProps) {
 
 	return (
 		<div>
-			<Button onClick={handleOpen} variant="outlined" disabled={!online}>My IP</Button>
+			<Button onClick={handleOpen} variant="outlined" disabled={!connectionState}>My IP</Button>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}

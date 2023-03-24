@@ -1,10 +1,9 @@
 import { Typography, Box, Link } from '@mui/material';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { PageProps } from '../interfaces';
 import { HomeMenu } from "../components/menu";
 
-export default function Home({ online }: PageProps) {
+export default function Home() {
 	const navigate = useNavigate();
 
 	useEffect(() => { document.title = "What's This?" });
@@ -17,7 +16,7 @@ export default function Home({ online }: PageProps) {
 				<Link sx={{ cursor: 'pointer', textDecoration: 'none' }} onClick={() => navigate('/help')}>see the help page</Link>.
 			</Typography>
 
-			<HomeMenu onlineState={online} />
+			<HomeMenu />
 		</Box>
 	)
 }
