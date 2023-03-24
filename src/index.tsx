@@ -4,14 +4,11 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import Layout from "./theme/layout";
-import Home from './pages/home';
-import { HelpPage, AboutPage } from './pages/help';
-import { InspectionHome, InspectonResultDisplay } from "./pages/inspection";
-import DomainToolsHome from './pages/domain';
-import StringConversionPage from './pages/converter';
-import { CronConversionPage } from './pages/cron';
-import UnixEpochPage from './pages/time';
 import { ErrorBoundary } from "./error";
+import {
+	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
+	InspectonResultDisplay, StringConversionPage, UnixEpochPage
+} from './pages';
 
 type ConnectionContextType = {
 	connectionState: boolean;
