@@ -1,4 +1,4 @@
-export default function WhatsThisLogo() {
+const WhatsThisLogo = () => {
 	return (
 		<svg width="180" height="180" version="1.1" viewBox="0 0 495.48 495.48">
 			<defs>
@@ -19,3 +19,5 @@ export default function WhatsThisLogo() {
 		</svg>
 	);
 }
+
+export default WhatsThisLogo;

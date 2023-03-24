@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { HomeMenu } from "../components/menu";
 
-export default function Home() {
+const Home = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => { document.title = "What's This?" });
@@ -20,3 +20,5 @@ export default function Home() {
 		</Box>
 	)
 }
+
+export default Home;

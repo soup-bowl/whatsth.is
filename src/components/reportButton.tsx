@@ -6,7 +6,7 @@ const BrowserDetails = () => {
 };
 
 export const GeneralTemplate = (url: string, result: any) => {
-	let template = `	
+	const template = `	
 	**What was the URL you were scanning?**
 	${url}
 	
@@ -36,8 +36,8 @@ interface Props {
 	label: string;
 }
 
-function ErrorButton({ title, body, label }: Props) {
-	let titleEncode = encodeURIComponent(title);
+const ErrorButton = ({ title, body, label }: Props) => {
+	const titleEncode = encodeURIComponent(title);
 	return (
 		<Button
 			variant="outlined"
@@ -55,7 +55,7 @@ interface InspProps {
 	object: IInspectionDetails[];
 }
 
-export function ReportInspectionError({ url, object }: InspProps) {
+export const ReportInspectionError = ({ url, object }: InspProps) => {
 	return (
 		<ErrorButton title={`Failed Detection URL: ${url}`} body={GeneralTemplate(url, object)} label="detection-fail" />
 	);
@@ -67,7 +67,7 @@ interface DNSProps {
 	object: ILookupTableLayout[];
 }
 
-export function ReportDNSError({ url, protocol, object }: DNSProps) {
+export const ReportDNSError = ({ url, protocol, object }: DNSProps) => {
 	return (
 		<ErrorButton title={`Failed ${protocol} on URL: ${url}`} body={GeneralTemplate(`[${protocol}] ${url}`, object)} label="detection-fail" />
 	);

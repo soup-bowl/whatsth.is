@@ -59,7 +59,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-export default function Layout() {
+const Layout = () => {
 	const { connectionState } = useContext(ConnectionContext);
 	const [open, setOpen] = useState(false);
 	const desktop = useMediaQuery("(min-width: 961px)");
@@ -164,3 +164,5 @@ export default function Layout() {
 		</ThemeProvider>
 	)
 };
+
+export default Layout;

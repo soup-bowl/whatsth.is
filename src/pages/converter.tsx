@@ -9,7 +9,7 @@ import { IStringMorph } from "../interfaces";
 
 const siteTitle = "String Conversions";
 
-export default function StringConversionPage() {
+const StringConversionPage = () => {
 	const [stringMorph, setStringMorph] = useState<IStringMorph>({ decodeError: false } as IStringMorph);
 	const [passphrase, setPassphrase] = useState('');
 	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
@@ -26,7 +26,7 @@ export default function StringConversionPage() {
 		setStringMorph({ decodeError: false } as IStringMorph);
 	};
 
-	function ConvertTo(thing: string, phrase: string = '') {
+	const ConvertTo = (thing: string, phrase: string = '') => {
 		switch (type) {
 			case ConversionType.Base64:
 				return btoa(thing);
@@ -44,7 +44,7 @@ export default function StringConversionPage() {
 		}
 	}
 
-	function ConvertFrom(thing: string, phrase: string = '') {
+	const ConvertFrom = (thing: string, phrase: string = '') => {
 		switch (type) {
 			case ConversionType.Base64:
 				return atob(thing);
@@ -155,3 +155,5 @@ export default function StringConversionPage() {
 		</>
 	);
 }
+
+export default StringConversionPage;

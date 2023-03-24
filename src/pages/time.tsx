@@ -8,8 +8,8 @@ const siteTitle = "Unix Timestamp Conversion";
 const maxInt32 = 2147483647;
 const MaxAcceptUnix = 253402300799999;
 
-export default function UnixEpochPage() {
-	function timeOutput(time: number): ITime {
+const UnixEpochPage = () => {
+	const timeOutput = (time: number): ITime => {
 		if (time > MaxAcceptUnix) {
 			try {
 				return timeStore;
@@ -105,3 +105,5 @@ export default function UnixEpochPage() {
 		</>
 	);
 }
+
+export default UnixEpochPage;

@@ -7,7 +7,7 @@ interface Props {
 	details?: IInspectionDetails;
 }
 
-export default function DetailCard({ details }: Props) {
+const DetailCard = ({ details }: Props) => {
 	if (details === undefined || details === null) {
 		return (<></>);
 	}
@@ -41,3 +41,5 @@ export default function DetailCard({ details }: Props) {
 		</Card>
 	);
 }
+
+export default DetailCard;

@@ -26,7 +26,7 @@ interface ServiceProps {
 	name: string;
 }
 
-export function ServiceIcon({ name }: ServiceProps) {
+export const ServiceIcon = ({ name }: ServiceProps) => {
 	switch (name.toLowerCase()) {
 		case 'wordpress':
 			return (<FontAwesomeIcon icon={faWordpress} />);
@@ -76,4 +76,4 @@ export function ServiceIcon({ name }: ServiceProps) {
 		default:
 			return (<></>);
 	}
-}
+};

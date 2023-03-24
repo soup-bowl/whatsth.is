@@ -25,7 +25,7 @@ export interface DialogTitleProps {
 	onClose: () => void;
 }
 
-function BootstrapDialogTitle(props: DialogTitleProps) {
+const BootstrapDialogTitle = (props: DialogTitleProps) => {
 	const { children, onClose, ...other } = props;
 
 	return (
@@ -49,7 +49,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
-export function UserAgentModel() {
+export const UserAgentModel = () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -123,7 +123,7 @@ export function UserAgentModel() {
 	);
 }
 
-export function MyIpAddressModal() {
+export const MyIpAddressModal = () => {
 	const { connectionState } = useContext(ConnectionContext);
 	const [ips, setIPs] = useState<IIPCollection>({ ipv4: 'N/A', ipv6: 'N/A' });
 	const [open, setOpen] = useState(false);
@@ -191,7 +191,7 @@ interface GeoProps {
 	ip: string;
 }
 
-export function IPAddressGeo({ ip}: GeoProps) {
+export const IPAddressGeo = ({ ip}: GeoProps) => {
 	const [geo, setGeo] = useState<any>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);

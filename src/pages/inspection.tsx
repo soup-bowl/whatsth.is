@@ -10,7 +10,7 @@ import { ConnectionContext } from "../context";
 
 const siteTitle = "Site Inspector";
 
-export function InspectionHome() {
+export const InspectionHome = () => {
 	const { connectionState } = useContext(ConnectionContext);
 	const [inputURL, setInputURL] = useState('');
 	const navigate = useNavigate();
@@ -68,7 +68,7 @@ interface Props {
 	url: string;
 }
 
-export function InspectonResult({ url }: Props) {
+export const InspectonResult = ({ url }: Props) => {
 	const navigate = useNavigate();
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -162,7 +162,7 @@ export function InspectonResult({ url }: Props) {
 	);
 };
 
-export function InspectonResultDisplay() {
+export const InspectonResultDisplay = () => {
 	const inspectionURL = window.location.hash.slice(10);
 
 	useEffect(() => { document.title = `${inspectionURL} - What's This?` });

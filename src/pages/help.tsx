@@ -9,7 +9,7 @@ import WhatsThisLogo from "../components/logo";
 import { IStorage } from "../interfaces";
 import { ConnectionContext } from "../context";
 
-export function HelpPage() {
+export const HelpPage = () => {
 	const siteTitle = "Help";
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
@@ -68,7 +68,7 @@ export function HelpPage() {
 }
 
 // https://stackoverflow.com/a/35696506
-function formatBytes(bytes: number, decimals: number = 2) {
+const formatBytes = (bytes: number, decimals: number = 2) => {
 	if (bytes === 0) return '0 Bytes';
 
 	const k = 1024;
@@ -80,7 +80,7 @@ function formatBytes(bytes: number, decimals: number = 2) {
 	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-export function AboutPage() {
+export const AboutPage = () => {
 	const siteTitle = "About";
 	const { connectionState } = useContext(ConnectionContext);
 

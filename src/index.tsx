@@ -11,7 +11,7 @@ import {
 } from './pages';
 import { ConnectionContext } from './context';
 
-function App() {
+const App = () => {
 	const [connectionState, setConnectionState] = useState(navigator.onLine);
 
 	useEffect(() => {

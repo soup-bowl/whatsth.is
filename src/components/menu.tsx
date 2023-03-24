@@ -5,16 +5,19 @@ import {
 import { useNavigate } from "react-router-dom";
 import { IMenu, IMenuCategory } from "../interfaces";
 
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import HomeIcon from '@mui/icons-material/Home';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import DnsIcon from '@mui/icons-material/Dns';
-import CachedIcon from '@mui/icons-material/Cached';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import TimelapseIcon from '@mui/icons-material/Timelapse';
-import HelpIcon from '@mui/icons-material/Help';
-import CoPresentIcon from '@mui/icons-material/CoPresent';
+import {
+	Brightness4 as Brightness4Icon,
+	Brightness7 as Brightness7Icon,
+	Home as HomeIcon,
+	TravelExplore as TravelExploreIcon,
+	Dns as DnsIcon,
+	Cached as CachedIcon,
+	AccessTime as AccessTimeIcon,
+	Timelapse as TimelapseIcon,
+	Help as HelpIcon,
+	CoPresent as CoPresentIcon,
+} from '@mui/icons-material';
+
 import { useContext } from "react";
 import { ConnectionContext } from "../context";
 
@@ -95,7 +98,7 @@ const getMenu: IMenu[] = [
 	}
 ];
 
-export function DrawMenu({ drawerClose, theme, colorMode }: MenuProps) {
+export const DrawMenu = ({ drawerClose, theme, colorMode }: MenuProps) => {
 	const { connectionState } = useContext(ConnectionContext);
 	const navigate = useNavigate();
 
@@ -168,7 +171,7 @@ const OptionSquare = styled(Paper)(({ theme }) => ({
 	minHeight: "125px"
 }));
 
-export function HomeMenu() {
+export const HomeMenu = () => {
 	const { connectionState } = useContext(ConnectionContext);
 	const navigate = useNavigate();
 

@@ -5,7 +5,7 @@ interface Props {
 	message?: string;
 }
 
-export default function ErrorMessage({ title, message = '' }: Props) {
+const ErrorMessage = ({ title, message = '' }: Props) => {
 	return (
 		<>
 			<Typography variant="h1" my={2}>{title}</Typography>
@@ -13,3 +13,5 @@ export default function ErrorMessage({ title, message = '' }: Props) {
 		</>
 	);
 };
+
+export default ErrorMessage;
