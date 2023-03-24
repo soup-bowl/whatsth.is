@@ -29,7 +29,7 @@ const UnixEpochPage = () => {
 	}
 
 	const [timeStore, setTimeStore] = useState<ITime>((): ITime => {
-		const inputGet: string = window.location.hash.slice(7);
+		const inputGet: string = window.location.hash.split('/').slice(-1)[0];
 		const inputIsNumber: boolean = /^\d+$/.test(inputGet);
 
 		return timeOutput(

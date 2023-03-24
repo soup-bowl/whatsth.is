@@ -3,7 +3,7 @@ import cronstrue from 'cronstrue';
 import { useEffect, useState } from "react";
 
 const CronConversionPage = () => {
-	const inputGet = window.location.hash.slice(7);
+	const inputGet = window.location.hash.split('/').slice(-1)[0];
 	const siteTitle = "Cron Calculator";
 
 	const checkValidGetCode = (input: string) => {
