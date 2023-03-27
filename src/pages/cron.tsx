@@ -1,33 +1,13 @@
 import { Link, TextField, Typography } from "@mui/material";
-import cronstrue from 'cronstrue';
 import { useEffect, useState } from "react";
+import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "../utils/cronUtils";
 
 const CronConversionPage = () => {
 	const inputGet = window.location.hash.split('/').slice(-1)[0];
 	const siteTitle = "Cron Calculator";
 
-	const checkValidGetCode = (input: string) => {
-		input = input.split('_').join(' ');
-		if (~[5, 6].indexOf(input.split(' ').length)) {
-			return true;
-		}
-		return false;
-	}
-	
-	const calculate = (input: string) => {
-		input = input.split('_').join(' ');
-		let output: string = '';
-		try {
-			output = cronstrue.toString(input);
-		} catch {
-			output = 'Unable to calculate - check string is valid';
-		}
-	
-		return output;
-	}
-
-	const [timeString, setTimeString] = useState<string>((checkValidGetCode(inputGet)) ? inputGet.split('_').join(' ') : '* * * * *');
-	const [timeResult, setTimeResult] = useState<string>(calculate(timeString));
+	const [timeString, setTimeString] = useState<string>(checkForValidCronCode(inputGet) ? decodeCronCode(inputGet) : '* * * * *');
+	const [timeResult, setTimeResult] = useState<string>(calculateCronString(timeString));
 
 	const timeChange = (e: any) => {
 		setTimeString(e.target.value);
@@ -36,8 +16,8 @@ const CronConversionPage = () => {
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
-		setTimeResult(calculate(timeString));
-		window.location.href = `/#/cron/${timeString.split(' ').join('_')}`
+		setTimeResult(calculateCronString(timeString));
+		window.location.href = `/#/cron/${encodeCronCode(timeString)}`
 	}, [timeString]);
 
 	return (
