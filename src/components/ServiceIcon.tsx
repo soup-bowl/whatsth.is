@@ -18,62 +18,39 @@ import {
 	faVimeo,
 	faVuejs,
 	faWikipediaW,
-	faWordpress
+	faWordpress,
+	IconDefinition
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface ServiceProps {
-	name: string;
-}
+const iconsByService: { [key: string]: IconDefinition } = {
+	wordpress: faWordpress,
+	drupal: faDrupal,
+	joomla: faJoomla,
+	phpbb: faPhp,
+	discourse: faDiscourse,
+	magento: faMagento,
+	shopify: faShopify,
+	mediawiki: faWikipediaW,
+	squarespace: faSquarespace,
+	'google tag manager': faGoogle,
+	'google analytics': faGoogle,
+	react: faReact,
+	'vue.js': faVuejs,
+	bootstrap: faBootstrap,
+	vimeo: faVimeo,
+	cloudflare: faCloudflare,
+	'aws-cloudfront': faAws,
+	aspnet: faMicrosoft,
+	kestrel: faMicrosoft,
+	ubuntu: faUbuntu,
+	java: faJava,
+	php: faPhp,
+	github: faGithub,
+	'github pages': faGithub,
+};
 
-export const ServiceIcon = ({ name }: ServiceProps) => {
-	switch (name.toLowerCase()) {
-		case 'wordpress':
-			return (<FontAwesomeIcon icon={faWordpress} />);
-		case 'drupal':
-			return (<FontAwesomeIcon icon={faDrupal} />);
-		case 'joomla':
-			return (<FontAwesomeIcon icon={faJoomla} />);
-		case 'phpbb':
-			return (<FontAwesomeIcon icon={faPhp} />);
-		case 'discourse':
-			return (<FontAwesomeIcon icon={faDiscourse} />);
-		case 'magento':
-			return (<FontAwesomeIcon icon={faMagento} />);
-		case 'shopify':
-			return (<FontAwesomeIcon icon={faShopify} />);
-		case 'mediawiki':
-			return (<FontAwesomeIcon icon={faWikipediaW} />);
-		case 'squarespace':
-			return (<FontAwesomeIcon icon={faSquarespace} />);
-		case 'google tag manager':
-		case 'google analytics':
-			return (<FontAwesomeIcon icon={faGoogle} />);
-		case 'react':
-			return (<FontAwesomeIcon icon={faReact} />);
-		case 'vue.js':
-			return (<FontAwesomeIcon icon={faVuejs} />);
-		case 'bootstrap':
-			return (<FontAwesomeIcon icon={faBootstrap} />);
-		case 'vimeo':
-			return (<FontAwesomeIcon icon={faVimeo} />);
-		case 'cloudflare':
-			return (<FontAwesomeIcon icon={faCloudflare} />);
-		case 'aws-cloudfront':
-			return (<FontAwesomeIcon icon={faAws} />);
-		case 'aspnet':
-		case 'kestrel':
-			return (<FontAwesomeIcon icon={faMicrosoft} />);
-		case 'ubuntu':
-			return (<FontAwesomeIcon icon={faUbuntu} />);
-		case 'java':
-			return (<FontAwesomeIcon icon={faJava} />);
-		case 'php':
-			return (<FontAwesomeIcon icon={faPhp} />);
-		case 'github':
-		case 'github pages':
-			return (<FontAwesomeIcon icon={faGithub} />);
-		default:
-			return (<></>);
-	}
+export const ServiceIcon = ({ name }: { name: string }) => {
+	const icon = iconsByService[name.toLowerCase()];
+	return icon ? <FontAwesomeIcon icon={icon} /> : <></>;
 };

@@ -2,10 +2,10 @@ import {
 	Box, FormControl, Grid, InputLabel, TextField, Typography,
 	MenuItem, Select, SelectChangeEvent, ListSubheader, Link
 } from "@mui/material";
-import { AES, TripleDES, enc } from 'crypto-js';
 import { useEffect, useState } from "react";
 import { ConversionType } from "../enums";
 import { IStringMorph } from "../interfaces";
+import { StringConversion } from "../utils/stringUtils";
 
 const siteTitle = "String Conversions";
 
@@ -25,42 +25,6 @@ const StringConversionPage = () => {
 		setPassphrase(e.target.value);
 		setStringMorph({ decodeError: false } as IStringMorph);
 	};
-
-	const ConvertTo = (thing: string, phrase: string = '') => {
-		switch (type) {
-			case ConversionType.Base64:
-				return btoa(thing);
-			case ConversionType.Hex:
-				// https://stackoverflow.com/a/60435654
-				return thing.split("").map(c => c.charCodeAt(0).toString(16).padStart(2, "0")).join("");
-			case ConversionType.URI:
-				return encodeURIComponent(thing);
-			case ConversionType.AES:
-				return AES.encrypt(thing, phrase).toString();
-			case ConversionType.TDES:
-				return TripleDES.encrypt(thing, phrase).toString();
-			default:
-				return thing;
-		}
-	}
-
-	const ConvertFrom = (thing: string, phrase: string = '') => {
-		switch (type) {
-			case ConversionType.Base64:
-				return atob(thing);
-			case ConversionType.Hex:
-				// https://stackoverflow.com/a/60435654
-				return thing.split(/(\w\w)/g).filter(p => !!p).map(c => String.fromCharCode(parseInt(c, 16))).join("")
-			case ConversionType.URI:
-				return decodeURIComponent(thing);
-			case ConversionType.AES:
-				return AES.decrypt(thing, phrase).toString(enc.Utf8);
-			case ConversionType.TDES:
-				return TripleDES.decrypt(thing, phrase).toString(enc.Utf8);
-			default:
-				return thing;
-		}
-	}
 
 	return (
 		<>
@@ -115,7 +79,7 @@ const StringConversionPage = () => {
 							onChange={(e) => {
 								setStringMorph({
 									decoded: e.target.value,
-									encoded: ConvertTo(e.target.value, passphrase),
+									encoded: StringConversion('to', type, e.target.value, passphrase),
 									decodeError: false
 								});
 							}}
@@ -139,7 +103,7 @@ const StringConversionPage = () => {
 								} as IStringMorph;
 
 								try {
-									convs.decoded = ConvertFrom(e.target.value, passphrase);
+									convs.decoded = StringConversion('from', type, e.target.value, passphrase);
 								} catch {
 									convs.decoded = stringMorph.decoded;
 									convs.decodeError = true;

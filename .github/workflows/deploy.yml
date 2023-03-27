@@ -14,7 +14,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
-
 jobs:
   build:
     environment:
@@ -43,11 +42,11 @@ jobs:
         uses: reedyuk/npm-version@1.1.1
         with:
           version: ${{ steps.get_version.outputs.version-without-v  }}-${{ steps.commit.outputs.short }}
-          git-tag-version: 'false'
+          git-tag-version: "false"
 
       - name: 📦 Build Site
         run: npm ci && npm run build
-      
+
       - name: 🚀 Pre-Deploy Site
         uses: actions/upload-pages-artifact@v1
         with:

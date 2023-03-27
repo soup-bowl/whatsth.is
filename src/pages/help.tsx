@@ -8,6 +8,7 @@ import CloudOffIcon from '@mui/icons-material/CloudOff';
 import WhatsThisLogo from "../components/logo";
 import { IStorage } from "../interfaces";
 import { ConnectionContext } from "../context";
+import { formatBytes } from "../utils/stringUtils";
 
 export const HelpPage = () => {
 	const siteTitle = "Help";
@@ -65,19 +66,6 @@ export const HelpPage = () => {
 			</Typography>
 		</>
 	);
-}
-
-// https://stackoverflow.com/a/35696506
-const formatBytes = (bytes: number, decimals: number = 2) => {
-	if (bytes === 0) return '0 Bytes';
-
-	const k = 1024;
-	const dm = decimals < 0 ? 0 : decimals;
-	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-	const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
 export const AboutPage = () => {

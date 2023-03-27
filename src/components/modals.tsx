@@ -191,8 +191,8 @@ interface GeoProps {
 	ip: string;
 }
 
-export const IPAddressGeo = ({ ip}: GeoProps) => {
-	const [geo, setGeo] = useState<any>();
+export const IPAddressGeo = ({ ip }: GeoProps) => {
+	const [geo, setGeo] = useState<IIPGeolocation | undefined>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -208,10 +208,6 @@ export const IPAddressGeo = ({ ip}: GeoProps) => {
 				setGeo(undefined);
 			});
 	}, [ip, open]);
-
-	if (geo === undefined) {
-		<IconButton size="small">🌐</IconButton>
-	}
 
 	return (
 		<div>
