@@ -5,7 +5,7 @@ import {
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, IDNSRecordDetails } from "../interfaces";
+import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 import { ReportDNSError } from "../components/reportButton";
@@ -16,10 +16,8 @@ const DomainToolsHome = () => {
 	const siteTitle = "Domain Tools";
 
 	const { connectionState } = useContext(ConnectionContext);
-	const [selectionProtocol, setSelectionProtocol] = useState('');
-	const [selectionURL, setSelectionURL] = useState('');
-	const [currentProtocol, setCurrentProtocol] = useState('');
-	const [currentURL, setCurrentURL] = useState('');
+	const [selectionInput, setSelectionInput] = useState<IDomainSelection>({} as IDomainSelection);
+	const [currentInput, setCurrentInput] = useState<IDomainSelection>({} as IDomainSelection);
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [tableData, setTableData] = useState<ILookupTable>({ columns: [], rows: [] } as ILookupTable);
@@ -35,15 +33,15 @@ const DomainToolsHome = () => {
 		if (method !== '') {
 			const urlParts = urlSegments.join('/').split('://');
 			const url = urlParts[urlParts.length - 1].split('/')[0];
-			setSelectionProtocol(method);
-			setCurrentProtocol(method);
-			setSelectionURL(url);
-			setCurrentURL(url);
+
+			const selectionSetter: IDomainSelection = { protocol: method, url: url };
+			setSelectionInput(selectionSetter);
+			setCurrentInput(selectionSetter);
 		}
 	}, []);
 
 	useEffect(() => {
-		if (currentProtocol !== '' && currentURL !== '') {
+		if (currentInput?.protocol !== undefined && currentInput.protocol !== '' && currentInput?.url !== undefined && currentInput.url !== '') {
 			setLoading(true);
 
 			let cols: GridColumns = [
@@ -84,8 +82,8 @@ const DomainToolsHome = () => {
 				},
 			];
 
-			if (currentProtocol !== "WHOIS") {
-				agent.DNS.dns(currentURL)
+			if (currentInput.protocol !== "WHOIS") {
+				agent.DNS.dns(currentInput.url)
 					.then((response) => {
 						let records: ILookupTableLayout[] = [];
 						let types: string[] = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS'];
@@ -120,7 +118,7 @@ const DomainToolsHome = () => {
 						setLoading(false);
 					});
 			} else {
-				agent.DNS.whois(currentURL)
+				agent.DNS.whois(currentInput.url)
 					.then(response => {
 						let records: ILookupTableLayout[] = [];
 
@@ -145,22 +143,19 @@ const DomainToolsHome = () => {
 					});
 			}
 		}
-	}, [currentProtocol, currentURL]);
+	}, [currentInput]);
 
 	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		window.location.href = `/#/domain/${selectionProtocol}/${selectionURL}`;
-		setCurrentProtocol(selectionProtocol);
-		setCurrentURL(selectionURL);
+		window.location.href = `/#/domain/${selectionInput.protocol}/${selectionInput.url}`;
+		setCurrentInput({ protocol: selectionInput.protocol, url: selectionInput.url });
 	};
 
 	const clearForm = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		window.location.href = `/#/domain`;
-		setSelectionProtocol('');
-		setCurrentProtocol('');
-		setSelectionURL('');
-		setCurrentURL('');
+		setCurrentInput({} as IDomainSelection);
+		setSelectionInput({} as IDomainSelection);
 		setTableData({ columns: [], rows: [] } as ILookupTable);
 	};
 
@@ -184,8 +179,8 @@ const DomainToolsHome = () => {
 									id="type"
 									label="Type"
 									disabled={!connectionState}
-									value={selectionProtocol}
-									onChange={(e: SelectChangeEvent) => (setSelectionProtocol(e.target.value))}
+									value={selectionInput?.protocol ?? ''}
+									onChange={(e: SelectChangeEvent) => setSelectionInput({ ...selectionInput, protocol: e.target.value })}
 								>
 									<MenuItem key="DNS" value="DNS">DNS Records</MenuItem>
 									<MenuItem key="WHOIS" value="WHOIS">WHOIS Query</MenuItem>
@@ -199,8 +194,8 @@ const DomainToolsHome = () => {
 								placeholder="soupbowl.io"
 								label="URL"
 								variant="outlined"
-								value={selectionURL}
-								onChange={(e: any) => (setSelectionURL(e.target.value))}
+								value={selectionInput?.url ?? ''}
+								onChange={(e: any) => setSelectionInput({ ...selectionInput, url: e.target.value })}
 								disabled={!connectionState}
 							/>
 						</Grid>
@@ -219,7 +214,7 @@ const DomainToolsHome = () => {
 								variant="outlined"
 								value="Return"
 								onClick={clearForm}
-								disabled={(currentProtocol === '')}
+								disabled={(currentInput.protocol === '')}
 							>
 								Clear Selection
 							</Button>
@@ -229,14 +224,14 @@ const DomainToolsHome = () => {
 					<Grid item>
 						{tableData.rows.length > 0 ?
 							<Box>
-								<Typography my={2} component="h2" variant="h5">{currentProtocol} records for {currentURL}</Typography>
+								<Typography my={2} component="h2" variant="h5">{currentInput.protocol} records for {currentInput.url}</Typography>
 								<Box>
-									{currentProtocol === "DNS" &&
+									{currentInput.protocol === "DNS" &&
 										<Typography my={2}>
 											Powered by <Link href="https://www.dnspython.org/">dnspython</Link>.
 										</Typography>
 									}
-									{currentProtocol === "WHOIS" &&
+									{currentInput.protocol === "WHOIS" &&
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
 											this tool does not show ownership contact information. Powered by
@@ -259,12 +254,12 @@ const DomainToolsHome = () => {
 									/>
 								</Box>
 								<Box my={2}>
-									<ReportDNSError url={currentURL} protocol={currentProtocol} object={tableData.rows}  />
+									<ReportDNSError url={currentInput.url} protocol={currentInput.protocol} object={tableData.rows} />
 								</Box>
 							</Box>
 							:
 							<Box>
-								{currentURL !== '' &&
+								{currentInput?.url !== undefined && currentInput.url !== '' &&
 									<>
 										{loading ?
 											<>
@@ -273,7 +268,7 @@ const DomainToolsHome = () => {
 											</>
 											:
 											<Typography my={2}>
-												There are no <strong>{currentProtocol}</strong> records to display for <strong>{currentURL}</strong>.
+												There are no <strong>{currentInput.protocol}</strong> records to display for <strong>{currentInput.url}</strong>.
 											</Typography>}
 									</>
 								}

@@ -152,3 +152,8 @@ export interface IIPGeolocation {
 	postal: string;
 	icon?: string;
 }
+
+export interface IDomainSelection {
+	protocol: string;
+	url: string;
+}
