@@ -5,7 +5,7 @@ import {
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection } from "../interfaces";
+import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResponseRecordListingOptions } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 import { ReportDNSError } from "../components/reportButton";
@@ -86,23 +86,20 @@ const DomainToolsHome = () => {
 				agent.DNS.dns(currentInput.url)
 					.then((response) => {
 						let records: ILookupTableLayout[] = [];
-						let types: string[] = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS'];
+						let types: (keyof IDNSResponseRecordListingOptions['records'])[] = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS'];
 
-						types.forEach((type: string, i: number) => {
-							// @ts-ignore
-							let key: keyof typeof response.records = type;
-							if (response.records[key].length > 0) {
+						types.forEach((type: keyof IDNSResponseRecordListingOptions['records'], i: number) => {
+							if (response.records[type].length > 0) {
 								let collection: string[] = [];
 								if (type === 'MX') {
-									// @ts-ignore
-									response.records[key].forEach((entry: IDNSRecordDetails) => {
+									response.records[type].forEach((entry: IDNSRecordDetails) => {
 										collection.push(`${entry.address} (Priority ${entry.priority})`);
 									});
 								}
 								records.push({
 									id: i,
 									key: type,
-									value: (collection.length > 0) ? collection.join('<!=BREAK=!>') : response.records[key].join('<!=BREAK=!>')
+									value: (collection.length > 0) ? collection.join('<!=BREAK=!>') : response.records[type].join('<!=BREAK=!>')
 								});
 							}
 						});

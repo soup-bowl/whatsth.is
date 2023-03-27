@@ -91,6 +91,17 @@ export interface IDNSRecordDetails {
 	priority: number;
 }
 
+export interface IDNSResponseRecordListingOptions {
+	records: {
+		A: string[];
+		AAAA: string[];
+		CNAME: string[];
+		MX: IDNSRecordDetails[];
+		TXT: string[];
+		NS: string[];
+	};
+}
+
 export interface IWHOISResult {
 	success: boolean;
 	domain: string;
