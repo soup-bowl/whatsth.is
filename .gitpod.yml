@@ -8,15 +8,16 @@ tasks:
     before: cd ../api.whatsth.is
     env:
       REDIS_URL: redis://localhost
+      DOTNET_ROOT: /home/gitpod/dotnet
+      PATH: /home/gitpod/dotnet:$PATH
     init: |
       docker pull redis/redis-stack:latest
-      python -m venv env
-      source env/bin/activate
-      poetry install
+      mkdir -p /home/gitpod/dotnet
+      curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.100 --install-dir /home/gitpod/dotnet
+      /home/gitpod/dotnet/dotnet restore
     command: |
-      source env/bin/activate
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
-      poetry run uvicorn api.main:app --reload --port 43594
+      /home/gitpod/dotnet/dotnet run --project Whatsthis.API
   - name: Frontend
     init: |
       nvm install 18
