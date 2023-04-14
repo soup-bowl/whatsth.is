@@ -9,8 +9,8 @@ tasks:
     env:
       REDIS_URL: redis://localhost
       DOTNET_ROOT: /home/gitpod/dotnet
-      PATH: /home/gitpod/dotnet:$PATH
     init: |
+      printf 'export PATH="%s:$PATH"\n' "/home/gitpod/dotnet" >> $HOME/.bashrc
       docker pull redis/redis-stack:latest
       mkdir -p /home/gitpod/dotnet
       curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.100 --install-dir /home/gitpod/dotnet
