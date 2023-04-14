@@ -10,7 +10,7 @@ const requests = {
 };
 
 const Details = {
-	openapi: () => requests.get<IOpenAPI>('/openapi.json'),
+	openapi: () => requests.get<IOpenAPI>('/swagger/v1/swagger.json'),
 }
 
 const Inspection = {
