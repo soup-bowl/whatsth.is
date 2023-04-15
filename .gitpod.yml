@@ -1,3 +1,4 @@
+
 checkoutLocation: whatsth.is
 additionalRepositories:
   - url: https://github.com/soup-bowl/api.whatsth.is
@@ -47,3 +48,10 @@ ports:
     name: Redis GUI
     description: RedisInsight client for the backend API.
     visibility: private
+
+vscode:
+  extensions:
+    - muhammad-sammy.csharp
+    - cweijan.vscode-redis-client
+    - rangav.vscode-thunder-client
+    - ms-azuretools.vscode-docker
