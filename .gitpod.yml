@@ -12,13 +12,14 @@ tasks:
       DOTNET_ROOT: /home/gitpod/dotnet
     init: |
       printf 'export PATH="%s:$PATH"\n' "/home/gitpod/dotnet" >> $HOME/.bashrc
+      source $HOME/.bashrc
       docker pull redis/redis-stack:latest
       mkdir -p /home/gitpod/dotnet
       curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 7.0.100 --install-dir /home/gitpod/dotnet
       /home/gitpod/dotnet/dotnet restore
     command: |
       docker run -d -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
-      /home/gitpod/dotnet/dotnet run --project Whatsthis.API
+      /home/gitpod/dotnet/dotnet watch run --project Whatsthis.API
   - name: Frontend
     init: |
       nvm install 18
