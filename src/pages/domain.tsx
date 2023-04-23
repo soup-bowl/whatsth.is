@@ -225,7 +225,7 @@ const DomainToolsHome = () => {
 								<Box>
 									{currentInput.protocol === "DNS" &&
 										<Typography my={2}>
-											Powered by <Link href="https://www.dnspython.org/">dnspython</Link>.
+											DNS Lookup powered by <Link href="https://dnsclient.michaco.net/">DnsClient.NET</Link>.
 										</Typography>
 									}
 									{currentInput.protocol === "WHOIS" &&

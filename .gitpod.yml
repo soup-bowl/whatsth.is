@@ -41,7 +41,7 @@ ports:
     onOpen: open-browser
   - port: 43594
     name: Backend
-    description: Backend Python FastAPI.
+    description: Backend .NET API.
     visibility: public
   - port: 8001
     name: Redis GUI
