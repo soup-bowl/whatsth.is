@@ -12,20 +12,13 @@ export interface IOpenAPIInfo {
 }
 
 export interface IInspectionResult {
-	success: boolean;
-	message: IInspectionSiteDetails | string;
+	technology: IInspectionTechnology;
 	url: string;
 }
 
-export interface IInspectionSiteDetails {
-	title: string;
-	technology: IInspectionTechnology;
-	additional?: IInspectionWordPress;
-}
-
 export interface IInspectionTechnology {
-	cms: IInspectionDetails | null;
-	frontend: IInspectionDetails | null;
+	cms: IInspectionDetails[];
+	frontend: IInspectionDetails[];
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
 	seo: IInspectionDetails[];
@@ -38,8 +31,8 @@ export interface IInspectionDetails {
 	description: string;
 	type?: string;
 	url: string;
-	match_available: number;
-	match_on: string[];
+	matchAvailable: number;
+	matchedOn: string[];
 }
 
 export interface IInspectionWordPress {
@@ -72,18 +65,12 @@ export interface ILookupTableLayout {
 }
 
 export interface IDNSResult {
-	success: boolean;
-	message: string;
-	records: IDNSRecord;
-}
-
-export interface IDNSRecord {
-	A: string[];
-	AAAA: string[];
-	CNAME: string[];
-	MX: IDNSRecordDetails[];
-	TXT: string[];
-	NS: string[];
+	a: string[];
+	aaaa: string[];
+	cname: string[];
+	mx: IDNSRecordDetails[];
+	txt: string[];
+	ns: string[];
 }
 
 export interface IDNSRecordDetails {
@@ -91,26 +78,14 @@ export interface IDNSRecordDetails {
 	priority: number;
 }
 
-export interface IDNSResponseRecordListingOptions {
-	records: {
-		A: string[];
-		AAAA: string[];
-		CNAME: string[];
-		MX: IDNSRecordDetails[];
-		TXT: string[];
-		NS: string[];
-	};
-}
-
 export interface IWHOISResult {
-	success: boolean;
 	domain: string;
 	registrar: string;
-	whois_operator: string;
-	nameservers: string[];
-	date_created: string;
-	date_updated: string;
-	date_expires: string;
+	whois: string;
+	nameServers: string[];
+	created: string;
+	updated: string;
+	expires: string;
 }
 
 export interface IStringMorph {

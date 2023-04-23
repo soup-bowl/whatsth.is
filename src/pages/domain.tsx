@@ -5,7 +5,7 @@ import {
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResponseRecordListingOptions } from "../interfaces";
+import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResult } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
 import '../theme/grid.css';
 import { ReportDNSError } from "../components/reportButton";
@@ -86,20 +86,20 @@ const DomainToolsHome = () => {
 				agent.DNS.dns(currentInput.url)
 					.then((response) => {
 						let records: ILookupTableLayout[] = [];
-						let types: (keyof IDNSResponseRecordListingOptions['records'])[] = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS'];
+						let types: (keyof IDNSResult)[] = ['a', 'aaaa', 'cname', 'mx', 'txt', 'ns'];
 
-						types.forEach((type: keyof IDNSResponseRecordListingOptions['records'], i: number) => {
-							if (response.records[type].length > 0) {
+						types.forEach((type: keyof IDNSResult, i: number) => {
+							if (response[type].length > 0) {
 								let collection: string[] = [];
-								if (type === 'MX') {
-									response.records[type].forEach((entry: IDNSRecordDetails) => {
+								if (type === 'mx') {
+									response[type].forEach((entry: IDNSRecordDetails) => {
 										collection.push(`${entry.address} (Priority ${entry.priority})`);
 									});
 								}
 								records.push({
 									id: i,
 									key: type,
-									value: (collection.length > 0) ? collection.join('<!=BREAK=!>') : response.records[type].join('<!=BREAK=!>')
+									value: (collection.length > 0) ? collection.join('<!=BREAK=!>') : response[type].join('<!=BREAK=!>')
 								});
 							}
 						});
@@ -122,10 +122,10 @@ const DomainToolsHome = () => {
 						records.push(
 							{ id: 0, key: 'Domain', value: response.domain },
 							{ id: 1, key: 'Registrar', value: response.registrar },
-							{ id: 2, key: 'WHOIS', value: response.whois_operator },
-							{ id: 3, key: 'First Registered', value: new Date(response.date_created).toLocaleDateString() },
-							{ id: 4, key: 'Renewal Date', value: new Date(response.date_updated).toLocaleDateString() },
-							{ id: 5, key: 'Expiry Date', value: new Date(response.date_expires).toLocaleDateString() },
+							{ id: 2, key: 'WHOIS', value: response.whois },
+							{ id: 3, key: 'First Registered', value: new Date(response.created).toLocaleDateString() },
+							{ id: 4, key: 'Renewal Date', value: new Date(response.updated).toLocaleDateString() },
+							{ id: 5, key: 'Expiry Date', value: new Date(response.expires).toLocaleDateString() },
 						);
 
 						setTableData({
@@ -225,14 +225,13 @@ const DomainToolsHome = () => {
 								<Box>
 									{currentInput.protocol === "DNS" &&
 										<Typography my={2}>
-											Powered by <Link href="https://www.dnspython.org/">dnspython</Link>.
+											DNS Lookup powered by <Link href="https://dnsclient.michaco.net/">DnsClient.NET</Link>.
 										</Typography>
 									}
 									{currentInput.protocol === "WHOIS" &&
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,
-											this tool does not show ownership contact information. Powered by
-											the <Link href="https://pypi.org/project/python-whois/">Python WHOIS library</Link>.
+											this tool does not show ownership contact information.
 										</Typography>
 									}
 									<DataGrid

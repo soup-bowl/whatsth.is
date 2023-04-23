@@ -8,7 +8,7 @@ tasks:
   - name: Backend
     before: cd ../api.whatsth.is
     env:
-      REDIS_URL: redis://localhost
+      REDIS_URL: localhost:6379
       DOTNET_ROOT: /home/gitpod/dotnet
     init: |
       printf 'export PATH="%s:$PATH"\n' "/home/gitpod/dotnet" >> $HOME/.bashrc
@@ -43,7 +43,7 @@ ports:
     onOpen: open-browser
   - port: 43594
     name: Backend
-    description: Backend Python FastAPI.
+    description: Backend .NET API.
     visibility: public
   - port: 8001
     name: Redis GUI

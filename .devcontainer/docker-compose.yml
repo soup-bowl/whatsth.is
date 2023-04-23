@@ -7,7 +7,7 @@ services:
   apiserver:
     image: ghcr.io/soup-bowl/whatsthis-api:edge
     ports:
-      - 43594:43594
+      - 43594:80
     environment:
       WTAPI_CORS_POLICY: "*"
       REDIS_URL: redis://redis
