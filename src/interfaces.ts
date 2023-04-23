@@ -65,18 +65,12 @@ export interface ILookupTableLayout {
 }
 
 export interface IDNSResult {
-	success: boolean;
-	message: string;
-	records: IDNSRecord;
-}
-
-export interface IDNSRecord {
-	A: string[];
-	AAAA: string[];
-	CNAME: string[];
-	MX: IDNSRecordDetails[];
-	TXT: string[];
-	NS: string[];
+	a: string[];
+	aaaa: string[];
+	cname: string[];
+	mx: IDNSRecordDetails[];
+	txt: string[];
+	ns: string[];
 }
 
 export interface IDNSRecordDetails {
@@ -84,26 +78,14 @@ export interface IDNSRecordDetails {
 	priority: number;
 }
 
-export interface IDNSResponseRecordListingOptions {
-	records: {
-		A: string[];
-		AAAA: string[];
-		CNAME: string[];
-		MX: IDNSRecordDetails[];
-		TXT: string[];
-		NS: string[];
-	};
-}
-
 export interface IWHOISResult {
-	success: boolean;
 	domain: string;
 	registrar: string;
-	whois_operator: string;
-	nameservers: string[];
-	date_created: string;
-	date_updated: string;
-	date_expires: string;
+	whois: string;
+	nameServers: string[];
+	created: string;
+	updated: string;
+	expires: string;
 }
 
 export interface IStringMorph {
