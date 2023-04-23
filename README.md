@@ -17,8 +17,6 @@ React-based [progressive web app][pwa] proof-of-concept designed to provide a to
 
 This app comprises of two components - A React frontend (this repository), and a [C# .NET inspection API][api].
 
-[The website this powers][site] is deployed by the 'main' branch. All changes and PRs go into the 'develop' branch (see [Git Flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)).
-
 ## Getting Started
 
 ### With Gitpod
