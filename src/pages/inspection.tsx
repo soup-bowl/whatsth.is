@@ -85,15 +85,13 @@ export const InspectonResult = ({ url }: Props) => {
 
 		agent.Inspection.inspect(url)
 			.then(response => {
-				if (typeof response.message !== 'string') {
-					if (response.message.technology.cms !== null) { addSoftwareToList(response.message.technology.cms, 'CMS') };
-					if (response.message.technology.frontend !== null) { addSoftwareToList(response.message.technology.frontend, 'Frontend') };
-					response.message.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
-					response.message.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
-					response.message.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
-					response.message.technology.language.forEach((res) => addSoftwareToList(res, 'Language'));
-					response.message.technology.server.forEach((res) => addSoftwareToList(res, 'Server'));
-				}
+				response.technology.cms.forEach((res) => addSoftwareToList(res, 'CMS'));
+				response.technology.frontend.forEach((res) => addSoftwareToList(res, 'Frontend'));
+				response.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
+				response.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
+				response.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
+				response.technology.language.forEach((res) => addSoftwareToList(res, 'Language'));
+				response.technology.server.forEach((res) => addSoftwareToList(res, 'Server'));
 			})
 			.catch(() => setRError(true))
 			.finally(() => setLoading(false));

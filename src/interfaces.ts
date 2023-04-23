@@ -12,20 +12,13 @@ export interface IOpenAPIInfo {
 }
 
 export interface IInspectionResult {
-	success: boolean;
-	message: IInspectionSiteDetails | string;
+	technology: IInspectionTechnology;
 	url: string;
 }
 
-export interface IInspectionSiteDetails {
-	title: string;
-	technology: IInspectionTechnology;
-	additional?: IInspectionWordPress;
-}
-
 export interface IInspectionTechnology {
-	cms: IInspectionDetails | null;
-	frontend: IInspectionDetails | null;
+	cms: IInspectionDetails[];
+	frontend: IInspectionDetails[];
 	javascript: IInspectionDetails[];
 	cdn: IInspectionDetails[];
 	seo: IInspectionDetails[];
@@ -38,8 +31,8 @@ export interface IInspectionDetails {
 	description: string;
 	type?: string;
 	url: string;
-	match_available: number;
-	match_on: string[];
+	matchAvailable: number;
+	matchedOn: string[];
 }
 
 export interface IInspectionWordPress {

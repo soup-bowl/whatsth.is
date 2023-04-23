@@ -27,7 +27,7 @@ const DetailCard = ({ details }: Props) => {
 							sx={{ marginRight: 1 }}
 						/>
 					}
-					{details.match_on.length} out of {details.match_available} matches
+					{details.matchedOn.length} out of {details.matchAvailable} matches
 				</Typography>
 				<Typography variant="body2">
 					{details.description}
