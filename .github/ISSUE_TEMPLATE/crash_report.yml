@@ -1,0 +1,47 @@
+name: Report a System Crash
+description: Hit a :( screen? Report it here.
+labels: ["bug"]
+assignees: soup-bowl
+body:
+  - type: checkboxes
+    id: verifications
+    attributes:
+      label: I have...
+      options:
+        - label: Cleared my cache
+          required: true
+  - type: checkboxes
+    id: userenv
+    attributes:
+      label: The following are relevant to my situation...
+      options:
+        - label: I was on Desktop.
+        - label: I was on Mobile.
+        - label: I have installed the app in my browser (mention below).
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: If installed, it'll still link to the browser you installed with.
+      placeholder: e.g. Firefox 110
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What were you doing when the bug occurred?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What was the result you expected?
+    validations:
+      required: true
+  - type: textarea
+    id: trace
+    attributes:
+      label: Stack Trace / Debug Output
+      description: If you got an output, Paste the Stack Trace below.
+    validations:
+      required: false
