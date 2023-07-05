@@ -5,9 +5,10 @@ import { ServiceIcon } from ".";
 
 interface Props {
 	details?: IInspectionDetails;
+	url?: string;
 }
 
-const DetailCard = ({ details }: Props) => {
+const DetailCard = ({ details, url }: Props) => {
 	if (details === undefined || details === null) {
 		return (<></>);
 	}
@@ -37,6 +38,10 @@ const DetailCard = ({ details }: Props) => {
 				<Button href={details.url} target="_blank" rel="noopener">
 					Learn more
 				</Button>
+				{(url !== undefined && details.name === 'WordPress') &&
+					<Button href={`https://soupbowl.io/pressify/#/${url}`}>
+						Pressify
+					</Button>}
 			</CardActions>
 		</Card>
 	);

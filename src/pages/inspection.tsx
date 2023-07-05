@@ -119,7 +119,7 @@ export const InspectonResult = ({ url }: Props) => {
 								{siteDetails.map((jslib, i) => {
 									return (
 										<Grid key={i} item xs={12} md={6}>
-											<DetailCard details={jslib} />
+											<DetailCard details={jslib} url={url} />
 										</Grid>
 									);
 								})}
