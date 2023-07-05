@@ -3,9 +3,7 @@ import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, Aler
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
 import { IInspectionDetails } from '../interfaces';
-import { UserAgentModel } from '../components/modals';
-import { ReportInspectionError } from '../components/reportButton';
-import DetailCard from '../components/inspectModules';
+import { DetailCard, ReportInspectionError, UserAgentModel } from '../components';
 import { ConnectionContext } from "../context";
 
 const siteTitle = "Site Inspector";

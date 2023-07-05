@@ -1,7 +1,7 @@
 import { Typography, Box, Link } from '@mui/material';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { HomeMenu } from "../components/menu";
+import { HomeMenu } from '../components';
 
 const Home = () => {
 	const navigate = useNavigate();

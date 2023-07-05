@@ -7,7 +7,7 @@ import axios from "axios";
 import countryCodeEmoji from "country-code-emoji";
 import { useContext, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
-import { IIPCollection, IIPGeolocation } from "../interfaces";
+import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
 import { ConnectionContext } from "../context";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -18,12 +18,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 		padding: theme.spacing(1),
 	},
 }));
-
-export interface DialogTitleProps {
-	id: string;
-	children?: React.ReactNode;
-	onClose: () => void;
-}
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
 	const { children, onClose, ...other } = props;

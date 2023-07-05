@@ -1,6 +1,12 @@
 import { GridColumns } from "@mui/x-data-grid";
 import { SecondType } from "./enums";
 
+export interface DialogTitleProps {
+	id: string;
+	children?: React.ReactNode;
+	onClose: () => void;
+}
+
 export interface IOpenAPI {
 	info: IOpenAPIInfo;
 }

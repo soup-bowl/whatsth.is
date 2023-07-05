@@ -5,7 +5,7 @@ import agent from "../api/agent";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import WhatsThisLogo from "../components/logo";
+import { WhatsThisLogo } from "../components";
 import { IStorage } from "../interfaces";
 import { ConnectionContext } from "../context";
 import { formatBytes } from "../utils/stringUtils";

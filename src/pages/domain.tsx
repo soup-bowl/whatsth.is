@@ -6,9 +6,8 @@ import { DataGrid, GridColumns } from "@mui/x-data-grid";
 import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResult } from "../interfaces";
-import { IPAddressGeo, MyIpAddressModal } from "../components/modals";
+import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
 import '../theme/grid.css';
-import { ReportDNSError } from "../components/reportButton";
 import { ConnectionContext } from "../context";
 import { isValidIP } from "../utils/stringUtils";
 
