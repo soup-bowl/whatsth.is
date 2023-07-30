@@ -162,6 +162,13 @@ export interface HSL {
 	l: number;
 }
 
+export interface CMYK {
+	c: number;
+	m: number;
+	y: number;
+	k: number;
+}
+
 export interface IColourValues {
 	hex: string;
 	rgb: RGB;
