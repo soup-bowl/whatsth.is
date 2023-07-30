@@ -16,6 +16,7 @@ import {
 	Timelapse as TimelapseIcon,
 	Help as HelpIcon,
 	CoPresent as CoPresentIcon,
+	ColorLens as ColorLensIcon,
 } from '@mui/icons-material';
 
 import { useContext } from "react";
@@ -80,6 +81,13 @@ const getMenu: IMenu[] = [
 		icon: <CachedIcon />,
 		category: Category.Conversion,
 		url: '/convert',
+		needsInternet: false,
+	},
+	{
+		name: 'Colour Picker',
+		icon: <ColorLensIcon />,
+		category: Category.Conversion,
+		url: '/colour',
 		needsInternet: false,
 	},
 	{

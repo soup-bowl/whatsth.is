@@ -7,7 +7,7 @@ import Layout from "./theme/layout";
 import { ErrorBoundary } from "./error";
 import {
 	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
-	InspectonResultDisplay, StringConversionPage, UnixEpochPage
+	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage
 } from './pages';
 import { ConnectionContext } from './context';
 
@@ -39,6 +39,8 @@ const App = () => {
 							<Route path="inspect" element={<InspectionHome />} />
 							<Route path="inspect/*" element={<InspectonResultDisplay />} />
 							<Route path="domain/*" element={<DomainToolsHome />} />
+							<Route path="colour" element={<ColourPickerPage />} />
+							<Route path="color" element={<Navigate replace to="/colour" />} />
 							<Route path="cron" element={<CronConversionPage />} />
 							<Route path="cron/*" element={<CronConversionPage />} />
 							<Route path="time" element={<UnixEpochPage />} />
