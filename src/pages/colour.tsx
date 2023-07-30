@@ -31,7 +31,7 @@ const ColourPickerPage = () => {
 			{ key: 'CMYK', value: `C: ${cmyk.c}, M: ${cmyk.m}, Y: ${cmyk.y}, K: ${cmyk.k}` },
 			{ key: 'HTML Name', value: getHTMLColorName(colours.hex) },
 			{ key: 'XKCD Name', value: getXKCDColorName(colours.hex) },
-			{ key: '0x Variant', value: colours.hex.replace('#', '0x') },
+			{ key: '0x Variant', value: colours.hex.toUpperCase().replace('#', '0x') },
 		]);
 	}, [colours]);
 
