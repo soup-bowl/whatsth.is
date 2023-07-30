@@ -20,64 +20,6 @@ const ColourPickerPage = () => {
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography my={2}>Select a colour you like, and convert it into many different formats.</Typography>
-			<Grid container spacing={2}>
-				<Grid item xs={12} sm={6}>
-					<TextField fullWidth
-						id="hex"
-						label="Hex"
-						value={colours.hex}
-						InputLabelProps={{ shrink: true }}
-						onChange={(e) => setColours(hexToAll(e.target.value))}
-					/>
-				</Grid>
-				<Grid container item xs={12} sm={6}>
-					<Grid item xs={4}>
-						<TextField fullWidth
-							type="number"
-							id="rgb-r"
-							label="R"
-							value={colours.rgb.r}
-							InputProps={{ inputProps: { min: 0, max: 255 } }}
-							InputLabelProps={{ shrink: true }}
-							onChange={(e) => {
-								const rgb: RGB = { ...colours.rgb, r: parseInt(e.target.value) }
-								const hex: string = rgbToHex(rgb);
-								setColours(hexToAll(hex));
-							}}
-						/>
-					</Grid>
-					<Grid item xs={4}>
-						<TextField fullWidth
-							type="number"
-							id="rgb-g"
-							label="G"
-							value={colours.rgb.g}
-							InputProps={{ inputProps: { min: 0, max: 255 } }}
-							InputLabelProps={{ shrink: true }}
-							onChange={(e) => {
-								const rgb: RGB = { ...colours.rgb, g: parseInt(e.target.value) }
-								const hex: string = rgbToHex(rgb);
-								setColours(hexToAll(hex));
-							}}
-						/>
-					</Grid>
-					<Grid item xs={4}>
-						<TextField fullWidth
-							type="number"
-							id="rgb-b"
-							label="B"
-							value={colours.rgb.b}
-							InputProps={{ inputProps: { min: 0, max: 255 } }}
-							InputLabelProps={{ shrink: true }}
-							onChange={(e) => {
-								const rgb: RGB = { ...colours.rgb, b: parseInt(e.target.value) }
-								const hex: string = rgbToHex(rgb);
-								setColours(hexToAll(hex));
-							}}
-						/>
-					</Grid>
-				</Grid>
-			</Grid>
 			<Card raised={true} sx={{
 				backgroundColor: colours.hex,
 				backgroundImage: 'none',
@@ -92,16 +34,69 @@ const ColourPickerPage = () => {
 								<Typography sx={{ fontWeight: 'bold' }}>Hex</Typography>
 							</Grid>
 							<Grid item xs={12} sm={8}>
-								<Typography>{colours.hex}</Typography>
+								<TextField fullWidth
+									variant="standard"
+									value={colours.hex}
+									inputProps={{ style: { color: rgbToString(getContrastingColor(colours.rgb)) }}}
+									onChange={(e) => setColours(hexToAll(e.target.value))}
+								/>
 							</Grid>
 
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>RGB</Typography>
 							</Grid>
-							<Grid item xs={12} sm={8}>
-								<Typography>{`R: ${colours.rgb.r}, G: ${colours.rgb.g}, B: ${colours.rgb.b}`}</Typography>
+							<Grid item xs={12} sm={8} container>
+								<Grid item xs={4}>
+									<TextField fullWidth
+										variant="standard"
+										type="number"
+										value={colours.rgb.r}
+										InputProps={{
+											inputProps: { min: 0, max: 255 },
+											style: { color: rgbToString(getContrastingColor(colours.rgb)) }
+										}}
+										onChange={(e) => {
+											const rgb: RGB = { ...colours.rgb, r: parseInt(e.target.value) }
+											const hex: string = rgbToHex(rgb);
+											setColours(hexToAll(hex));
+										}}
+									/>
+								</Grid>
+								<Grid item xs={4}>
+									<TextField fullWidth
+										variant="standard"
+										type="number"
+										value={colours.rgb.g}
+										InputProps={{
+											inputProps: { min: 0, max: 255 },
+											style: { color: rgbToString(getContrastingColor(colours.rgb)) }
+										}}
+										onChange={(e) => {
+											const rgb: RGB = { ...colours.rgb, g: parseInt(e.target.value) }
+											const hex: string = rgbToHex(rgb);
+											setColours(hexToAll(hex));
+										}}
+									/>
+								</Grid>
+								<Grid item xs={4}>
+									<TextField fullWidth
+										variant="standard"
+										sx={{color: rgbToString(getContrastingColor(colours.rgb))}}
+										type="number"
+										value={colours.rgb.b}
+										InputProps={{
+											inputProps: { min: 0, max: 255 },
+											style: { color: rgbToString(getContrastingColor(colours.rgb)) }
+										}}
+										onChange={(e) => {
+											const rgb: RGB = { ...colours.rgb, b: parseInt(e.target.value) }
+											const hex: string = rgbToHex(rgb);
+											setColours(hexToAll(hex));
+										}}
+									/>
+								</Grid>
 							</Grid>
-							
+
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>HSL</Typography>
 							</Grid>
