@@ -112,7 +112,7 @@ const ColourPickerPage = () => {
 				<CardContent>
 					<Grid container>
 						{colourInfo.map((item) => (
-							<Grid key={item.key} item container>
+							<Grid key={item.key} item container marginY={1}>
 								<Grid item xs={12} sm={4}>
 									<Typography sx={{ fontWeight: 'bold' }}>{item.key}</Typography>
 								</Grid>

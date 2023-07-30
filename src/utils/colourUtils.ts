@@ -109,5 +109,5 @@ const getColorName = (hexColor: string, collective: { [key: string]: string }): 
 		}
 	}
 
-	return "Unknown";
+	return "Not Defined";
 }
