@@ -40,6 +40,7 @@ const App = () => {
 							<Route path="inspect/*" element={<InspectonResultDisplay />} />
 							<Route path="domain/*" element={<DomainToolsHome />} />
 							<Route path="colour" element={<ColourPickerPage />} />
+							<Route path="colour/*" element={<ColourPickerPage />} />
 							<Route path="color" element={<Navigate replace to="/colour" />} />
 							<Route path="cron" element={<CronConversionPage />} />
 							<Route path="cron/*" element={<CronConversionPage />} />

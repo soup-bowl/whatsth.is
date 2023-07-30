@@ -1,12 +1,22 @@
-import { Card, Grid, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { Card, CardContent, Grid, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { IColourValues, RGB } from "../interfaces";
-import { hexToRgb, rgbToHex } from "../utils/colourUtils";
+import { hexToRgb, isValidColorString, rgbToHex } from "../utils/colourUtils";
+import { ChromePicker } from "react-color";
 
 const siteTitle = "Colour Picker";
 
 const ColourPickerPage = () => {
-	const [colours, setColours] = useState<IColourValues>({ hex: '#000000', rgb: { r: 0, g: 0, b: 0 } });
+	const inputGet = window.location.hash.split('/').slice(-1)[0];
+	const startingVal = isValidColorString(inputGet) ? inputGet : '#000000';
+	const [colours, setColours] = useState<IColourValues>({ hex: startingVal, rgb: hexToRgb(startingVal) });
+	const [displayPicker, setDisplayPicker] = useState(false);
+
+	useEffect(() => {
+		if (isValidColorString(colours.hex)) {
+			window.location.href = `/#/colour/${colours.hex.replace('#', '')}`
+		}
+	}, [colours]);
 
 	return (
 		<>
@@ -23,7 +33,7 @@ const ColourPickerPage = () => {
 							InputProps={{ inputProps: { min: 0, max: 255 } }}
 							InputLabelProps={{ shrink: true }}
 							onChange={(e) => {
-								let changedVals:RGB = {...colours.rgb, r: parseInt(e.target.value)} 
+								let changedVals: RGB = { ...colours.rgb, r: parseInt(e.target.value) }
 								setColours({
 									hex: rgbToHex(changedVals),
 									rgb: changedVals
@@ -40,7 +50,7 @@ const ColourPickerPage = () => {
 							InputProps={{ inputProps: { min: 0, max: 255 } }}
 							InputLabelProps={{ shrink: true }}
 							onChange={(e) => {
-								let changedVals:RGB = {...colours.rgb, g: parseInt(e.target.value)} 
+								let changedVals: RGB = { ...colours.rgb, g: parseInt(e.target.value) }
 								setColours({
 									hex: rgbToHex(changedVals),
 									rgb: changedVals
@@ -57,7 +67,7 @@ const ColourPickerPage = () => {
 							InputProps={{ inputProps: { min: 0, max: 255 } }}
 							InputLabelProps={{ shrink: true }}
 							onChange={(e) => {
-								let changedVals:RGB = {...colours.rgb, b: parseInt(e.target.value)} 
+								let changedVals: RGB = { ...colours.rgb, b: parseInt(e.target.value) }
 								setColours({
 									hex: rgbToHex(changedVals),
 									rgb: changedVals
@@ -81,6 +91,23 @@ const ColourPickerPage = () => {
 					/>
 				</Grid>
 			</Grid>
+			<Card
+				sx={{ backgroundColor: colours.hex, m: 2, height: 50 }}
+				raised={true}
+				onClick={() => setDisplayPicker(true)}
+			/>
+			{displayPicker ??
+				<ChromePicker
+					color={colours.hex}
+					onChangeComplete={(colour) => {
+						setColours({
+							hex: colour.hex,
+							rgb: hexToRgb(colour.hex)
+						})
+					}}
+					disableAlpha
+				/>
+			}
 		</>
 	);
 }

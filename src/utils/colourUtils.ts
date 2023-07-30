@@ -21,3 +21,13 @@ export const rgbToHex = (rgb: RGB): string => {
 
 	return `#${hexR}${hexG}${hexB}`;
 }
+
+export const isValidColorString = (str: string) => {
+	const colorPattern = /^(#)?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+	return colorPattern.test(str);
+}
+
+export const getContrastingColor = (rgb: RGB) => {
+	const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+	return brightness > 128 ? [0, 0, 0] : [255, 255, 255];
+}
