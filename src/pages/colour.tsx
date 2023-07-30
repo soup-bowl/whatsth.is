@@ -116,7 +116,13 @@ const ColourPickerPage = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Card raised={true} sx={{ backgroundColor: colours.hex, color: rgbToString(getContrastingColor(colours.rgb)), m: 2, p: 2 }}>
+			<Card raised={true} sx={{
+				backgroundColor: colours.hex,
+				backgroundImage: 'none',
+				color: rgbToString(getContrastingColor(colours.rgb)),
+				m: 2,
+				p: 2
+			}}>
 				<CardContent>
 					<Grid container>
 						{colourInfo.map((item) => (
