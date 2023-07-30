@@ -7,7 +7,7 @@ const siteTitle = "Colour Picker";
 
 const ColourPickerPage = () => {
 	const inputGet = window.location.hash.split('/').slice(-1)[0];
-	const startingVal = isValidColorString(inputGet) ? inputGet : '#000000';
+	const startingVal = isValidColorString(inputGet) ? inputGet : '9c27b0';
 	const [colours, setColours] = useState<IColourValues>(hexToAll(`#${startingVal}`));
 
 	useEffect(() => {
