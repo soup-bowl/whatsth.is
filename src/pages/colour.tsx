@@ -36,6 +36,7 @@ const ColourPickerPage = () => {
 							<Grid item xs={12} sm={8}>
 								<TextField fullWidth
 									variant="standard"
+									color="secondary"
 									value={colours.hex}
 									inputProps={{ style: { color: rgbToString(getContrastingColor(colours.rgb)) }}}
 									onChange={(e) => setColours(hexToAll(e.target.value))}
@@ -49,6 +50,7 @@ const ColourPickerPage = () => {
 								<Grid item xs={4}>
 									<TextField fullWidth
 										variant="standard"
+										color="secondary"
 										type="number"
 										value={colours.rgb.r}
 										InputProps={{
@@ -65,6 +67,7 @@ const ColourPickerPage = () => {
 								<Grid item xs={4}>
 									<TextField fullWidth
 										variant="standard"
+										color="secondary"
 										type="number"
 										value={colours.rgb.g}
 										InputProps={{
@@ -81,7 +84,7 @@ const ColourPickerPage = () => {
 								<Grid item xs={4}>
 									<TextField fullWidth
 										variant="standard"
-										sx={{color: rgbToString(getContrastingColor(colours.rgb))}}
+										color="secondary"
 										type="number"
 										value={colours.rgb.b}
 										InputProps={{
