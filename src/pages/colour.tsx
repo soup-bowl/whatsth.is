@@ -16,7 +16,7 @@ interface IList {
 const ColourPickerPage = () => {
 	const inputGet = window.location.hash.split('/').slice(-1)[0];
 	const startingVal = isValidColorString(inputGet) ? inputGet : '#000000';
-	const [colours, setColours] = useState<IColourValues>({ hex: startingVal, rgb: hexToRgb(startingVal) });
+	const [colours, setColours] = useState<IColourValues>({ hex: `#${startingVal}`, rgb: hexToRgb(startingVal) });
 	const [colourInfo, setColourInfo] = useState<IList[]>([]);
 	const [displayPicker, setDisplayPicker] = useState(false);
 
