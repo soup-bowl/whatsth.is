@@ -1,6 +1,7 @@
 import { CMYK, HSL, RGB } from "../interfaces";
 import htmlCodes from "./colourCodes/htmlColours.json";
 import xkcdCodes from "./colourCodes/xkcdColours.json";
+import wildWest from "./colourCodes/wild.json";
 
 export const hexToRgb = (hex: string): RGB => {
 	hex = hex.replace("#", "");
@@ -110,4 +111,9 @@ const getColorName = (hexColor: string, collective: { [key: string]: string }): 
 	}
 
 	return "Not Defined";
+}
+
+export const getEasterEgg = (hex: string): string | undefined => {
+	const refs: { [key: string]: string } = wildWest;
+	return refs[hex.toUpperCase().replace("#", "")] || undefined;
 }

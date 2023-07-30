@@ -2,7 +2,7 @@ import { Card, CardContent, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CMYK, HSL, IColourValues, RGB } from "../interfaces";
 import {
-	getContrastingColor, getHTMLColorName, getXKCDColorName, hexToRgb, isValidColorString, rgbToCMYK,
+	getContrastingColor, getEasterEgg, getHTMLColorName, getXKCDColorName, hexToRgb, isValidColorString, rgbToCMYK,
 	rgbToHSL, rgbToHex, rgbToString
 } from "../utils/colourUtils";
 
@@ -26,13 +26,21 @@ const ColourPickerPage = () => {
 
 		const hsl: HSL = rgbToHSL(colours.rgb);
 		const cmyk: CMYK = rgbToCMYK(colours.rgb);
-		setColourInfo([
+
+		let colInfo: IList[] = [
 			{ key: 'HSL', value: `H: ${hsl.h}, S: ${hsl.s}, L: ${hsl.l}` },
 			{ key: 'CMYK', value: `C: ${cmyk.c}, M: ${cmyk.m}, Y: ${cmyk.y}, K: ${cmyk.k}` },
 			{ key: 'HTML Name', value: getHTMLColorName(colours.hex) },
 			{ key: 'XKCD Name', value: getXKCDColorName(colours.hex) },
 			{ key: '0x Variant', value: colours.hex.toUpperCase().replace('#', '0x') },
-		]);
+		]
+
+		const wild = getEasterEgg(colours.hex);
+		if (wild !== undefined) {
+			colInfo.push({ key: 'Wild Wasteland', value: wild });
+		}
+
+		setColourInfo(colInfo);
 	}, [colours]);
 
 	return (
