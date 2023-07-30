@@ -18,7 +18,6 @@ const ColourPickerPage = () => {
 	const startingVal = isValidColorString(inputGet) ? inputGet : '#000000';
 	const [colours, setColours] = useState<IColourValues>({ hex: `#${startingVal}`, rgb: hexToRgb(startingVal) });
 	const [colourInfo, setColourInfo] = useState<IList[]>([]);
-	const [displayPicker, setDisplayPicker] = useState(false);
 
 	useEffect(() => {
 		if (isValidColorString(colours.hex)) {
