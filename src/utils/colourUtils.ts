@@ -1,4 +1,4 @@
-import { CMYK, HSL, RGB } from "../interfaces";
+import { CMYK, HSL, IColourValues, RGB } from "../interfaces";
 import htmlCodes from "./colourCodes/htmlColours.json";
 import xkcdCodes from "./colourCodes/xkcdColours.json";
 import wildWest from "./colourCodes/wild.json";
@@ -116,4 +116,17 @@ const getColorName = (hexColor: string, collective: { [key: string]: string }): 
 export const getEasterEgg = (hex: string): string | undefined => {
 	const refs: { [key: string]: string } = wildWest;
 	return refs[hex.toUpperCase().replace("#", "")] || undefined;
+}
+
+export const hexToAll = (hex: string): IColourValues => {
+	const rgb = hexToRgb(hex); 
+	return({
+		hex: hex,
+		rgb: rgb,
+		cmyk: rgbToCMYK(rgb),
+		hsl: rgbToHSL(rgb),
+		htmlCode: getHTMLColorName(hex),
+		xkcdCode: getXKCDColorName(hex),
+		oxVar: hex.toUpperCase().replace('#', '0x')
+	});
 }

@@ -172,5 +172,9 @@ export interface CMYK {
 export interface IColourValues {
 	hex: string;
 	rgb: RGB;
-	hsl?: HSL;
+	hsl: HSL;
+	cmyk: CMYK;
+	htmlCode: string;
+	xkcdCode: string;
+	oxVar: string;
 }
