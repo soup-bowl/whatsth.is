@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IColourValues, RGB } from "../interfaces";
 import { getContrastingColor, hexToAll, isValidColorString, rgbToHex, rgbToString } from "../utils/colourUtils";
@@ -33,7 +33,7 @@ const ColourPickerPage = () => {
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>Hex</Typography>
 							</Grid>
-							<Grid item xs={12} sm={8}>
+							<Grid item xs={10} sm={6}>
 								<TextField fullWidth
 									variant="standard"
 									color="secondary"
@@ -42,11 +42,16 @@ const ColourPickerPage = () => {
 									onChange={(e) => setColours(hexToAll(e.target.value))}
 								/>
 							</Grid>
+							<Grid item xs={2} container justifyContent="center" alignItems="center">
+								<Button variant="text" color="secondary" onClick={() => {
+									navigator.clipboard.writeText(colours.hex);
+								}}>Copy</Button>
+							</Grid>
 
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>RGB</Typography>
 							</Grid>
-							<Grid item xs={12} sm={8} container>
+							<Grid item xs={10} sm={6} container>
 								<Grid item xs={4}>
 									<TextField fullWidth
 										variant="standard"
@@ -99,19 +104,34 @@ const ColourPickerPage = () => {
 									/>
 								</Grid>
 							</Grid>
+							<Grid item xs={2} container justifyContent="center" alignItems="center">
+								<Button variant="text" color="secondary" onClick={() => {
+									navigator.clipboard.writeText(`rgb(${colours.rgb.r},${colours.rgb.g},${colours.rgb.b})`);
+								}}>Copy</Button>
+							</Grid>
 
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>HSL</Typography>
 							</Grid>
-							<Grid item xs={12} sm={8}>
+							<Grid item xs={10} sm={6}>
 								<Typography>{`H: ${colours.hsl.h}, S: ${colours.hsl.s}, L: ${colours.hsl.l}`}</Typography>
+							</Grid>
+							<Grid item xs={2} container justifyContent="center" alignItems="center">
+								<Button variant="text" color="secondary" onClick={() => {
+									navigator.clipboard.writeText(`hsl(${colours.hsl.h}, ${colours.hsl.s}%, ${colours.hsl.l}%)`);
+								}}>Copy</Button>
 							</Grid>
 
 							<Grid item xs={12} sm={4}>
 								<Typography sx={{ fontWeight: 'bold' }}>CMYK</Typography>
 							</Grid>
-							<Grid item xs={12} sm={8}>
+							<Grid item xs={10} sm={6}>
 								<Typography>{`C: ${colours.cmyk.c}, M: ${colours.cmyk.m}, Y: ${colours.cmyk.y}, K: ${colours.cmyk.k}`}</Typography>
+							</Grid>
+							<Grid item xs={2} container justifyContent="center" alignItems="center">
+								<Button variant="text" color="secondary" onClick={() => {
+									navigator.clipboard.writeText(`cmyk(${colours.cmyk.c}%, ${colours.cmyk.m}%, ${colours.cmyk.y}%, ${colours.cmyk.k}%)`);
+								}}>Copy</Button>
 							</Grid>
 
 							<Grid item xs={12} sm={4}>
