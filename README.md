@@ -9,7 +9,7 @@
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]). Also comes in [extension format][ext]!
+* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]).
 * [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
 * [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
 * [Colour Tools](https://whatsth.is/#/colour).
