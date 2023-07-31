@@ -1,7 +1,7 @@
-import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
+import { Button, Card, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IColourValues, RGB } from "../interfaces";
-import { getContrastingColor, hexToAll, isValidColorString, rgbToHex, rgbToString } from "../utils/colourUtils";
+import { hexToAll, isValidColorString, rgbToHex } from "../utils/colourUtils";
 
 const siteTitle = "Colour Picker";
 
