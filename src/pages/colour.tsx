@@ -68,7 +68,10 @@ const ColourPickerPage = () => {
 								variant="standard"
 								type="number"
 								value={colours.rgb.r}
-								InputProps={{ inputProps: { min: 0, max: 255 } }}
+								InputProps={{
+									inputProps: { min: 0, max: 255 },
+									startAdornment: <InputAdornment position="start">R</InputAdornment>,
+								}}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, r: parseInt(e.target.value) }
 									setColours(rgbToAll(rgb));
@@ -80,7 +83,10 @@ const ColourPickerPage = () => {
 								variant="standard"
 								type="number"
 								value={colours.rgb.g}
-								InputProps={{ inputProps: { min: 0, max: 255 } }}
+								InputProps={{
+									inputProps: { min: 0, max: 255 },
+									startAdornment: <InputAdornment position="start">G</InputAdornment>,
+								}}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, g: parseInt(e.target.value) }
 									setColours(rgbToAll(rgb));
@@ -92,7 +98,10 @@ const ColourPickerPage = () => {
 								variant="standard"
 								type="number"
 								value={colours.rgb.b}
-								InputProps={{ inputProps: { min: 0, max: 255 } }}
+								InputProps={{
+									inputProps: { min: 0, max: 255 },
+									startAdornment: <InputAdornment position="start">B</InputAdornment>,
+								}}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, b: parseInt(e.target.value) }
 									setColours(rgbToAll(rgb));
@@ -117,7 +126,10 @@ const ColourPickerPage = () => {
 								variant="standard"
 								type="number"
 								value={colours.hsl.h}
-								InputProps={{ inputProps: { min: 0, max: 359 } }}
+								InputProps={{
+									inputProps: { min: 0, max: 359 },
+									startAdornment: <InputAdornment position="start">H</InputAdornment>,
+								}}
 								onChange={(e) => {
 									const hsl: HSL = { ...colours.hsl, h: parseInt(e.target.value) }
 									setColours(hslToAll(hsl));
@@ -131,6 +143,7 @@ const ColourPickerPage = () => {
 								value={colours.hsl.s}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">S</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
@@ -146,6 +159,7 @@ const ColourPickerPage = () => {
 								value={colours.hsl.l}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">L</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
@@ -167,13 +181,14 @@ const ColourPickerPage = () => {
 						<Typography sx={{ fontWeight: 'bold' }}>CMYK</Typography>
 					</Grid>
 					<Grid item xs={10} sm={6} container>
-						<Grid item xs={3}>
+						<Grid item xs={6} md={3}>
 							<TextField fullWidth
 								variant="standard"
 								type="number"
 								value={colours.cmyk.c}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">C</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
@@ -182,13 +197,14 @@ const ColourPickerPage = () => {
 								}}
 							/>
 						</Grid>
-						<Grid item xs={3}>
+						<Grid item xs={6} md={3}>
 							<TextField fullWidth
 								variant="standard"
 								type="number"
 								value={colours.cmyk.m}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">M</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
@@ -197,13 +213,14 @@ const ColourPickerPage = () => {
 								}}
 							/>
 						</Grid>
-						<Grid item xs={3}>
+						<Grid item xs={6} md={3}>
 							<TextField fullWidth
 								variant="standard"
 								type="number"
 								value={colours.cmyk.y}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">Y</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
@@ -212,13 +229,14 @@ const ColourPickerPage = () => {
 								}}
 							/>
 						</Grid>
-						<Grid item xs={3}>
+						<Grid item xs={6} md={3}>
 							<TextField fullWidth
 								variant="standard"
 								type="number"
 								value={colours.cmyk.k}
 								InputProps={{
 									inputProps: { min: 0, max: 100 },
+									startAdornment: <InputAdornment position="start">K</InputAdornment>,
 									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
 								}}
 								onChange={(e) => {
