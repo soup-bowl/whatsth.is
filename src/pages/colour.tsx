@@ -28,7 +28,7 @@ const ColourPickerPage = () => {
 			}} />
 			<Grid container>
 				<Grid item container marginY={1}>
-				<Grid item xs={12} sm={4}>
+					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>Picker</Typography>
 					</Grid>
 					<Grid item xs={12} sm={8}>
@@ -36,7 +36,9 @@ const ColourPickerPage = () => {
 							setColours(hexToAll(e.target.value));
 						}} />
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>Hex</Typography>
 					</Grid>
@@ -52,7 +54,9 @@ const ColourPickerPage = () => {
 							navigator.clipboard.writeText(colours.hex);
 						}}>Copy</Button>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>RGB</Typography>
 					</Grid>
@@ -102,7 +106,9 @@ const ColourPickerPage = () => {
 							navigator.clipboard.writeText(`rgb(${colours.rgb.r},${colours.rgb.g},${colours.rgb.b})`);
 						}}>Copy</Button>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>HSL</Typography>
 					</Grid>
@@ -114,7 +120,9 @@ const ColourPickerPage = () => {
 							navigator.clipboard.writeText(`hsl(${colours.hsl.h}, ${colours.hsl.s}%, ${colours.hsl.l}%)`);
 						}}>Copy</Button>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>CMYK</Typography>
 					</Grid>
@@ -126,29 +134,35 @@ const ColourPickerPage = () => {
 							navigator.clipboard.writeText(`cmyk(${colours.cmyk.c}%, ${colours.cmyk.m}%, ${colours.cmyk.y}%, ${colours.cmyk.k}%)`);
 						}}>Copy</Button>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>HTML Name</Typography>
 					</Grid>
-					<Grid item xs={12} sm={8}>
+					<Grid item xs={12} sm={6}>
 						<Typography>{colours.htmlCode}</Typography>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>XKCD Name</Typography>
 					</Grid>
-					<Grid item xs={12} sm={8}>
+					<Grid item xs={12} sm={6}>
 						<Typography>{colours.xkcdCode}</Typography>
 					</Grid>
+				</Grid>
 
+				<Grid item container marginY={1}>
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>0x Variant</Typography>
 					</Grid>
-					<Grid item xs={12} sm={8}>
+					<Grid item xs={12} sm={6}>
 						<Typography>{colours.oxVar}</Typography>
 					</Grid>
 				</Grid>
-			</Grid>
+			</Grid >
 		</>
 	);
 }
