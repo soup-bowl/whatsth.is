@@ -1,7 +1,7 @@
-import { Button, Card, Grid, TextField, Typography } from "@mui/material";
+import { Button, Card, Grid, InputAdornment, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { IColourValues, RGB } from "../interfaces";
-import { hexToAll, isValidColorString, rgbToHex } from "../utils/colourUtils";
+import { CMYK, HSL, IColourValues, RGB } from "../interfaces";
+import { cmykToAll, hexToAll, hslToAll, isValidColorString, rgbToAll } from "../utils/colourUtils";
 
 const siteTitle = "Colour Picker";
 
@@ -9,6 +9,8 @@ const ColourPickerPage = () => {
 	const inputGet = window.location.hash.split('/').slice(-1)[0];
 	const startingVal = isValidColorString(inputGet) ? inputGet : '9c27b0';
 	const [colours, setColours] = useState<IColourValues>(hexToAll(`#${startingVal}`));
+
+	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
 		if (isValidColorString(colours.hex)) {
@@ -69,8 +71,7 @@ const ColourPickerPage = () => {
 								InputProps={{ inputProps: { min: 0, max: 255 } }}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, r: parseInt(e.target.value) }
-									const hex: string = rgbToHex(rgb);
-									setColours(hexToAll(hex));
+									setColours(rgbToAll(rgb));
 								}}
 							/>
 						</Grid>
@@ -82,8 +83,7 @@ const ColourPickerPage = () => {
 								InputProps={{ inputProps: { min: 0, max: 255 } }}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, g: parseInt(e.target.value) }
-									const hex: string = rgbToHex(rgb);
-									setColours(hexToAll(hex));
+									setColours(rgbToAll(rgb));
 								}}
 							/>
 						</Grid>
@@ -95,8 +95,7 @@ const ColourPickerPage = () => {
 								InputProps={{ inputProps: { min: 0, max: 255 } }}
 								onChange={(e) => {
 									const rgb: RGB = { ...colours.rgb, b: parseInt(e.target.value) }
-									const hex: string = rgbToHex(rgb);
-									setColours(hexToAll(hex));
+									setColours(rgbToAll(rgb));
 								}}
 							/>
 						</Grid>
@@ -112,8 +111,49 @@ const ColourPickerPage = () => {
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>HSL</Typography>
 					</Grid>
-					<Grid item xs={10} sm={6}>
-						<Typography>{`H: ${colours.hsl.h}, S: ${colours.hsl.s}, L: ${colours.hsl.l}`}</Typography>
+					<Grid item xs={10} sm={6} container>
+						<Grid item xs={4}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.hsl.h}
+								InputProps={{ inputProps: { min: 0, max: 359 } }}
+								onChange={(e) => {
+									const hsl: HSL = { ...colours.hsl, h: parseInt(e.target.value) }
+									setColours(hslToAll(hsl));
+								}}
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.hsl.s}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const hsl: HSL = { ...colours.hsl, s: parseInt(e.target.value) }
+									setColours(hslToAll(hsl));
+								}}
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.hsl.l}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const hsl: HSL = { ...colours.hsl, l: parseInt(e.target.value) }
+									setColours(hslToAll(hsl));
+								}}
+							/>
+						</Grid>
 					</Grid>
 					<Grid item xs={2} container justifyContent="center" alignItems="center">
 						<Button variant="text" color="secondary" onClick={() => {
@@ -126,8 +166,67 @@ const ColourPickerPage = () => {
 					<Grid item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: 'bold' }}>CMYK</Typography>
 					</Grid>
-					<Grid item xs={10} sm={6}>
-						<Typography>{`C: ${colours.cmyk.c}, M: ${colours.cmyk.m}, Y: ${colours.cmyk.y}, K: ${colours.cmyk.k}`}</Typography>
+					<Grid item xs={10} sm={6} container>
+						<Grid item xs={3}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.cmyk.c}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const cmyk: CMYK = { ...colours.cmyk, c: parseInt(e.target.value) }
+									setColours(cmykToAll(cmyk));
+								}}
+							/>
+						</Grid>
+						<Grid item xs={3}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.cmyk.m}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const cmyk: CMYK = { ...colours.cmyk, m: parseInt(e.target.value) }
+									setColours(cmykToAll(cmyk));
+								}}
+							/>
+						</Grid>
+						<Grid item xs={3}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.cmyk.y}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const cmyk: CMYK = { ...colours.cmyk, y: parseInt(e.target.value) }
+									setColours(cmykToAll(cmyk));
+								}}
+							/>
+						</Grid>
+						<Grid item xs={3}>
+							<TextField fullWidth
+								variant="standard"
+								type="number"
+								value={colours.cmyk.k}
+								InputProps={{
+									inputProps: { min: 0, max: 100 },
+									endAdornment: <InputAdornment position="end" sx={{ marginRight: 0.5 }}>%</InputAdornment>,
+								}}
+								onChange={(e) => {
+									const cmyk: CMYK = { ...colours.cmyk, k: parseInt(e.target.value) }
+									setColours(cmykToAll(cmyk));
+								}}
+							/>
+						</Grid>
 					</Grid>
 					<Grid item xs={2} container justifyContent="center" alignItems="center">
 						<Button variant="text" color="secondary" onClick={() => {

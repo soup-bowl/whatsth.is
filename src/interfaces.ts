@@ -169,6 +169,12 @@ export interface CMYK {
 	k: number;
 }
 
+export interface Hue {
+	p: number;
+	q: number;
+	t: number;
+}
+
 export interface IColourValues {
 	hex: string;
 	rgb: RGB;

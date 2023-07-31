@@ -1,9 +1,8 @@
 import { CMYK, HSL, IColourValues, RGB } from "../interfaces";
 import htmlCodes from "./colourCodes/htmlColours.json";
 import xkcdCodes from "./colourCodes/xkcdColours.json";
-import wildWest from "./colourCodes/wild.json";
 
-export const hexToRgb = (hex: string): RGB => {
+const hexToRgb = (hex: string): RGB => {
 	hex = hex.replace("#", "");
 
 	return {
@@ -13,7 +12,7 @@ export const hexToRgb = (hex: string): RGB => {
 	};
 }
 
-export const rgbToHex = (rgb: RGB): string => {
+const rgbToHex = (rgb: RGB): string => {
 	rgb.r = Math.min(255, Math.max(0, rgb.r));
 	rgb.g = Math.min(255, Math.max(0, rgb.g));
 	rgb.b = Math.min(255, Math.max(0, rgb.b));
@@ -25,7 +24,7 @@ export const rgbToHex = (rgb: RGB): string => {
 	return `#${hexR}${hexG}${hexB}`;
 }
 
-export const rgbToHSL = (rgb: RGB): HSL => {
+const rgbToHSL = (rgb: RGB): HSL => {
 	const rNormalized = rgb.r / 255;
 	const gNormalized = rgb.g / 255;
 	const bNormalized = rgb.b / 255;
@@ -62,7 +61,7 @@ export const rgbToHSL = (rgb: RGB): HSL => {
 	};
 }
 
-export const rgbToCMYK = (rgb: RGB): CMYK => {
+const rgbToCMYK = (rgb: RGB): CMYK => {
 	const rNormalized = rgb.r / 255;
 	const gNormalized = rgb.g / 255;
 	const bNormalized = rgb.b / 255;
@@ -80,26 +79,53 @@ export const rgbToCMYK = (rgb: RGB): CMYK => {
 	};
 }
 
-export const isValidColorString = (str: string) => {
-	const colorPattern = /^(#)?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
-	return colorPattern.test(str);
-}
-
-export const getContrastingColor = (rgb: RGB): RGB => {
-	const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-	if (brightness > 128) {
-		return { r: 0, g: 0, b: 0 }
-	} else {
-		return { r: 255, g: 255, b: 255 }
+const hslToRGB = (hsl: HSL): RGB => {
+	const hueToRGB = (p: number, q: number, t: number): number => {
+		if (t < 0) t += 1;
+		if (t > 1) t -= 1;
+		if (t < 1 / 6) return p + (q - p) * 6 * t;
+		if (t < 1 / 2) return q;
+		if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+		return p;
 	}
+
+	const { h, s, l } = hsl;
+	const hNormalized = h / 360;
+	const sNormalized = s / 100;
+	const lNormalized = l / 100;
+
+	if (sNormalized === 0) {
+		// Achromatic color (gray)
+		const grayValue = Math.round(lNormalized * 255);
+		return { r: grayValue, g: grayValue, b: grayValue };
+	}
+
+	const q = lNormalized < 0.5 ? lNormalized * (1 + sNormalized) : lNormalized + sNormalized - lNormalized * sNormalized;
+	const p = 2 * lNormalized - q;
+
+	const r = Math.round(hueToRGB(p, q, hNormalized + 1 / 3) * 255);
+	const g = Math.round(hueToRGB(p, q, hNormalized) * 255);
+	const b = Math.round(hueToRGB(p, q, hNormalized - 1 / 3) * 255);
+
+	return { r, g, b };
 }
 
-export const rgbToString = (rgb: RGB): string => {
-	return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+const cmykToRGB = (cmyk: CMYK): RGB => {
+	const { c, m, y, k } = cmyk;
+	const cNormalized = c / 100;
+	const mNormalized = m / 100;
+	const yNormalized = y / 100;
+	const kNormalized = k / 100;
+
+	const r = Math.round(255 * (1 - cNormalized) * (1 - kNormalized));
+	const g = Math.round(255 * (1 - mNormalized) * (1 - kNormalized));
+	const b = Math.round(255 * (1 - yNormalized) * (1 - kNormalized));
+
+	return { r, g, b };
 }
 
-export const getHTMLColorName = (hexColor: string): string => getColorName(hexColor, htmlCodes);
-export const getXKCDColorName = (hexColor: string): string => getColorName(hexColor, xkcdCodes);
+const getHTMLColorName = (hexColor: string): string => getColorName(hexColor, htmlCodes);
+const getXKCDColorName = (hexColor: string): string => getColorName(hexColor, xkcdCodes);
 
 const getColorName = (hexColor: string, collective: { [key: string]: string }): string => {
 	hexColor = hexColor.toUpperCase();
@@ -113,14 +139,14 @@ const getColorName = (hexColor: string, collective: { [key: string]: string }): 
 	return "Not Defined";
 }
 
-export const getEasterEgg = (hex: string): string | undefined => {
-	const refs: { [key: string]: string } = wildWest;
-	return refs[hex.toUpperCase().replace("#", "")] || undefined;
+export const isValidColorString = (str: string) => {
+	const colorPattern = /^(#)?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+	return colorPattern.test(str);
 }
 
-export const hexToAll = (hex: string): IColourValues => {
-	const rgb = hexToRgb(hex); 
-	return({
+export const rgbToAll = (rgb: RGB): IColourValues => {
+	const hex = rgbToHex(rgb);
+	return ({
 		hex: hex,
 		rgb: rgb,
 		cmyk: rgbToCMYK(rgb),
@@ -130,3 +156,9 @@ export const hexToAll = (hex: string): IColourValues => {
 		oxVar: hex.toUpperCase().replace('#', '0x')
 	});
 }
+
+export const hexToAll = (hex: string): IColourValues => rgbToAll(hexToRgb(hex));
+
+export const hslToAll = (hsl: HSL): IColourValues => rgbToAll(hslToRGB(hsl));
+
+export const cmykToAll = (cmyk: CMYK): IColourValues => rgbToAll(cmykToRGB(cmyk));
