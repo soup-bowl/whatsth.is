@@ -12,6 +12,7 @@ React-based [progressive web app][pwa] proof-of-concept designed to provide a to
 * [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]). Also comes in [extension format][ext]!
 * [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
 * [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
+* [Colour Tools](https://whatsth.is/#/colour).
 * [Cron Conversion](https://whatsth.is/#/cron).
 * [UNIX Timestamp Converter](https://whatsth.is/#/time).
 
