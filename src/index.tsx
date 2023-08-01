@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+//import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import Layout from "./theme/layout";
 import { ErrorBoundary } from "./error";
@@ -72,7 +72,7 @@ root.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register({
+/*serviceWorkerRegistration.register({
 	onUpdate: (registration: ServiceWorkerRegistration) => {
 		if (registration && registration.waiting) {
 			registration.waiting.postMessage({ type: 'SKIP_WAITING' });
@@ -80,4 +80,4 @@ serviceWorkerRegistration.register({
 
 		window.location.reload();
 	}
-});
+});*/
