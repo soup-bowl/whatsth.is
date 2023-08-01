@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { IDNSResult, IInspectionResult, IOpenAPI, IWHOISResult } from '../interfaces';
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 const responseBody = <T> ( response: AxiosResponse<T> ) => response.data;
 
