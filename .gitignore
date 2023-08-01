@@ -1,4 +1,4 @@
+dist
 build
 node_modules
-.env.development.local
-.env.production.local
+*.local
