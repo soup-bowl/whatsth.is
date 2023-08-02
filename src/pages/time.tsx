@@ -43,7 +43,7 @@ const UnixEpochPage = () => {
 		window.location.href = `/#/time/${timeStore.unix}`
 	}, [timeStore]);
 
-	const changeDateTime = (e: any) => {
+	const changeDateTime = (e: ChangeEvent<HTMLInputElement>) => {
 		const conversionDate: Date = new Date(e.target.value);
 		const ts: number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
 			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1e3));
