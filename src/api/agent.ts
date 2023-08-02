@@ -1,31 +1,37 @@
-import axios, { AxiosResponse } from 'axios';
 import { IDNSResult, IInspectionResult, IOpenAPI, IWHOISResult } from '../interfaces';
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+const baseUrl = import.meta.env.VITE_API_URL;
 
-const responseBody = <T> ( response: AxiosResponse<T> ) => response.data;
+const responseBody = async <T>(response: Response): Promise<T> => {
+	const data = await response.json();
+	return data;
+};
 
-const requests = {
-	get: <T>(url: string) => axios.get<T>(url).then(responseBody),
+const get = async <T>(url: string): Promise<T> => {
+	const response = await fetch(baseUrl + url);
+	if (!response.ok) {
+		throw new Error('Network response was not ok.');
+	}
+	return responseBody<T>(response);
 };
 
 const Details = {
-	openapi: () => requests.get<IOpenAPI>('/swagger/v1/swagger.json'),
-}
+	openapi: () => get<IOpenAPI>('/swagger/v1/swagger.json'),
+};
 
 const Inspection = {
-	inspect: (url: string) => requests.get<IInspectionResult>('/inspect/' + encodeURIComponent(url)),
+	inspect: (url: string) => get<IInspectionResult>('/inspect/' + encodeURIComponent(url)),
 };
 
 const DNS = {
-	dns: (url: string) => requests.get<IDNSResult>(`/dns/${encodeURIComponent(url)}`),
-	whois: (url: string) => requests.get<IWHOISResult>(`/whois/${encodeURIComponent(url)}`),
+	dns: (url: string) => get<IDNSResult>(`/dns/${encodeURIComponent(url)}`),
+	whois: (url: string) => get<IWHOISResult>(`/whois/${encodeURIComponent(url)}`),
 };
 
 const agent = {
 	Details,
 	Inspection,
-	DNS
+	DNS,
 };
 
 export default agent;
