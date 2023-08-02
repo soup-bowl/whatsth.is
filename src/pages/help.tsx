@@ -109,7 +109,7 @@ export const AboutPage = () => {
 				on <Link style={{ fontWeight: 'bold' }} href="https://pages.github.com/">GitHub Pages</Link>.
 			</Typography>
 			<Stack my={2}>
-				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION}</Box></Typography>
+				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION?.replace(/\"/g, "")}</Box></Typography>
 
 				<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
 

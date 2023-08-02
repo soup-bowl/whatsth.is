@@ -14,50 +14,39 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.1.1",
+    "@types/crypto-js": "^4.1.1",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.3",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.2.7",
     "@types/ua-parser-js": "^0.7.36",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "axios": "^1.4.0",
     "country-code-emoji": "^2.3.0",
     "cronstrue": "^2.27.0",
     "crypto-js": "^4.1.1",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.11.0",
-    "react-scripts": "^5.0.1",
     "serve-build": "^0.1.0",
     "typescript": "^4.9.5",
     "ua-parser-js": "^1.0.34",
+    "vite": "^4.4.5",
     "web-vitals": "^3.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "buildstart": "react-scripts build && serve-build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "npm run dev",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.1.1"
+    "vite-plugin-pwa": "^0.16.4"
   }
 }
