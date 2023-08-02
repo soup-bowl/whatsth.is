@@ -38,20 +38,26 @@ This will start-up a **dynamically recompiling** ReactJS server on localhost:300
 
 ### Without Docker
 
-**Note you will need to either [run a copy of the API server][api], or hook up to the production one (api.whatsth.is).**
+**Note you will need to either [run a copy of the API server][api] (you can override with `.env.local`), or by default it will connect to production (api.whatsth.is).**
 
-This project requires NodeJS to develop, test and compile the code. The following - run in root - will quickstart you.
+This project requires NodeJS to develop, test and compile the code. The following will quickstart you.
 
 ```bash
 npm install
 npm start
 ```
 
-The API the system will communicate with is defined in the appropriate `.env` file (if using `npm start`, it's `.development`).
+The API the system will communicate with is defined in the appropriate `.env`.
 
 ### Testing Offline Capabilities
 
-The PWA aspect won't kick into full effect unless it is running 'production' with full HTTPS. With these conditions met, the command `npm run buildstart` has been provided to compile a production build of the tool, and run a local instance server to preview it. 
+If you want to test the PWA functionality locally, you can add the following to the `VitePWA()` segment in `vite.config.ts`:
+
+```js
+devOptions: {
+	enabled: true
+},
+```
 
 [site]: https://whatsth.is
 [pwa]:  https://web.dev/learn/pwa/progressive-web-apps/
