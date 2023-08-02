@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import agent from '../api/agent';
@@ -15,12 +15,12 @@ export const InspectionHome = () => {
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
-	const submitForm = (e: any) => {
+	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		return navigate('/inspect/' + inputURL);
 	};
 
-	const changeForm = (e: any) => {
+	const changeForm = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputURL(e.target.value);
 	};
 

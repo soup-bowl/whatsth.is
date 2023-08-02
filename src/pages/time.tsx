@@ -1,5 +1,5 @@
 import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import WarningIcon from '@mui/icons-material/Warning';
 import { ITime } from "../interfaces";
 import { SecondType } from "../enums";
@@ -51,7 +51,7 @@ const UnixEpochPage = () => {
 		setTimeStore(timeOutput(ts));
 	};
 
-	const changeUnix = (e: any) => {
+	const changeUnix = (e: ChangeEvent<HTMLInputElement>) => {
 		setTimeStore(timeOutput(parseInt(e.target.value)));
 	};
 

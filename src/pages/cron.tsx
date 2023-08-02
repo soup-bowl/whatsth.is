@@ -1,5 +1,5 @@
 import { Link, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "../utils/cronUtils";
 
 const CronConversionPage = () => {
@@ -9,7 +9,7 @@ const CronConversionPage = () => {
 	const [timeString, setTimeString] = useState<string>(checkForValidCronCode(inputGet) ? decodeCronCode(inputGet) : '* * * * *');
 	const [timeResult, setTimeResult] = useState<string>(calculateCronString(timeString));
 
-	const timeChange = (e: any) => {
+	const timeChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setTimeString(e.target.value);
 	};
 

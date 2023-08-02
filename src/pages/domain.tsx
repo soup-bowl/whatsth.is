@@ -3,7 +3,7 @@ import {
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
 import { DataGrid, GridColumns } from "@mui/x-data-grid";
-import { FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResult } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
@@ -189,7 +189,7 @@ const DomainToolsHome = () => {
 								label="URL"
 								variant="outlined"
 								value={selectionInput?.url ?? ''}
-								onChange={(e: any) => setSelectionInput({ ...selectionInput, url: e.target.value })}
+								onChange={(e: ChangeEvent<HTMLInputElement>) => setSelectionInput({ ...selectionInput, url: e.target.value })}
 								disabled={!connectionState}
 							/>
 						</Grid>

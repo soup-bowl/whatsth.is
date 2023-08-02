@@ -2,7 +2,7 @@ import {
 	Box, FormControl, Grid, InputLabel, TextField, Typography,
 	MenuItem, Select, SelectChangeEvent, ListSubheader, Link
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ConversionType } from "../enums";
 import { IStringMorph } from "../interfaces";
 import { StringConversion } from "../utils/stringUtils";
@@ -21,7 +21,7 @@ const StringConversionPage = () => {
 		setStringMorph({ decodeError: false } as IStringMorph);
 	};
 
-	const handleChangePassphrase = (e: any) => {
+	const handleChangePassphrase = (e: ChangeEvent<HTMLInputElement>) => {
 		setPassphrase(e.target.value);
 		setStringMorph({ decodeError: false } as IStringMorph);
 	};

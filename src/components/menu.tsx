@@ -33,7 +33,7 @@ enum Category {
 	Conversion,
 }
 
-const ResizableIconButton = ({ ...props }: any) => {
+const ResizableIconButton = ({ ...props }) => {
 	return (
 		<IconButton
 			sx={{
