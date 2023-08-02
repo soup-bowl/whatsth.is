@@ -20,7 +20,6 @@ const DomainToolsHome = () => {
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [tableData, setTableData] = useState<ILookupTable>({ columns: [], rows: [] } as ILookupTable);
-	const [errResult, setErrResult] = useState<boolean>(false);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
@@ -109,10 +108,7 @@ const DomainToolsHome = () => {
 						});
 						setLoading(false);
 					})
-					.catch(() => {
-						setErrResult(true);
-						setLoading(false);
-					});
+					.catch(() => setLoading(false));
 			} else {
 				agent.DNS.whois(currentInput.url)
 					.then(response => {
@@ -131,10 +127,7 @@ const DomainToolsHome = () => {
 						});
 						setLoading(false);
 					})
-					.catch(() => {
-						setErrResult(true);
-						setLoading(false);
-					});
+					.catch(() => setLoading(false));
 			}
 		}
 	}, [currentInput]);
