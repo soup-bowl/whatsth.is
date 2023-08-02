@@ -63,10 +63,6 @@ export const UserAgentModel = () => {
 					UserAgent Information
 				</BootstrapDialogTitle>
 				<DialogContent>
-					<Typography color="darkgrey">
-						With thanks to <Link href="https://github.com/faisalman/ua-parser-js" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ua-parser-js</Link> to be
-						able to unpack this string of text.
-					</Typography>
 					<Grid container id="conn-modal-modal-description" spacing={2} my={2}>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Your UserAgent</Typography>
@@ -154,11 +150,6 @@ export const MyIpAddressModal = () => {
 					My IP Addresses
 				</BootstrapDialogTitle>
 				<DialogContent>
-					<Typography color="darkgrey">
-						Information obtained from&nbsp;
-						<Link href="https://api.ident.me/" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ident.me</Link>
-						.
-					</Typography>
 					<Grid container id="ipi-modal-modal-description" spacing={2} my={2}>
 						<Grid item xs={12} sm={2}>
 							<Typography fontWeight={700}>IP v4</Typography>
@@ -232,39 +223,32 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 				</BootstrapDialogTitle>
 				<DialogContent>
 					{geo !== undefined ?
-						<>
-							<Typography color="darkgrey">
-								Information obtained from&nbsp;
-								<Link href="https://ipinfo.io/" style={{ color: 'darkgrey', textDecorationColor: 'darkgrey' }}>ipinfo.io</Link>
-								.
-							</Typography>
-							<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
-								<Grid item xs={12} sm={3}>
-									<Typography fontWeight={700}>IP</Typography>
-								</Grid>
-								<Grid item xs={12} sm={9}>
-									<Typography>{geo.ip}</Typography>
-								</Grid>
-								<Grid item xs={12} sm={3}>
-									<Typography fontWeight={700}>Hostname</Typography>
-								</Grid>
-								<Grid item xs={12} sm={9}>
-									<Typography>{geo.hostname}</Typography>
-								</Grid>
-								<Grid item xs={12} sm={3}>
-									<Typography fontWeight={700}>Organisation</Typography>
-								</Grid>
-								<Grid item xs={12} sm={9}>
-									<Typography>{geo.org}</Typography>
-								</Grid>
-								<Grid item xs={12} sm={3}>
-									<Typography fontWeight={700}>Location</Typography>
-								</Grid>
-								<Grid item xs={12} sm={9}>
-									<Typography>{geo.city}, {geo.region}</Typography>
-								</Grid>
+						<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
+							<Grid item xs={12} sm={3}>
+								<Typography fontWeight={700}>IP</Typography>
 							</Grid>
-						</>
+							<Grid item xs={12} sm={9}>
+								<Typography>{geo.ip}</Typography>
+							</Grid>
+							<Grid item xs={12} sm={3}>
+								<Typography fontWeight={700}>Hostname</Typography>
+							</Grid>
+							<Grid item xs={12} sm={9}>
+								<Typography>{geo.hostname}</Typography>
+							</Grid>
+							<Grid item xs={12} sm={3}>
+								<Typography fontWeight={700}>Organisation</Typography>
+							</Grid>
+							<Grid item xs={12} sm={9}>
+								<Typography>{geo.org}</Typography>
+							</Grid>
+							<Grid item xs={12} sm={3}>
+								<Typography fontWeight={700}>Location</Typography>
+							</Grid>
+							<Grid item xs={12} sm={9}>
+								<Typography>{geo.city}, {geo.region}</Typography>
+							</Grid>
+						</Grid>
 						:
 						<>
 							<Typography id="geo-modal-modal-description" my={2}>

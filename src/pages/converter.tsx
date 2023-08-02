@@ -1,6 +1,6 @@
 import {
 	Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader, Link
+	MenuItem, Select, SelectChangeEvent, ListSubheader
 } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ConversionType } from "../enums";
@@ -30,8 +30,7 @@ const StringConversionPage = () => {
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
 			<Typography>
-				Converts text from and into various forms of encoding and encryption methods. The encryption segment is
-				powered by the <Link href="https://www.npmjs.com/package/crypto-js">CryptoJS library</Link>.
+				Converts text from and into various forms of encoding and encryption methods.
 			</Typography>
 			<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 				<Grid container spacing={2} marginTop={2}>

@@ -213,11 +213,6 @@ const DomainToolsHome = () => {
 							<Box>
 								<Typography my={2} component="h2" variant="h5">{currentInput.protocol} records for {currentInput.url}</Typography>
 								<Box>
-									{currentInput.protocol === "DNS" &&
-										<Typography my={2}>
-											DNS Lookup powered by <Link href="https://dnsclient.michaco.net/">DnsClient.NET</Link>.
-										</Typography>
-									}
 									{currentInput.protocol === "WHOIS" &&
 										<Typography my={2}>
 											Due to the prevalence of <Link href="https://en.wikipedia.org/wiki/Domain_privacy">WHOIS protection</Link>,

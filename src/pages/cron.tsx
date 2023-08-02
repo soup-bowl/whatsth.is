@@ -1,4 +1,4 @@
-import { Link, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "../utils/cronUtils";
 
@@ -23,7 +23,7 @@ const CronConversionPage = () => {
 	return (
 		<>
 			<Typography variant="h1" my={2}>{siteTitle}</Typography>
-			<Typography my={2}>Convert crontab time strings into human-readable format. Uses the <Link href="https://www.npmjs.com/package/cronstrue">cRonstrue library</Link>.</Typography>
+			<Typography my={2}>Convert crontab time strings into human-readable format.</Typography>
 			<TextField fullWidth
 				id="timestring"
 				value={timeString}
