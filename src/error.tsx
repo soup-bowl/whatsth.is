@@ -45,7 +45,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 
 	render() {
 		if (this.state.hasError) {
-			let message = encodeURIComponent(`
+			const message = encodeURIComponent(`
 			I have:
 
 			- [ ]  Cleared my cache.
@@ -69,8 +69,8 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 			${this.state.errorStack}
 			\`\`\`
 			`.replace(/\t/g, ''));
-			let title = `[${this.state.errorName}] ${this.state.errorMessage}`.split(' ').join('+');
-			let url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&body=${message}&title=${title}`;
+			const title = `[${this.state.errorName}] ${this.state.errorMessage}`.split(' ').join('+');
+			const url = `https://github.com/soup-bowl/whatsth.is/issues/new?assignees=soup-bowl&labels=bug&body=${message}&title=${title}`;
 
 			return (
 				<ThemeProvider theme={theme}>

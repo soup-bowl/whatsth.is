@@ -97,7 +97,7 @@ const StringConversionPage = () => {
 							error={stringMorph.decodeError}
 							helperText={(stringMorph.decodeError) ? 'This value cannot be converted.' : ''}
 							onChange={(e) => {
-								let convs = {
+								const convs = {
 									encoded: e.target.value,
 									decodeError: false
 								} as IStringMorph;

@@ -18,7 +18,7 @@ const UnixEpochPage = () => {
 			}
 		}
 
-		let conversionDate: Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
+		const conversionDate: Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
 
 		return {
 			string: conversionDate,
@@ -44,8 +44,8 @@ const UnixEpochPage = () => {
 	}, [timeStore]);
 
 	const changeDateTime = (e: any) => {
-		let conversionDate: Date = new Date(e.target.value);
-		let ts: number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
+		const conversionDate: Date = new Date(e.target.value);
+		const ts: number = ((conversionDate.getTime() / 1e3) >= 1e11) ?
 			conversionDate.getTime() : Math.floor((conversionDate.getTime() / 1e3));
 
 		setTimeStore(timeOutput(ts));

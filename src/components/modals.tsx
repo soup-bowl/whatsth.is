@@ -126,12 +126,12 @@ export const MyIpAddressModal = () => {
 
 	useEffect(() => {
 		axios.get('https://4.ident.me/').then(value => {
-			let ipVals = ips;
+			const ipVals = ips;
 			ipVals.ipv4 = value.data;
 			setIPs(ipVals);
 		});
 		axios.get('https://6.ident.me/').then(value => {
-			let ipVals = ips;
+			const ipVals = ips;
 			ipVals.ipv6 = value.data;
 			setIPs(ipVals);
 		});
@@ -194,11 +194,11 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 	useEffect(() => {
 		axios.get(`https://ipinfo.io/${ip}/json`)
 			.then(value => {
-				let reply: IIPGeolocation = value.data;
+				const reply: IIPGeolocation = value.data;
 				reply.icon = countryCodeEmoji(reply.country) ?? undefined;
 				setGeo(reply);
 			})
-			.catch(err => {
+			.catch(() => {
 				setGeo(undefined);
 			});
 	}, [ip, open]);

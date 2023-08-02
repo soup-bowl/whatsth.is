@@ -167,7 +167,7 @@ export const DrawMenu = ({ drawerClose, theme, colorMode }: MenuProps) => {
 	);
 }
 
-const OptionSquare = styled(Paper)(({ theme }) => ({
+const OptionSquare = styled(Paper)({
 	padding: 1,
 	margin: 1,
 	display: 'flex',
@@ -177,7 +177,7 @@ const OptionSquare = styled(Paper)(({ theme }) => ({
 	alignItems: 'center',
 	maxWidth: "200px",
 	minHeight: "125px"
-}));
+});
 
 export const HomeMenu = () => {
 	const { connectionState } = useContext(ConnectionContext);

@@ -43,7 +43,7 @@ const DomainToolsHome = () => {
 		if (currentInput?.protocol !== undefined && currentInput.protocol !== '' && currentInput?.url !== undefined && currentInput.url !== '') {
 			setLoading(true);
 
-			let cols: GridColumns = [
+			const cols: GridColumns = [
 				{
 					field: 'key', headerName: 'Key', flex: 1, renderCell(params) {
 						return (<strong>{params.row.key}</strong>);
@@ -52,7 +52,7 @@ const DomainToolsHome = () => {
 				{
 					field: 'value', headerName: 'Value', flex: 2, renderCell(params) {
 						if (params.row.value !== null && params.row.value.includes('<!=BREAK=!>')) {
-							let values: string[] = params.row.value.split('<!=BREAK=!>');
+							const values: string[] = params.row.value.split('<!=BREAK=!>');
 							return (
 								<div style={{ width: '100%' }}>
 									{values.map((value, i) => {
@@ -84,12 +84,12 @@ const DomainToolsHome = () => {
 			if (currentInput.protocol !== "WHOIS") {
 				agent.DNS.dns(currentInput.url)
 					.then((response) => {
-						let records: ILookupTableLayout[] = [];
-						let types: (keyof IDNSResult)[] = ['a', 'aaaa', 'cname', 'mx', 'txt', 'ns'];
+						const records: ILookupTableLayout[] = [];
+						const types: (keyof IDNSResult)[] = ['a', 'aaaa', 'cname', 'mx', 'txt', 'ns'];
 
 						types.forEach((type: keyof IDNSResult, i: number) => {
 							if (response[type].length > 0) {
-								let collection: string[] = [];
+								const collection: string[] = [];
 								if (type === 'mx') {
 									response[type].forEach((entry: IDNSRecordDetails) => {
 										collection.push(`${entry.address} (Priority ${entry.priority})`);
@@ -109,23 +109,21 @@ const DomainToolsHome = () => {
 						});
 						setLoading(false);
 					})
-					.catch((err: any) => {
+					.catch(() => {
 						setErrResult(true);
 						setLoading(false);
 					});
 			} else {
 				agent.DNS.whois(currentInput.url)
 					.then(response => {
-						let records: ILookupTableLayout[] = [];
-
-						records.push(
+						const records: ILookupTableLayout[] = [
 							{ id: 0, key: 'Domain', value: response.domain },
 							{ id: 1, key: 'Registrar', value: response.registrar },
 							{ id: 2, key: 'WHOIS', value: response.whois },
 							{ id: 3, key: 'First Registered', value: new Date(response.created).toLocaleDateString() },
 							{ id: 4, key: 'Renewal Date', value: new Date(response.updated).toLocaleDateString() },
 							{ id: 5, key: 'Expiry Date', value: new Date(response.expires).toLocaleDateString() },
-						);
+						];
 
 						setTableData({
 							columns: cols,
@@ -133,7 +131,7 @@ const DomainToolsHome = () => {
 						});
 						setLoading(false);
 					})
-					.catch((err: any) => {
+					.catch(() => {
 						setErrResult(true);
 						setLoading(false);
 					});

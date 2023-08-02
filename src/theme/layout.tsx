@@ -76,7 +76,7 @@ const Layout = () => {
 	const colorMode = useMemo(() => ({
 		toggleColorMode: () => {
 			setMode((prevMode:string) => {
-				let cmode = (prevMode === 'light') ? 'dark' : 'light';
+				const cmode = (prevMode === 'light') ? 'dark' : 'light';
 				localStorage.setItem('ColourPref', cmode);
 				return cmode;
 			});

@@ -74,8 +74,8 @@ export const InspectonResult = ({ url }: Props) => {
 
 	useEffect(() => {
 		const addSoftwareToList = (inspection: IInspectionDetails, type: string) => {
-			let list = siteDetails;
-			let newItem = inspection;
+			const list = siteDetails;
+			const newItem = inspection;
 			newItem.type = type;
 			list.push(newItem);
 			setSiteDetails(list);
