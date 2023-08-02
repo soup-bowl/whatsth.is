@@ -68,6 +68,11 @@ export const HelpPage = () => {
 	);
 }
 
+interface ErrorCatch {
+	code?: string;
+	message?: string;
+}
+
 export const AboutPage = () => {
 	const siteTitle = "About";
 	const { connectionState } = useContext(ConnectionContext);
@@ -82,7 +87,7 @@ export const AboutPage = () => {
 			agent.Details.openapi().then(response => {
 				setApiVersion(response.info.version);
 			})
-				.catch((err: any) => {
+				.catch((err: ErrorCatch) => {
 					setApiVersion(
 						<Tooltip title={`(${err.code ?? 'N/A'}) ${err.message ?? 'N/A'}`}><span>Comms Error</span></Tooltip>
 					);

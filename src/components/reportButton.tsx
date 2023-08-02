@@ -5,7 +5,7 @@ const BrowserDetails = () => {
 	return (window.navigator.userAgent);
 };
 
-export const GeneralTemplate = (url: string, result: any) => {
+export const GeneralTemplate = (url: string, result: string) => {
 	const template = `	
 	**What was the URL you were scanning?**
 	${url}
@@ -57,7 +57,7 @@ interface InspProps {
 
 export const ReportInspectionError = ({ url, object }: InspProps) => {
 	return (
-		<ErrorButton title={`Failed Detection URL: ${url}`} body={GeneralTemplate(url, object)} label="detection-fail" />
+		<ErrorButton title={`Failed Detection URL: ${url}`} body={GeneralTemplate(url, JSON.stringify(object, null, 2))} label="detection-fail" />
 	);
 }
 
@@ -69,6 +69,6 @@ interface DNSProps {
 
 export const ReportDNSError = ({ url, protocol, object }: DNSProps) => {
 	return (
-		<ErrorButton title={`Failed ${protocol} on URL: ${url}`} body={GeneralTemplate(`[${protocol}] ${url}`, object)} label="detection-fail" />
+		<ErrorButton title={`Failed ${protocol} on URL: ${url}`} body={GeneralTemplate(`[${protocol}] ${url}`, JSON.stringify(object, null, 2))} label="detection-fail" />
 	);
 }

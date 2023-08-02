@@ -1,5 +1,5 @@
 import { Box, Button, Container, CssBaseline, Paper, Stack, ThemeProvider, Typography } from "@mui/material";
-import { CSSProperties, Component } from "react";
+import { CSSProperties, Component, ErrorInfo } from "react";
 import theme from "./theme/theme";
 
 interface ErrorProp {
@@ -25,7 +25,7 @@ const errorBox: CSSProperties = {
 }
 
 export class ErrorBoundary extends Component<ErrorProp, StateProp> {
-	constructor(props: any) {
+	constructor(props: ErrorProp) {
 		super(props);
 		this.state = { hasError: false };
 	}
@@ -34,7 +34,7 @@ export class ErrorBoundary extends Component<ErrorProp, StateProp> {
 		return { hasError: true };
 	}
 
-	componentDidCatch(error: any, errorInfo: any) {
+	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
 		console.log(errorInfo.componentStack);
 		this.setState({
 			errorName: error.name,

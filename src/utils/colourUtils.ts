@@ -31,7 +31,7 @@ const rgbToHSL = (rgb: RGB): HSL => {
 
 	const max = Math.max(rNormalized, gNormalized, bNormalized);
 	const min = Math.min(rNormalized, gNormalized, bNormalized);
-	let h = 0, s, l = (max + min) / 2;
+	let h = 0, s; const l = (max + min) / 2;
 
 	if (max === min) {
 		h = s = 0; // achromatic
