@@ -2,7 +2,7 @@ import {
 	Alert, AlertTitle, Box, Button, FormControl, Grid, InputLabel, Link, MenuItem,
 	Select, SelectChangeEvent, Skeleton, Stack, TextField, Typography
 } from "@mui/material"
-import { DataGrid, GridColumns } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import agent from '../api/agent';
 import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResult } from "../interfaces";
@@ -43,7 +43,7 @@ const DomainToolsHome = () => {
 		if (currentInput?.protocol !== undefined && currentInput.protocol !== '' && currentInput?.url !== undefined && currentInput.url !== '') {
 			setLoading(true);
 
-			const cols: GridColumns = [
+			const cols: GridColDef[] = [
 				{
 					field: 'key', headerName: 'Key', flex: 1, renderCell(params) {
 						return (<strong>{params.row.key}</strong>);
@@ -236,9 +236,7 @@ const DomainToolsHome = () => {
 										columns={tableData.columns}
 										getRowId={(row) => row.id}
 										loading={loading}
-										error={errResult}
 										getRowHeight={() => 'auto'}
-										disableSelectionOnClick
 										disableColumnMenu
 										disableColumnSelector
 										hideFooter

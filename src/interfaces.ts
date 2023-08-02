@@ -1,4 +1,4 @@
-import { GridColumns } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { SecondType } from "./enums";
 
 export interface DialogTitleProps {
@@ -60,7 +60,7 @@ export interface IInspectionWordPressPost {
 }
 
 export interface ILookupTable {
-	columns: GridColumns;
+	columns: GridColDef[];
 	rows: ILookupTableLayout[];
 }
 
