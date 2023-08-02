@@ -87,3 +87,30 @@ export const isValidIP = (ip: string) => {
 	}
 	return false;
 }
+
+/**
+ * Get a country flag emoji based on the provided country code.
+ * Uses Unicode regional indicator symbols to represent country flags.
+ * Credit: OpenAI
+ * @param {string} countryCode - The two-letter ISO country code (e.g., 'US', 'GB').
+ * @returns {string | null} The country flag emoji if a valid countryCode is provided,
+ *                         otherwise returns null for an invalid countryCode.
+ */
+export const getCountryFlag = (countryCode: string): string | null => {
+	const base = 0x1F1A5;
+	const alphaOffset = 0x41;
+	const countryCodeUppercase = countryCode.toUpperCase();
+
+	// Check if the input countryCode is exactly 2 characters long and contains only letters
+	if (/^[A-Z]{2}$/.test(countryCodeUppercase)) {
+		const firstChar = countryCodeUppercase.charCodeAt(0);
+		const secondChar = countryCodeUppercase.charCodeAt(1);
+
+		// Combine the two characters to form the flag emoji
+		const flagEmoji = String.fromCodePoint(base + (firstChar - alphaOffset), base + (secondChar - alphaOffset));
+		return flagEmoji;
+	}
+
+	// Return null if the countryCode is invalid
+	return null;
+};

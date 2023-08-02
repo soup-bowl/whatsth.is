@@ -3,12 +3,11 @@ import {
 	Dialog, DialogTitle, DialogContent
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import axios from "axios";
-import countryCodeEmoji from "country-code-emoji";
 import { useContext, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
 import { ConnectionContext } from "../context";
+import { getCountryFlag } from "../utils/stringUtils";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -125,17 +124,22 @@ export const MyIpAddressModal = () => {
 	const handleClose = () => setOpen(false);
 
 	useEffect(() => {
-		axios.get('https://4.ident.me/').then(value => {
-			const ipVals = ips;
-			ipVals.ipv4 = value.data;
-			setIPs(ipVals);
-		});
-		axios.get('https://6.ident.me/').then(value => {
-			const ipVals = ips;
-			ipVals.ipv6 = value.data;
-			setIPs(ipVals);
-		});
-	}, [ips]);
+		const fetchIPs = async () => {
+			try {
+				const ipv4Response = await fetch('https://4.ident.me/');
+				const ipv4Data = await ipv4Response.text();
+
+				const ipv6Response = await fetch('https://6.ident.me/');
+				const ipv6Data = await ipv6Response.text();
+
+				setIPs({ ipv4: ipv4Data, ipv6: ipv6Data });
+			} catch (error) {
+				console.error('Error fetching IP data:', error);
+			}
+		};
+
+		fetchIPs();
+	}, []);
 
 	return (
 		<div>
@@ -192,15 +196,26 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 	const handleClose = () => setOpen(false);
 
 	useEffect(() => {
-		axios.get(`https://ipinfo.io/${ip}/json`)
-			.then(value => {
-				const reply: IIPGeolocation = value.data;
-				reply.icon = countryCodeEmoji(reply.country) ?? undefined;
-				setGeo(reply);
-			})
-			.catch(() => {
+		const fetchIPInfo = async () => {
+			try {
+				const response = await fetch(`https://ipinfo.io/${ip}/json`);
+				if (response.ok) {
+					const data = await response.json();
+					const reply: IIPGeolocation = data;
+					reply.icon = getCountryFlag(reply.country) ?? undefined;
+					setGeo(reply);
+				} else {
+					setGeo(undefined);
+				}
+			} catch (error) {
+				console.error('Error fetching IP info:', error);
 				setGeo(undefined);
-			});
+			}
+		};
+
+		if (open && ip) {
+			fetchIPInfo();
+		}
 	}, [ip, open]);
 
 	return (
