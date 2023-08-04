@@ -133,28 +133,29 @@ export const AboutPage = () => {
 				<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
 			</Stack>
 			<Typography variant="h2" my={2}>Credit</Typography>
-			<DataGrid
-				columns={[
-					{ field: 'package', headerName: 'Package', flex: 1 },
-					{
-						field: 'maintainer', headerName: 'Author/Owner', flex: 1, renderCell(params) {
-							return (<Link href={params.row.maintainer}>{params.row.maintainer}</Link>);
+			<Box sx={{ height: 400, width: '100%' }}>
+				<DataGrid
+					columns={[
+						{ field: 'package', headerName: 'Package', flex: 0.6 },
+						{
+							field: 'maintainer', headerName: 'Author/Owner', flex: 1.4, renderCell(params) {
+								return (<Link href={params.row.maintainer}>{params.row.maintainer}</Link>);
+							}
 						}
-					}
-				]}
-				rows={[
-					{ id: 0, package: 'CryptoJS', maintainer: 'https://www.npmjs.com/package/crypto-js' },
-					{ id: 1, package: 'cRontrue', maintainer: 'https://www.npmjs.com/package/cronstrue' },
-					{ id: 2, package: 'DnsClient.NET', maintainer: 'https://dnsclient.michaco.net/' },
-					{ id: 3, package: 'ua-parser-js', maintainer: 'https://github.com/faisalman/ua-parser-js' },
-					{ id: 4, package: 'ident.me', maintainer: 'https://api.ident.me/' },
-					{ id: 5, package: 'ipinfo.io', maintainer: 'https://ipinfo.io/' },
-				]}
-				disableColumnMenu
-				disableColumnSelector
-				hideFooter
-				sx={{ minHeight: 400 }}
-			/>
+					]}
+					rows={[
+						{ id: 0, package: 'CryptoJS', maintainer: 'https://www.npmjs.com/package/crypto-js' },
+						{ id: 1, package: 'cRontrue', maintainer: 'https://www.npmjs.com/package/cronstrue' },
+						{ id: 2, package: 'DnsClient.NET', maintainer: 'https://dnsclient.michaco.net/' },
+						{ id: 3, package: 'ua-parser-js', maintainer: 'https://github.com/faisalman/ua-parser-js' },
+						{ id: 4, package: 'ident.me', maintainer: 'https://api.ident.me/' },
+						{ id: 5, package: 'ipinfo.io', maintainer: 'https://ipinfo.io/' },
+					]}
+					disableColumnMenu
+					disableColumnSelector
+					hideFooter
+				/>
+			</Box>
 		</Box>
 	);
 }
