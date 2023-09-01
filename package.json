@@ -15,7 +15,7 @@
     "@types/node": "^20.3.3",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.2.7",
-    "@types/ua-parser-js": "^0.7.36",
+    "@types/ua-parser-js": "^0.7.37",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
