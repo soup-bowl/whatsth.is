@@ -1,7 +1,8 @@
-import { Typography, Link, Box, Button, Stack, Chip, Tooltip } from "@mui/material";
+import { Typography, Link, Box, Button, Stack, Chip, Tooltip, IconButton, styled } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import agent from "../api/agent";
 
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
@@ -10,6 +11,17 @@ import { IStorage } from "../interfaces";
 import { ConnectionContext } from "../context";
 import { formatBytes } from "../utils/stringUtils";
 import { DataGrid } from "@mui/x-data-grid";
+
+const WalletDisplay = styled(Typography)({
+	fontFamily: 'monospace',
+	color: '#ffffff',
+	backgroundColor: '#121212',
+	padding: 2,
+	borderRadius: 5,
+	borderStyle: 'solid',
+	borderWidth: 1,
+	borderColor: '#515151',
+});
 
 export const HelpPage = () => {
 	const siteTitle = "Help";
@@ -81,6 +93,11 @@ export const AboutPage = () => {
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
 
+	const wallets = [
+		{ key: 'btc', wallet: '3CFhcK1mazPDEiX8FLEhEQhQ9ARYFMCkqf' },
+		{ key: 'eth', wallet: '0x74C34F52593aF941BEea187203153Ec065321001' },
+	]
+
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
 	useEffect(() => {
@@ -132,6 +149,20 @@ export const AboutPage = () => {
 				<Button onClick={() => (window.location.reload())} variant="outlined" color="error"><CachedIcon />&nbsp;Reload</Button>
 				<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
 			</Stack>
+			<Typography variant="h1" my={2}>Donate</Typography>
+			{wallets.map((wallet, i) => (
+				<Box>
+					<Typography variant="h3" sx={{ marginTop: 2 }}>{wallet.key.toUpperCase()} Address</Typography>
+					<Stack direction="row" justifyContent="center" alignItems="center">
+						<WalletDisplay>{wallet.wallet}</WalletDisplay>
+						<IconButton onClick={() => {
+							navigator.clipboard.writeText(wallet.wallet);
+						}}>
+							<FileCopyIcon />
+						</IconButton>
+					</Stack>
+				</Box>
+			))}
 			<Typography variant="h2" my={2}>Credit</Typography>
 			<Box sx={{ height: 400, width: '100%' }}>
 				<DataGrid
