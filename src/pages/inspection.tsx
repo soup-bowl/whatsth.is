@@ -3,7 +3,7 @@ import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, Aler
 import { useNavigate } from 'react-router-dom';
 import { DetailCard, ReportInspectionError, UserAgentModel } from '../components';
 import { ConnectionContext, useAPIContext } from "../context";
-import { APIAgentType, IInspectionDetails } from 'libwhatsthis';
+import { IInspectionDetails } from 'libwhatsthis';
 
 const siteTitle = "Site Inspector";
 
@@ -66,7 +66,7 @@ interface Props {
 }
 
 export const InspectonResult = ({ url }: Props) => {
-	const { apiAgent }: { apiAgent: APIAgentType } = useAPIContext();
+	const { apiAgent } = useAPIContext();
 	const navigate = useNavigate();
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);

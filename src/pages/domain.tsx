@@ -8,13 +8,13 @@ import { IDomainSelection, ILookupTable, ILookupTableLayout } from "../interface
 import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
 import '../theme/grid.css';
 import { ConnectionContext, useAPIContext } from "../context";
-import { APIAgentType, IDNSResult, isValidIP } from "libwhatsthis";
+import { IDNSResult, isValidIP } from "libwhatsthis";
 
 const DomainToolsHome = () => {
 	const siteTitle = "Domain Tools";
 
 	const { connectionState } = useContext(ConnectionContext);
-	const { apiAgent }: { apiAgent: APIAgentType } = useAPIContext();
+	const { apiAgent } = useAPIContext();
 	const [selectionInput, setSelectionInput] = useState<IDomainSelection>({} as IDomainSelection);
 	const [currentInput, setCurrentInput] = useState<IDomainSelection>({} as IDomainSelection);
 

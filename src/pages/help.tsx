@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { WhatsThisLogo } from "../components";
 import { IStorage } from "../interfaces";
 import { ConnectionContext, useAPIContext } from "../context";
-import { APIAgentType, formatBytes } from "libwhatsthis";
+import { formatBytes } from "libwhatsthis";
 import { DataGrid } from "@mui/x-data-grid";
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
@@ -88,7 +88,7 @@ interface ErrorCatch {
 export const AboutPage = () => {
 	const siteTitle = "About";
 	const { connectionState } = useContext(ConnectionContext);
-	const { apiAgent }: { apiAgent: APIAgentType } = useAPIContext();
+	const { apiAgent } = useAPIContext();
 
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
