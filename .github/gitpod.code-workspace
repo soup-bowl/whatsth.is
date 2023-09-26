@@ -7,6 +7,10 @@
 		{
 			"path": "/workspace/api.whatsth.is",
 			"name": "Backend"
+		},
+		{
+			"path": "/workspace/whatsth.is-lib",
+			"name": "Library"
 		}
 	],
 	"settings": {

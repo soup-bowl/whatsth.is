@@ -4,8 +4,17 @@ checkoutLocation: whatsth.is
 additionalRepositories:
   - url: https://github.com/soup-bowl/api.whatsth.is
     checkoutLocation: api.whatsth.is
+  - url: https://github.com/soup-bowl/whatsth.is-libfront
+    checkoutLocation: whatsth.is-lib
 
 tasks:
+  - name: Library
+    before: cd ../whatsth.is-lib
+    init: |
+      npm install
+    command: |
+      npm link
+    openMode: tab-before
   - name: Backend
     before: cd ../api.whatsth.is
     env:
