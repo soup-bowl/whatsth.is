@@ -9,7 +9,7 @@ import CloudOffIcon from '@mui/icons-material/CloudOff';
 import { WhatsThisLogo } from "../components";
 import { IStorage } from "../interfaces";
 import { ConnectionContext } from "../context";
-import { formatBytes } from "../utils/stringUtils";
+import { formatBytes } from "libwhatsthis";
 import { DataGrid } from "@mui/x-data-grid";
 
 const WalletDisplay = styled(Typography)({

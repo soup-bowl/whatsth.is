@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
 import { ConnectionContext } from "../context";
-import { getCountryFlag } from "../utils/stringUtils";
+import { getCountryFlag } from "libwhatsthis";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
