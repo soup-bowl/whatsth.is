@@ -4,9 +4,9 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from "react";
-import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
+import { DialogTitleProps } from "../interfaces";
 import { ConnectionContext } from "../context";
-import { getCountryFlag, getUserAgent } from "libwhatsthis";
+import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation, getUserAgent } from "libwhatsthis";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -112,7 +112,7 @@ export const UserAgentModel = () => {
 
 export const MyIpAddressModal = () => {
 	const { connectionState } = useContext(ConnectionContext);
-	const [ips, setIPs] = useState<IIPCollection>({ ipv4: 'N/A', ipv6: 'N/A' });
+	const [ips, setIPs] = useState<IPAddresses>({ ipv4: 'N/A', ipv6: 'N/A' });
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -120,13 +120,7 @@ export const MyIpAddressModal = () => {
 	useEffect(() => {
 		const fetchIPs = async () => {
 			try {
-				const ipv4Response = await fetch('https://4.ident.me/');
-				const ipv4Data = await ipv4Response.text();
-
-				const ipv6Response = await fetch('https://6.ident.me/');
-				const ipv6Data = await ipv6Response.text();
-
-				setIPs({ ipv4: ipv4Data, ipv6: ipv6Data });
+				setIPs(await getBothIPAddresses());
 			} catch (error) {
 				console.error('Error fetching IP data:', error);
 			}
@@ -179,7 +173,7 @@ interface GeoProps {
 }
 
 export const IPAddressGeo = ({ ip }: GeoProps) => {
-	const [geo, setGeo] = useState<IIPGeolocation | undefined>();
+	const [geo, setGeo] = useState<IPGeolocation | undefined>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -187,15 +181,7 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 	useEffect(() => {
 		const fetchIPInfo = async () => {
 			try {
-				const response = await fetch(`https://ipinfo.io/${ip}/json`);
-				if (response.ok) {
-					const data = await response.json();
-					const reply: IIPGeolocation = data;
-					reply.icon = getCountryFlag(reply.country) ?? undefined;
-					setGeo(reply);
-				} else {
-					setGeo(undefined);
-				}
+				setGeo(await getIPGeolocation(ip));
 			} catch (error) {
 				console.error('Error fetching IP info:', error);
 				setGeo(undefined);

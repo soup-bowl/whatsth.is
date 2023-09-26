@@ -115,11 +115,6 @@ export interface IMenuCategory {
 	description?: string;
 }
 
-export interface IIPCollection {
-	ipv4: string;
-	ipv6: string;
-}
-
 export interface ITime {
 	string: Date;
 	unix: number;
@@ -130,19 +125,6 @@ export interface ITime {
 export interface IStorage {
 	quota: number;
 	usage: number;
-}
-
-export interface IIPGeolocation {
-	ip: string;
-	loc: string;
-	org: string;
-	region: string;
-	timezone: string;
-	country: string;
-	city: string;
-	hostname: string;
-	postal: string;
-	icon?: string;
 }
 
 export interface IDomainSelection {
