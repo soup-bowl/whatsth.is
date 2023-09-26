@@ -113,7 +113,7 @@ export const AboutPage = () => {
 		} else {
 			setApiVersion(<><CloudOffIcon fontSize="inherit" /> Offline</>);
 		}
-	}, [connectionState]);
+	}, [connectionState, apiAgent]);
 
 	useEffect(() => {
 		if ('storage' in navigator && 'estimate' in navigator.storage) {
@@ -156,7 +156,7 @@ export const AboutPage = () => {
 				</Link>
 			</Typography>
 			{wallets.map((wallet, i) => (
-				<Box>
+				<Box key={i}>
 					<Typography variant="h3" sx={{ marginTop: 2 }}>{wallet.key.toUpperCase()} Address</Typography>
 					<Stack direction="row" justifyContent="center" alignItems="center">
 						<WalletDisplay>{wallet.wallet}</WalletDisplay>

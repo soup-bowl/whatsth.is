@@ -93,7 +93,7 @@ export const InspectonResult = ({ url }: Props) => {
 			})
 			.catch(() => setRError(true))
 			.finally(() => setLoading(false));
-	}, [url, siteDetails]);
+	}, [url, siteDetails, apiAgent]);
 
 	if (loading) {
 		return (

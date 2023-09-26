@@ -130,7 +130,7 @@ const DomainToolsHome = () => {
 					.catch(() => setLoading(false));
 			}
 		}
-	}, [currentInput]);
+	}, [currentInput, apiAgent]);
 
 	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

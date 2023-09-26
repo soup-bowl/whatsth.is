@@ -14,7 +14,7 @@ interface APIContextType {
 }
 
 export const APIContext = createContext<APIContextType | undefined>(undefined);
-export function useAPIContext() {
+export const useAPIContext = () => {
 	const context = useContext(APIContext);
 	if (context === undefined) {
 		throw new Error('useAPIContext must be used within an APIContextProvider');
