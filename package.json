@@ -14,7 +14,6 @@
     "@types/node": "^20.5.7",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.2.7",
-    "@types/ua-parser-js": "^0.7.37",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
@@ -25,7 +24,6 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.11.0",
     "typescript": "^5.2.2",
-    "ua-parser-js": "^1.0.34",
     "vite": "^4.4.5"
   },
   "scripts": {

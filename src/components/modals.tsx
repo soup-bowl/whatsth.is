@@ -4,10 +4,9 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from "react";
-import UAParser from "ua-parser-js";
 import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
 import { ConnectionContext } from "../context";
-import { getCountryFlag } from "libwhatsthis";
+import { getCountryFlag, getUserAgent } from "libwhatsthis";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -47,8 +46,7 @@ export const UserAgentModel = () => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const uaParser = new UAParser();
-	uaParser.setUA(window.navigator.userAgent);
+	const userAgent = getUserAgent(window.navigator.userAgent);
 
 	return (
 		<div>
@@ -79,31 +77,31 @@ export const UserAgentModel = () => {
 							<Typography fontWeight={700}>Browser</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getBrowser().name} {uaParser.getBrowser().version}</Typography>
+							<Typography>{userAgent.browser.name} {userAgent.browser.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Engine</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getEngine().name} {uaParser.getEngine().version}</Typography>
+							<Typography>{userAgent.engine.name} {userAgent.engine.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Operating System</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getOS().name} {uaParser.getOS().version}</Typography>
+							<Typography>{userAgent.system.name} {userAgent.system.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Device</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getDevice().model ?? <em>Unspecified</em>}</Typography>
+							<Typography>{userAgent.device ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>CPU</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getCPU().architecture ?? <em>Unspecified</em>}</Typography>
+							<Typography>{userAgent.cpu ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 					</Grid>
 				</DialogContent>
