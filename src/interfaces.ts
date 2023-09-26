@@ -7,58 +7,6 @@ export interface DialogTitleProps {
 	onClose: () => void;
 }
 
-export interface IOpenAPI {
-	info: IOpenAPIInfo;
-}
-
-export interface IOpenAPIInfo {
-	title: string;
-	description: string;
-	version: string;
-}
-
-export interface IInspectionResult {
-	technology: IInspectionTechnology;
-	url: string;
-}
-
-export interface IInspectionTechnology {
-	cms: IInspectionDetails[];
-	frontend: IInspectionDetails[];
-	javascript: IInspectionDetails[];
-	cdn: IInspectionDetails[];
-	seo: IInspectionDetails[];
-	language: IInspectionDetails[];
-	server: IInspectionDetails[];
-}
-
-export interface IInspectionDetails {
-	name: string;
-	description: string;
-	type?: string;
-	url: string;
-	matchAvailable: number;
-	matchedOn: string[];
-}
-
-export interface IInspectionWordPress {
-	success: boolean;
-	name: string;
-	tagline: string;
-	timezone: string;
-	post_count: number;
-	page_count: number;
-	cat_count: number;
-	latest_post?: IInspectionWordPressPost;
-	latest_page?: IInspectionWordPressPost;
-}
-
-export interface IInspectionWordPressPost {
-	title: string;
-	date: string;
-	url: string;
-}
-
 export interface ILookupTable {
 	columns: GridColDef[];
 	rows: ILookupTableLayout[];
@@ -68,30 +16,6 @@ export interface ILookupTableLayout {
 	id: number;
 	key: string;
 	value: string;
-}
-
-export interface IDNSResult {
-	a: string[];
-	aaaa: string[];
-	cname: string[];
-	mx: IDNSRecordDetails[];
-	txt: string[];
-	ns: string[];
-}
-
-export interface IDNSRecordDetails {
-	address: string;
-	priority: number;
-}
-
-export interface IWHOISResult {
-	domain: string;
-	registrar: string;
-	whois: string;
-	nameServers: string[];
-	created: string;
-	updated: string;
-	expires: string;
 }
 
 export interface IStringMorph {
