@@ -1,16 +1,15 @@
 import { Typography, Link, Box, Button, Stack, Chip, Tooltip, IconButton, styled } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
-import agent from "../api/agent";
+import { WhatsThisLogo } from "../components";
+import { IStorage } from "../interfaces";
+import { ConnectionContext, useAPIContext } from "../context";
+import { APIAgentType, formatBytes } from "libwhatsthis";
+import { DataGrid } from "@mui/x-data-grid";
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import { WhatsThisLogo } from "../components";
-import { IStorage } from "../interfaces";
-import { ConnectionContext } from "../context";
-import { formatBytes } from "libwhatsthis";
-import { DataGrid } from "@mui/x-data-grid";
 
 const WalletDisplay = styled(Typography)({
 	fontFamily: 'monospace',
@@ -89,6 +88,7 @@ interface ErrorCatch {
 export const AboutPage = () => {
 	const siteTitle = "About";
 	const { connectionState } = useContext(ConnectionContext);
+	const { apiAgent }: { apiAgent: APIAgentType } = useAPIContext();
 
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
@@ -102,7 +102,7 @@ export const AboutPage = () => {
 
 	useEffect(() => {
 		if (connectionState) {
-			agent.Details.openapi().then(response => {
+			apiAgent.Details.openapi().then(response => {
 				setApiVersion(response.info.version);
 			})
 				.catch((err: ErrorCatch) => {

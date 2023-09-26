@@ -1,10 +1,9 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import agent from '../api/agent';
-import { IInspectionDetails } from '../interfaces';
 import { DetailCard, ReportInspectionError, UserAgentModel } from '../components';
-import { ConnectionContext } from "../context";
+import { ConnectionContext, useAPIContext } from "../context";
+import { APIAgentType, IInspectionDetails } from 'libwhatsthis';
 
 const siteTitle = "Site Inspector";
 
@@ -67,6 +66,7 @@ interface Props {
 }
 
 export const InspectonResult = ({ url }: Props) => {
+	const { apiAgent }: { apiAgent: APIAgentType } = useAPIContext();
 	const navigate = useNavigate();
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -81,7 +81,7 @@ export const InspectonResult = ({ url }: Props) => {
 			setSiteDetails(list);
 		}
 
-		agent.Inspection.inspect(url)
+		apiAgent.Inspection.inspect(url)
 			.then(response => {
 				response.technology.cms.forEach((res) => addSoftwareToList(res, 'CMS'));
 				response.technology.frontend.forEach((res) => addSoftwareToList(res, 'Frontend'));
