@@ -1,34 +1,14 @@
 import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
+import { ConversionTime, timeOutput, SecondType } from "libwhatsthis";
+
 import WarningIcon from '@mui/icons-material/Warning';
-import { ITime } from "../interfaces";
-import { SecondType } from "../enums";
 
 const siteTitle = "Unix Timestamp Conversion";
-const maxInt32 = 2147483647;
 const MaxAcceptUnix = 253402300799999;
 
 const UnixEpochPage = () => {
-	const timeOutput = (time: number): ITime => {
-		if (time > MaxAcceptUnix) {
-			try {
-				return timeStore;
-			} catch {
-				return timeOutput(MaxAcceptUnix);
-			}
-		}
-
-		const conversionDate: Date = (time >= 1e11) ? new Date(time) : new Date(time * 1e3);
-
-		return {
-			string: conversionDate,
-			unix: time,
-			overflow: (time > maxInt32) ? true : false,
-			type: (time >= 1e11) ? SecondType.ms : SecondType.s,
-		}
-	}
-
-	const [timeStore, setTimeStore] = useState<ITime>((): ITime => {
+	const [timeStore, setTimeStore] = useState<ConversionTime>((): ConversionTime => {
 		const inputGet: string = window.location.hash.split('/').slice(-1)[0];
 		const inputIsNumber: boolean = /^\d+$/.test(inputGet);
 

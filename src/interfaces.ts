@@ -1,5 +1,4 @@
 import { GridColDef } from "@mui/x-data-grid";
-import { SecondType } from "./enums";
 
 export interface DialogTitleProps {
 	id: string;
@@ -37,13 +36,6 @@ export interface IMenuCategory {
 	id: number;
 	name: string;
 	description?: string;
-}
-
-export interface ITime {
-	string: Date;
-	unix: number;
-	overflow: boolean;
-	type: SecondType;
 }
 
 export interface IStorage {
