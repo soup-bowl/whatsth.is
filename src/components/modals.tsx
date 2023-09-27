@@ -2,11 +2,12 @@ import {
 	Typography, Button, Grid, Link, IconButton, Stack, styled,
 	Dialog, DialogTitle, DialogContent
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from "react";
 import { DialogTitleProps } from "../interfaces";
 import { ConnectionContext } from "../context";
 import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation, getUserAgent } from "libwhatsthis";
+
+import CloseIcon from '@mui/icons-material/Close';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
