@@ -8,9 +8,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.11.16",
+    "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.7",
-    "@mui/x-data-grid": "^6.10.0",
+    "@mui/x-data-grid": "^6.16.0",
     "@types/crypto-js": "^4.1.1",
     "@types/node": "^20.5.7",
     "@types/react": "^18.0.7",
@@ -29,7 +29,7 @@
     "react-router-dom": "^6.11.0",
     "typescript": "^5.2.2",
     "ua-parser-js": "^1.0.34",
-    "vite": "^4.4.5"
+    "vite": "^4.4.9"
   },
   "scripts": {
     "start": "npm run dev",
