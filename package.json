@@ -28,7 +28,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.11.0",
     "typescript": "^5.2.2",
-    "ua-parser-js": "^1.0.34",
+    "ua-parser-js": "^1.0.36",
     "vite": "^4.4.9"
   },
   "scripts": {
