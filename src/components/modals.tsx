@@ -2,12 +2,12 @@ import {
 	Typography, Button, Grid, Link, IconButton, Stack, styled,
 	Dialog, DialogTitle, DialogContent
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from "react";
-import UAParser from "ua-parser-js";
-import { DialogTitleProps, IIPCollection, IIPGeolocation } from "../interfaces";
+import { DialogTitleProps } from "../interfaces";
 import { ConnectionContext } from "../context";
-import { getCountryFlag } from "../utils/stringUtils";
+import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation, getUserAgent } from "libwhatsthis";
+
+import CloseIcon from '@mui/icons-material/Close';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -47,8 +47,7 @@ export const UserAgentModel = () => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const uaParser = new UAParser();
-	uaParser.setUA(window.navigator.userAgent);
+	const userAgent = getUserAgent(window.navigator.userAgent);
 
 	return (
 		<div>
@@ -79,31 +78,31 @@ export const UserAgentModel = () => {
 							<Typography fontWeight={700}>Browser</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getBrowser().name} {uaParser.getBrowser().version}</Typography>
+							<Typography>{userAgent.browser.name} {userAgent.browser.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Engine</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getEngine().name} {uaParser.getEngine().version}</Typography>
+							<Typography>{userAgent.engine.name} {userAgent.engine.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Operating System</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getOS().name} {uaParser.getOS().version}</Typography>
+							<Typography>{userAgent.system.name} {userAgent.system.version}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Device</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getDevice().model ?? <em>Unspecified</em>}</Typography>
+							<Typography>{userAgent.device ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>CPU</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{uaParser.getCPU().architecture ?? <em>Unspecified</em>}</Typography>
+							<Typography>{userAgent.cpu ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 					</Grid>
 				</DialogContent>
@@ -114,7 +113,7 @@ export const UserAgentModel = () => {
 
 export const MyIpAddressModal = () => {
 	const { connectionState } = useContext(ConnectionContext);
-	const [ips, setIPs] = useState<IIPCollection>({ ipv4: 'N/A', ipv6: 'N/A' });
+	const [ips, setIPs] = useState<IPAddresses>({ ipv4: 'N/A', ipv6: 'N/A' });
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -122,13 +121,7 @@ export const MyIpAddressModal = () => {
 	useEffect(() => {
 		const fetchIPs = async () => {
 			try {
-				const ipv4Response = await fetch('https://4.ident.me/');
-				const ipv4Data = await ipv4Response.text();
-
-				const ipv6Response = await fetch('https://6.ident.me/');
-				const ipv6Data = await ipv6Response.text();
-
-				setIPs({ ipv4: ipv4Data, ipv6: ipv6Data });
+				setIPs(await getBothIPAddresses());
 			} catch (error) {
 				console.error('Error fetching IP data:', error);
 			}
@@ -181,7 +174,7 @@ interface GeoProps {
 }
 
 export const IPAddressGeo = ({ ip }: GeoProps) => {
-	const [geo, setGeo] = useState<IIPGeolocation | undefined>();
+	const [geo, setGeo] = useState<IPGeolocation | undefined>();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -189,15 +182,7 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 	useEffect(() => {
 		const fetchIPInfo = async () => {
 			try {
-				const response = await fetch(`https://ipinfo.io/${ip}/json`);
-				if (response.ok) {
-					const data = await response.json();
-					const reply: IIPGeolocation = data;
-					reply.icon = getCountryFlag(reply.country) ?? undefined;
-					setGeo(reply);
-				} else {
-					setGeo(undefined);
-				}
+				setGeo(await getIPGeolocation(ip));
 			} catch (error) {
 				console.error('Error fetching IP info:', error);
 				setGeo(undefined);

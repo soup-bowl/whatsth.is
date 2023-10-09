@@ -1,6 +1,6 @@
 
 import { Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material";
-import { IInspectionDetails } from "../interfaces";
+import { IInspectionDetails } from "libwhatsthis";
 import { ServiceIcon } from ".";
 
 interface Props {

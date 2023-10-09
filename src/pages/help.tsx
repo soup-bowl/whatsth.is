@@ -1,16 +1,15 @@
 import { Typography, Link, Box, Button, Stack, Chip, Tooltip, IconButton, styled } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
-import agent from "../api/agent";
+import { WhatsThisLogo } from "../components";
+import { IStorage } from "../interfaces";
+import { ConnectionContext, useAPIContext } from "../context";
+import { formatBytes } from "libwhatsthis";
+import { DataGrid } from "@mui/x-data-grid";
 
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CachedIcon from '@mui/icons-material/Cached';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import { WhatsThisLogo } from "../components";
-import { IStorage } from "../interfaces";
-import { ConnectionContext } from "../context";
-import { formatBytes } from "../utils/stringUtils";
-import { DataGrid } from "@mui/x-data-grid";
 
 const WalletDisplay = styled(Typography)({
 	fontFamily: 'monospace',
@@ -89,6 +88,7 @@ interface ErrorCatch {
 export const AboutPage = () => {
 	const siteTitle = "About";
 	const { connectionState } = useContext(ConnectionContext);
+	const { apiAgent } = useAPIContext();
 
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
@@ -102,7 +102,7 @@ export const AboutPage = () => {
 
 	useEffect(() => {
 		if (connectionState) {
-			agent.Details.openapi().then(response => {
+			apiAgent.Details.openapi().then(response => {
 				setApiVersion(response.info.version);
 			})
 				.catch((err: ErrorCatch) => {
@@ -113,7 +113,7 @@ export const AboutPage = () => {
 		} else {
 			setApiVersion(<><CloudOffIcon fontSize="inherit" /> Offline</>);
 		}
-	}, [connectionState]);
+	}, [connectionState, apiAgent]);
 
 	useEffect(() => {
 		if ('storage' in navigator && 'estimate' in navigator.storage) {
@@ -132,8 +132,8 @@ export const AboutPage = () => {
 				on <Link style={{ fontWeight: 'bold' }} href="https://pages.github.com/">GitHub Pages</Link>.
 			</Typography>
 			<Stack my={2}>
-				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION?.replace(/"/g, "")}</Box></Typography>
-
+				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION?.replace(/"/g, "") ?? "Error"}</Box></Typography>
+				<Typography>Library Version: <Box component="span" fontWeight='700'>{process.env.REACT_LIB_VERSION?.replace("^", "") ?? "Error"}</Box></Typography>
 				<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
 
 				{storageInfo.quota !== undefined && storageInfo.quota !== 0 ?
@@ -151,7 +151,7 @@ export const AboutPage = () => {
 			</Stack>
 			<Typography variant="h1" my={2}>Donate</Typography>
 			{wallets.map((wallet, i) => (
-				<Box>
+				<Box key={i}>
 					<Typography variant="h3" sx={{ marginTop: 2 }}>{wallet.key.toUpperCase()} Address</Typography>
 					<Stack direction="row" justifyContent="center" alignItems="center">
 						<WalletDisplay>{wallet.wallet}</WalletDisplay>

@@ -5,9 +5,3 @@ export enum ConversionType {
 	AES = 10,
 	TDES = 11,
 }
-
-export enum SecondType {
-	s = 1,
-	ms = 2,
-	us = 3,
-}

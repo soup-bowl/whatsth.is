@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import react from '@vitejs/plugin-react-swc';
-import { version } from './package.json';
+import { version, dependencies } from './package.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -44,6 +44,7 @@ export default defineConfig({
 	define: {
 		'process.env': {
 			REACT_APP_VERSION: JSON.stringify(version),
+			REACT_LIB_VERSION: dependencies["libwhatsthis"]
 		},
 	},
 })

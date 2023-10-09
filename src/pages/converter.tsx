@@ -5,7 +5,7 @@ import {
 import { ChangeEvent, useEffect, useState } from "react";
 import { ConversionType } from "../enums";
 import { IStringMorph } from "../interfaces";
-import { StringConversion } from "../utils/stringUtils";
+import { StringConversion } from "libwhatsthis";
 
 const siteTitle = "String Conversions";
 

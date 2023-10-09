@@ -4,17 +4,17 @@ import {
 } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
-import agent from '../api/agent';
-import { ILookupTable, ILookupTableLayout, IDNSRecordDetails, IDomainSelection, IDNSResult } from "../interfaces";
+import { IDomainSelection, ILookupTable, ILookupTableLayout } from "../interfaces";
 import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
 import '../theme/grid.css';
-import { ConnectionContext } from "../context";
-import { isValidIP } from "../utils/stringUtils";
+import { ConnectionContext, useAPIContext } from "../context";
+import { IDNSResult, isValidIP } from "libwhatsthis";
 
 const DomainToolsHome = () => {
 	const siteTitle = "Domain Tools";
 
 	const { connectionState } = useContext(ConnectionContext);
+	const { apiAgent } = useAPIContext();
 	const [selectionInput, setSelectionInput] = useState<IDomainSelection>({} as IDomainSelection);
 	const [currentInput, setCurrentInput] = useState<IDomainSelection>({} as IDomainSelection);
 
@@ -81,7 +81,7 @@ const DomainToolsHome = () => {
 			];
 
 			if (currentInput.protocol !== "WHOIS") {
-				agent.DNS.dns(currentInput.url)
+				apiAgent.DNS.dns(currentInput.url)
 					.then((response) => {
 						const records: ILookupTableLayout[] = [];
 						const types: (keyof IDNSResult)[] = ['a', 'aaaa', 'cname', 'mx', 'txt', 'ns'];
@@ -90,7 +90,7 @@ const DomainToolsHome = () => {
 							if (response[type].length > 0) {
 								const collection: string[] = [];
 								if (type === 'mx') {
-									response[type].forEach((entry: IDNSRecordDetails) => {
+									response[type].forEach(entry => {
 										collection.push(`${entry.address} (Priority ${entry.priority})`);
 									});
 								}
@@ -110,7 +110,7 @@ const DomainToolsHome = () => {
 					})
 					.catch(() => setLoading(false));
 			} else {
-				agent.DNS.whois(currentInput.url)
+				apiAgent.DNS.whois(currentInput.url)
 					.then(response => {
 						const records: ILookupTableLayout[] = [
 							{ id: 0, key: 'Domain', value: response.domain },
@@ -130,7 +130,7 @@ const DomainToolsHome = () => {
 					.catch(() => setLoading(false));
 			}
 		}
-	}, [currentInput]);
+	}, [currentInput, apiAgent]);
 
 	const submitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

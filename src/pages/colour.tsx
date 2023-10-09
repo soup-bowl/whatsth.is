@@ -1,7 +1,6 @@
 import { Button, Card, Grid, InputAdornment, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { CMYK, HSL, IColourValues, RGB } from "../interfaces";
-import { cmykToAll, hexToAll, hslToAll, isValidColorString, rgbToAll } from "../utils/colourUtils";
+import { CMYK, HSL, IColourValues, RGB, cmykToAll, hexToAll, hslToAll, isValidColorString, rgbToAll } from "libwhatsthis";
 
 const siteTitle = "Colour Picker";
 

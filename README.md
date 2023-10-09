@@ -16,7 +16,7 @@ React-based [progressive web app][pwa] proof-of-concept designed to provide a to
 * [Cron Conversion](https://whatsth.is/#/cron).
 * [UNIX Timestamp Converter](https://whatsth.is/#/time).
 
-This app comprises of two components - A React frontend (this repository), and a [C# .NET inspection API][api].
+This app comprises of three components - A React frontend (this repository), an [engine library][lib], and a [C# .NET inspection API][api].
 
 ## Getting Started
 
@@ -62,4 +62,5 @@ devOptions: {
 [site]: https://whatsth.is
 [pwa]:  https://web.dev/learn/pwa/progressive-web-apps/
 [api]:  https://github.com/soup-bowl/api.whatsth.is
+[lib]:  https://github.com/soup-bowl/libwhatsthis
 [ext]:  https://github.com/soup-bowl/whatsth.is-browser
