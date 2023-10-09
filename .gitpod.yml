@@ -4,7 +4,7 @@ checkoutLocation: whatsth.is
 additionalRepositories:
   - url: https://github.com/soup-bowl/api.whatsth.is
     checkoutLocation: api.whatsth.is
-  - url: https://github.com/soup-bowl/whatsth.is-libfront
+  - url: https://github.com/soup-bowl/libwhatsthis
     checkoutLocation: whatsth.is-lib
 
 tasks:
