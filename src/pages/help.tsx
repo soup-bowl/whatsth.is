@@ -132,8 +132,8 @@ export const AboutPage = () => {
 				on <Link style={{ fontWeight: 'bold' }} href="https://pages.cloudflare.com/">Cloudflare Pages</Link>.
 			</Typography>
 			<Stack my={2}>
-				<Typography>App Version: <Box component="span" fontWeight='700'>{process.env.REACT_APP_VERSION?.replace(/"/g, "") ?? "Error"}</Box></Typography>
-				<Typography>Library Version: <Box component="span" fontWeight='700'>{process.env.REACT_LIB_VERSION?.replace("^", "") ?? "Error"}</Box></Typography>
+				<Typography>App Version: <Box component="span" fontWeight='700'>{__APP_VERSION__}</Box></Typography>
+				<Typography>Library Version: <Box component="span" fontWeight='700'>{__LIB_VERSION__.replace("^", "")}</Box></Typography>
 				<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
 
 				{storageInfo.quota !== undefined && storageInfo.quota !== 0 ?

@@ -42,9 +42,7 @@ export default defineConfig({
 		port: 3000
 	},
 	define: {
-		'process.env': {
-			REACT_APP_VERSION: JSON.stringify(version),
-			REACT_LIB_VERSION: dependencies["libwhatsthis"]
-		},
+		__APP_VERSION__: JSON.stringify(version),
+		__LIB_VERSION__: JSON.stringify(dependencies["libwhatsthis"])
 	},
 })
