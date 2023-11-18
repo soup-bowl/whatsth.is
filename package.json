@@ -1,7 +1,25 @@
 {
   "name": "whatsth.is",
   "version": "edge",
+  "description": "Swiss-army knife development toolbox frontend",
   "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soup-bowl/whatsth.is.git"
+  },
+  "author": "soup-bowl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soup-bowl/whatsth.is/issues"
+  },
+  "homepage": "https://whatsth.is",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.10.8",
@@ -25,16 +43,9 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.11.0",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9"
-  },
-  "scripts": {
-    "start": "npm run dev",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "vite": "^5.0.0"
   },
   "devDependencies": {
-    "vite-plugin-pwa": "^0.16.4"
+    "vite-plugin-pwa": "^0.17.0"
   }
 }
