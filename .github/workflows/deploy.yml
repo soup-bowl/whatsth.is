@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: 🏗 Setup Node.js
         uses: actions/setup-node@v2
@@ -32,14 +32,14 @@ jobs:
 
       - name: 🔎 Identify Commit Hash
         id: commit
-        uses: pr-mpt/actions-commit-hash@v1
+        uses: prompt/actions-commit-hash@v3
 
       - name: 🔎 Identify version
         id: get_version
         uses: battila7/get-version-action@v2
 
       - name: 🦸 change version in NPM
-        uses: reedyuk/npm-version@1.1.1
+        uses: reedyuk/npm-version@1.2.2
         with:
           version: ${{ steps.get_version.outputs.version-without-v  }}-${{ steps.commit.outputs.short }}
           git-tag-version: "false"
@@ -48,10 +48,10 @@ jobs:
         run: npm ci && npm run build
 
       - name: 🚀 Pre-Deploy Site
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./dist
 
       - name: 🚀 Deploy Site
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
