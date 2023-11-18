@@ -47,11 +47,11 @@ jobs:
       - name: 📦 Build Site
         run: npm ci && npm run build
 
-      - name: 🚀 Pre-Deploy Site
-        uses: actions/upload-pages-artifact@v2
+      - name: 🚛 Publish Site
+        uses: cloudflare/pages-action@v1
         with:
-          path: ./dist
-
-      - name: 🚀 Deploy Site
-        id: deployment
-        uses: actions/deploy-pages@v2
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: whatsthis
+          directory: ./dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
