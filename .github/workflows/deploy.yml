@@ -1,4 +1,4 @@
-name: Auto-deploy to GitHub Pages
+name: 🚀 Deploy!
 
 on:
   release:
