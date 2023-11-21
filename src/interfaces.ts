@@ -55,4 +55,5 @@ export interface IScratchpadItem {
 	title: string;
 	type: ScratchpadItemType;
 	message: string;
+	image?: string;
 }

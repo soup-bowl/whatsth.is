@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Stack, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { Scratches } from "../components/ScratchListings";
 import { IScratchpadItem } from "../interfaces";
@@ -66,6 +66,12 @@ const ScratchpadPage = () => {
 			<Typography>
 				Store useful notes and links. <strong>This is not currently backed up</strong>, please use at your own risk.
 			</Typography>
+			<Box my={2}>
+				<Alert severity="info">
+					<AlertTitle>Beta</AlertTitle>
+					This is a <strong>beta</strong> service. Please use the feedback forms to let us know what is missing!
+				</Alert>
+			</Box>
 			<Stack direction="row" spacing={2} my={2}>
 				<Button variant="contained" startIcon={<AddIcon />} onClick={() => addScratch(createItem("New Note", ""))}>
 					Add

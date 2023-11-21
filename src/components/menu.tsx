@@ -116,6 +116,7 @@ const getMenu: IMenu[] = [
 		category: Category.Tools,
 		url: '/scratchpad',
 		needsInternet: false,
+		beta: true,
 	}
 ];
 
