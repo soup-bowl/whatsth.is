@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { IScratchpadItem } from "../interfaces";
-import { hslToAll } from "libwhatsthis";
+import { hexToAll, hslToAll } from "libwhatsthis";
 
 interface ScratchItemProps {
 	item: IScratchpadItem;
@@ -13,22 +13,39 @@ interface HeaderColours {
 	darkColor: string;
 }
 
-const generateColors = (timestamp: number): HeaderColours => {
-	const hue = timestamp % 1;
-	const lightness = 0.5;
-	const saturation = 0.7;
+// https://mui.com/material-ui/react-avatar/
+const stringToColor = (string: string) => {
+	let hash = 0;
+	let i;
 
-	const lightColor = hslToAll({ h: hue, l: lightness, s: saturation }).rgb;
-	const darkColor = hslToAll({ h: hue, l: 0.25, s: saturation }).rgb;
+	/* eslint-disable no-bitwise */
+	for (i = 0; i < string.length; i += 1) {
+		hash = string.charCodeAt(i) + ((hash << 5) - hash);
+	}
+
+	let color = '#';
+
+	for (i = 0; i < 3; i += 1) {
+		const value = (hash >> (i * 8)) & 0xff;
+		color += `00${value.toString(16)}`.slice(-2);
+	}
+	/* eslint-enable no-bitwise */
+
+	return color;
+};
+
+const generateColors = (title: string): HeaderColours => {
+	const hex = stringToColor(title);
+	const hsl = hexToAll(hex).hsl;
 
 	return {
-		lightColor: `#${lightColor.r.toString(16).padStart(2, '0')}${lightColor.g.toString(16).padStart(2, '0')}${lightColor.b.toString(16).padStart(2, '0')}`,
-		darkColor: `#${darkColor.r.toString(16).padStart(2, '0')}${darkColor.g.toString(16).padStart(2, '0')}${darkColor.b.toString(16).padStart(2, '0')}`,
+		lightColor: `hsl(${hsl.h}, ${hsl.s}%, ${(hsl.l + 20)}%)`,
+		darkColor: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
 	};
-}
+};
 
 const Scratch = ({ item, onClick, onDelete }: ScratchItemProps) => {
-	const cols = generateColors(item.created);
+	const cols = generateColors(item.title);
 
 	return (
 		<Card sx={{ maxWidth: 345 }}>
