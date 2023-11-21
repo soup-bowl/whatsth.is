@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { DetailCard, ReportInspectionError, UserAgentModel } from '../components';
+import { DetailCard, ReportInspectionError } from '../components';
+import { UserAgentModel } from '../modals';
 import { ConnectionContext, useAPIContext } from "../context";
 import { IInspectionDetails } from 'libwhatsthis';
 

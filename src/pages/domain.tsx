@@ -5,9 +5,10 @@ import {
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import { IDomainSelection, ILookupTable, ILookupTableLayout } from "../interfaces";
-import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
+import { ReportDNSError } from "../components";
 import '../theme/grid.css';
 import { ConnectionContext, useAPIContext } from "../context";
+import { IPAddressGeo, MyIpAddressModal } from "../modals";
 import { IDNSResult, isValidIP } from "libwhatsthis";
 
 const DomainToolsHome = () => {
