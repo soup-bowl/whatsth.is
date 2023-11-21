@@ -5,3 +5,8 @@ export enum ConversionType {
 	AES = 10,
 	TDES = 11,
 }
+
+export enum ScratchpadItemType {
+	Text,
+	Link,
+}
