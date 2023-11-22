@@ -56,6 +56,7 @@ const Scratch = ({ item, onClick, onDelete }: ScratchItemProps) => {
 					height: 140,
 					backgroundColor: cols.darkColor,
 					color: cols.lightColor,
+					fontFamily: 'serif',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
