@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Alert, AlertTitle, Box, Button, Stack, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { Scratches } from "../components/ScratchListings";
-import { IScratchpadItem } from "../interfaces";
-import { ScratchpadItemType } from "../enums";
 import { ScratchEditorModal } from "../modals";
+import { addScratch, createItem, getScratches, removeScratch, saveScratches, updateScratch } from "../utils/scratch";
+import { IScratchpadItem } from "../interfaces";
 
 const siteTitle = "Scratchpad";
 
@@ -13,48 +13,9 @@ const ScratchpadPage = () => {
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
-	const readFromLocalStorage = (key: string): IScratchpadItem[] | undefined => {
-		const value = localStorage.getItem(key);
-
-		if (value) {
-			return JSON.parse(value);
-		}
-
-		return undefined;
-	}
-
-	const writeToLocalStorage = (key: string, value: IScratchpadItem[]) => localStorage.setItem(key, JSON.stringify(value));
-
-	const getScratches = () => readFromLocalStorage('WTScratchpadItems');
-	const saveScratches = (items: IScratchpadItem[]) => writeToLocalStorage('WTScratchpadItems', items);
-
-	const addScratch = (item: IScratchpadItem) => {
-		let items = getScratches();
-
-		if (items === undefined) {
-			items = [];
-		}
-
-		items.push(item);
-
-		setScratches(items);
-	};
-
-	const removeScratch = (id: string) => setScratches(getScratches()?.filter(item => item.id !== id) ?? []);
-
-	const updateScratch = (sratch: IScratchpadItem) => {
-		let items = getScratches()?.filter(item => item.id !== sratch.id) ?? [];
-		items.push(sratch);
-		setScratches(items);
-	};
-
-	const createItem = (title: string, message: string): IScratchpadItem => ({
-		id: self.crypto.randomUUID(),
-		created: Date.now(),
-		type: ScratchpadItemType.Text,
-		title: title,
-		message: message,
-	});
+	const addItem = (item: IScratchpadItem) => setScratches(addScratch(scratches ?? [], item));
+	const removeItem = (id: string) => setScratches(removeScratch(scratches ?? [], id));
+	const updateItem = (sratch: IScratchpadItem) => setScratches(updateScratch(scratches ?? [], sratch));
 
 	const [scratches, setScratches] = useState<IScratchpadItem[] | undefined>(getScratches());
 	const [activeScratch, setActiveScratch] = useState<IScratchpadItem | undefined>(undefined);
@@ -73,7 +34,16 @@ const ScratchpadPage = () => {
 				</Alert>
 			</Box>
 			<Stack direction="row" spacing={2} my={2}>
-				<Button variant="contained" startIcon={<AddIcon />} onClick={() => addScratch(createItem("New Note", ""))}>
+				<Button
+					variant="contained"
+					startIcon={<AddIcon />}
+					onClick={() => {
+						const newItem = createItem("New Note", "");
+						addItem(newItem);
+						setActiveScratch(scratches?.find(obj => obj.id === newItem.id));
+						setOpen(true);
+					}}
+				>
 					Add
 				</Button>
 			</Stack>
@@ -83,13 +53,13 @@ const ScratchpadPage = () => {
 					setActiveScratch(scratches?.find(obj => obj.id === id));
 					setOpen(true);
 				}}
-				onDelete={(id) => removeScratch(id)}
+				onDelete={(id) => removeItem(id)}
 			/>
 			{activeScratch !== undefined && <ScratchEditorModal
 				open={open}
 				handleClose={() => setOpen(false)}
 				handleSave={(item) => {
-					updateScratch(item);
+					updateItem(item);
 					setOpen(false);
 				}}
 				item={activeScratch ?? {} as IScratchpadItem}

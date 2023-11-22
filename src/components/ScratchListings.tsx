@@ -57,6 +57,7 @@ const Scratch = ({ item, onClick, onDelete }: ScratchItemProps) => {
 					backgroundColor: cols.darkColor,
 					color: cols.lightColor,
 					fontFamily: 'serif',
+					textTransform: 'uppercase',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -75,7 +76,7 @@ const Scratch = ({ item, onClick, onDelete }: ScratchItemProps) => {
 			</CardContent>
 			<CardActions>
 				<Button size="small" onClick={() => onClick(item.id)}>Open</Button>
-				<Button size="small" onClick={() => onDelete(item.id)}>Delete</Button>
+				<Button size="small" color="error" onClick={() => onDelete(item.id)}>Delete</Button>
 			</CardActions>
 		</Card>
 	);
