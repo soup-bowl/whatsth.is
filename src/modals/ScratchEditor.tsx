@@ -1,7 +1,8 @@
-import { AppBar, Button, Container, Dialog, IconButton, TextField, Toolbar } from "@mui/material";
+import { AppBar, Button, Card, Container, Dialog, IconButton, TextField, Toolbar } from "@mui/material";
 import { IScratchpadItem } from "../interfaces";
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from "react";
+import { Editor } from "@monaco-editor/react";
 
 interface Props {
 	item: IScratchpadItem;
@@ -13,6 +14,8 @@ interface Props {
 const ScratchEditorModal = ({ item, open, handleClose, handleSave }: Props) => {
 	const [text, setText] = useState<string>('');
 	const [title, setTitle] = useState<string>('');
+
+	const lightdark = localStorage.getItem('ColourPref');
 
 	useEffect(() => {
 		setText(item.message);
@@ -57,13 +60,16 @@ const ScratchEditorModal = ({ item, open, handleClose, handleSave }: Props) => {
 				</Toolbar>
 			</AppBar>
 			<Container maxWidth="lg" style={{ paddingTop: 25 }}>
-				<TextField
-					multiline
-					fullWidth
-					rows={12}
-					onChange={(e) => setText(e.target.value)}
-					value={text}
-				/>
+				<Card>
+					<Editor
+						theme={lightdark === "light" ? "vs-light" : "vs-dark"}
+						height="75vh"
+						defaultLanguage="markdown"
+						value={text}
+						onChange={(e) => setText(e ?? '')}
+						options={{ minimap: { enabled: false } }}
+					/>
+				</Card>
 			</Container>
 		</Dialog>
 	);
