@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, AlertTitle, Box, Button, Stack, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { Scratches } from "../components/ScratchListings";
 import { ScratchEditorModal } from "../modals";
@@ -9,7 +9,9 @@ import { IScratchpadItem } from "../interfaces";
 const siteTitle = "Scratchpad";
 
 const ScratchpadPage = () => {
-	const [open, setOpen] = useState(false);
+	const [openNewNote, setOpenNewNote] = useState(false);
+	const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+	const openMenuDialog = Boolean(menuAnchorEl);
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
@@ -20,6 +22,64 @@ const ScratchpadPage = () => {
 	const [scratches, setScratches] = useState<IScratchpadItem[] | undefined>(getScratches());
 	const [activeScratch, setActiveScratch] = useState<IScratchpadItem | undefined>(undefined);
 	useEffect(() => saveScratches(scratches ?? []), [scratches]);
+
+	const handleClickMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setMenuAnchorEl(event.currentTarget);
+	};
+
+	const handleCloseMenu = () => {
+		setMenuAnchorEl(null);
+	};
+
+	const handleExport = () => {
+		const fileName = "scratchpad-export.json";
+		const json = JSON.stringify(scratches, null, 2);
+		const blob = new Blob([json], { type: "application/json" });
+		const href = URL.createObjectURL(blob);
+
+		const link = document.createElement("a");
+		link.href = href;
+		link.download = fileName;
+		document.body.appendChild(link);
+		link.click();
+
+		document.body.removeChild(link);
+		URL.revokeObjectURL(href);
+
+		handleCloseMenu();
+	};
+
+	const handleImport = () => {
+		const fileInput = document.createElement("input");
+		fileInput.type = "file";
+		fileInput.accept = ".json";
+
+		fileInput.addEventListener("change", (event) => {
+			const files = (event.target as HTMLInputElement).files;
+			if (files && files.length > 0) {
+				const file = files[0];
+				const reader = new FileReader();
+
+				reader.onload = (e) => {
+					const text = (e.target?.result || "") as string;
+					try {
+						const data = JSON.parse(text) as IScratchpadItem[];
+						saveScratches(data);
+						setScratches(getScratches());
+					} catch (error) {
+						console.error("Error parsing JSON:", error);
+					} finally {
+						handleCloseMenu();
+					}
+				};
+
+				reader.readAsText(file);
+			}
+		});
+
+		// Trigger the file input
+		fileInput.click();
+	}
 
 	return (
 		<>
@@ -41,29 +101,50 @@ const ScratchpadPage = () => {
 						const newItem = createItem("New Note", "");
 						addItem(newItem);
 						setActiveScratch(scratches?.find(obj => obj.id === newItem.id));
-						setOpen(true);
+						setOpenNewNote(true);
 					}}
 				>
 					Add
+				</Button>
+				<Button
+					id="scratch-option-button"
+					color="secondary"
+					variant="contained"
+					aria-controls={openMenuDialog ? 'scratch-option-menu' : undefined}
+					aria-haspopup="true"
+					aria-expanded={openMenuDialog ? 'true' : undefined}
+					onClick={handleClickMenu}
+				>
+					Options
 				</Button>
 			</Stack>
 			<Scratches
 				items={scratches?.sort((a, b) => b.created - a.created) ?? []}
 				onClick={(id) => {
 					setActiveScratch(scratches?.find(obj => obj.id === id));
-					setOpen(true);
+					setOpenNewNote(true);
 				}}
 				onDelete={(id) => removeItem(id)}
 			/>
 			{activeScratch !== undefined && <ScratchEditorModal
-				open={open}
-				handleClose={() => setOpen(false)}
+				open={openNewNote}
+				handleClose={() => setOpenNewNote(false)}
 				handleSave={(item) => {
 					updateItem(item);
-					setOpen(false);
+					setOpenNewNote(false);
 				}}
 				item={activeScratch ?? {} as IScratchpadItem}
 			/>}
+			<Menu
+				id="scratch-option-menu"
+				anchorEl={menuAnchorEl}
+				open={openMenuDialog}
+				onClose={handleCloseMenu}
+				MenuListProps={{ 'aria-labelledby': 'scratch-option-button' }}
+			>
+				<MenuItem onClick={handleImport}>Import Scratches</MenuItem>
+				<MenuItem onClick={handleExport}>Export Scratches</MenuItem>
+			</Menu>
 		</>
 	);
 }
