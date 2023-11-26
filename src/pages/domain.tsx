@@ -199,7 +199,8 @@ const DomainToolsHome = () => {
 								Submit
 							</Button>
 							<Button
-								variant="outlined"
+								variant="contained"
+								color="secondary"
 								value="Return"
 								onClick={clearForm}
 								disabled={(currentInput.protocol === '')}

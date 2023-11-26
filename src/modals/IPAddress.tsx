@@ -25,7 +25,7 @@ export const MyIpAddressModal = () => {
 
 	return (
 		<div>
-			<Button onClick={handleOpen} variant="outlined" disabled={!connectionState}>My IP</Button>
+			<Button onClick={handleOpen} variant="contained" color="secondary" disabled={!connectionState}>My IP</Button>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}

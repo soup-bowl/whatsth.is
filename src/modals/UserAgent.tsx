@@ -12,7 +12,7 @@ const UserAgentModel = () => {
 
 	return (
 		<div>
-			<Button onClick={handleOpen} variant="outlined">Connection Info</Button>
+			<Button onClick={handleOpen} variant="contained" color="secondary">Connection Info</Button>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}

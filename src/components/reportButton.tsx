@@ -41,7 +41,7 @@ const ErrorButton = ({ title, body, label }: Props) => {
 	const titleEncode = encodeURIComponent(title);
 	return (
 		<Button
-			variant="outlined"
+			variant="contained"
 			color="error"
 			sx={{ marginLeft: 2 }}
 			href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?body=${body}&title=${titleEncode}&labels=${label}`}
