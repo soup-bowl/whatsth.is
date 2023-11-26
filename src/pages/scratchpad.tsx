@@ -93,6 +93,13 @@ const ScratchpadPage = () => {
 					This is a <strong>beta</strong> service. Please use the feedback forms to let us know what is missing!
 				</Alert>
 			</Box>
+			<Box my={2}>
+				<Alert severity="warning">
+					<AlertTitle>Data Loss</AlertTitle>
+					Data is stored <strong>client-side</strong>, so changing browser settings and cache-clearing can destroy data.
+					Do not store essential data without backing up. <strong>Data is not encrypted</strong>.
+				</Alert>
+			</Box>
 			<Stack direction="row" spacing={2} my={2}>
 				<Button
 					variant="contained"
