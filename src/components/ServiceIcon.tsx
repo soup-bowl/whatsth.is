@@ -1,56 +1,18 @@
-import {
-	faAws,
-	faBootstrap,
-	faCloudflare,
-	faDiscourse,
-	faDrupal,
-	faGithub,
-	faGoogle,
-	faJava,
-	faJoomla,
-	faMagento,
-	faMicrosoft,
-	faPhp,
-	faReact,
-	faShopify,
-	faSquarespace,
-	faUbuntu,
-	faVimeo,
-	faVuejs,
-	faWikipediaW,
-	faWordpress,
-	IconDefinition
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as Icons from '@icons-pack/react-simple-icons';
 
-const iconsByService: { [key: string]: IconDefinition } = {
-	wordpress: faWordpress,
-	drupal: faDrupal,
-	joomla: faJoomla,
-	phpbb: faPhp,
-	discourse: faDiscourse,
-	magento: faMagento,
-	shopify: faShopify,
-	mediawiki: faWikipediaW,
-	squarespace: faSquarespace,
-	'google tag manager': faGoogle,
-	'google analytics': faGoogle,
-	react: faReact,
-	'vue.js': faVuejs,
-	bootstrap: faBootstrap,
-	vimeo: faVimeo,
-	cloudflare: faCloudflare,
-	'aws-cloudfront': faAws,
-	aspnet: faMicrosoft,
-	kestrel: faMicrosoft,
-	ubuntu: faUbuntu,
-	java: faJava,
-	php: faPhp,
-	github: faGithub,
-	'github pages': faGithub,
-};
+const rewriteIcon: { [key: string]: string } = {
+	'githubpages': 'github',
+}
 
 export const ServiceIcon = ({ name }: { name: string }) => {
-	const icon = iconsByService[name.toLowerCase()];
-	return icon ? <FontAwesomeIcon icon={icon} /> : <></>;
+	const normalized = name.toLowerCase().replace(/\s+/g, '');
+	const iconNameKey = rewriteIcon[normalized] || normalized;
+	const iconName = `Si${iconNameKey.charAt(0).toUpperCase() + iconNameKey.slice(1).toLowerCase()}`;
+	const IconComponent = (Icons as any)[iconName] as React.ComponentType | undefined;
+
+	if (IconComponent === undefined) {
+		return (<></>);
+	}
+
+	return (<IconComponent />);
 };

@@ -152,7 +152,7 @@ export const InspectonResult = ({ url }: Props) => {
 				<ReportInspectionError url={url} object={siteDetails} />
 			</Box>
 			<Typography my={1} color="darkgrey">
-				All brand logos courtesy from <Link href="https://fontawesome.com/" target="_blank" rel="noopener">FontAwesome</Link>.
+				All brand logos courtesy from <Link href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</Link>.
 			</Typography>
 		</Box>
 	);
