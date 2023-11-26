@@ -5,7 +5,7 @@ import Layout from "./theme/layout";
 import { ErrorBoundary } from "./error";
 import {
 	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
-	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage
+	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage, ScratchpadPage
 } from './pages';
 import { APIContext, ConnectionContext } from './context';
 import { APIAgentType, Agent } from 'libwhatsthis';
@@ -48,6 +48,7 @@ const App = () => {
 								<Route path="cron/*" element={<CronConversionPage />} />
 								<Route path="time" element={<UnixEpochPage />} />
 								<Route path="time/*" element={<UnixEpochPage />} />
+								<Route path="scratchpad" element={<ScratchpadPage />} />
 								<Route path="convert" element={<StringConversionPage />} />
 								<Route path="encoder" element={<Navigate replace to="/convert" />} />
 								<Route path="decoder" element={<Navigate replace to="/convert" />} />

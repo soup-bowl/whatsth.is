@@ -1,6 +1,7 @@
-import { Button, Card, Grid, InputAdornment, TextField, Typography } from "@mui/material";
+import { Button, Card, Grid, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CMYK, HSL, IColourValues, RGB, cmykToAll, hexToAll, hslToAll, isValidColorString, rgbToAll } from "libwhatsthis";
+import { SaveScratchButton } from "../components";
 
 const siteTitle = "Colour Picker";
 
@@ -279,6 +280,12 @@ const ColourPickerPage = () => {
 					</Grid>
 				</Grid>
 			</Grid >
+			<Stack direction="row" spacing={2} my={2}>
+				<SaveScratchButton
+					title={`${colours.hex} details`}
+					message={JSON.stringify(colours, null, 2)}
+				/>
+			</Stack>
 		</>
 	);
 }

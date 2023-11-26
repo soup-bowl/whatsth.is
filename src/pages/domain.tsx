@@ -5,9 +5,10 @@ import {
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useState } from "react";
 import { IDomainSelection, ILookupTable, ILookupTableLayout } from "../interfaces";
-import { IPAddressGeo, MyIpAddressModal, ReportDNSError } from "../components";
+import { ReportDNSError, SaveScratchButton } from "../components";
 import '../theme/grid.css';
 import { ConnectionContext, useAPIContext } from "../context";
+import { IPAddressGeo, MyIpAddressModal } from "../modals";
 import { IDNSResult, isValidIP } from "libwhatsthis";
 
 const DomainToolsHome = () => {
@@ -198,7 +199,8 @@ const DomainToolsHome = () => {
 								Submit
 							</Button>
 							<Button
-								variant="outlined"
+								variant="contained"
+								color="secondary"
 								value="Return"
 								onClick={clearForm}
 								disabled={(currentInput.protocol === '')}
@@ -232,9 +234,13 @@ const DomainToolsHome = () => {
 										sx={{ minHeight: 400 }}
 									/>
 								</Box>
-								<Box my={2}>
+								<Stack direction="row" spacing={2} my={2}>
 									<ReportDNSError url={currentInput.url} protocol={currentInput.protocol} object={tableData.rows} />
-								</Box>
+									<SaveScratchButton
+										title={`${currentInput.protocol} result for ${currentInput.url}`}
+										message={JSON.stringify(tableData.rows, null, 2)}
+									/>
+								</Stack>
 							</Box>
 							:
 							<Box>

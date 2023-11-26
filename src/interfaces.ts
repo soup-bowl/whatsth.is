@@ -1,4 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
+import { ScratchpadItemType } from "./enums";
 
 export interface DialogTitleProps {
 	id: string;
@@ -46,4 +47,13 @@ export interface IStorage {
 export interface IDomainSelection {
 	protocol: string;
 	url: string;
+}
+
+export interface IScratchpadItem {
+	id: string;
+	created: number;
+	title: string;
+	type: ScratchpadItemType;
+	message: string;
+	image?: string;
 }

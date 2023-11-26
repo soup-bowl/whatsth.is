@@ -17,6 +17,7 @@ import {
 	Help as HelpIcon,
 	CoPresent as CoPresentIcon,
 	ColorLens as ColorLensIcon,
+	NoteAlt as NoteAltIcon,
 } from '@mui/icons-material';
 
 import { useContext } from "react";
@@ -31,6 +32,7 @@ interface MenuProps {
 enum Category {
 	Inspection,
 	Conversion,
+	Tools,
 }
 
 const ResizableIconButton = ({ ...props }) => {
@@ -56,6 +58,10 @@ const getMenuCategories: IMenuCategory[] = [
 	{
 		id: Category.Conversion,
 		name: 'Conversion',
+	},
+	{
+		id: Category.Tools,
+		name: 'Tools',
 	}
 ];
 
@@ -103,6 +109,14 @@ const getMenu: IMenu[] = [
 		category: Category.Conversion,
 		url: '/time',
 		needsInternet: false,
+	},
+	{
+		name: 'Scratchpad',
+		icon: <NoteAltIcon />,
+		category: Category.Tools,
+		url: '/scratchpad',
+		needsInternet: false,
+		beta: true,
 	}
 ];
 
