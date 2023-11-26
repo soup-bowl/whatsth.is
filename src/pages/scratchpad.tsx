@@ -59,39 +59,42 @@ const ScratchpadPage = () => {
 		const fileInput = document.createElement("input");
 		fileInput.type = "file";
 		fileInput.accept = ".json";
+		fileInput.multiple = true;
 
 		fileInput.addEventListener("change", (event) => {
 			const files = (event.target as HTMLInputElement).files;
 			if (files && files.length > 0) {
-				const file = files[0];
-				const reader = new FileReader();
+				for (let i = 0; i < files.length; ++i) {
+					const file = files[i];
+					const reader = new FileReader();
 
-				reader.onload = (e) => {
-					const text = (e.target?.result || "") as string;
-					try {
-						const data = JSON.parse(text) as IPossibleScratchpadItem[];
+					reader.onload = (e) => {
+						const text = (e.target?.result || "") as string;
+						try {
+							const data = JSON.parse(text) as IPossibleScratchpadItem[];
 
-						let collection = getScratches() ?? [];
-						let count = 0;
-						data.forEach((item) => {
-							if (collection.find(exist => exist.id === item.id) === undefined) {
-								collection?.push(createItemViaPossible(item));
-								count++;
-							}
-						});
+							let collection = getScratches() ?? [];
+							let count = 0;
+							data.forEach((item) => {
+								if (collection.find(exist => exist.id === item.id) === undefined) {
+									collection?.push(createItemViaPossible(item));
+									count++;
+								}
+							});
 
-						saveScratches(collection);
-						setScratches(collection);
-						enqueueSnackbar(`Imported ${count.toString()} scratches`);
-					} catch (error) {
-						console.error("Error parsing file:", error);
-						enqueueSnackbar("An error occurred processing the import");
-					} finally {
-						handleCloseMenu();
-					}
-				};
+							saveScratches(collection);
+							setScratches(collection);
+							enqueueSnackbar(`Imported ${count.toString()} scratches`);
+						} catch (error) {
+							console.error("Error parsing file:", error);
+							enqueueSnackbar("An error occurred processing the import");
+						} finally {
+							handleCloseMenu();
+						}
+					};
 
-				reader.readAsText(file);
+					reader.readAsText(file);
+				}
 			}
 		});
 
