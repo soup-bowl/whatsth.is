@@ -57,3 +57,12 @@ export interface IScratchpadItem {
 	message: string;
 	image?: string;
 }
+
+export interface IPossibleScratchpadItem {
+	id?: string;
+	created?: number;
+	title?: string;
+	type?: ScratchpadItemType;
+	message?: string;
+	image?: string;
+}

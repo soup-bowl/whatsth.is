@@ -1,5 +1,5 @@
 import { ScratchpadItemType } from "../enums";
-import { IScratchpadItem } from "../interfaces";
+import { IPossibleScratchpadItem, IScratchpadItem } from "../interfaces";
 import { readFromLocalStorage, writeToLocalStorage } from "./localStorage";
 
 export const getScratches = () => readFromLocalStorage<IScratchpadItem[]>('WTScratchpadItems');
@@ -31,4 +31,12 @@ export const createItem = (title: string, message: string): IScratchpadItem => (
 	type: ScratchpadItemType.Text,
 	title: title,
 	message: message,
+});
+
+export const createItemViaPossible = (item: IPossibleScratchpadItem):IScratchpadItem => ({
+	id: item.id ?? self.crypto.randomUUID(),
+	created: item.created ?? Date.now(),
+	type: item.type ?? ScratchpadItemType.Text,
+	title: item.title ?? 'Undefined Title',
+	message: item.message ?? '',
 });

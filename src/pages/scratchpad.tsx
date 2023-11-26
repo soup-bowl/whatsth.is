@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Alert, AlertTitle, Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import { useSnackbar } from 'notistack';
 import { Scratches } from "../components";
 import { ScratchEditorModal } from "../modals";
-import { addScratch, createItem, getScratches, removeScratch, saveScratches, updateScratch } from "../utils/scratch";
-import { IScratchpadItem } from "../interfaces";
+import { addScratch, createItem, createItemViaPossible, getScratches, removeScratch, saveScratches, updateScratch } from "../utils/scratch";
+import { IPossibleScratchpadItem, IScratchpadItem } from "../interfaces";
 
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -16,6 +17,7 @@ const ScratchpadPage = () => {
 	const [openNewNote, setOpenNewNote] = useState(false);
 	const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
 	const openMenuDialog = Boolean(menuAnchorEl);
+	const { enqueueSnackbar } = useSnackbar();
 
 	useEffect(() => { document.title = `${siteTitle} - What's This?` });
 
@@ -67,11 +69,23 @@ const ScratchpadPage = () => {
 				reader.onload = (e) => {
 					const text = (e.target?.result || "") as string;
 					try {
-						const data = JSON.parse(text) as IScratchpadItem[];
-						saveScratches(data);
-						setScratches(getScratches());
+						const data = JSON.parse(text) as IPossibleScratchpadItem[];
+
+						let collection = getScratches() ?? [];
+						let count = 0;
+						data.forEach((item) => {
+							if (collection.find(exist => exist.id === item.id) === undefined) {
+								collection?.push(createItemViaPossible(item));
+								count++;
+							}
+						});
+
+						saveScratches(collection);
+						setScratches(collection);
+						enqueueSnackbar(`Imported ${count.toString()} scratches`);
 					} catch (error) {
-						console.error("Error parsing JSON:", error);
+						console.error("Error parsing file:", error);
+						enqueueSnackbar("An error occurred processing the import");
 					} finally {
 						handleCloseMenu();
 					}
