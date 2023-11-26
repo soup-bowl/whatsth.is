@@ -2,6 +2,7 @@ import { Button, DialogContent, Grid, Typography } from "@mui/material";
 import { getUserAgent } from "libwhatsthis";
 import { useState } from "react";
 import { BootstrapDialog, BootstrapDialogTitle } from "./_shared";
+import { SaveScratchButton } from "../components";
 
 const UserAgentModel = () => {
 	const [open, setOpen] = useState(false);
@@ -66,6 +67,10 @@ const UserAgentModel = () => {
 							<Typography>{userAgent.cpu ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 					</Grid>
+					<SaveScratchButton
+						title="UserAgent"
+						message={JSON.stringify(userAgent, null, 2)}
+					/>
 				</DialogContent>
 			</BootstrapDialog>
 		</div>
