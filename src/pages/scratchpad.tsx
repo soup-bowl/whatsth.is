@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { Alert, AlertTitle, Box, Button, Menu, MenuItem, Stack, Typography } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
+import { Alert, AlertTitle, Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import { Scratches } from "../components";
 import { ScratchEditorModal } from "../modals";
 import { addScratch, createItem, getScratches, removeScratch, saveScratches, updateScratch } from "../utils/scratch";
 import { IScratchpadItem } from "../interfaces";
+
+import AddIcon from '@mui/icons-material/Add';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DownloadIcon from '@mui/icons-material/Download';
+import UploadIcon from '@mui/icons-material/Upload';
 
 const siteTitle = "Scratchpad";
 
@@ -117,6 +121,7 @@ const ScratchpadPage = () => {
 					id="scratch-option-button"
 					color="secondary"
 					variant="contained"
+					startIcon={<MoreVertIcon />}
 					aria-controls={openMenuDialog ? 'scratch-option-menu' : undefined}
 					aria-haspopup="true"
 					aria-expanded={openMenuDialog ? 'true' : undefined}
@@ -149,8 +154,18 @@ const ScratchpadPage = () => {
 				onClose={handleCloseMenu}
 				MenuListProps={{ 'aria-labelledby': 'scratch-option-button' }}
 			>
-				<MenuItem onClick={handleImport}>Import Scratches</MenuItem>
-				<MenuItem onClick={handleExport}>Export Scratches</MenuItem>
+				<MenuItem onClick={handleImport}>
+					<ListItemIcon>
+						<DownloadIcon fontSize="small" />
+					</ListItemIcon>
+					<ListItemText>Import Scratches</ListItemText>
+				</MenuItem>
+				<MenuItem onClick={handleExport}>
+					<ListItemIcon>
+						<UploadIcon fontSize="small" />
+					</ListItemIcon>
+					<ListItemText>Export Scratches</ListItemText>
+				</MenuItem>
 			</Menu>
 		</>
 	);
