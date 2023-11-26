@@ -146,8 +146,8 @@ export const AboutPage = () => {
 				}
 			</Stack>
 			<Stack my={2} spacing={2} direction="row" justifyContent="center">
-				<Button onClick={() => (window.location.reload())} variant="outlined" color="error"><CachedIcon />&nbsp;Reload</Button>
-				<Button href="https://github.com/soup-bowl/whatsth.is" variant="outlined"><GitHubIcon />&nbsp;Source Code</Button>
+				<Button onClick={() => (window.location.reload())} variant="contained" color="error"><CachedIcon />&nbsp;Reload</Button>
+				<Button href="https://github.com/soup-bowl/whatsth.is" variant="contained"><GitHubIcon />&nbsp;Source Code</Button>
 			</Stack>
 			<Typography variant="h1" my={2}>Donate</Typography>
 			{wallets.map((wallet, i) => (
