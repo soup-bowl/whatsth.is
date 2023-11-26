@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { IScratchpadItem } from "../interfaces";
 import { addScratch, createItem, getScratches, saveScratches } from "../utils/scratch";
 import { useState } from "react";
+import { NoteAlt as NoteAltIcon } from '@mui/icons-material';
 
 const SaveScratchButton = ({ title, message }: { title: string, message: string }) => {
 	const [open, setOpen] = useState(false);
@@ -15,8 +15,8 @@ const SaveScratchButton = ({ title, message }: { title: string, message: string 
 
 	return (
 		<>
-			<Button variant="contained" color="secondary" onClick={handleOpen}>
-				Save to Scratchpad
+			<Button variant="contained" color="secondary" onClick={handleOpen} startIcon={<NoteAltIcon />}>
+				Save
 			</Button>
 			<Dialog
 				open={open}
