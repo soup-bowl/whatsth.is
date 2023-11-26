@@ -1,8 +1,9 @@
-import { Box, InputAdornment, Link, TextField, Typography } from "@mui/material";
+import { Box, InputAdornment, Link, Stack, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ConversionTime, timeOutput, SecondType } from "libwhatsthis";
 
 import WarningIcon from '@mui/icons-material/Warning';
+import { SaveScratchButton } from "../components";
 
 const siteTitle = "Unix Timestamp Conversion";
 const MaxAcceptUnix = 253402300799999;
@@ -82,6 +83,15 @@ const UnixEpochPage = () => {
 					the <Link href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem</Link>.
 				</Typography>
 			}
+			<Stack direction="row" spacing={2} my={2}>
+				<SaveScratchButton
+					title={timeStore.unix.toString()}
+					message={JSON.stringify({
+						unix: timeStore.unix,
+						literal: timeStore.string.toISOString()
+					}, null, 2)}
+				/>
+			</Stack>
 		</>
 	);
 }

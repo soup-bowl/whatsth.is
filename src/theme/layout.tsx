@@ -8,7 +8,7 @@ import { useContext, useMemo, useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
-import { DrawMenu } from "../components/menu";
+import { DrawMenu } from "../components";
 import { purple } from "@mui/material/colors";
 import { ConnectionContext } from "../context";
 

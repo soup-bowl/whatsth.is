@@ -1,6 +1,7 @@
-import { TextField, Typography } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "libwhatsthis";
+import { SaveScratchButton } from "../components";
 
 const CronConversionPage = () => {
 	const inputGet = window.location.hash.split('/').slice(-1)[0];
@@ -33,6 +34,15 @@ const CronConversionPage = () => {
 			/>
 			<Typography my={2}>Equates to:</Typography>
 			<Typography my={2} variant="h4">{timeResult}</Typography>
+			<Stack direction="row" spacing={2} my={2}>
+				<SaveScratchButton
+					title={`Cron Calculator`}
+					message={JSON.stringify({
+						cron: timeString,
+						literal: timeResult,
+					}, null, 2)}
+				/>
+			</Stack>
 		</>
 	);
 };

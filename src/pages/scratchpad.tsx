@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, AlertTitle, Box, Button, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { Scratches } from "../components/ScratchListings";
+import { Scratches } from "../components";
 import { ScratchEditorModal } from "../modals";
 import { addScratch, createItem, getScratches, removeScratch, saveScratches, updateScratch } from "../utils/scratch";
 import { IScratchpadItem } from "../interfaces";

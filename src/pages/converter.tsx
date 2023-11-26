@@ -1,11 +1,12 @@
 import {
 	Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader
+	MenuItem, Select, SelectChangeEvent, ListSubheader, Stack
 } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ConversionType } from "../enums";
 import { IStringMorph } from "../interfaces";
 import { StringConversion } from "libwhatsthis";
+import { SaveScratchButton } from "../components";
 
 const siteTitle = "String Conversions";
 
@@ -115,6 +116,16 @@ const StringConversionPage = () => {
 					</Grid>
 				</Grid>
 			</Box>
+			<Stack direction="row" spacing={2} my={2}>
+				<SaveScratchButton
+					title={`${ConversionType[type]} conversion`}
+					message={JSON.stringify({
+						type: ConversionType[type],
+						encoded: stringMorph.encoded,
+						decoded: stringMorph.decoded,
+					}, null, 2)}
+				/>
+			</Stack>
 		</>
 	);
 }

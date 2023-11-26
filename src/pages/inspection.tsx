@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { DetailCard, ReportInspectionError } from '../components';
+import { DetailCard, ReportInspectionError, SaveScratchButton } from '../components';
 import { UserAgentModel } from '../modals';
 import { ConnectionContext, useAPIContext } from "../context";
 import { IInspectionDetails } from 'libwhatsthis';
@@ -148,10 +148,11 @@ export const InspectonResult = ({ url }: Props) => {
 						</Typography>
 					</Box>}
 			</Box>
-			<Box>
+			<Stack direction="row" spacing={2} my={2}>
 				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
+				<SaveScratchButton title={`Inspection of ${url}`} message={JSON.stringify(siteDetails, null, 2)} />
 				<ReportInspectionError url={url} object={siteDetails} />
-			</Box>
+			</Stack>
 			<Typography my={1} color="darkgrey">
 				All brand logos courtesy from <Link href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</Link>.
 			</Typography>
