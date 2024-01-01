@@ -21,7 +21,7 @@
   },
   "homepage": "https://whatsth.is",
   "dependencies": {
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.10.8",
     "@icons-pack/react-simple-icons": "^9.1.0",
     "@monaco-editor/react": "^4.6.0",
