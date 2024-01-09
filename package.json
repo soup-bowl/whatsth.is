@@ -23,29 +23,29 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.10.8",
-    "@icons-pack/react-simple-icons": "^9.1.0",
+    "@icons-pack/react-simple-icons": "^9.2.0",
     "@monaco-editor/react": "^4.6.0",
-    "@mui/icons-material": "^5.14.16",
+    "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
-    "@mui/x-data-grid": "^6.16.0",
-    "@types/node": "^20.8.10",
-    "@types/react": "^18.0.7",
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@mui/x-data-grid": "^6.18.7",
+    "@types/node": "^20.10.7",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.45.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
+    "eslint-plugin-react-refresh": "^0.4.5",
     "libwhatsthis": "^0.1.2",
     "notistack": "^3.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.21.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.5"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11"
   },
   "devDependencies": {
-    "vite-plugin-pwa": "^0.17.0"
+    "vite-plugin-pwa": "^0.17.4"
   }
 }
