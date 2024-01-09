@@ -9,3 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    group:
+      name: "all npm updates"
+      package-ecosystem: "npm"
