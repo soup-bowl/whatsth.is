@@ -25,14 +25,14 @@
     "@emotion/styled": "^11.10.8",
     "@icons-pack/react-simple-icons": "^9.3.0",
     "@monaco-editor/react": "^4.6.0",
-    "@mui/icons-material": "^5.15.5",
-    "@mui/material": "^5.15.5",
-    "@mui/x-data-grid": "^6.19.1",
-    "@types/node": "^20.11.5",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
+    "@mui/x-data-grid": "^6.19.2",
+    "@types/node": "^20.11.10",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -46,6 +46,6 @@
     "vite": "^5.0.12"
   },
   "devDependencies": {
-    "vite-plugin-pwa": "^0.17.4"
+    "vite-plugin-pwa": "^0.17.5"
   }
 }
