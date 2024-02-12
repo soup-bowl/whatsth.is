@@ -25,14 +25,14 @@
     "@emotion/styled": "^11.10.8",
     "@icons-pack/react-simple-icons": "^9.3.0",
     "@monaco-editor/react": "^4.6.0",
-    "@mui/icons-material": "^5.15.7",
-    "@mui/material": "^5.15.7",
-    "@mui/x-data-grid": "^6.19.3",
-    "@types/node": "^20.11.16",
-    "@types/react": "^18.2.52",
-    "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/material": "^5.15.9",
+    "@mui/x-data-grid": "^6.19.4",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -43,9 +43,9 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.22.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.1.1"
   },
   "devDependencies": {
-    "vite-plugin-pwa": "^0.17.5"
+    "vite-plugin-pwa": "^0.18.1"
   }
 }
