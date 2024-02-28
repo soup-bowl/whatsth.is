@@ -7,4 +7,3 @@ export { AboutPage, HelpPage } from './help';
 export { default as UnixEpochPage } from './time';
 export { default as ColourPickerPage } from './colour';
 export { default as ScratchpadPage } from './scratchpad';
-export { default as OptionsPage } from './options';

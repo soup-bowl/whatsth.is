@@ -11,6 +11,7 @@ import CloudOffIcon from '@mui/icons-material/CloudOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { DrawMenu } from "../components";
 import { ConnectionContext } from "../context";
+import { SettingsModel } from "../modals";
 
 const drawerWidth = 240;
 
@@ -61,9 +62,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 interface LayoutProps {
 	theme: Theme;
+	mode: any;
+	setMode: any;
 }
 
-const Layout = ({ theme }: LayoutProps) => {
+const Layout = ({ theme, mode, setMode }: LayoutProps) => {
 	const navigate = useNavigate();
 	const { connectionState } = useContext(ConnectionContext);
 	const [open, setOpen] = useState(false);
@@ -105,9 +108,7 @@ const Layout = ({ theme }: LayoutProps) => {
 						<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
 					}
 					<Typography sx={{ flexGrow: 1 }} />
-					<IconButton onClick={() => navigate('/options')}>
-						<SettingsIcon sx={{ color: 'white' }} />
-					</IconButton>
+					<SettingsModel mode={mode} setMode={setMode} />
 				</Toolbar>
 			</AppBar>
 			<Drawer
