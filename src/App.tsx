@@ -4,8 +4,8 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from "./theme/layout";
 import { ErrorBoundary } from "./error";
 import {
-	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
-	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage, ScratchpadPage, OptionsPage
+	Home, CronConversionPage, DomainToolsHome, InspectionHome,
+	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage, ScratchpadPage
 } from './pages';
 import { APIContext, ConnectionContext } from './context';
 import { APIAgentType, Agent } from 'libwhatsthis';
