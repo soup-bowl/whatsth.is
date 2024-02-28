@@ -106,7 +106,7 @@ const Layout = ({ theme }: LayoutProps) => {
 					}
 					<Typography sx={{ flexGrow: 1 }} />
 					<IconButton onClick={() => navigate('/options')}>
-						<SettingsIcon />
+						<SettingsIcon sx={{ color: 'white' }} />
 					</IconButton>
 				</Toolbar>
 			</AppBar>
