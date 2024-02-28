@@ -11,7 +11,7 @@ tasks:
   - name: Library
     before: cd ../whatsth.is-lib
     init: |
-      npm install
+      npm ci
     command: |
       npm link
     openMode: tab-before
