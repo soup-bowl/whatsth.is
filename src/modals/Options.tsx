@@ -114,8 +114,8 @@ const SettingsModel = ({ mode, setMode }: Props) => {
 				</BootstrapDialogTitle>
 				<DialogContent>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-						<Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-							<Tab label="Settings" {...a11yProps(0)} />
+						<Tabs centered value={value} onChange={handleChange}>
+							<Tab label="Options" {...a11yProps(0)} />
 							<Tab label="About" {...a11yProps(1)} />
 						</Tabs>
 					</Box>
