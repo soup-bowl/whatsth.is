@@ -154,21 +154,6 @@ export const DrawMenu = ({ drawerClose }: MenuProps) => {
 					</ListItemButton>
 				);
 			})}
-			<Divider />
-			<ListItemButton
-				onClick={() => MenuNav('/help')}
-				selected={window.location.hash.includes("/help")}
-			>
-				<ListItemIcon><HelpIcon /></ListItemIcon>
-				<ListItemText primary="Help" />
-			</ListItemButton>
-			<ListItemButton
-				onClick={() => MenuNav('/about')}
-				selected={window.location.hash.includes("/about")}
-			>
-				<ListItemIcon><CoPresentIcon /></ListItemIcon>
-				<ListItemText primary="About" />
-			</ListItemButton>
 		</List>
 	);
 }

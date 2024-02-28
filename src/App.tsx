@@ -63,8 +63,6 @@ const App = () => {
 								<Routes>
 									<Route path="/" element={<Layout theme={theme} mode={mode} setMode={setMode} />}>
 										<Route index element={<Home />} />
-										<Route path="help" element={<HelpPage />} />
-										<Route path="about" element={<AboutPage />} />
 										<Route path="inspect" element={<InspectionHome />} />
 										<Route path="inspect/*" element={<InspectonResultDisplay />} />
 										<Route path="domain/*" element={<DomainToolsHome />} />
