@@ -64,7 +64,6 @@ const SettingsModel = ({ mode, setMode }: Props) => {
 	const { apiAgent } = useAPIContext();
 
 	const [apiVersion, setApiVersion] = useState<string | JSX.Element>('');
-	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage);
 
 	const handleChange = (event: SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -84,14 +83,6 @@ const SettingsModel = ({ mode, setMode }: Props) => {
 			setApiVersion(<><CloudOffIcon fontSize="inherit" /> Offline</>);
 		}
 	}, [connectionState, apiAgent]);
-
-	useEffect(() => {
-		if ('storage' in navigator && 'estimate' in navigator.storage) {
-			navigator.storage.estimate().then(({ usage, quota }) => {
-				setStorageInfo({ usage: usage ?? 0, quota: quota ?? 0 });
-			});
-		}
-	}, []);
 
 	const colorMode = useMemo(() => ({
 		toggleColorMode: () => {
@@ -154,15 +145,6 @@ const SettingsModel = ({ mode, setMode }: Props) => {
 								<Typography>App Version: <Box component="span" fontWeight='700'>{__APP_VERSION__}</Box></Typography>
 								<Typography>Library Version: <Box component="span" fontWeight='700'>{__LIB_VERSION__.replace("^", "")}</Box></Typography>
 								<Typography>API Version: <Box component="span" fontWeight='700'>{apiVersion}</Box></Typography>
-
-								{storageInfo.quota !== undefined && storageInfo.quota !== 0 ?
-									<Typography>
-										Using <Box component="span" fontWeight='700'>{formatBytes(storageInfo.usage)}</Box> of&nbsp;
-										<Box component="span" fontWeight='700'>{formatBytes(storageInfo.quota)}</Box> available local storage.
-									</Typography>
-									:
-									<Typography color="darkgrey">Storage API is not supported.</Typography>
-								}
 							</Stack>
 							<Stack my={2} spacing={2} direction="row" justifyContent="center">
 								<Button
