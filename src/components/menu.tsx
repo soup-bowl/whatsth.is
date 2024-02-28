@@ -24,9 +24,7 @@ import { useContext } from "react";
 import { ConnectionContext } from "../context";
 
 interface MenuProps {
-	theme: Theme;
 	drawerClose: () => void;
-	colorMode: { toggleColorMode: () => void; };
 }
 
 enum Category {
@@ -120,7 +118,7 @@ const getMenu: IMenu[] = [
 	}
 ];
 
-export const DrawMenu = ({ drawerClose, theme, colorMode }: MenuProps) => {
+export const DrawMenu = ({ drawerClose }: MenuProps) => {
 	const { connectionState } = useContext(ConnectionContext);
 	const navigate = useNavigate();
 
@@ -157,12 +155,6 @@ export const DrawMenu = ({ drawerClose, theme, colorMode }: MenuProps) => {
 				);
 			})}
 			<Divider />
-			<ListItemButton onClick={colorMode.toggleColorMode}>
-				<ListItemIcon>
-					{theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-				</ListItemIcon>
-				<ListItemText primary={theme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode'} />
-			</ListItemButton>
 			<ListItemButton
 				onClick={() => MenuNav('/help')}
 				selected={window.location.hash.includes("/help")}

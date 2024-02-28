@@ -1,15 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import {
-	CssBaseline, ThemeProvider, Toolbar, IconButton, Typography, Container,
-	styled, Drawer, Box, useMediaQuery, PaletteMode, createTheme
+	CssBaseline, Toolbar, IconButton, Typography, Container,
+	styled, Drawer, Box, useMediaQuery, Theme
 } from '@mui/material';
-import { useContext, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloudOffIcon from '@mui/icons-material/CloudOff';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { DrawMenu } from "../components";
-import { purple } from "@mui/material/colors";
 import { ConnectionContext } from "../context";
 
 const drawerWidth = 240;
@@ -59,7 +59,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-const Layout = () => {
+interface LayoutProps {
+	theme: Theme;
+}
+
+const Layout = ({ theme }: LayoutProps) => {
+	const navigate = useNavigate();
 	const { connectionState } = useContext(ConnectionContext);
 	const [open, setOpen] = useState(false);
 	const desktop = useMediaQuery("(min-width: 961px)");
@@ -72,96 +77,67 @@ const Layout = () => {
 		setOpen(false);
 	};
 
-	const [mode, setMode] = useState<string>(localStorage.getItem('ColourPref') ?? 'dark');
-	const colorMode = useMemo(() => ({
-		toggleColorMode: () => {
-			setMode((prevMode:string) => {
-				const cmode = (prevMode === 'light') ? 'dark' : 'light';
-				localStorage.setItem('ColourPref', cmode);
-				return cmode;
-			});
-		},
-	}), []);
-
-	const theme = useMemo(() => createTheme({
-		palette: {
-			primary: purple,
-			mode: mode as PaletteMode
-		},
-		typography: {
-			button: {
-				textTransform: 'none'
-			},
-			h1: {
-				fontSize: '3.25rem'
-			},
-			h2: {
-				fontSize: '2.75rem'
-			},
-			h3: {
-				fontSize: '2rem'
-			}
-		}
-	}), [mode]);
-
 	return (
-		<ThemeProvider theme={theme}>
-			<Box sx={{ display: 'flex' }}>
-				<CssBaseline enableColorScheme />
-				<AppBar
-					position="fixed"
-					open={open}
-					sx={{
-						backgroundColor: theme.palette.primary.main,
-						zIndex: (theme) => (desktop ? theme.zIndex.drawer + 10 : 10)
-					}}>
-					<Toolbar>
-						{!desktop &&
-							<IconButton
-								color="inherit"
-								aria-label="open drawer"
-								onClick={handleDrawerOpen}
-								edge="start"
-								sx={{ mr: 2, ...(open && { display: 'none' }) }}
-							>
-								<MenuIcon />
-							</IconButton>
-						}
-						<Typography variant="h6" noWrap component="div">What's this?</Typography>
-						{!connectionState &&
-							<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
-						}
-					</Toolbar>
-				</AppBar>
-				<Drawer
-					sx={{
-						width: drawerWidth,
-						flexShrink: 0,
-						'& .MuiDrawer-paper': {
-							width: drawerWidth,
-							boxSizing: 'border-box',
-						},
-					}}
-					variant={(desktop) ? "permanent" : "temporary"}
-					anchor="left"
-					open={open}
-					onClose={handleDrawerClose}
-				>
-					<DrawerHeader>
-						<IconButton onClick={handleDrawerClose}>
+		<Box sx={{ display: 'flex' }}>
+			<CssBaseline enableColorScheme />
+
+			<AppBar
+				position="fixed"
+				open={open}
+				sx={{
+					backgroundColor: theme.palette.primary.main,
+					zIndex: (theme) => (desktop ? theme.zIndex.drawer + 10 : 10)
+				}}>
+				<Toolbar>
+					{!desktop &&
+						<IconButton
+							color="inherit"
+							aria-label="open drawer"
+							onClick={handleDrawerOpen}
+							edge="start"
+							sx={{ mr: 2, ...(open && { display: 'none' }) }}
+						>
 							<MenuIcon />
 						</IconButton>
-					</DrawerHeader>
-					<DrawMenu drawerClose={handleDrawerClose} colorMode={colorMode} theme={theme} />
-				</Drawer>
-				<Main open={open}>
-					<DrawerHeader />
-					<Container maxWidth="md">
-						<Outlet />
-					</Container>
-				</Main>
-			</Box>
-		</ThemeProvider>
+					}
+					<Typography variant="h6" noWrap component="div">What's this?</Typography>
+					{!connectionState &&
+						<CloudOffIcon color="disabled" sx={{ marginLeft: 1 }} />
+					}
+					<Typography sx={{ flexGrow: 1 }} />
+					<IconButton onClick={() => navigate('/options')}>
+						<SettingsIcon />
+					</IconButton>
+				</Toolbar>
+			</AppBar>
+			<Drawer
+				sx={{
+					width: drawerWidth,
+					flexShrink: 0,
+					'& .MuiDrawer-paper': {
+						width: drawerWidth,
+						boxSizing: 'border-box',
+					},
+				}}
+				variant={(desktop) ? "permanent" : "temporary"}
+				anchor="left"
+				open={open}
+				onClose={handleDrawerClose}
+			>
+				<DrawerHeader>
+					<IconButton onClick={handleDrawerClose}>
+						<MenuIcon />
+					</IconButton>
+				</DrawerHeader>
+				<DrawMenu drawerClose={handleDrawerClose} />
+			</Drawer>
+			<Main open={open}>
+				<DrawerHeader />
+				<Container maxWidth="md">
+					<Outlet />
+				</Container>
+			</Main>
+		</Box>
 	)
 };
 
