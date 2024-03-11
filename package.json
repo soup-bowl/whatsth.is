@@ -23,16 +23,16 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.10.8",
-    "@icons-pack/react-simple-icons": "^9.3.0",
+    "@icons-pack/react-simple-icons": "^9.4.0",
     "@monaco-editor/react": "^4.6.0",
-    "@mui/icons-material": "^5.15.11",
-    "@mui/material": "^5.15.11",
+    "@mui/icons-material": "^5.15.12",
+    "@mui/material": "^5.15.12",
     "@mui/x-data-grid": "^6.19.6",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^7.1.0",
-    "@typescript-eslint/parser": "^7.1.0",
+    "@types/node": "^20.11.25",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -41,9 +41,9 @@
     "notistack": "^3.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.22.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4"
+    "react-router-dom": "^6.22.3",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5"
   },
   "devDependencies": {
     "vite-plugin-pwa": "^0.19.2"
