@@ -1,31 +1,33 @@
-import { useContext, useEffect, useState } from "react";
-import { ConnectionContext } from "../context";
-import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation } from "libwhatsthis";
-import { Button, DialogContent, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
-import { BootstrapDialog, BootstrapDialogTitle } from "./_shared";
+import { useContext, useEffect, useState } from "react"
+import { ConnectionContext } from "../context"
+import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation } from "libwhatsthis"
+import { Button, DialogContent, Grid, IconButton, Link, Stack, Typography } from "@mui/material"
+import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
 
 export const MyIpAddressModal = () => {
-	const { connectionState } = useContext(ConnectionContext);
-	const [ips, setIPs] = useState<IPAddresses>({ ipv4: 'N/A', ipv6: 'N/A' });
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const { connectionState } = useContext(ConnectionContext)
+	const [ips, setIPs] = useState<IPAddresses>({ ipv4: "N/A", ipv6: "N/A" })
+	const [open, setOpen] = useState(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
 
 	useEffect(() => {
 		const fetchIPs = async () => {
 			try {
-				setIPs(await getBothIPAddresses());
+				setIPs(await getBothIPAddresses())
 			} catch (error) {
-				console.error('Error fetching IP data:', error);
+				console.error("Error fetching IP data:", error)
 			}
-		};
+		}
 
-		fetchIPs();
-	}, []);
+		fetchIPs()
+	}, [])
 
 	return (
 		<div>
-			<Button onClick={handleOpen} variant="contained" color="secondary" disabled={!connectionState}>My IP</Button>
+			<Button onClick={handleOpen} variant="contained" color="secondary" disabled={!connectionState}>
+				My IP
+			</Button>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
@@ -59,37 +61,39 @@ export const MyIpAddressModal = () => {
 				</DialogContent>
 			</BootstrapDialog>
 		</div>
-	);
+	)
 }
 
 interface GeoProps {
-	ip: string;
+	ip: string
 }
 
 export const IPAddressGeo = ({ ip }: GeoProps) => {
-	const [geo, setGeo] = useState<IPGeolocation | undefined>();
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [geo, setGeo] = useState<IPGeolocation | undefined>()
+	const [open, setOpen] = useState(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
 
 	useEffect(() => {
 		const fetchIPInfo = async () => {
 			try {
-				setGeo(await getIPGeolocation(ip));
+				setGeo(await getIPGeolocation(ip))
 			} catch (error) {
-				console.error('Error fetching IP info:', error);
-				setGeo(undefined);
+				console.error("Error fetching IP info:", error)
+				setGeo(undefined)
 			}
-		};
+		}
 
 		if (open && ip) {
-			fetchIPInfo();
+			fetchIPInfo()
 		}
-	}, [ip, open]);
+	}, [ip, open])
 
 	return (
 		<div>
-			<IconButton onClick={handleOpen} size="small">{geo?.icon ?? <>🌐</>}</IconButton>
+			<IconButton onClick={handleOpen} size="small">
+				{geo?.icon ?? <>🌐</>}
+			</IconButton>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
@@ -100,7 +104,7 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 					About IP...
 				</BootstrapDialogTitle>
 				<DialogContent>
-					{geo !== undefined ?
+					{geo !== undefined ? (
 						<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
 							<Grid item xs={12} sm={3}>
 								<Typography fontWeight={700}>IP</Typography>
@@ -124,19 +128,22 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 								<Typography fontWeight={700}>Location</Typography>
 							</Grid>
 							<Grid item xs={12} sm={9}>
-								<Typography>{geo.city}, {geo.region}</Typography>
+								<Typography>
+									{geo.city}, {geo.region}
+								</Typography>
 							</Grid>
 						</Grid>
-						:
+					) : (
 						<>
 							<Typography id="geo-modal-modal-description" my={2}>
-								Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the
-								API we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result,
-								we can't show you the information.
+								Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the API
+								we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result, we
+								can't show you the information.
 							</Typography>
-						</>}
+						</>
+					)}
 				</DialogContent>
 			</BootstrapDialog>
 		</div>
-	);
+	)
 }

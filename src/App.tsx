@@ -1,33 +1,42 @@
-import { useEffect, useState } from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from "react"
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
 
-import Layout from "./theme/layout";
-import { ErrorBoundary } from "./error";
+import Layout from "./theme/layout"
+import { ErrorBoundary } from "./error"
 import {
-	Home, AboutPage, CronConversionPage, DomainToolsHome, HelpPage, InspectionHome,
-	InspectonResultDisplay, StringConversionPage, UnixEpochPage, ColourPickerPage, ScratchpadPage
-} from './pages';
-import { APIContext, ConnectionContext } from './context';
-import { APIAgentType, Agent } from 'libwhatsthis';
-import { SnackbarProvider } from 'notistack';
+	Home,
+	AboutPage,
+	CronConversionPage,
+	DomainToolsHome,
+	HelpPage,
+	InspectionHome,
+	InspectonResultDisplay,
+	StringConversionPage,
+	UnixEpochPage,
+	ColourPickerPage,
+	ScratchpadPage,
+} from "./pages"
+import { APIContext, ConnectionContext } from "./context"
+import { APIAgentType, Agent } from "libwhatsthis"
+import { SnackbarProvider } from "notistack"
 
 const App = () => {
-	const [connectionState, setConnectionState] = useState(navigator.onLine);
+	const [connectionState, setConnectionState] = useState(navigator.onLine)
 
-	const apiAgent: APIAgentType = new Agent(import.meta.env.VITE_API_URL);
+	const apiAgent: APIAgentType = new Agent(import.meta.env.VITE_API_URL)
 
 	useEffect(() => {
-		const handleOnline = () => setConnectionState(true);
-		const handleOffline = () => setConnectionState(false);
+		const handleOnline = () => setConnectionState(true)
+		const handleOffline = () => setConnectionState(false)
 
-		window.addEventListener("online", handleOnline);
-		window.addEventListener("offline", handleOffline);
+		window.addEventListener("online", handleOnline)
+		window.addEventListener("offline", handleOffline)
 
 		return () => {
-			window.removeEventListener("online", handleOnline);
-			window.removeEventListener("offline", handleOffline);
-		};
-	}, []);
+			window.removeEventListener("online", handleOnline)
+			window.removeEventListener("offline", handleOffline)
+		}
+	}, [])
 
 	return (
 		<ErrorBoundary>
@@ -64,7 +73,7 @@ const App = () => {
 				</ConnectionContext.Provider>
 			</APIContext.Provider>
 		</ErrorBoundary>
-	);
+	)
 }
 
-export default App;
+export default App

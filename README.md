@@ -9,12 +9,12 @@
 
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-* [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]).
-* [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
-* [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
-* [Colour Tools](https://whatsth.is/#/colour).
-* [Cron Conversion](https://whatsth.is/#/cron).
-* [UNIX Timestamp Converter](https://whatsth.is/#/time).
+- [Website Inspector](https://whatsth.is/#/inspect) (Beta - [uses the API][api]).
+- [DNS Inspector](https://whatsth.is/#/dns) (Beta - [uses the API][api]).
+- [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
+- [Colour Tools](https://whatsth.is/#/colour).
+- [Cron Conversion](https://whatsth.is/#/cron).
+- [UNIX Timestamp Converter](https://whatsth.is/#/time).
 
 This app comprises of three components - A React frontend (this repository), an [engine library][lib], and a [C# .NET inspection API][api].
 
@@ -60,7 +60,7 @@ devOptions: {
 ```
 
 [site]: https://whatsth.is
-[pwa]:  https://web.dev/learn/pwa/progressive-web-apps/
-[api]:  https://github.com/whatsth-is/api.whatsth.is
-[lib]:  https://github.com/whatsth-is/libwhatsthis
-[ext]:  https://github.com/whatsth-is/whatsth.is-browser
+[pwa]: https://web.dev/learn/pwa/progressive-web-apps/
+[api]: https://github.com/whatsth-is/api.whatsth.is
+[lib]: https://github.com/whatsth-is/libwhatsthis
+[ext]: https://github.com/whatsth-is/whatsth.is-browser

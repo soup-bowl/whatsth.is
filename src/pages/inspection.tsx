@@ -1,32 +1,47 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
-import { Button, TextField, Grid, Typography, CircularProgress, Box, Alert, AlertTitle, Stack, Link } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { DetailCard, ReportInspectionError, SaveScratchButton } from '../components';
-import { UserAgentModel } from '../modals';
-import { ConnectionContext, useAPIContext } from "../context";
-import { IInspectionDetails } from 'libwhatsthis';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react"
+import {
+	Button,
+	TextField,
+	Grid,
+	Typography,
+	CircularProgress,
+	Box,
+	Alert,
+	AlertTitle,
+	Stack,
+	Link,
+} from "@mui/material"
+import { useNavigate } from "react-router-dom"
+import { DetailCard, ReportInspectionError, SaveScratchButton } from "../components"
+import { UserAgentModel } from "../modals"
+import { ConnectionContext, useAPIContext } from "../context"
+import { IInspectionDetails } from "libwhatsthis"
 
-const siteTitle = "Site Inspector";
+const siteTitle = "Site Inspector"
 
 export const InspectionHome = () => {
-	const { connectionState } = useContext(ConnectionContext);
-	const [inputURL, setInputURL] = useState('');
-	const navigate = useNavigate();
+	const { connectionState } = useContext(ConnectionContext)
+	const [inputURL, setInputURL] = useState("")
+	const navigate = useNavigate()
 
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+	useEffect(() => {
+		document.title = `${siteTitle} - What's This?`
+	})
 
 	const submitForm = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		return navigate('/inspect/' + inputURL);
-	};
+		e.preventDefault()
+		return navigate("/inspect/" + inputURL)
+	}
 
 	const changeForm = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputURL(e.target.value);
-	};
+		setInputURL(e.target.value)
+	}
 
 	return (
 		<>
-			<Typography variant="h1" my={2}>{siteTitle}</Typography>
+			<Typography variant="h1" my={2}>
+				{siteTitle}
+			</Typography>
 			<Typography my={2}>We will try to pick details out of the URL you specify.</Typography>
 			<Box my={2}>
 				<Alert severity="info">
@@ -35,7 +50,8 @@ export const InspectionHome = () => {
 				</Alert>
 			</Box>
 			<form onSubmit={submitForm} noValidate>
-				<TextField fullWidth
+				<TextField
+					fullWidth
 					id="url"
 					type="url"
 					placeholder="https://wordpress.org"
@@ -46,12 +62,7 @@ export const InspectionHome = () => {
 				/>
 				<Box my={2}>
 					<Stack spacing={2} direction="row">
-						<Button
-							type="submit"
-							variant="contained"
-							value="Submit"
-							disabled={!connectionState}
-						>
+						<Button type="submit" variant="contained" value="Submit" disabled={!connectionState}>
 							Submit
 						</Button>
 						<UserAgentModel />
@@ -59,42 +70,42 @@ export const InspectionHome = () => {
 				</Box>
 			</form>
 		</>
-	);
-};
+	)
+}
 
 interface Props {
-	url: string;
+	url: string
 }
 
 export const InspectonResult = ({ url }: Props) => {
-	const { apiAgent } = useAPIContext();
-	const navigate = useNavigate();
-	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([]);
-	const [loading, setLoading] = useState<boolean>(true);
-	const [requestError, setRError] = useState<boolean>(false);
+	const { apiAgent } = useAPIContext()
+	const navigate = useNavigate()
+	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([])
+	const [loading, setLoading] = useState<boolean>(true)
+	const [requestError, setRError] = useState<boolean>(false)
 
 	useEffect(() => {
 		const addSoftwareToList = (inspection: IInspectionDetails, type: string) => {
-			const list = siteDetails;
-			const newItem = inspection;
-			newItem.type = type;
-			list.push(newItem);
-			setSiteDetails(list);
+			const list = siteDetails
+			const newItem = inspection
+			newItem.type = type
+			list.push(newItem)
+			setSiteDetails(list)
 		}
 
 		apiAgent.Inspection.inspect(url)
-			.then(response => {
-				response.technology.cms.forEach((res) => addSoftwareToList(res, 'CMS'));
-				response.technology.frontend.forEach((res) => addSoftwareToList(res, 'Frontend'));
-				response.technology.javascript.forEach((res) => addSoftwareToList(res, 'JavaScript'));
-				response.technology.cdn.forEach((res) => addSoftwareToList(res, 'CDN'));
-				response.technology.seo.forEach((res) => addSoftwareToList(res, 'SEO'));
-				response.technology.language.forEach((res) => addSoftwareToList(res, 'Language'));
-				response.technology.server.forEach((res) => addSoftwareToList(res, 'Server'));
+			.then((response) => {
+				response.technology.cms.forEach((res) => addSoftwareToList(res, "CMS"))
+				response.technology.frontend.forEach((res) => addSoftwareToList(res, "Frontend"))
+				response.technology.javascript.forEach((res) => addSoftwareToList(res, "JavaScript"))
+				response.technology.cdn.forEach((res) => addSoftwareToList(res, "CDN"))
+				response.technology.seo.forEach((res) => addSoftwareToList(res, "SEO"))
+				response.technology.language.forEach((res) => addSoftwareToList(res, "Language"))
+				response.technology.server.forEach((res) => addSoftwareToList(res, "Server"))
 			})
 			.catch(() => setRError(true))
-			.finally(() => setLoading(false));
-	}, [url, siteDetails, apiAgent]);
+			.finally(() => setLoading(false))
+	}, [url, siteDetails, apiAgent])
 
 	if (loading) {
 		return (
@@ -106,28 +117,32 @@ export const InspectonResult = ({ url }: Props) => {
 					<Typography>Inspecting the site...</Typography>
 				</Grid>
 			</Grid>
-		);
+		)
 	}
 
 	return (
 		<Box>
-			<Typography my={1} color="darkgrey">For the URL {url} ...</Typography>
+			<Typography my={1} color="darkgrey">
+				For the URL {url} ...
+			</Typography>
 			<Box my={2}>
-				{!requestError ?
+				{!requestError ? (
 					<>
-						{siteDetails.length > 0 ?
+						{siteDetails.length > 0 ? (
 							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 								{siteDetails.map((jslib, i) => {
 									return (
 										<Grid key={i} item xs={12} md={6}>
 											<DetailCard details={jslib} url={url} />
 										</Grid>
-									);
+									)
 								})}
 							</Grid>
-							:
+						) : (
 							<Box>
-								<Typography variant="h1" my={2}>Nothing detected!</Typography>
+								<Typography variant="h1" my={2}>
+									Nothing detected!
+								</Typography>
 								<Typography my={1} color="darkgrey">
 									We can see the site, but nothing was detected against our algorithms
 								</Typography>
@@ -136,34 +151,47 @@ export const InspectonResult = ({ url }: Props) => {
 									methods to customise libraries and functions, which may not be understood by the algorithm.
 								</Typography>
 							</Box>
-						}
+						)}
 					</>
-					:
+				) : (
 					<Box>
-						<Typography variant="h1" my={2}>Access failed</Typography>
-						<Typography my={1} color="darkgrey">For some reason, our API cannot access the specified URL</Typography>
+						<Typography variant="h1" my={2}>
+							Access failed
+						</Typography>
+						<Typography my={1} color="darkgrey">
+							For some reason, our API cannot access the specified URL
+						</Typography>
 						<Typography>
 							Check to make sure the website you specified is a correct, valid address. This can also happen if the
 							website has blocked us from scanning it.
 						</Typography>
-					</Box>}
+					</Box>
+				)}
 			</Box>
 			<Stack direction="row" spacing={2} my={2}>
-				<Button variant="contained" value="Return" onClick={() => navigate('/inspect')}>Check Another Site</Button>
+				<Button variant="contained" value="Return" onClick={() => navigate("/inspect")}>
+					Check Another Site
+				</Button>
 				<SaveScratchButton title={`Inspection of ${url}`} message={JSON.stringify(siteDetails, null, 2)} />
 				<ReportInspectionError url={url} object={siteDetails} />
 			</Stack>
 			<Typography my={1} color="darkgrey">
-				All brand logos courtesy from <Link href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</Link>.
+				All brand logos courtesy from{" "}
+				<Link href="https://simpleicons.org" target="_blank" rel="noopener">
+					Simple Icons
+				</Link>
+				.
 			</Typography>
 		</Box>
-	);
-};
+	)
+}
 
 export const InspectonResultDisplay = () => {
-	const inspectionURL = window.location.hash.slice(10);
+	const inspectionURL = window.location.hash.slice(10)
 
-	useEffect(() => { document.title = `${inspectionURL} - What's This?` });
+	useEffect(() => {
+		document.title = `${inspectionURL} - What's This?`
+	})
 
-	return (<InspectonResult url={inspectionURL} />);
+	return <InspectonResult url={inspectionURL} />
 }

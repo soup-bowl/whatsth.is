@@ -1,19 +1,21 @@
-import { Button, DialogContent, Grid, Typography } from "@mui/material";
-import { getUserAgent } from "libwhatsthis";
-import { useState } from "react";
-import { BootstrapDialog, BootstrapDialogTitle } from "./_shared";
-import { SaveScratchButton } from "../components";
+import { Button, DialogContent, Grid, Typography } from "@mui/material"
+import { getUserAgent } from "libwhatsthis"
+import { useState } from "react"
+import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
+import { SaveScratchButton } from "../components"
 
 const UserAgentModel = () => {
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [open, setOpen] = useState(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
 
-	const userAgent = getUserAgent(window.navigator.userAgent);
+	const userAgent = getUserAgent(window.navigator.userAgent)
 
 	return (
 		<div>
-			<Button onClick={handleOpen} variant="contained" color="secondary">Connection Info</Button>
+			<Button onClick={handleOpen} variant="contained" color="secondary">
+				Connection Info
+			</Button>
 			<BootstrapDialog
 				open={open}
 				onClose={handleClose}
@@ -32,27 +34,31 @@ const UserAgentModel = () => {
 							<Typography>{window.navigator.userAgent}</Typography>
 						</Grid>
 						<Grid item xs={12} sm={12}>
-							<Typography>
-								From this, it can be determined:
-							</Typography>
+							<Typography>From this, it can be determined:</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Browser</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{userAgent.browser.name} {userAgent.browser.version}</Typography>
+							<Typography>
+								{userAgent.browser.name} {userAgent.browser.version}
+							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Engine</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{userAgent.engine.name} {userAgent.engine.version}</Typography>
+							<Typography>
+								{userAgent.engine.name} {userAgent.engine.version}
+							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Operating System</Typography>
 						</Grid>
 						<Grid item xs={12} sm={8}>
-							<Typography>{userAgent.system.name} {userAgent.system.version}</Typography>
+							<Typography>
+								{userAgent.system.name} {userAgent.system.version}
+							</Typography>
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<Typography fontWeight={700}>Device</Typography>
@@ -67,14 +73,11 @@ const UserAgentModel = () => {
 							<Typography>{userAgent.cpu ?? <em>Unspecified</em>}</Typography>
 						</Grid>
 					</Grid>
-					<SaveScratchButton
-						title="UserAgent"
-						message={JSON.stringify(userAgent, null, 2)}
-					/>
+					<SaveScratchButton title="UserAgent" message={JSON.stringify(userAgent, null, 2)} />
 				</DialogContent>
 			</BootstrapDialog>
 		</div>
-	);
+	)
 }
 
-export default UserAgentModel;
+export default UserAgentModel

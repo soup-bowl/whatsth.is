@@ -1,44 +1,56 @@
 import {
-	Box, FormControl, Grid, InputLabel, TextField, Typography,
-	MenuItem, Select, SelectChangeEvent, ListSubheader, Stack
-} from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
-import { ConversionType } from "../enums";
-import { IStringMorph } from "../interfaces";
-import { StringConversion } from "libwhatsthis";
-import { SaveScratchButton } from "../components";
+	Box,
+	FormControl,
+	Grid,
+	InputLabel,
+	TextField,
+	Typography,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
+	ListSubheader,
+	Stack,
+} from "@mui/material"
+import { ChangeEvent, useEffect, useState } from "react"
+import { ConversionType } from "../enums"
+import { IStringMorph } from "../interfaces"
+import { StringConversion } from "libwhatsthis"
+import { SaveScratchButton } from "../components"
 
-const siteTitle = "String Conversions";
+const siteTitle = "String Conversions"
 
 const StringConversionPage = () => {
-	const [stringMorph, setStringMorph] = useState<IStringMorph>({ decodeError: false } as IStringMorph);
-	const [passphrase, setPassphrase] = useState('');
-	const [type, setType] = useState<ConversionType>(ConversionType.Base64);
+	const [stringMorph, setStringMorph] = useState<IStringMorph>({ decodeError: false } as IStringMorph)
+	const [passphrase, setPassphrase] = useState("")
+	const [type, setType] = useState<ConversionType>(ConversionType.Base64)
 
-	useEffect(() => { document.title = `${siteTitle} - What's This?` });
+	useEffect(() => {
+		document.title = `${siteTitle} - What's This?`
+	})
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
-		setType(parseInt(event.target.value));
-		setStringMorph({ decodeError: false } as IStringMorph);
-	};
+		setType(parseInt(event.target.value))
+		setStringMorph({ decodeError: false } as IStringMorph)
+	}
 
 	const handleChangePassphrase = (e: ChangeEvent<HTMLInputElement>) => {
-		setPassphrase(e.target.value);
-		setStringMorph({ decodeError: false } as IStringMorph);
-	};
+		setPassphrase(e.target.value)
+		setStringMorph({ decodeError: false } as IStringMorph)
+	}
 
 	return (
 		<>
-			<Typography variant="h1" my={2}>{siteTitle}</Typography>
-			<Typography>
-				Converts text from and into various forms of encoding and encryption methods.
+			<Typography variant="h1" my={2}>
+				{siteTitle}
 			</Typography>
+			<Typography>Converts text from and into various forms of encoding and encryption methods.</Typography>
 			<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
 				<Grid container spacing={2} marginTop={2}>
 					<Grid item xs={12} sm={4}>
 						<FormControl fullWidth>
 							<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
-							<Select fullWidth
+							<Select
+								fullWidth
 								label="Conversion Type"
 								labelId="chooseConversionType"
 								id="chooseConversionType"
@@ -55,9 +67,10 @@ const StringConversionPage = () => {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12} sm={8} display={(parseInt(type.toString()) >= 10) ? 'inherit' : 'none'}>
+					<Grid item xs={12} sm={8} display={parseInt(type.toString()) >= 10 ? "inherit" : "none"}>
 						<FormControl fullWidth>
-							<TextField fullWidth
+							<TextField
+								fullWidth
 								id="passphrase"
 								label="Encryption Password (optional)"
 								onChange={handleChangePassphrase}
@@ -79,9 +92,9 @@ const StringConversionPage = () => {
 							onChange={(e) => {
 								setStringMorph({
 									decoded: e.target.value,
-									encoded: StringConversion('to', type, e.target.value, passphrase),
-									decodeError: false
-								});
+									encoded: StringConversion("to", type, e.target.value, passphrase),
+									decodeError: false,
+								})
 							}}
 							InputLabelProps={{ shrink: true }}
 						/>
@@ -95,21 +108,21 @@ const StringConversionPage = () => {
 							rows={15}
 							value={stringMorph.encoded}
 							error={stringMorph.decodeError}
-							helperText={(stringMorph.decodeError) ? 'This value cannot be converted.' : ''}
+							helperText={stringMorph.decodeError ? "This value cannot be converted." : ""}
 							onChange={(e) => {
 								const convs = {
 									encoded: e.target.value,
-									decodeError: false
-								} as IStringMorph;
+									decodeError: false,
+								} as IStringMorph
 
 								try {
-									convs.decoded = StringConversion('from', type, e.target.value, passphrase);
+									convs.decoded = StringConversion("from", type, e.target.value, passphrase)
 								} catch {
-									convs.decoded = stringMorph.decoded;
-									convs.decodeError = true;
+									convs.decoded = stringMorph.decoded
+									convs.decodeError = true
 								}
 
-								setStringMorph(convs);
+								setStringMorph(convs)
 							}}
 							InputLabelProps={{ shrink: true }}
 						/>
@@ -119,15 +132,19 @@ const StringConversionPage = () => {
 			<Stack direction="row" spacing={2} my={2}>
 				<SaveScratchButton
 					title={`${ConversionType[type]} conversion`}
-					message={JSON.stringify({
-						type: ConversionType[type],
-						encoded: stringMorph.encoded,
-						decoded: stringMorph.decoded,
-					}, null, 2)}
+					message={JSON.stringify(
+						{
+							type: ConversionType[type],
+							encoded: stringMorph.encoded,
+							decoded: stringMorph.decoded,
+						},
+						null,
+						2
+					)}
 				/>
 			</Stack>
 		</>
-	);
+	)
 }
 
-export default StringConversionPage;
+export default StringConversionPage

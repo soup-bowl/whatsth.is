@@ -1,11 +1,11 @@
 export const readFromLocalStorage = <T>(key: string): T | undefined => {
-	const value = localStorage.getItem(key);
+	const value = localStorage.getItem(key)
 
 	if (value) {
-		return JSON.parse(value) as T;
+		return JSON.parse(value) as T
 	}
 
-	return undefined;
+	return undefined
 }
 
-export const writeToLocalStorage = <T>(key: string, value: T) => localStorage.setItem(key, JSON.stringify(value));
+export const writeToLocalStorage = <T>(key: string, value: T) => localStorage.setItem(key, JSON.stringify(value))

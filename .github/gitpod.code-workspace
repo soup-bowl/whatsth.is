@@ -2,23 +2,21 @@
 	"folders": [
 		{
 			"path": "/workspace/whatsth.is",
-			"name": "Frontend"
+			"name": "Frontend",
 		},
 		{
 			"path": "/workspace/api.whatsth.is",
-			"name": "Backend"
+			"name": "Backend",
 		},
 		{
 			"path": "/workspace/whatsth.is-lib",
-			"name": "Library"
-		}
+			"name": "Library",
+		},
 	],
 	"settings": {
-		"githubPullRequests.ignoredPullRequestBranches": [
-			"develop"
-		],
+		"githubPullRequests.ignoredPullRequestBranches": ["develop"],
 		"yaml.schemas": {
-			"https://json.schemastore.org/github-workflow.json": "file:///workspace/whatsth.is/.github/workflows/deploy.yml"
-		}
-	}
+			"https://json.schemastore.org/github-workflow.json": "file:///workspace/whatsth.is/.github/workflows/deploy.yml",
+		},
+	},
 }

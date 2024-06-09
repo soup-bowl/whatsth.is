@@ -10,9 +10,7 @@
 	"postStartCommand": "./.devcontainer/postStartCommand.sh",
 	"postAttachCommand": "./.devcontainer/postAttachCommand.sh",
 	"appPort": [3000, 43594],
-	"forwardPorts": [
-		3000
-	],
+	"forwardPorts": [3000],
 	"portsAttributes": {
 		"3000": {
 			"label": "Frontend"

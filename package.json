@@ -1,51 +1,53 @@
 {
-  "name": "whatsth.is",
-  "version": "edge",
-  "description": "Swiss-army knife development toolbox frontend",
-  "private": true,
-  "scripts": {
-    "start": "npm run dev",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/soup-bowl/whatsth.is.git"
-  },
-  "author": "soup-bowl",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/soup-bowl/whatsth.is/issues"
-  },
-  "homepage": "https://whatsth.is",
-  "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@icons-pack/react-simple-icons": "^9.4.1",
-    "@monaco-editor/react": "^4.6.0",
-    "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
-    "@mui/x-data-grid": "^7.3.1",
-    "@types/node": "^20.12.7",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
-    "@vitejs/plugin-react-swc": "^3.6.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "libwhatsthis": "^0.1.3",
-    "notistack": "^3.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.0",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10"
-  },
-  "devDependencies": {
-    "vite-plugin-pwa": "^0.20.0"
-  }
+	"name": "whatsth.is",
+	"version": "edge",
+	"description": "Swiss-army knife development toolbox frontend",
+	"private": true,
+	"scripts": {
+		"start": "npm run dev",
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"preview": "vite preview",
+		"format": "prettier . --write"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/soup-bowl/whatsth.is.git"
+	},
+	"author": "soup-bowl",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/soup-bowl/whatsth.is/issues"
+	},
+	"homepage": "https://whatsth.is",
+	"dependencies": {
+		"@emotion/react": "^11.11.4",
+		"@emotion/styled": "^11.11.5",
+		"@icons-pack/react-simple-icons": "^9.4.1",
+		"@monaco-editor/react": "^4.6.0",
+		"@mui/icons-material": "^5.15.15",
+		"@mui/material": "^5.15.15",
+		"@mui/x-data-grid": "^7.3.1",
+		"@types/node": "^20.12.7",
+		"@types/react": "^18.3.1",
+		"@types/react-dom": "^18.3.0",
+		"@typescript-eslint/eslint-plugin": "^7.8.0",
+		"@typescript-eslint/parser": "^7.8.0",
+		"@vitejs/plugin-react-swc": "^3.6.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-react-hooks": "^4.6.2",
+		"eslint-plugin-react-refresh": "^0.4.6",
+		"libwhatsthis": "^0.1.3",
+		"notistack": "^3.0.1",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-router-dom": "^6.23.0",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.10"
+	},
+	"devDependencies": {
+		"prettier": "^3.3.1",
+		"vite-plugin-pwa": "^0.20.0"
+	}
 }

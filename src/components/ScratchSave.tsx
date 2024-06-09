@@ -1,17 +1,17 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { addScratch, createItem, getScratches, saveScratches } from "../utils/scratch";
-import { useState } from "react";
-import { NoteAlt as NoteAltIcon } from '@mui/icons-material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
+import { addScratch, createItem, getScratches, saveScratches } from "../utils/scratch"
+import { useState } from "react"
+import { NoteAlt as NoteAltIcon } from "@mui/icons-material"
 
-const SaveScratchButton = ({ title, message }: { title: string, message: string }) => {
-	const [open, setOpen] = useState(false);
+const SaveScratchButton = ({ title, message }: { title: string; message: string }) => {
+	const [open, setOpen] = useState(false)
 
 	const handleOpen = () => {
-		saveScratches(addScratch(getScratches() ?? [], createItem(title, message)));
-		setOpen(true);
-	};
+		saveScratches(addScratch(getScratches() ?? [], createItem(title, message)))
+		setOpen(true)
+	}
 
-	const handleClose = () => setOpen(false);
+	const handleClose = () => setOpen(false)
 
 	return (
 		<>
@@ -24,20 +24,18 @@ const SaveScratchButton = ({ title, message }: { title: string, message: string 
 				aria-labelledby="scratchsave-dialog-title"
 				aria-describedby="scratchsave-dialog-description"
 			>
-				<DialogTitle id="scratchsave-dialog-title">
-					Scratch Saved
-				</DialogTitle>
+				<DialogTitle id="scratchsave-dialog-title">Scratch Saved</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="scratchsave-dialog-description">
-						Details saved to scratchpad.
-					</DialogContentText>
+					<DialogContentText id="scratchsave-dialog-description">Details saved to scratchpad.</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} autoFocus>OK</Button>
+					<Button onClick={handleClose} autoFocus>
+						OK
+					</Button>
 				</DialogActions>
 			</Dialog>
 		</>
-	);
-};
+	)
+}
 
-export default SaveScratchButton;
+export default SaveScratchButton
