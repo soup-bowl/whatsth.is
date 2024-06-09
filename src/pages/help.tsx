@@ -163,6 +163,11 @@ export const AboutPage = () => {
 				</Button>
 			</Stack>
 			<Typography variant="h1" my={2}>Donate</Typography>
+			<Typography my={2}>
+				<Link href="https://www.buymeacoffee.com/soupbowl">
+					<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="40" />
+				</Link>
+			</Typography>
 			{wallets.map((wallet, i) => (
 				<Box key={i}>
 					<Typography variant="h3" sx={{ marginTop: 2 }}>{wallet.key.toUpperCase()} Address</Typography>
