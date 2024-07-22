@@ -15,6 +15,7 @@ import {
 	UnixEpochPage,
 	ColourPickerPage,
 	ScratchpadPage,
+	SharePage,
 } from "./pages"
 import { APIContext, ConnectionContext } from "./context"
 import { APIAgentType, Agent } from "libwhatsthis"
@@ -61,6 +62,8 @@ const App = () => {
 									<Route path="time/*" element={<UnixEpochPage />} />
 									<Route path="scratchpad" element={<ScratchpadPage />} />
 									<Route path="convert" element={<StringConversionPage />} />
+									<Route path="share" element={<SharePage />} />
+									<Route path="sharing" element={<Navigate replace to="/share" />} />
 									<Route path="encoder" element={<Navigate replace to="/convert" />} />
 									<Route path="decoder" element={<Navigate replace to="/convert" />} />
 									<Route path="unix" element={<Navigate replace to="/time" />} />

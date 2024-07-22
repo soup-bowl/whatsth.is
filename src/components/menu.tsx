@@ -30,6 +30,7 @@ import {
 	CoPresent as CoPresentIcon,
 	ColorLens as ColorLensIcon,
 	NoteAlt as NoteAltIcon,
+	DriveFileMove as DriveFileMoveIcon,
 } from "@mui/icons-material"
 
 import { useContext } from "react"
@@ -128,6 +129,14 @@ const getMenu: IMenu[] = [
 		category: Category.Tools,
 		url: "/scratchpad",
 		needsInternet: false,
+		beta: true,
+	},
+	{
+		name: "File Sharing",
+		icon: <DriveFileMoveIcon />,
+		category: Category.Tools,
+		url: "/share",
+		needsInternet: true,
 		beta: true,
 	},
 ]
