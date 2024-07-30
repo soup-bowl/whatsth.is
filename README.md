@@ -1,8 +1,8 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/11209477/167717787-7f33f564-e975-4055-bf7b-c2b3c29e4f81.png" /></p>
 <h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
 <p align="center">
-  <a href="https://www.codefactor.io/repository/github/whatsth-is/whatsth.is"><img src="https://www.codefactor.io/repository/github/whatsth-is/whatsth.is/badge" alt="CodeFactor" /></a>
-  <a href="https://gitpod.io/#https://github.com/whatsth-is/whatsth.is"><img src="https://img.shields.io/badge/open%20in-Gitpod-orange?logo=gitpod&logoColor=white" /></a>
+  <a href="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is"><img src="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge" alt="CodeFactor" /></a>
+  <a href="https://gitpod.io/#https://github.com/soup-bowl/whatsth.is"><img src="https://img.shields.io/badge/open%20in-Gitpod-orange?logo=gitpod&logoColor=white" /></a>
 </p>
 
 ![A computer display shows the Whats This website, with a mobile phone showing the same content in front](https://blog.soupbowl.io/assets/img/devices-whatsthis.webp)
@@ -61,6 +61,6 @@ devOptions: {
 
 [site]: https://whatsth.is
 [pwa]: https://web.dev/learn/pwa/progressive-web-apps/
-[api]: https://github.com/whatsth-is/api.whatsth.is
-[lib]: https://github.com/whatsth-is/libwhatsthis
-[ext]: https://github.com/whatsth-is/whatsth.is-browser
+[api]: https://github.com/soup-bowl/api.whatsth.is
+[lib]: https://github.com/soup-bowl/libwhatsthis
+[ext]: https://github.com/soup-bowl/whatsth.is-browser
