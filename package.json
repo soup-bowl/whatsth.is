@@ -26,10 +26,10 @@
 		"@emotion/styled": "^11.11.5",
 		"@icons-pack/react-simple-icons": "^10.0.0",
 		"@monaco-editor/react": "^4.6.0",
-		"@mui/icons-material": "^6.1.1",
+		"@mui/icons-material": "^6.1.6",
 		"@mui/material": "^6.0.0",
 		"@mui/x-data-grid": "^7.18.0",
-		"@types/node": "^22.7.4",
+		"@types/node": "^22.8.6",
 		"@types/react": "^18.3.10",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.7.1",
@@ -42,7 +42,7 @@
 		"react-dom": "^18.3.1",
 		"react-router-dom": "^6.26.2",
 		"typescript": "^5.6.2",
-		"typescript-eslint": "^8.8.0",
+		"typescript-eslint": "^8.12.2",
 		"vite": "^5.4.8"
 	},
 	"devDependencies": {
