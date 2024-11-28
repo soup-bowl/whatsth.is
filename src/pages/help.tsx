@@ -216,8 +216,8 @@ export const AboutPage = () => {
 					<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="40" />
 				</Link>
 			</Typography>
-			{wallets.map((wallet, i) => (
-				<Box key={i}>
+			{wallets.map((wallet) => (
+				<Box key={wallet.key}>
 					<Typography variant="h3" sx={{ marginTop: 2 }}>
 						{wallet.key.toUpperCase()} Address
 					</Typography>

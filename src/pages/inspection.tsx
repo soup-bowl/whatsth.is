@@ -130,9 +130,9 @@ export const InspectonResult = ({ url }: Props) => {
 					<>
 						{siteDetails.length > 0 ? (
 							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-								{siteDetails.map((jslib, i) => {
+								{siteDetails.map((jslib) => {
 									return (
-										<Grid key={i} item xs={12} md={6}>
+										<Grid key={jslib.name} item xs={12} md={6}>
 											<DetailCard details={jslib} url={url} />
 										</Grid>
 									)

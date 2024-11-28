@@ -81,9 +81,9 @@ const DomainToolsHome = () => {
 							const values: string[] = params.row.value.split("<!=BREAK=!>")
 							return (
 								<div style={{ width: "100%" }}>
-									{values.map((value, i) => {
+									{values.map((value) => {
 										return (
-											<Stack key={i} my={2} direction="row" alignItems="center">
+											<Stack key={value} my={2} direction="row" alignItems="center">
 												<Typography>{value}</Typography>
 												{isValidIP(value) && <IPAddressGeo ip={value} />}
 											</Stack>

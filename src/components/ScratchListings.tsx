@@ -100,9 +100,9 @@ export const Scratches = ({ items = undefined, listView = false, onClick, onDele
 
 	return (
 		<Grid container spacing={2} my={2}>
-			{items.map((item, index) => (
-				<Grid key={index} item xs={12} sm={listView ? 12 : 6} md={listView ? 12 : 4}>
-					<Scratch item={item} key={index} onClick={onClick} onDelete={onDelete} />
+			{items.map((item) => (
+				<Grid key={item.id} item xs={12} sm={listView ? 12 : 6} md={listView ? 12 : 4}>
+					<Scratch item={item} key={item.id} onClick={onClick} onDelete={onDelete} />
 				</Grid>
 			))}
 		</Grid>

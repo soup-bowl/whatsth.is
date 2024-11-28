@@ -203,18 +203,18 @@ export const HomeMenu = () => {
 
 	return (
 		<>
-			{getMenuCategories.map((item: IMenuCategory, i: number) => {
+			{getMenuCategories.map((item: IMenuCategory) => {
 				return (
-					<Box key={i}>
+					<Box key={item.id}>
 						<Typography variant="h4" component="h2" my={2}>
 							{item.name}
 						</Typography>
 						{item.description !== undefined && <Typography my={2}>{item.description}</Typography>}
 						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-							{getMenu.map((subitem: IMenu, i: number) => {
+							{getMenu.map((subitem: IMenu) => {
 								if (subitem.category === item.id) {
 									return (
-										<Grid key={i} item xs={6} md={3}>
+										<Grid key={subitem.name} item xs={6} md={3}>
 											<Link
 												sx={{
 													cursor: subitem.needsInternet && !connectionState ? "default" : "pointer",
