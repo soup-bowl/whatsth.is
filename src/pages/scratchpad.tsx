@@ -85,8 +85,7 @@ const ScratchpadPage = () => {
 		fileInput.addEventListener("change", (event) => {
 			const files = (event.target as HTMLInputElement).files
 			if (files && files.length > 0) {
-				for (let i = 0; i < files.length; ++i) {
-					const file = files[i]
+				for (let file of files) {
 					const reader = new FileReader()
 
 					reader.onload = (e) => {

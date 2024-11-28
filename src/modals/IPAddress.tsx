@@ -6,7 +6,7 @@ import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
 
 export const MyIpAddressModal = () => {
 	const { connectionState } = useContext(ConnectionContext)
-	const [ips, setIPs] = useState<IPAddresses>({ ipv4: "N/A", ipv6: "N/A" })
+	const [addresses, setAddresses] = useState<IPAddresses>({ ipv4: "N/A", ipv6: "N/A" })
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
@@ -14,7 +14,7 @@ export const MyIpAddressModal = () => {
 	useEffect(() => {
 		const fetchIPs = async () => {
 			try {
-				setIPs(await getBothIPAddresses())
+				setAddresses(await getBothIPAddresses())
 			} catch (error) {
 				console.error("Error fetching IP data:", error)
 			}
@@ -44,8 +44,8 @@ export const MyIpAddressModal = () => {
 						</Grid>
 						<Grid item xs={12} sm={10}>
 							<Stack direction="row" alignItems="center">
-								<Typography>{ips.ipv4}</Typography>
-								<IPAddressGeo ip={ips.ipv4} />
+								<Typography>{addresses.ipv4}</Typography>
+								<IPAddressGeo ip={addresses.ipv4} />
 							</Stack>
 						</Grid>
 						<Grid item xs={12} sm={2}>
@@ -53,8 +53,8 @@ export const MyIpAddressModal = () => {
 						</Grid>
 						<Grid item xs={12} sm={10}>
 							<Stack direction="row" alignItems="center">
-								<Typography>{ips.ipv6}</Typography>
-								<IPAddressGeo ip={ips.ipv6} />
+								<Typography>{addresses.ipv6}</Typography>
+								<IPAddressGeo ip={addresses.ipv6} />
 							</Stack>
 						</Grid>
 					</Grid>
@@ -134,13 +134,11 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 							</Grid>
 						</Grid>
 					) : (
-						<>
-							<Typography id="geo-modal-modal-description" my={2}>
-								Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the API
-								we use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result, we
-								can't show you the information.
-							</Typography>
-						</>
+						<Typography id="geo-modal-modal-description" my={2}>
+							Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the API we
+							use to detect IP geolocation. There's nothing wrong with blocking this info, but as a result, we can't
+							show you the information.
+						</Typography>
 					)}
 				</DialogContent>
 			</BootstrapDialog>

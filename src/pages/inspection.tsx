@@ -82,7 +82,7 @@ export const InspectonResult = ({ url }: Props) => {
 	const navigate = useNavigate()
 	const [siteDetails, setSiteDetails] = useState<IInspectionDetails[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
-	const [requestError, setRError] = useState<boolean>(false)
+	const [requestError, setRequestError] = useState<boolean>(false)
 
 	useEffect(() => {
 		const addSoftwareToList = (inspection: IInspectionDetails, type: string) => {
@@ -103,7 +103,7 @@ export const InspectonResult = ({ url }: Props) => {
 				response.technology.language.forEach((res) => addSoftwareToList(res, "Language"))
 				response.technology.server.forEach((res) => addSoftwareToList(res, "Server"))
 			})
-			.catch(() => setRError(true))
+			.catch(() => setRequestError(true))
 			.finally(() => setLoading(false))
 	}, [url, siteDetails, apiAgent])
 
