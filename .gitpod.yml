@@ -27,11 +27,11 @@ tasks:
       dotnet watch run --project Whatsthis.API
   - name: Frontend
     init: |
-      nvm install 18
+      nvm install 20
       npm install
     command: |
       echo "VITE_API_URL=$(gp url 43594)" > .env.local
-      nvm use 18
+      nvm use 20
       npm start
     openMode: split-right
 
