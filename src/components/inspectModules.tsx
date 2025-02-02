@@ -31,7 +31,7 @@ const DetailCard = ({ details, url }: Props) => {
 					Learn more
 				</Button>
 				{url !== undefined && details.name === "WordPress" && (
-					<Button href={`https://soupbowl.io/pressify/#/${url}`}>Pressify</Button>
+					<Button href={`https://pressify.app/#/${url}`}>Pressify</Button>
 				)}
 			</CardActions>
 		</Card>
