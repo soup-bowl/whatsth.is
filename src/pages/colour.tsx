@@ -1,4 +1,4 @@
-import { Button, Card, Grid, InputAdornment, Stack, TextField, Typography } from "@mui/material"
+import { Button, Card, GridLegacy, InputAdornment, Stack, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import {
 	CMYK,
@@ -45,12 +45,12 @@ const ColourPickerPage = () => {
 					height: 50,
 				}}
 			/>
-			<Grid container>
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+			<GridLegacy container>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>Picker</Typography>
-					</Grid>
-					<Grid item xs={12} sm={8}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={8}>
 						<input
 							type="color"
 							value={colours.hex}
@@ -58,22 +58,22 @@ const ColourPickerPage = () => {
 								setColours(hexToAll(e.target.value))
 							}}
 						/>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>Hex</Typography>
-					</Grid>
-					<Grid item xs={10} sm={6}>
+					</GridLegacy>
+					<GridLegacy item xs={10} sm={6}>
 						<TextField
 							fullWidth
 							variant="standard"
 							value={colours.hex}
 							onChange={(e) => setColours(hexToAll(e.target.value))}
 						/>
-					</Grid>
-					<Grid item xs={2} container justifyContent="center" alignItems="center">
+					</GridLegacy>
+					<GridLegacy item xs={2} container justifyContent="center" alignItems="center">
 						<Button
 							variant="text"
 							color="secondary"
@@ -83,15 +83,15 @@ const ColourPickerPage = () => {
 						>
 							Copy
 						</Button>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>RGB</Typography>
-					</Grid>
-					<Grid item xs={10} sm={6} container>
-						<Grid item xs={4}>
+					</GridLegacy>
+					<GridLegacy item xs={10} sm={6} container>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -106,8 +106,8 @@ const ColourPickerPage = () => {
 									setColours(rgbToAll(rgb))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={4}>
+						</GridLegacy>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -122,8 +122,8 @@ const ColourPickerPage = () => {
 									setColours(rgbToAll(rgb))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={4}>
+						</GridLegacy>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -138,9 +138,9 @@ const ColourPickerPage = () => {
 									setColours(rgbToAll(rgb))
 								}}
 							/>
-						</Grid>
-					</Grid>
-					<Grid item xs={2} container justifyContent="center" alignItems="center">
+						</GridLegacy>
+					</GridLegacy>
+					<GridLegacy item xs={2} container justifyContent="center" alignItems="center">
 						<Button
 							variant="text"
 							color="secondary"
@@ -150,15 +150,15 @@ const ColourPickerPage = () => {
 						>
 							Copy
 						</Button>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>HSL</Typography>
-					</Grid>
-					<Grid item xs={10} sm={6} container>
-						<Grid item xs={4}>
+					</GridLegacy>
+					<GridLegacy item xs={10} sm={6} container>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -173,8 +173,8 @@ const ColourPickerPage = () => {
 									setColours(hslToAll(hsl))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={4}>
+						</GridLegacy>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -194,8 +194,8 @@ const ColourPickerPage = () => {
 									setColours(hslToAll(hsl))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={4}>
+						</GridLegacy>
+						<GridLegacy item xs={4}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -215,9 +215,9 @@ const ColourPickerPage = () => {
 									setColours(hslToAll(hsl))
 								}}
 							/>
-						</Grid>
-					</Grid>
-					<Grid item xs={2} container justifyContent="center" alignItems="center">
+						</GridLegacy>
+					</GridLegacy>
+					<GridLegacy item xs={2} container justifyContent="center" alignItems="center">
 						<Button
 							variant="text"
 							color="secondary"
@@ -227,15 +227,15 @@ const ColourPickerPage = () => {
 						>
 							Copy
 						</Button>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>CMYK</Typography>
-					</Grid>
-					<Grid item xs={10} sm={6} container>
-						<Grid item xs={6} md={3}>
+					</GridLegacy>
+					<GridLegacy item xs={10} sm={6} container>
+						<GridLegacy item xs={6} md={3}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -255,8 +255,8 @@ const ColourPickerPage = () => {
 									setColours(cmykToAll(cmyk))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={6} md={3}>
+						</GridLegacy>
+						<GridLegacy item xs={6} md={3}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -276,8 +276,8 @@ const ColourPickerPage = () => {
 									setColours(cmykToAll(cmyk))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={6} md={3}>
+						</GridLegacy>
+						<GridLegacy item xs={6} md={3}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -297,8 +297,8 @@ const ColourPickerPage = () => {
 									setColours(cmykToAll(cmyk))
 								}}
 							/>
-						</Grid>
-						<Grid item xs={6} md={3}>
+						</GridLegacy>
+						<GridLegacy item xs={6} md={3}>
 							<TextField
 								fullWidth
 								variant="standard"
@@ -318,9 +318,9 @@ const ColourPickerPage = () => {
 									setColours(cmykToAll(cmyk))
 								}}
 							/>
-						</Grid>
-					</Grid>
-					<Grid item xs={2} container justifyContent="center" alignItems="center">
+						</GridLegacy>
+					</GridLegacy>
+					<GridLegacy item xs={2} container justifyContent="center" alignItems="center">
 						<Button
 							variant="text"
 							color="secondary"
@@ -332,36 +332,36 @@ const ColourPickerPage = () => {
 						>
 							Copy
 						</Button>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>HTML Name</Typography>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={6}>
 						<Typography>{colours.htmlCode}</Typography>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>XKCD Name</Typography>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={6}>
 						<Typography>{colours.xkcdCode}</Typography>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 
-				<Grid item container marginY={1}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy item container marginY={1}>
+					<GridLegacy item xs={12} sm={4}>
 						<Typography sx={{ fontWeight: "bold" }}>0x Variant</Typography>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={6}>
 						<Typography>{colours.oxVar}</Typography>
-					</Grid>
-				</Grid>
-			</Grid>
+					</GridLegacy>
+				</GridLegacy>
+			</GridLegacy>
 			<Stack direction="row" spacing={2} my={2}>
 				<SaveScratchButton title={`${colours.hex} details`} message={JSON.stringify(colours, null, 2)} />
 			</Stack>

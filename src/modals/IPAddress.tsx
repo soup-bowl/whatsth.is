@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { ConnectionContext } from "../context"
 import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation } from "libwhatsthis"
-import { Button, DialogContent, Grid, IconButton, Link, Stack, Typography } from "@mui/material"
+import { Button, DialogContent, GridLegacy, IconButton, Link, Stack, Typography } from "@mui/material"
 import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
 
 export const MyIpAddressModal = () => {
@@ -38,26 +38,26 @@ export const MyIpAddressModal = () => {
 					My IP Addresses
 				</BootstrapDialogTitle>
 				<DialogContent>
-					<Grid container id="ipi-modal-modal-description" spacing={2} my={2}>
-						<Grid item xs={12} sm={2}>
+					<GridLegacy container id="ipi-modal-modal-description" spacing={2} my={2}>
+						<GridLegacy item xs={12} sm={2}>
 							<Typography fontWeight={700}>IP v4</Typography>
-						</Grid>
-						<Grid item xs={12} sm={10}>
+						</GridLegacy>
+						<GridLegacy item xs={12} sm={10}>
 							<Stack direction="row" alignItems="center">
 								<Typography>{addresses.ipv4}</Typography>
 								<IPAddressGeo ip={addresses.ipv4} />
 							</Stack>
-						</Grid>
-						<Grid item xs={12} sm={2}>
+						</GridLegacy>
+						<GridLegacy item xs={12} sm={2}>
 							<Typography fontWeight={700}>IP v6</Typography>
-						</Grid>
-						<Grid item xs={12} sm={10}>
+						</GridLegacy>
+						<GridLegacy item xs={12} sm={10}>
 							<Stack direction="row" alignItems="center">
 								<Typography>{addresses.ipv6}</Typography>
 								<IPAddressGeo ip={addresses.ipv6} />
 							</Stack>
-						</Grid>
-					</Grid>
+						</GridLegacy>
+					</GridLegacy>
 				</DialogContent>
 			</BootstrapDialog>
 		</div>
@@ -105,34 +105,34 @@ export const IPAddressGeo = ({ ip }: GeoProps) => {
 				</BootstrapDialogTitle>
 				<DialogContent>
 					{geo !== undefined ? (
-						<Grid container id="geo-modal-modal-description" spacing={2} my={2}>
-							<Grid item xs={12} sm={3}>
+						<GridLegacy container id="geo-modal-modal-description" spacing={2} my={2}>
+							<GridLegacy item xs={12} sm={3}>
 								<Typography fontWeight={700}>IP</Typography>
-							</Grid>
-							<Grid item xs={12} sm={9}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={9}>
 								<Typography>{geo.ip}</Typography>
-							</Grid>
-							<Grid item xs={12} sm={3}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={3}>
 								<Typography fontWeight={700}>Hostname</Typography>
-							</Grid>
-							<Grid item xs={12} sm={9}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={9}>
 								<Typography>{geo.hostname}</Typography>
-							</Grid>
-							<Grid item xs={12} sm={3}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={3}>
 								<Typography fontWeight={700}>Organisation</Typography>
-							</Grid>
-							<Grid item xs={12} sm={9}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={9}>
 								<Typography>{geo.org}</Typography>
-							</Grid>
-							<Grid item xs={12} sm={3}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={3}>
 								<Typography fontWeight={700}>Location</Typography>
-							</Grid>
-							<Grid item xs={12} sm={9}>
+							</GridLegacy>
+							<GridLegacy item xs={12} sm={9}>
 								<Typography>
 									{geo.city}, {geo.region}
 								</Typography>
-							</Grid>
-						</Grid>
+							</GridLegacy>
+						</GridLegacy>
 					) : (
 						<Typography id="geo-modal-modal-description" my={2}>
 							Some browsers and Adblocking mechanisms block <Link href="https://ipinfo.io/">ipinfo.io</Link>, the API we

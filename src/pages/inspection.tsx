@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react"
 import {
 	Button,
 	TextField,
-	Grid,
+	GridLegacy,
 	Typography,
 	CircularProgress,
 	Box,
@@ -109,14 +109,14 @@ export const InspectonResult = ({ url }: Props) => {
 
 	if (loading) {
 		return (
-			<Grid container spacing={0} my={2} direction="column" alignItems="center">
-				<Grid item xs={3}>
+			<GridLegacy container spacing={0} my={2} direction="column" alignItems="center">
+				<GridLegacy item xs={3}>
 					<CircularProgress />
-				</Grid>
-				<Grid item xs={3}>
+				</GridLegacy>
+				<GridLegacy item xs={3}>
 					<Typography>Inspecting the site...</Typography>
-				</Grid>
-			</Grid>
+				</GridLegacy>
+			</GridLegacy>
 		)
 	}
 
@@ -129,15 +129,15 @@ export const InspectonResult = ({ url }: Props) => {
 				{!requestError ? (
 					<>
 						{siteDetails.length > 0 ? (
-							<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+							<GridLegacy container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 								{siteDetails.map((jslib) => {
 									return (
-										<Grid key={jslib.name} item xs={12} md={6}>
+										<GridLegacy key={jslib.name} item xs={12} md={6}>
 											<DetailCard details={jslib} url={url} />
-										</Grid>
+										</GridLegacy>
 									)
 								})}
-							</Grid>
+							</GridLegacy>
 						) : (
 							<Box>
 								<Typography variant="h1" my={2}>

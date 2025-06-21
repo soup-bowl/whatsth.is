@@ -4,7 +4,7 @@ import {
 	Box,
 	Button,
 	FormControl,
-	Grid,
+	GridLegacy,
 	InputLabel,
 	Link,
 	MenuItem,
@@ -182,9 +182,9 @@ const DomainToolsHome = () => {
 				</Alert>
 			</Box>
 			<form onSubmit={submitForm} noValidate>
-				<Grid container direction="column" spacing={2} my={2}>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={4}>
+				<GridLegacy container direction="column" spacing={2} my={2}>
+					<GridLegacy container spacing={2}>
+						<GridLegacy item xs={12} sm={4}>
 							<FormControl fullWidth>
 								<InputLabel id="type">Type</InputLabel>
 								<Select
@@ -204,8 +204,8 @@ const DomainToolsHome = () => {
 									</MenuItem>
 								</Select>
 							</FormControl>
-						</Grid>
-						<Grid item xs={12} sm={8}>
+						</GridLegacy>
+						<GridLegacy item xs={12} sm={8}>
 							<TextField
 								fullWidth
 								id="url"
@@ -219,9 +219,9 @@ const DomainToolsHome = () => {
 								}
 								disabled={!connectionState}
 							/>
-						</Grid>
-					</Grid>
-					<Grid item>
+						</GridLegacy>
+					</GridLegacy>
+					<GridLegacy item>
 						<Stack spacing={2} direction="row">
 							<Button type="submit" variant="contained" value="Submit" disabled={!connectionState}>
 								Submit
@@ -237,8 +237,8 @@ const DomainToolsHome = () => {
 							</Button>
 							<MyIpAddressModal />
 						</Stack>
-					</Grid>
-					<Grid item>
+					</GridLegacy>
+					<GridLegacy item>
 						{tableData.rows.length > 0 ? (
 							<Box>
 								<Typography my={2} component="h2" variant="h5">
@@ -294,8 +294,8 @@ const DomainToolsHome = () => {
 								)}
 							</Box>
 						)}
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 			</form>
 		</>
 	)

@@ -1,7 +1,7 @@
 import {
 	Box,
 	FormControl,
-	Grid,
+	GridLegacy,
 	InputLabel,
 	TextField,
 	Typography,
@@ -45,8 +45,8 @@ const StringConversionPage = () => {
 			</Typography>
 			<Typography>Converts text from and into various forms of encoding and encryption methods.</Typography>
 			<Box sx={{ flexGrow: 1, marginBottom: 2 }}>
-				<Grid container spacing={2} marginTop={2}>
-					<Grid item xs={12} sm={4}>
+				<GridLegacy container spacing={2} marginTop={2}>
+					<GridLegacy item xs={12} sm={4}>
 						<FormControl fullWidth>
 							<InputLabel id="chooseConversionType">Conversion Type</InputLabel>
 							<Select
@@ -66,8 +66,8 @@ const StringConversionPage = () => {
 								<MenuItem value={11}>3DES</MenuItem>
 							</Select>
 						</FormControl>
-					</Grid>
-					<Grid item xs={12} sm={8} display={parseInt(type.toString()) >= 10 ? "inherit" : "none"}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={8} display={parseInt(type.toString()) >= 10 ? "inherit" : "none"}>
 						<FormControl fullWidth>
 							<TextField
 								fullWidth
@@ -76,12 +76,12 @@ const StringConversionPage = () => {
 								onChange={handleChangePassphrase}
 							/>
 						</FormControl>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 			</Box>
 			<Box sx={{ flexGrow: 1 }}>
-				<Grid container spacing={2}>
-					<Grid item xs={12} sm={6}>
+				<GridLegacy container spacing={2}>
+					<GridLegacy item xs={12} sm={6}>
 						<TextField
 							multiline
 							fullWidth
@@ -98,8 +98,8 @@ const StringConversionPage = () => {
 							}}
 							InputLabelProps={{ shrink: true }}
 						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</GridLegacy>
+					<GridLegacy item xs={12} sm={6}>
 						<TextField
 							multiline
 							fullWidth
@@ -126,8 +126,8 @@ const StringConversionPage = () => {
 							}}
 							InputLabelProps={{ shrink: true }}
 						/>
-					</Grid>
-				</Grid>
+					</GridLegacy>
+				</GridLegacy>
 			</Box>
 			<Stack direction="row" spacing={2} my={2}>
 				<SaveScratchButton
