@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import { WhatsThisLogo } from "../components"
 import { IStorage } from "../interfaces"
 import { formatBytes } from "libwhatsthis"
-import { DataGrid } from "@mui/x-data-grid"
 
 import FileCopyIcon from "@mui/icons-material/FileCopy"
 import GitHubIcon from "@mui/icons-material/GitHub"
@@ -195,35 +194,6 @@ export const AboutPage = () => {
 					</Stack>
 				</Box>
 			))}
-			<Typography variant="h2" my={2}>
-				Credit
-			</Typography>
-			<Box sx={{ height: 400, width: "100%" }}>
-				<DataGrid
-					columns={[
-						{ field: "package", headerName: "Package", flex: 0.6 },
-						{
-							field: "maintainer",
-							headerName: "Author/Owner",
-							flex: 1.4,
-							renderCell(params) {
-								return <Link href={params.row.maintainer}>{params.row.maintainer}</Link>
-							},
-						},
-					]}
-					rows={[
-						{ id: 0, package: "CryptoJS", maintainer: "https://www.npmjs.com/package/crypto-js" },
-						{ id: 1, package: "cRontrue", maintainer: "https://www.npmjs.com/package/cronstrue" },
-						{ id: 2, package: "DnsClient.NET", maintainer: "https://dnsclient.michaco.net/" },
-						{ id: 3, package: "ua-parser-js", maintainer: "https://github.com/faisalman/ua-parser-js" },
-						{ id: 4, package: "ident.me", maintainer: "https://api.ident.me/" },
-						{ id: 5, package: "ipinfo.io", maintainer: "https://ipinfo.io/" },
-					]}
-					disableColumnMenu
-					disableColumnSelector
-					hideFooter
-				/>
-			</Box>
 		</Box>
 	)
 }
