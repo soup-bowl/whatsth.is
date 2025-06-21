@@ -15,7 +15,6 @@ import {
 	SiBootstrap,
 	SiVimeo,
 	SiCloudflare,
-	SiAmazonwebservices,
 	SiUbuntu,
 	SiNginx,
 	SiGhost,
@@ -39,7 +38,6 @@ import {
 const iconsMap: { [key: string]: React.ComponentType } = {
 	angular: SiAngular,
 	apache: SiApache,
-	awscloudfront: SiAmazonwebservices,
 	axios: SiAxios,
 	bootstrap: SiBootstrap,
 	cloudflare: SiCloudflare,

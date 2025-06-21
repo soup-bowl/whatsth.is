@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, GridLegacy, Typography } from "@mui/material"
 import { IScratchpadItem } from "../interfaces"
 import { hexToAll } from "libwhatsthis"
 
@@ -99,12 +99,12 @@ export const Scratches = ({ items = undefined, listView = false, onClick, onDele
 	}
 
 	return (
-		<Grid container spacing={2} my={2}>
+		<GridLegacy container spacing={2} my={2}>
 			{items.map((item) => (
-				<Grid key={item.id} item xs={12} sm={listView ? 12 : 6} md={listView ? 12 : 4}>
+				<GridLegacy key={item.id} item xs={12} sm={listView ? 12 : 6} md={listView ? 12 : 4}>
 					<Scratch item={item} key={item.id} onClick={onClick} onDelete={onDelete} />
-				</Grid>
+				</GridLegacy>
 			))}
-		</Grid>
+		</GridLegacy>
 	)
 }

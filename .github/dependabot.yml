@@ -9,23 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    ignore:
-      # Issues with Vite
-      - dependency-name: "eslint"
-        versions: ["9"]
-      - dependency-name: "@typescript-eslint/eslint-plugin"
-        versions: ["8"]
-      - dependency-name: "@typescript-eslint/parser"
-        versions: ["8"]
-      # Monaco editor not support React 19 until 4.7.0
-      - dependency-name: "react"
-        versions: [">=19.0.0"]
-      - dependency-name: "react-dom"
-        versions: [">=19.0.0"]
-      - dependency-name: "@types/react"
-        versions: [">=19.0.0"]
-      - dependency-name: "@types/react-dom"
-        versions: [">=19.0.0"]
     groups:
       dev-dependencies:
         patterns:

@@ -2,7 +2,7 @@ import {
 	Box,
 	Chip,
 	Divider,
-	Grid,
+	GridLegacy,
 	IconButton,
 	Link,
 	List,
@@ -188,11 +188,11 @@ export const HomeMenu = () => {
 							{item.name}
 						</Typography>
 						{item.description !== undefined && <Typography my={2}>{item.description}</Typography>}
-						<Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+						<GridLegacy container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 							{getMenu.map((subitem: IMenu) => {
 								if (subitem.category === item.id) {
 									return (
-										<Grid key={subitem.name} item xs={6} md={3}>
+										<GridLegacy key={subitem.name} item xs={6} md={3}>
 											<Link
 												sx={{
 													cursor: subitem.needsInternet && !connectionState ? "default" : "pointer",
@@ -206,13 +206,13 @@ export const HomeMenu = () => {
 													{subitem.beta && <Chip label="Beta" size="small" color="info" sx={{ marginLeft: "2px" }} />}
 												</OptionSquare>
 											</Link>
-										</Grid>
+										</GridLegacy>
 									)
 								} else {
 									return undefined
 								}
 							})}
-						</Grid>
+						</GridLegacy>
 					</Box>
 				)
 			})}
