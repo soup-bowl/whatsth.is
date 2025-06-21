@@ -27,7 +27,7 @@ export interface IStringMorph {
 export interface IMenu {
 	name: string
 	category: number
-	icon: JSX.Element
+	icon: React.ReactNode
 	url: string
 	needsInternet: boolean
 	beta?: boolean

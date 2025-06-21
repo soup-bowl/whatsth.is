@@ -105,7 +105,7 @@ export const AboutPage = () => {
 	const { connectionState } = useContext(ConnectionContext)
 	const { apiAgent } = useAPIContext()
 
-	const [apiVersion, setApiVersion] = useState<string | JSX.Element>("")
+	const [apiVersion, setApiVersion] = useState<string | React.ReactNode>("")
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage)
 
 	const wallets = [

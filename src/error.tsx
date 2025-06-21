@@ -3,7 +3,7 @@ import { CSSProperties, Component, ErrorInfo } from "react"
 import theme from "./theme/theme"
 
 interface ErrorProp {
-	children: JSX.Element
+	children: React.ReactNode
 }
 
 interface StateProp {
