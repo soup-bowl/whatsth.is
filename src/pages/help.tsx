@@ -1,15 +1,13 @@
-import { Typography, Link, Box, Button, Stack, Chip, Tooltip, IconButton, styled } from "@mui/material"
-import { useState, useEffect, useContext } from "react"
+import { Typography, Link, Box, Button, Stack, Chip, IconButton, styled } from "@mui/material"
+import { useState, useEffect } from "react"
 import { WhatsThisLogo } from "../components"
 import { IStorage } from "../interfaces"
-import { ConnectionContext, useAPIContext } from "../context"
 import { formatBytes } from "libwhatsthis"
 import { DataGrid } from "@mui/x-data-grid"
 
 import FileCopyIcon from "@mui/icons-material/FileCopy"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import CachedIcon from "@mui/icons-material/Cached"
-import CloudOffIcon from "@mui/icons-material/CloudOff"
 
 const WalletDisplay = styled(Typography)({
 	fontFamily: "monospace",
@@ -95,17 +93,9 @@ export const HelpPage = () => {
 	)
 }
 
-interface ErrorCatch {
-	code?: string
-	message?: string
-}
-
 export const AboutPage = () => {
 	const siteTitle = "About"
-	const { connectionState } = useContext(ConnectionContext)
-	const { apiAgent } = useAPIContext()
 
-	const [apiVersion, setApiVersion] = useState<string | JSX.Element>("")
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage)
 
 	const wallets = [
@@ -116,28 +106,6 @@ export const AboutPage = () => {
 	useEffect(() => {
 		document.title = `${siteTitle} - What's This?`
 	})
-
-	useEffect(() => {
-		if (connectionState) {
-			apiAgent.Details.openapi()
-				.then((response) => {
-					setApiVersion(response.info.version)
-				})
-				.catch((err: ErrorCatch) => {
-					setApiVersion(
-						<Tooltip title={`(${err.code ?? "N/A"}) ${err.message ?? "N/A"}`}>
-							<span>Comms Error</span>
-						</Tooltip>
-					)
-				})
-		} else {
-			setApiVersion(
-				<>
-					<CloudOffIcon fontSize="inherit" /> Offline
-				</>
-			)
-		}
-	}, [connectionState, apiAgent])
 
 	useEffect(() => {
 		if ("storage" in navigator && "estimate" in navigator.storage) {
@@ -175,12 +143,6 @@ export const AboutPage = () => {
 					Library Version:{" "}
 					<Box component="span" fontWeight="700">
 						{__LIB_VERSION__.replace("^", "")}
-					</Box>
-				</Typography>
-				<Typography>
-					API Version:{" "}
-					<Box component="span" fontWeight="700">
-						{apiVersion}
 					</Box>
 				</Typography>
 
