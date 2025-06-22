@@ -3,20 +3,12 @@
 {
 	"name": "Node.js & TypeScript",
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:20-bullseye",
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	},
-	"postCreateCommand": "./.devcontainer/postCreateCommand.sh",
-	"postStartCommand": "./.devcontainer/postStartCommand.sh",
-	"postAttachCommand": "./.devcontainer/postAttachCommand.sh",
-	"appPort": [3000, 43594],
+	"postCreateCommand": "npm install",
+	"appPort": [3000],
 	"forwardPorts": [3000],
 	"portsAttributes": {
 		"3000": {
 			"label": "Frontend"
-		},
-		"43594": {
-			"label": "API"
 		}
 	},
 	"remoteUser": "root"

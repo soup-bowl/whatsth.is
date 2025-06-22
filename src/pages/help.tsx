@@ -1,15 +1,12 @@
-import { Typography, Link, Box, Button, Stack, Chip, Tooltip, IconButton, styled } from "@mui/material"
-import { useState, useEffect, useContext } from "react"
+import { Typography, Link, Box, Button, Stack, Chip, IconButton, styled } from "@mui/material"
+import { useState, useEffect } from "react"
 import { WhatsThisLogo } from "../components"
 import { IStorage } from "../interfaces"
-import { ConnectionContext, useAPIContext } from "../context"
 import { formatBytes } from "../lib"
-import { DataGrid } from "@mui/x-data-grid"
 
 import FileCopyIcon from "@mui/icons-material/FileCopy"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import CachedIcon from "@mui/icons-material/Cached"
-import CloudOffIcon from "@mui/icons-material/CloudOff"
 
 const WalletDisplay = styled(Typography)({
 	fontFamily: "monospace",
@@ -95,17 +92,9 @@ export const HelpPage = () => {
 	)
 }
 
-interface ErrorCatch {
-	code?: string
-	message?: string
-}
-
 export const AboutPage = () => {
 	const siteTitle = "About"
-	const { connectionState } = useContext(ConnectionContext)
-	const { apiAgent } = useAPIContext()
 
-	const [apiVersion, setApiVersion] = useState<string | React.ReactNode>("")
 	const [storageInfo, setStorageInfo] = useState<IStorage>({} as IStorage)
 
 	const wallets = [
@@ -116,28 +105,6 @@ export const AboutPage = () => {
 	useEffect(() => {
 		document.title = `${siteTitle} - What's This?`
 	})
-
-	useEffect(() => {
-		if (connectionState) {
-			apiAgent.Details.openapi()
-				.then((response) => {
-					setApiVersion(response.info.version)
-				})
-				.catch((err: ErrorCatch) => {
-					setApiVersion(
-						<Tooltip title={`(${err.code ?? "N/A"}) ${err.message ?? "N/A"}`}>
-							<span>Comms Error</span>
-						</Tooltip>
-					)
-				})
-		} else {
-			setApiVersion(
-				<>
-					<CloudOffIcon fontSize="inherit" /> Offline
-				</>
-			)
-		}
-	}, [connectionState, apiAgent])
 
 	useEffect(() => {
 		if ("storage" in navigator && "estimate" in navigator.storage) {
@@ -169,12 +136,6 @@ export const AboutPage = () => {
 					App Version:{" "}
 					<Box component="span" fontWeight="700">
 						{__APP_VERSION__}
-					</Box>
-				</Typography>
-				<Typography>
-					API Version:{" "}
-					<Box component="span" fontWeight="700">
-						{apiVersion}
 					</Box>
 				</Typography>
 
@@ -227,35 +188,6 @@ export const AboutPage = () => {
 					</Stack>
 				</Box>
 			))}
-			<Typography variant="h2" my={2}>
-				Credit
-			</Typography>
-			<Box sx={{ height: 400, width: "100%" }}>
-				<DataGrid
-					columns={[
-						{ field: "package", headerName: "Package", flex: 0.6 },
-						{
-							field: "maintainer",
-							headerName: "Author/Owner",
-							flex: 1.4,
-							renderCell(params) {
-								return <Link href={params.row.maintainer}>{params.row.maintainer}</Link>
-							},
-						},
-					]}
-					rows={[
-						{ id: 0, package: "CryptoJS", maintainer: "https://www.npmjs.com/package/crypto-js" },
-						{ id: 1, package: "cRontrue", maintainer: "https://www.npmjs.com/package/cronstrue" },
-						{ id: 2, package: "DnsClient.NET", maintainer: "https://dnsclient.michaco.net/" },
-						{ id: 3, package: "ua-parser-js", maintainer: "https://github.com/faisalman/ua-parser-js" },
-						{ id: 4, package: "ident.me", maintainer: "https://api.ident.me/" },
-						{ id: 5, package: "ipinfo.io", maintainer: "https://ipinfo.io/" },
-					]}
-					disableColumnMenu
-					disableColumnSelector
-					hideFooter
-				/>
-			</Box>
 		</Box>
 	)
 }

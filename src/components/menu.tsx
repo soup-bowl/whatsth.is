@@ -42,7 +42,6 @@ interface MenuProps {
 }
 
 enum Category {
-	Inspection,
 	Conversion,
 	Tools,
 }
@@ -63,11 +62,6 @@ const ResizableIconButton = ({ ...props }) => {
 
 const getMenuCategories: IMenuCategory[] = [
 	{
-		id: Category.Inspection,
-		name: "Inspection Tools",
-		description: "These tools require an internet connection.",
-	},
-	{
 		id: Category.Conversion,
 		name: "Conversion",
 	},
@@ -78,22 +72,6 @@ const getMenuCategories: IMenuCategory[] = [
 ]
 
 const getMenu: IMenu[] = [
-	{
-		name: "Site Inspector",
-		icon: <TravelExploreIcon />,
-		category: Category.Inspection,
-		url: "/inspect",
-		needsInternet: true,
-		beta: true,
-	},
-	{
-		name: "Domain Tools",
-		icon: <DnsIcon />,
-		category: Category.Inspection,
-		url: "/domain",
-		needsInternet: true,
-		beta: true,
-	},
 	{
 		name: "String Conversion",
 		icon: <CachedIcon />,
