@@ -14,13 +14,10 @@ import {
 	ScratchpadPage,
 } from "./pages"
 import { ConnectionContext } from "./context"
-import { APIAgentType, Agent } from "./lib"
 import { SnackbarProvider } from "notistack"
 
 const App = () => {
 	const [connectionState, setConnectionState] = useState(navigator.onLine)
-
-	const apiAgent: APIAgentType = new Agent(import.meta.env.VITE_API_URL)
 
 	useEffect(() => {
 		const handleOnline = () => setConnectionState(true)
