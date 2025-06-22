@@ -2,7 +2,7 @@ import { Typography, Link, Box, Button, Stack, Chip, IconButton, styled } from "
 import { useState, useEffect } from "react"
 import { WhatsThisLogo } from "../components"
 import { IStorage } from "../interfaces"
-import { formatBytes } from "libwhatsthis"
+import { formatBytes } from "../lib"
 
 import FileCopyIcon from "@mui/icons-material/FileCopy"
 import GitHubIcon from "@mui/icons-material/GitHub"
@@ -136,12 +136,6 @@ export const AboutPage = () => {
 					App Version:{" "}
 					<Box component="span" fontWeight="700">
 						{__APP_VERSION__}
-					</Box>
-				</Typography>
-				<Typography>
-					Library Version:{" "}
-					<Box component="span" fontWeight="700">
-						{__LIB_VERSION__.replace("^", "")}
 					</Box>
 				</Typography>
 

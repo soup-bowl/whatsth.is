@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, GridLegacy, Typography } from "@mui/material"
 import { IScratchpadItem } from "../interfaces"
-import { hexToAll } from "libwhatsthis"
+import { hexToAll } from "../lib"
 
 interface ScratchItemProps {
 	item: IScratchpadItem

@@ -1,6 +1,6 @@
 import { Box, InputAdornment, Link, Stack, TextField, Typography } from "@mui/material"
 import { ChangeEvent, useEffect, useState } from "react"
-import { ConversionTime, timeOutput, SecondType } from "libwhatsthis"
+import { ConversionTime, SecondType, timeOutput } from "../lib"
 
 import WarningIcon from "@mui/icons-material/Warning"
 import { SaveScratchButton } from "../components"

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { ConnectionContext } from "../context"
-import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation } from "libwhatsthis"
+import { IPAddresses, IPGeolocation, getBothIPAddresses, getIPGeolocation } from "../lib"
 import { Button, DialogContent, GridLegacy, IconButton, Link, Stack, Typography } from "@mui/material"
 import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
 

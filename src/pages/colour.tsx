@@ -1,16 +1,6 @@
 import { Button, Card, GridLegacy, InputAdornment, Stack, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import {
-	CMYK,
-	HSL,
-	IColourValues,
-	RGB,
-	cmykToAll,
-	hexToAll,
-	hslToAll,
-	isValidColorString,
-	rgbToAll,
-} from "libwhatsthis"
+import { CMYK, HSL, IColourValues, RGB, cmykToAll, hexToAll, hslToAll, isValidColorString, rgbToAll } from "../lib"
 import { SaveScratchButton } from "../components"
 
 const siteTitle = "Colour Picker"
