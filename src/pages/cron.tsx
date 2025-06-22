@@ -1,6 +1,6 @@
 import { Stack, TextField, Typography } from "@mui/material"
 import { ChangeEvent, useEffect, useState } from "react"
-import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "libwhatsthis"
+import { calculateCronString, checkForValidCronCode, decodeCronCode, encodeCronCode } from "../lib"
 import { SaveScratchButton } from "../components"
 
 const CronConversionPage = () => {

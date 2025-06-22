@@ -1,6 +1,6 @@
 import { Button } from "@mui/material"
 import { ILookupTableLayout } from "../interfaces"
-import { IInspectionDetails } from "libwhatsthis"
+import { IInspectionDetails } from "../lib"
 
 const BrowserDetails = () => {
 	return window.navigator.userAgent

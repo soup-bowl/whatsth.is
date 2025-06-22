@@ -17,7 +17,7 @@ import {
 	ScratchpadPage,
 } from "./pages"
 import { APIContext, ConnectionContext } from "./context"
-import { APIAgentType, Agent } from "libwhatsthis"
+import { APIAgentType, Agent } from "./lib"
 import { SnackbarProvider } from "notistack"
 
 const App = () => {

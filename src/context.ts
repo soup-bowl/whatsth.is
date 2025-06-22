@@ -1,4 +1,4 @@
-import { APIAgentType } from "libwhatsthis"
+import { APIAgentType } from "./lib"
 import { createContext, useContext } from "react"
 
 type ConnectionContextType = {

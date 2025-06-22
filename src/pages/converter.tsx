@@ -14,7 +14,7 @@ import {
 import { ChangeEvent, useEffect, useState } from "react"
 import { ConversionType } from "../enums"
 import { IStringMorph } from "../interfaces"
-import { StringConversion } from "libwhatsthis"
+import { StringConversion } from "../lib"
 import { SaveScratchButton } from "../components"
 
 const siteTitle = "String Conversions"

@@ -1,5 +1,5 @@
 import { Button, DialogContent, GridLegacy, Typography } from "@mui/material"
-import { getUserAgent } from "libwhatsthis"
+import { getUserAgent } from "../lib"
 import { useState } from "react"
 import { BootstrapDialog, BootstrapDialogTitle } from "./_shared"
 import { SaveScratchButton } from "../components"

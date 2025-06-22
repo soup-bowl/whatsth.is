@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react"
 import { WhatsThisLogo } from "../components"
 import { IStorage } from "../interfaces"
 import { ConnectionContext, useAPIContext } from "../context"
-import { formatBytes } from "libwhatsthis"
+import { formatBytes } from "../lib"
 import { DataGrid } from "@mui/x-data-grid"
 
 import FileCopyIcon from "@mui/icons-material/FileCopy"
@@ -169,12 +169,6 @@ export const AboutPage = () => {
 					App Version:{" "}
 					<Box component="span" fontWeight="700">
 						{__APP_VERSION__}
-					</Box>
-				</Typography>
-				<Typography>
-					Library Version:{" "}
-					<Box component="span" fontWeight="700">
-						{__LIB_VERSION__.replace("^", "")}
 					</Box>
 				</Typography>
 				<Typography>

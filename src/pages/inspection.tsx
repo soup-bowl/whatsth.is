@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom"
 import { DetailCard, ReportInspectionError, SaveScratchButton } from "../components"
 import { UserAgentModel } from "../modals"
 import { ConnectionContext, useAPIContext } from "../context"
-import { IInspectionDetails } from "libwhatsthis"
+import { IInspectionDetails } from "../lib"
 
 const siteTitle = "Site Inspector"
 

@@ -22,7 +22,7 @@ import { ReportDNSError, SaveScratchButton } from "../components"
 import "../theme/grid.css"
 import { ConnectionContext, useAPIContext } from "../context"
 import { IPAddressGeo, MyIpAddressModal } from "../modals"
-import { IDNSResult, isValidIP } from "libwhatsthis"
+import { IDNSResult, isValidIP } from "../lib"
 
 const DomainToolsHome = () => {
 	const siteTitle = "Domain Tools"
