@@ -1,15 +1,3 @@
-// API
-export type {
-	APIAgentType,
-	IDNSResult,
-	IInspectionDetails,
-	IInspectionResult,
-	IInspectionTechnology,
-	IOpenAPI,
-	IWHOISResult,
-} from "./api/interfaces"
-export { default as Agent } from "./api/agent"
-
 // String
 export type { RGB, HSL, CMYK, Hue, IColourValues, UserAgent, ConversionTime } from "./string/interfaces"
 export { ConversionType, SecondType } from "./string/interfaces"
