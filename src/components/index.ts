@@ -1,6 +1,6 @@
 export { default as ErrorMessage } from "./errorMessage"
 export { default as WhatsThisLogo } from "./logo"
 export { DrawMenu, HomeMenu } from "./menu"
-export { GeneralTemplate, ReportDNSError, ReportInspectionError } from "./reportButton"
+export { GeneralTemplate } from "./reportButton"
 export { Scratches } from "./ScratchListings"
 export { default as SaveScratchButton } from "./ScratchSave"

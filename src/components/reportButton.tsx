@@ -1,7 +1,3 @@
-import { Button } from "@mui/material"
-import { ILookupTableLayout } from "../interfaces"
-import { IInspectionDetails } from "../lib"
-
 const BrowserDetails = () => {
 	return window.navigator.userAgent
 }
@@ -29,57 +25,4 @@ export const GeneralTemplate = (url: string, result: string) => {
 	`
 
 	return encodeURIComponent(template.replace(/\t/g, ""))
-}
-
-interface Props {
-	title: string
-	body: string
-	label: string
-}
-
-const ErrorButton = ({ title, body, label }: Props) => {
-	const titleEncode = encodeURIComponent(title)
-	return (
-		<Button
-			variant="contained"
-			color="error"
-			sx={{ marginLeft: 2 }}
-			href={`https://github.com/soup-bowl/api.whatsth.is/issues/new?body=${body}&title=${titleEncode}&labels=${label}`}
-			target="_blank"
-			rel="noopener"
-		>
-			Report
-		</Button>
-	)
-}
-
-interface InspProps {
-	url: string
-	object: IInspectionDetails[]
-}
-
-export const ReportInspectionError = ({ url, object }: InspProps) => {
-	return (
-		<ErrorButton
-			title={`Failed Detection URL: ${url}`}
-			body={GeneralTemplate(url, JSON.stringify(object, null, 2))}
-			label="detection-fail"
-		/>
-	)
-}
-
-interface DNSProps {
-	url: string
-	protocol: string
-	object: ILookupTableLayout[]
-}
-
-export const ReportDNSError = ({ url, protocol, object }: DNSProps) => {
-	return (
-		<ErrorButton
-			title={`Failed ${protocol} on URL: ${url}`}
-			body={GeneralTemplate(`[${protocol}] ${url}`, JSON.stringify(object, null, 2))}
-			label="detection-fail"
-		/>
-	)
 }
