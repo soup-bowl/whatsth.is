@@ -54,7 +54,6 @@ const App = () => {
 								<Route path="encoder" element={<Navigate replace to="/convert" />} />
 								<Route path="decoder" element={<Navigate replace to="/convert" />} />
 								<Route path="unix" element={<Navigate replace to="/time" />} />
-								<Route path="dns/*" element={<Navigate replace to="/domain" />} />
 								<Route path="*" element={<Navigate replace to="/" />} />
 							</Route>
 						</Routes>
