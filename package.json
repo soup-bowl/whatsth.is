@@ -25,36 +25,36 @@
 	"homepage": "https://whatsth.is",
 	"dependencies": {
 		"@emotion/react": "^11.14.0",
-		"@emotion/styled": "^11.14.0",
+		"@emotion/styled": "^11.14.1",
 		"@monaco-editor/react": "^4.6.0",
-		"@mui/icons-material": "^7.1.2",
+		"@mui/icons-material": "^7.2.0",
 		"@mui/material": "^7.1.2",
-		"@mui/x-data-grid": "^8.5.3",
+		"@mui/x-data-grid": "^8.6.0",
 		"@types/jest": "^30.0.0",
-		"@types/node": "^24.0.3",
+		"@types/node": "^24.0.8",
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"@vitejs/plugin-react-swc": "^3.7.2",
 		"cronstrue": "^2.61.0",
 		"crypto-es": "^2.1.0",
-		"eslint": "^9.9.1",
+		"eslint": "^9.30.0",
 		"eslint-plugin-react-hooks": "^5.1.0",
 		"eslint-plugin-react-refresh": "^0.4.18",
-		"jest": "^30.0.2",
+		"jest": "^30.0.3",
 		"jest-fetch-mock": "^3.0.3",
 		"notistack": "^3.0.2",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
-		"react-router-dom": "^7.1.5",
+		"react-router-dom": "^7.6.3",
 		"ts-jest": "^29.4.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.22.0",
-		"ua-parser-js": "^2.0.3",
-		"vite": "^6.3.4"
+		"typescript-eslint": "^8.35.1",
+		"ua-parser-js": "^2.0.4",
+		"vite": "^7.0.0"
 	},
 	"devDependencies": {
-		"prettier": "^3.4.2",
-		"vite-plugin-pwa": "^1.0.0"
+		"prettier": "^3.6.2",
+		"vite-plugin-pwa": "^1.0.1"
 	}
 }
