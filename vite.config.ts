@@ -1,4 +1,5 @@
 import { defineConfig } from "vite"
+import path from "path"
 import { VitePWA } from "vite-plugin-pwa"
 import react from "@vitejs/plugin-react-swc"
 import { version, dependencies } from "./package.json"
@@ -37,6 +38,14 @@ export default defineConfig({
 			},
 		}),
 	],
+	resolve: {
+		alias: [
+			// crypto-es uses internal subpath imports that aren't exposed via package.json "exports".
+			// Map the subpath specifiers to the actual files on disk so Vite/esbuild can resolve them.
+			{ find: 'crypto-es/lib/aes', replacement: path.resolve(process.cwd(), 'node_modules', 'crypto-es', 'dist', 'aes.mjs') },
+			{ find: 'crypto-es/lib/tripledes', replacement: path.resolve(process.cwd(), 'node_modules', 'crypto-es', 'dist', 'tripledes.mjs') },
+		],
+	},
 	server: {
 		host: true,
 		port: 3000,
