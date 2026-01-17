@@ -1,17 +1,20 @@
 <p align="center"><img src="https://f.subo.dev/i/whatsthis-logo.webp" /></p>
-<h1 align="center"><a href="https://whatsth.is">whatsth.is</a></h1>
+<h1 align="center"><a href="https://whatsthis.pages.dev">whatsth.is</a></h1>
 <p align="center">
   <a href="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is"><img src="https://www.codefactor.io/repository/github/soup-bowl/whatsth.is/badge" alt="CodeFactor" /></a>
 </p>
 
 ![A computer display shows the Whats This website, with a mobile phone showing the same content in front](https://f.subo.dev/i/whatsthis-app-image.webp)
 
+> [!WARNING]  
+> After **4 years**, this has now been **discontinued**. If you wish to keep using it, it will be available at [whatsthis.pages.dev](https://whatsthis.pages.dev/) past the domain expiration.
+
 React-based [progressive web app][pwa] proof-of-concept designed to provide a toolbox of assorted helpful development tools. The current options are:
 
-- [String Conversion (encode & encrypt)](https://whatsth.is/#/convert).
-- [Colour Tools](https://whatsth.is/#/colour).
-- [Cron Conversion](https://whatsth.is/#/cron).
-- [UNIX Timestamp Converter](https://whatsth.is/#/time).
+- [String Conversion (encode & encrypt)](https://whatsthis.pages.dev/#/convert).
+- [Colour Tools](https://whatsthis.pages.dev/#/colour).
+- [Cron Conversion](https://whatsthis.pages.dev/#/cron).
+- [UNIX Timestamp Converter](https://whatsthis.pages.dev/#/time).
 
 ## Getting Started
 
@@ -46,7 +49,7 @@ devOptions: {
 },
 ```
 
-[site]: https://whatsth.is
+[site]: https://whatsthis.pages.dev
 [pwa]: https://web.dev/learn/pwa/progressive-web-apps/
 [lib]: https://github.com/soup-bowl/libwhatsthis
 [ext]: https://github.com/soup-bowl/whatsth.is-browser
